@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+
+    width: 95%;
+    height: 100%;
+}
+
+.input{
+    position: relative;
+
+
+    border: #ffff,solid,2px;
+    border-radius: 8px;
+    background-color: #A8A6A6;
+
+    width: 70%;
+    height: 40%;
+
+    padding-left: 3%;
+    padding-right: 3%;
+    
+    margin-left: 6%;
+    margin-top: 3%;
+
+    outline: none;
+    box-shadow: none;
+
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em, 1vw, 5em);
+    color: #ffffff
+}
+
+input::placeholder{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-size: clamp(0.6em, 0.8vw, 5em);
+    color: rgba(255, 255, 255, 0.711);
+
+}
+
+.message{
+    margin-bottom: 1%;
+    margin-left: 6%;
+
+}
+
+.txtover{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: clamp(0.6em, 1vw, 5em);
+    color: #625353
+}

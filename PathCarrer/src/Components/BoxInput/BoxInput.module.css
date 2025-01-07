@@ -1,0 +1,45 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    width: 95%;
+    height: 100%;
+}
+
+.message{
+    margin-left: 6%;
+    margin-bottom: 1%;
+}
+
+.options{
+    
+    margin-left: 6%;
+
+    background-color: #95EB54;
+    border: #ffff solid 2px;
+    border-radius: 8px;
+    width: 13%;
+    height: 35%;
+
+    outline: none;
+    box-shadow: none;
+
+    padding-left: 2%;
+    
+}
+.txt{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: clamp(0.6em, 1vw, 5em);
+    color: #625353
+}
+
+.txtover{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em, 0.8vw, 5em);
+    color: #625353
+}

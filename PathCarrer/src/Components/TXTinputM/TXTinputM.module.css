@@ -1,0 +1,56 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+
+    width: 95%;
+    height: 100%;
+
+}
+.input{
+    display: flex;
+    justify-content: flex-start;
+
+    width: 80%;
+    height: 80%;
+
+    border: #ffff solid 2px;
+    border-radius: 8px;
+    background-color: #A8A6A6;
+
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 2%;
+
+    
+    margin-left: 6%;
+
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em, 1vw, 5em);
+    color: #ffffff;
+
+
+    outline: none;
+    resize: none;
+
+}
+
+
+.message{
+    position: relative;
+    margin-left: 6%;
+    margin-bottom: 1%;
+
+    white-space: pre-line;
+}
+
+.txtover{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: clamp(0.6em, 1vw, 5em);
+    color: #625353
+}
