@@ -32,9 +32,7 @@ function CreatePath () {
                 <div className={styles.inputM}>
                 <div className={styles.paraM}>
                 <TXTinputM
-                    message={`Digite tags que seus potenciais viwers usariam para procurar seu conteudo Ex: 
-                    #Como usar o PathCarrer #Modulos`}
-                          
+                    message={`Digite tags que seus potenciais viwers usariam para procurar seu conteudo Ex:`}
                     placeholder={"#Desenvolvimento pessoal   #Marketing Digital ..."}
                     />
                 </div>
@@ -47,8 +45,11 @@ function CreatePath () {
                  placeholder={`Adicione uma descrição ao seu Path`}/>
                 </div>
 
-                 <Button
-                 message={"Enviar"}/>
+                <div className={styles.button}>
+                  <Button
+                  message={"Enviar"}/>
+                </div>
+
                 </div>
             </form> 
         </div>
