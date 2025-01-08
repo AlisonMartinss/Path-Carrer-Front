@@ -3,11 +3,10 @@ import './App.css'
 
 //=-=-=-=-=-=- Pages imports =-=-=-=-=-=-=-//
 
-//TESTANDO GIT
-
 import Createpath from './Pages/CreatePath/Createpath'
 import CreateModulo from './Pages/CreateModulo/Createmodulo'
 import CreateAulas from './Pages/CreateAulas/CreateAulas'
+import Loby from './Pages/Loby/Loby'
 
 
 import {createBrowserRouter,createRoutesFromElements,RouterProvider, Route} from 'react-router-dom'
@@ -15,9 +14,10 @@ import {createBrowserRouter,createRoutesFromElements,RouterProvider, Route} from
 const browserRouter = createBrowserRouter(createRoutesFromElements(
 <Route path="/">
  <Route index element={<Createpath/>}/>
- <Route path="/CreatePath" element={<Createpath/>}/>
- <Route path="/CreateModulo" element={<CreateModulo/>}/>
- <Route path="/CreateAulas" element={<CreateAulas/>}/>
+ <Route path="/loby" element={<Loby/>}/>
+ <Route path="/createpath" element={<Createpath/>}/>
+ <Route path="/createmodulo" element={<CreateModulo/>}/>
+ <Route path="/createaulas" element={<CreateAulas/>}/>
 </Route>
 ))
 

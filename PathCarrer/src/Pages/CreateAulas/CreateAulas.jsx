@@ -1,11 +1,17 @@
 import styles from '../CreateAulas/CreateAulas.module.css'
 
+// =-=-=-=-=- Componentes =-=-=-=-=- //
+
 import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
 import TXTinputP from '../../Components/TXTinputP/TXTinputP'
 import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 import MessageIMG from '../../Components/messageIMG/messageIMG'
 import Dicas from '../../Components/Dicas/Dicas'
 import Button from '../../Components/Button/Button'
+
+// =-=-=-=-= Midias =-=-=-=-= //
+
+import JP2 from '../../assets/Midias/JP2.png'
 
 function CreateAulas (){
     return (
@@ -31,7 +37,10 @@ function CreateAulas (){
              </form>
 
              <div className={styles.tut_2}>
-                <MessageIMG img={""} message={"Está com duvida de como lidar com essa etapa? Clique aqui"}/>
+              <div className={styles.tut_img}>
+               <MessageIMG href={"https://www.youtube.com/watch?v=63nfV47oDhU"}img={JP2} message={"Está com duvida de como lidar com essa etapa? Clique aqui"}/>
+              </div>
+                
              </div>
                 
             </div>
