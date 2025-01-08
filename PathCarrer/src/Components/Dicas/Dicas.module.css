@@ -1,0 +1,42 @@
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 70%;
+    height: 12%;
+
+    margin-top: 12%;
+
+    background-color: #f6f6f6ee;
+}
+
+.esq{
+    margin-left: 18%;
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 8px;
+}
+
+.dir{
+    margin-right: 15%;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 40px;
+    border-top-right-radius: 8px;
+}
+
+.message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 80%;
+
+    border-bottom: solid 2px #1A5C7E;
+
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em, 1vw, 5em);
+    color: #1A5C7E;
+}
