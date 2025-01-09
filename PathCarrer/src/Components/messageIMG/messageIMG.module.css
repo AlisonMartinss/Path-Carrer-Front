@@ -11,7 +11,7 @@
     cursor: pointer;
 
     background-color: black;
-    border: solid #8E7B6D 4px;
+    border: solid #404040 4px;
     border-radius: 8px;
 }
 
@@ -30,8 +30,8 @@
 
     font-family: "Urbanist", serif;
     font-style: normal;
-    font-weight: 500;
-    font-size: clamp(0.6em, 1.3vw, 5em);
+    font-weight: 600;
+    font-size: clamp(0.6em, 1vw, 5em);
     color: #1A5C7E;
 
     padding-left: 3%;

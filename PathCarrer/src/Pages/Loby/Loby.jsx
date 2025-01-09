@@ -7,13 +7,16 @@ import styles from '../Loby/Loby.module.css'
                         </div>*/
 
 import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
+import SearchInput from '../../Components/SearchInput/SearchInput'
 import Window from '../../Components/window/Window'
 
 function Loby () {
     return (
         <main className={styles.main}>
             <header className={styles.header}><CabecalhoPadrao/></header>
-            <div className={styles.searchArea}></div>
+            <div className={styles.searchArea}>
+               <div className={styles.SearchInputArea}><SearchInput/></div>
+            </div>
             <div className={styles.core}>
              <div className={styles.classes}>
                 <div className={styles.classes_focus}>
