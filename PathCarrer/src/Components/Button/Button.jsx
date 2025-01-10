@@ -4,7 +4,7 @@ function Button (props) {
     const className = styles[props.class] || '';
     
     return (
-    <button class={className} onClick={props.func} type={props.type}>
+    <button class={className} onClick={props.func} type="button">
          {props.message}
     </button>
     )

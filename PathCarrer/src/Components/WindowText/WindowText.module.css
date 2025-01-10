@@ -1,0 +1,55 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  
+    width: 88%;
+    height: 80%;
+  
+    background-color: rgb(255, 255, 255);
+    border-radius: 25px;
+  
+    margin-top: -2%;
+    cursor: pointer;
+  
+    transition: transform 0.4s ease, 
+                box-shadow 0.4s ease;
+  }
+
+.main:hover{
+    box-shadow: -5px 10px 20px rgba(55, 55, 55, 0.76);
+    transform: translate(5px, -5px);
+
+ 
+
+}
+
+.text{
+    
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-top: -5%;
+    margin-left: 5%;
+
+    padding-top: 14%;
+    padding-bottom: 5%;
+
+
+    width: 90%;
+    height: 80%;
+    white-space: pre-wrap;
+
+    word-wrap: break-word; /* Quebra palavras muito grandes */
+    overflow-wrap: break-word; /* Suporte extra para quebra de palavras */
+}
+
+.overtxt{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em, 0.8vw, 5em);
+    color: #000000
+}

@@ -8,6 +8,8 @@ import styles from '../Loby/Loby.module.css'
 
 import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
 import SearchInput from '../../Components/SearchInput/SearchInput'
+import WindowText from '../../Components/WindowText/WindowText'
+import Button from '../../Components/Button/Button'
 import Window from '../../Components/window/Window'
 
 function Loby () {
@@ -19,6 +21,10 @@ function Loby () {
             </div>
             <div className={styles.core}>
              <div className={styles.classes}>
+                <div className={styles.daysWeek}>
+                  <div className={styles.day}><Button/></div>
+                  
+                </div>
                 <div className={styles.classes_focus}>
                  <div className={styles.preWindow}>
                     <Window/>
@@ -38,8 +44,18 @@ function Loby () {
                 </div>
              </div>
                 
-                <div className={styles.shortMensage}></div>
-            </div>
+             <div className={styles.shortMensage}>
+               <div className={styles.messageBody}>
+                <div className={`${styles.messageTitle} ${styles.txtOver}`}> 
+                  De<strong className={`${styles.strong}`}>Você</strong>para <strong className={`${styles.strong}`}>Você</strong>
+                </div>
+                <div className={styles.messageCore}>
+                  <div className={styles.WindowText}><WindowText txt={"254 para textos grandes"}/></div>
+                   <div className={styles.WindowText}><WindowText txt={"Fiquei todo empanzinado"}/></div>
+                </div>
+               </div>
+             </div>
+         </div>
 
         </main>
 
