@@ -1,5 +1,9 @@
 
 .button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 100%;
     height: 100%;
     border: solid #ffff 2px;
@@ -17,6 +21,10 @@
 }
 
 .Save{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     width: 100%;
     height: 100%;
     border: solid #ffff 2px;
@@ -32,6 +40,35 @@
     font-size: clamp(0.6em, 1vw, 5em);
     color: #625353
 
+}
+
+.day{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+    border: solid #8791AB 2px;
+
+    background-color: #ffff;
+    transition: background-color 0.5s,border 0.5s,color 0.3s;
+
+    outline: none;
+
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(0.6em, 1vw, 5em);
+    color: #4f4444;
+
+    outline:none
+}
+
+.day:hover{
+    background-color: #29fc49;
+    border: solid 2px #ffffff;
+    color: #ffff;
 }
 
 .button:hover{

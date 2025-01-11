@@ -21,10 +21,59 @@ function Loby () {
             </div>
             <div className={styles.core}>
              <div className={styles.classes}>
+
                 <div className={styles.daysWeek}>
-                  <div className={styles.day}><Button/></div>
-                  
+
+                  <div className={styles.day}>
+                    <Button 
+                    class={"day"}
+                    message={"All"}/>
+                  </div>
+
+                  <div className={styles.day}>
+                    <Button 
+                    class={"day"}
+                    message={"Dom"}/>
+                  </div>
+
+                  <div className={styles.day}>
+                    <Button 
+                    class={"day"}
+                    message={"Seg"}/>
+                  </div>
+
+                  <div className={styles.day}>
+                    <Button 
+                    class={"day"}
+                    message={"Ter"}/>
+                  </div>
+
+                  <div className={styles.day}>
+                    <Button 
+                    class={"day"}
+                    message={"Qua"}/>
+                  </div>
+
+                  <div className={styles.day}>
+                    <Button 
+                    class={"day"}
+                    message={"Qui"}/>
+                  </div>
+
+                  <div className={styles.day}>
+                    <Button 
+                    class={"day"}
+                    message={"Sex"}/>
+                  </div>
+
+                  <div className={styles.day}>
+                    <Button 
+                    class={"day"}
+                    message={"Sab"}/>
+                  </div>
+
                 </div>
+
                 <div className={styles.classes_focus}>
                  <div className={styles.preWindow}>
                     <Window/>

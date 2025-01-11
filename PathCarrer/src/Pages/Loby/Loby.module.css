@@ -48,8 +48,6 @@
     width: 45%;
     height: 100%;
 
-    background-color: rgb(121, 89, 89);
-
 }
 
 .shortMensage{
@@ -128,23 +126,22 @@
 
     margin-top: 1%;
 
-    background-color: aquamarine;
 }
 
 .daysWeek{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 80%;
     height: 10%;
 
-    background-color: blueviolet;
+    gap: 2%;
 }
 
 .day{
-    width: 10%;
-    height: 98%;
-
-    margin-left: 2%;
-
-    background-color: coral;
+    width: 9%;
+    height: 80%;
 }
 
 .classes_focus::-webkit-scrollbar{
