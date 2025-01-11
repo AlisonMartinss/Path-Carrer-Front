@@ -5,6 +5,7 @@ import './App.css'
 
 import Createpath from './Pages/CreatePath/Createpath'
 import CreateModulo from './Pages/CreateModulo/Createmodulo'
+import Explorer from './Pages/Explorer/Explorer'
 import CreateAulas from './Pages/CreateAulas/CreateAulas'
 import Class from './Pages/Class/Class'
 import Loby from './Pages/Loby/Loby'
@@ -19,7 +20,10 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
  <Route path="/createpath" element={<Createpath/>}/>
  <Route path="/createmodulo" element={<CreateModulo/>}/>
  <Route path="/createaulas" element={<CreateAulas/>}/>
- <Route path="/class" element={<Class/>}/>
+ <Route path="/class" element={<Class nomeDoModulo={"Nome do Modulo"} 
+ srcVideo={"https://www.youtube.com/embed/VAl7q9dHGwY&list=PLrVNhPcNvMQSfx5A2aB0FfugDTR2Uihvq&index=33"}/>}/>
+ <Route path="/explorer" element={<Explorer/>}/>
+
 </Route>
 ))
 

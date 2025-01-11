@@ -46,6 +46,12 @@
 
     z-index: 2;
 
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(0.6em,1.0vw, 5em);
+    color: #ffff
+
 }
 
 .classContainer{
