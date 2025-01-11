@@ -1,4 +1,4 @@
-.main {
+.main{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,22 @@
   
     width: 88%;
     height: 80%;
+}
+
+.mainModel2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
   
+    width: 88%;
+    height: 95%;
+
+}
+
+
+
+.mainStyle1{
     background-color: rgb(255, 255, 255);
     border-radius: 25px;
   
@@ -15,14 +30,31 @@
   
     transition: transform 0.4s ease, 
                 box-shadow 0.4s ease;
-  }
 
-.main:hover{
+}
+
+.mainStyle1:hover{
     box-shadow: -5px 10px 20px rgba(55, 55, 55, 0.76);
     transform: translate(5px, -5px);
+}
 
- 
 
+.mainStyle2{
+
+    background-color: #A8A6A6;
+    border: solid 1px #ffff;
+    
+
+    cursor: pointer;
+    transition:
+                transform 0.2s ease;
+
+
+
+}
+
+.mainStyle2:hover{
+    transform: translate(20px, -5px);
 }
 
 .text{

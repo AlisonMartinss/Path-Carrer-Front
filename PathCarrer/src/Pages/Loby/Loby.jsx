@@ -99,8 +99,8 @@ function Loby () {
                   De<strong className={`${styles.strong}`}>Você</strong>para <strong className={`${styles.strong}`}>Você</strong>
                 </div>
                 <div className={styles.messageCore}>
-                  <div className={styles.WindowText}><WindowText txt={"254 para textos grandes"}/></div>
-                   <div className={styles.WindowText}><WindowText txt={"Fiquei todo empanzinado"}/></div>
+                  <div className={styles.WindowText}> <WindowText classModel={"main"} classStyle={"mainStyle1"} txt={"254 para textos grandes"}/></div>
+                   <div className={styles.WindowText}><WindowText classModel={"main"} classStyle={"mainStyle1"} txt={"Fiquei todo empanzinado"}/></div>
                 </div>
                </div>
              </div>

@@ -6,6 +6,7 @@ import './App.css'
 import Createpath from './Pages/CreatePath/Createpath'
 import CreateModulo from './Pages/CreateModulo/Createmodulo'
 import CreateAulas from './Pages/CreateAulas/CreateAulas'
+import Class from './Pages/Class/Class'
 import Loby from './Pages/Loby/Loby'
 
 
@@ -18,6 +19,7 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
  <Route path="/createpath" element={<Createpath/>}/>
  <Route path="/createmodulo" element={<CreateModulo/>}/>
  <Route path="/createaulas" element={<CreateAulas/>}/>
+ <Route path="/class" element={<Class/>}/>
 </Route>
 ))
 
