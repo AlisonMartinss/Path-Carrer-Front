@@ -13,11 +13,16 @@
 }
 
 .core{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 90vh;
 }
 
 .menLateral{
+    position: relative;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,10 +38,13 @@
     justify-content: center;
     align-items: center;
 
-    width: 100%;
-    height: 18%;
+    width: 99%;
+    height: 20%;
 
-    background-color: blueviolet;
+    background-color: #8791AB;
+    border: solid 1px #ffff;
+
+    z-index: 2;
 
 }
 
@@ -49,8 +57,8 @@
     padding-top: 5%;
     padding-bottom: 5%;
 
-    background-color: rgba(144, 189, 229, 0.444);
-    
+    background-color: rgba(46, 126, 196, 0);
+    z-index: 2;
 }
 
 .classContainer::-webkit-scrollbar{
@@ -63,6 +71,18 @@
     background-color: none;
  }
 
+ .backGround{
+    position: absolute;
+    width: 97%;
+    height: 100%;
+    background-color:#a8a6a67d;
+
+    border: solid #ffff 1px;
+
+    z-index: 1;
+ }
+
+
  .class{
     display: flex;
     justify-content: center;
@@ -72,5 +92,83 @@
     height: 13%;
 
     padding-top: 1%;
+}
 
+.conteudo{
+    width: 78vw;
+    height: 90vh;
+
+    overflow-y: scroll;
+}
+
+.conteudo::-webkit-scrollbar{
+    width: 0px;
+    border: none;
+    
+}
+
+.conteudo::-webkit-scrollbar-thumb{
+    background-color: none;
+}
+
+.desc{
+    width: 70%;
+    height: 70%;
+
+    margin-left: 16%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+    overflow-y: scroll;
+    white-space: pre-wrap;
+
+    border-radius: 10px;
+
+    background-color: #8791AB;
+
+    padding-top: 3%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 3%;
+}
+
+.desc::-webkit-scrollbar{
+    width: 0px;
+    border: none;
+    
+}
+
+.desc::-webkit-scrollbar-thumb{
+    background-color: none;
+}
+
+.tela{
+    display: flex;
+    justify-content:center;
+    
+    width: 90%;
+    height: 70%;
+
+    margin-top: 6%;
+    margin-left: 4%;
+
+    border-radius: 13px;
+
+    gap: 3%;
+}
+
+.editButton{
+    width: 5%;
+    height: 10%;
+}
+
+.iframe{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 13px;
+
+    width: 80%;
+    height: 100%;
 }
