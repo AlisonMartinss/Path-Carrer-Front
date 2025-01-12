@@ -3,9 +3,9 @@
 ### Projeto ainda em desenvolvolvimento
 
 ## Tecnologias em uso
--ReactJS
--Vite (build tool)
--NodeJS
+- ReactJS
+- Vite (build tool)
+- NodeJS
 
 ## Como rodar o projeto
 1. Instale o Node.js (https://nodejs.org/).
