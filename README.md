@@ -1,8 +1,8 @@
 # Path-Carrer-Front
 
-###Projeto ainda em desenvolvolvimento
+### Projeto ainda em desenvolvolvimento
 
-##Tecnologias em uso
+## Tecnologias em uso
 -ReactJS
 -Vite (build tool)
 -NodeJS
