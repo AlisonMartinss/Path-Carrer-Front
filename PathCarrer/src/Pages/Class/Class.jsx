@@ -17,7 +17,43 @@ function Class (props){
                     <div className={styles.class}><WindowText 
                       classModel={"mainModel2"} 
                       classStyle={"mainStyle2"}/>
-                    </div>                     
+                    </div>
+                    <div className={styles.class}><WindowText 
+                      classModel={"mainModel2"} 
+                      classStyle={"mainStyle2"}/>
+                    </div> 
+                    <div className={styles.class}><WindowText 
+                      classModel={"mainModel2"} 
+                      classStyle={"mainStyle2"}/>
+                    </div> 
+                    <div className={styles.class}><WindowText 
+                      classModel={"mainModel2"} 
+                      classStyle={"mainStyle2"}/>
+                    </div> 
+                    <div className={styles.class}><WindowText 
+                      classModel={"mainModel2"} 
+                      classStyle={"mainStyle2"}/>
+                    </div> 
+                    <div className={styles.class}><WindowText 
+                      classModel={"mainModel2"} 
+                      classStyle={"mainStyle2"}/>
+                    </div> 
+                    <div className={styles.class}><WindowText 
+                      classModel={"mainModel2"} 
+                      classStyle={"mainStyle2"}/>
+                    </div> 
+                    <div className={styles.class}><WindowText 
+                      classModel={"mainModel2"} 
+                      classStyle={"mainStyle2"}/>
+                    </div> 
+                    <div className={styles.class}><WindowText 
+                      classModel={"mainModel2"} 
+                      classStyle={"mainStyle2"}/>
+                    </div> 
+                    <div className={styles.class}><WindowText 
+                      classModel={"mainModel2"} 
+                      classStyle={"mainStyle2"}/>
+                    </div>                      
                   </div>
 
                   <div className={styles.backGround}></div>

@@ -15,13 +15,13 @@ import {createBrowserRouter,createRoutesFromElements,RouterProvider, Route} from
 
 const browserRouter = createBrowserRouter(createRoutesFromElements(
 <Route path="/">
- <Route index element={<Createpath/>}/>
+ <Route index element={<Loby/>}/>
  <Route path="/loby" element={<Loby/>}/>
  <Route path="/createpath" element={<Createpath/>}/>
  <Route path="/createmodulo" element={<CreateModulo/>}/>
  <Route path="/createaulas" element={<CreateAulas/>}/>
  <Route path="/class" element={<Class nomeDoModulo={"Nome do Modulo"} 
- srcVideo={"https://www.youtube.com/embed/VAl7q9dHGwY&list=PLrVNhPcNvMQSfx5A2aB0FfugDTR2Uihvq&index=33"}/>}/>
+ srcVideo={"https://www.youtube.com/embed/F1xZ_uK2M6c"}/>}/>
  <Route path="/explorer" element={<Explorer/>}/>
 
 </Route>

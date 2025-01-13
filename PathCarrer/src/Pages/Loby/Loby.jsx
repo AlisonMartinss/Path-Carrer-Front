@@ -76,21 +76,33 @@ function Loby () {
                 <div className={styles.classes_focus}>
                  <div className={styles.preWindow}>
                     <Window
-                    title={"Como usar a plataforma 😉"}
-                    iconnnn={"Ing"}
+                    title={"Titulo exemplar 01 "}
+                    iconnnn={"IA"}
                     relative={"31/45"}/>
                  </div>
                  <div className={styles.preWindow}>
-                    <Window/>
+                    <Window
+                      title={"Titulo exemplar 02 "}
+                      iconnnn={"ING"}
+                      relative={"31/45"}/>
                  </div>
                  <div className={styles.preWindow}>
-                    <Window/> 
+                    <Window
+                    title={"Titulo exemplar 03 "}
+                    iconnnn={"FIN"}
+                    relative={"31/45"}/> 
                  </div>
                  <div className={styles.preWindow}>
-                   <Window/>
+                   <Window
+                   title={"Titulo exemplar 04 "}
+                   iconnnn={"MKT"}
+                   relative={"31/45"}/>
                  </div>
                  <div className={styles.preWindow}>
-                   <Window/>
+                   <Window
+                   title={"Titulo exemplar 05 "}
+                   iconnnn={"POR"}
+                   relative={"31/45"}/>
                  </div>
                 </div>
              </div>

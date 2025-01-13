@@ -1,22 +1,27 @@
 import styles from '../Window/Window.module.css'
 import ButtonIMG from '../ButtonIMG/ButtonIMG'
+import Trash from '../Trash/Trash'
 
 
-import Mat from '../../../src/assets/Midias/Icones/Icone_01.png'
-import Por from '../../../src/assets/Midias/Icones/Icone_02.png'
-import Ing from '../../../src/assets/Midias/Icones/Icone_03.png'
-import TI  from '../../../src/assets/Midias/Icones/Icone_04.png'
-import Fin from '../../../src/assets/Midias/Icones/Icone_05.png'
-import Emp from '../../../src/assets/Midias/Icones/Icone_06.png'
-import Des from '../../../src/assets/Midias/Icones/Icone_07.png'
-import Mkt from '../../../src/assets/Midias/Icones/Icone_08.png'
-import Ia  from '../../../src/assets/Midias/Icones/Icone_09.png'
+
+import ING from '../../../src/assets/Midias/Icones/Icone_01.png'
+import TI from '../../../src/assets/Midias/Icones/Icone_02.png'
+import FIN from '../../../src/assets/Midias/Icones/Icone_03.png'
+import MKT  from '../../../src/assets/Midias/Icones/Icone_04.png'
+import IA from '../../../src/assets/Midias/Icones/Icone_05.png'
+import POR from '../../../src/assets/Midias/Icones/Icone_06.png'
+import EMP from '../../../src/assets/Midias/Icones/Icone_07.png'
+import DES from '../../../src/assets/Midias/Icones/Icone_08.png'
+import FAV from '../../../src/assets/Midias/Icones/Icone2_02.png'
+import TRH from '../../../src/assets/Midias/Icones/Icone2_01.png'
+
+
 
 
 
 function Window(props) {
     const icones = {
-        Mat,Por,Ing,TI,Fin,Emp,Des,Mkt,Ia,
+        ING,TI,FIN,MKT,IA,POR,EMP,DES
     }
     
 
@@ -26,9 +31,8 @@ function Window(props) {
     return (
         <main className={styles.main}>
          <div className={styles.icons}>
-            <div className={`${styles.icon1} ${styles.overIcon}`}><ButtonIMG/></div>
-            <div className={`${styles.icon2} ${styles.overIcon}`}><ButtonIMG/></div>
-            <div className={`${styles.icon3} ${styles.overIcon}`}><ButtonIMG/></div>
+            <div className={`${styles.overIcon}`}><ButtonIMG img={FAV}/></div>
+            <div className={`${styles.overIcon}`}><ButtonIMG img={TRH}/></div>
          </div>
 
          <div className={styles.titleANDimg}>
