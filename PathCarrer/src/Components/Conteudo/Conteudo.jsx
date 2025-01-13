@@ -8,7 +8,7 @@ function Conteudo (props){
                 
                     <div className={styles.blockLower}>{props.nomeCanal}</div>
                     <img className={styles.img} src={props.imgCanal} alt="Imagem do canal" />
-                    <div className={styles.button}><ButtonIMG/></div>
+                    <div className={styles.button}><ButtonIMG iconi={"TfiFlagAlt2"} iconi2={"iconn"}/></div>
                 
                 
             </div>

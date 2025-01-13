@@ -11,8 +11,8 @@
     cursor: pointer;
 
     background-color: black;
-    border: solid #404040 4px;
-    border-radius: 8px;
+
+    border-radius: 20px;
 }
 
 .message{

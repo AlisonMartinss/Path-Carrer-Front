@@ -54,7 +54,8 @@ function CreatePath () {
 
                 <div className={styles.button}>
                   <Button
-                  message={"Enviar"}/>
+                  message={"Enviar"}
+                  class={"button"}/>
                 </div>
 
                 </div>

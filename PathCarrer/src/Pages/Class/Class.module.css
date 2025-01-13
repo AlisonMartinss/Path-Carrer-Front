@@ -130,7 +130,7 @@
 
     border-radius: 10px;
 
-    background-color: #8791AB;
+    background-color: #a8a8a6;
 
     padding-top: 3%;
     padding-left: 2%;
@@ -161,11 +161,16 @@
     border-radius: 13px;
 
     gap: 3%;
+
 }
 
 .editButton{
-    width: 5%;
-    height: 10%;
+    width: 5.5%;
+    height: 12%;
+
+    background-color: #8791AB;
+    border-radius: 50%;
+
 }
 
 .iframe{

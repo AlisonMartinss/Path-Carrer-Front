@@ -1,8 +1,8 @@
 import styles from '../Window/Window.module.css'
 import ButtonIMG from '../ButtonIMG/ButtonIMG'
-import Trash from '../Trash/Trash'
 
 
+// =-=-=-=-=- ICONES =-=-=-=-=- //
 
 import ING from '../../../src/assets/Midias/Icones/Icone_01.png'
 import TI from '../../../src/assets/Midias/Icones/Icone_02.png'
@@ -19,20 +19,24 @@ import TRH from '../../../src/assets/Midias/Icones/Icone2_01.png'
 
 
 
+
+
+
+
+
 function Window(props) {
     const icones = {
         ING,TI,FIN,MKT,IA,POR,EMP,DES
     }
     
-
     const Icon = icones[props.iconnnn] || '';
 
     
     return (
         <main className={styles.main}>
          <div className={styles.icons}>
-            <div className={`${styles.overIcon}`}><ButtonIMG img={FAV}/></div>
-            <div className={`${styles.overIcon}`}><ButtonIMG img={TRH}/></div>
+            <div className={`${styles.overIcon}`}><ButtonIMG iconi={"BsBookmarksFill"} iconi2={"iconn"} func={(event) => alert("PIPOCA COM SAL")}/></div>
+            <div className={`${styles.overIcon}`}><ButtonIMG iconi={"FaRegTrashAlt"} iconi2={"iconn2"}/></div>
          </div>
 
          <div className={styles.titleANDimg}>

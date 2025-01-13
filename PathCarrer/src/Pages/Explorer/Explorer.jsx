@@ -11,49 +11,114 @@ function Explorer (){
             <div className={styles.search}><SearchInput/></div>
             <div className={styles.core}>
                 <div className={styles.coreContent}>
-                 <div className={styles.content}><Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                </div>     
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div> 
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>  
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                </div>    
 
                 <div className={styles.coreContent}>
-                 <div className={styles.content}><Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div> 
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>  
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
                 </div> 
 
                 <div className={styles.coreContent}>
-                 <div className={styles.content}><Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
-                 <div className={styles.content}><Conteudo/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div> 
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>  
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
                 </div> 
+
+                <div className={styles.coreContent}>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div> 
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>  
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                 <div className={styles.content}>
+                    <Conteudo tituloModulo={"INSERINDO EXEMPLAR DE UM TITULO PARA O CONTEUDO QUE A DE VIR"}/></div>   
+                </div>  
+
+                
             </div>
         </main>
     )

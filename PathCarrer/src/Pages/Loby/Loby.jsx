@@ -11,6 +11,8 @@ import Window from '../../Components/window/Window'
 // =-=-=-=-= Icones =-=-=-=-=- //
 
 
+
+
 function Loby () {
     return (
         <main className={styles.main}>

@@ -23,8 +23,9 @@ function CreateModulo () {
                 </div>
 
                 <div className={styles.Button}>
-                    <Button
-                    message={"Enviar"}/>
+                <Button
+                  message={"Enviar"}
+                  class={"button"}/>
                 </div>
             </form>
            
