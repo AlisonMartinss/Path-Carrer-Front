@@ -24,9 +24,16 @@ function CreatePath () {
                 <div className={styles.boxInput}>
                 <BoxInput
                     message={"Selecione uma categoria que se encaixa no seu Path:"}
-                    v1={"marketing"} txt1={"marketing"}
-                    v2={"TI"} txt2={"TIg"}
-                    v3={"Negocios"} txt3={"Negocios"}
+                    v1={"MAT"} txt1={"Matemática"}
+                    v2={"POR"} txt2={"Português"}
+                    v3={"ING"} txt3={"Inglês"}
+                    v4={"TI"}  txt4={"Programação"}
+                    v5={"FIN"} txt5={"Educação Financeira"}
+
+                    v6={"EMP"} txt6={"Empreendedorismo"}
+                    v7={"DES"} txt7={"Design"}
+                    v8={"MAK"} txt8={"Marketing"}
+                    v9={"IA"}  txt9={"Inteligencia Artificial"}  
                  />
                 </div>
                 <div className={styles.inputM}>

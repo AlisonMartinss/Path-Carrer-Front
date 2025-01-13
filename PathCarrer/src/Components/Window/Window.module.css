@@ -41,13 +41,28 @@
     height: 44%;
 }
 
-.img{
+.preIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     margin-left: 5%;
 
     width: 11%;
     height: 98%;
 
     border-radius: 50%;
+
+    background-color: #8791AB;
+}
+
+.img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 80%;
+    height: 80%;
 }
 
 .title{
@@ -66,4 +81,12 @@
     height: 28%;
 
     padding-right: 20%;
+}
+
+.overTXT{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em,1.2vw, 5em);
+    color: #ffff
 }

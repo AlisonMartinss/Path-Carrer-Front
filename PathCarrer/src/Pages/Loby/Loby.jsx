@@ -2,20 +2,19 @@ import styles from '../Loby/Loby.module.css'
 
 // =-=-=-=-=- Componentes =-=-=-=-=- //
 
-/*<div className={styles.preWindow}>
-                          <Window/>
-                        </div>*/
-
 import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
 import SearchInput from '../../Components/SearchInput/SearchInput'
 import WindowText from '../../Components/WindowText/WindowText'
 import Button from '../../Components/Button/Button'
 import Window from '../../Components/window/Window'
 
+// =-=-=-=-= Icones =-=-=-=-=- //
+
+
 function Loby () {
     return (
         <main className={styles.main}>
-            <header className={styles.header}><CabecalhoPadrao/></header>
+            <header className={styles.header}><CabecalhoPadrao txt1={"Suporte"}txt2={"Pesquisar com base na categoria"}txt3={"Seus Paths"}/></header>
             <div className={styles.searchArea}>
                <div className={styles.SearchInputArea}><SearchInput/></div>
             </div>
@@ -76,7 +75,10 @@ function Loby () {
 
                 <div className={styles.classes_focus}>
                  <div className={styles.preWindow}>
-                    <Window/>
+                    <Window
+                    title={"Como usar a plataforma 😉"}
+                    iconnnn={"Ing"}
+                    relative={"31/45"}/>
                  </div>
                  <div className={styles.preWindow}>
                     <Window/>
