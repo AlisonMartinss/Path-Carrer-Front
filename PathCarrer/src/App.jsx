@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import './App.css'
 
+// =-=-=-=-= Providers =-=-=-=-= //
+
+import { PathProvider } from '../src/Provider/Provider'
+
 //=-=-=-=-=-=- Pages imports =-=-=-=-=-=-=-//
 
 import Createpath from './Pages/CreatePath/Createpath'
@@ -17,12 +21,24 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
 <Route path="/">
  <Route index element={<Loby/>}/>
  <Route path="/loby" element={<Loby/>}/>
- <Route path="/createpath" element={<Createpath/>}/>
- <Route path="/createmodulo" element={<CreateModulo/>}/>
- <Route path="/createaulas" element={<CreateAulas/>}/>
  <Route path="/class" element={<Class nomeDoModulo={"Nome do Modulo"} 
  srcVideo={"https://www.youtube.com/embed/F1xZ_uK2M6c"}/>}/>
  <Route path="/explorer" element={<Explorer/>}/>
+
+   <Route path="/createpath"   element = {
+   <PathProvider>
+     <Createpath />
+   </PathProvider>}/>
+
+   <Route path="/createmodulo" element = {
+   <PathProvider>
+     <CreateModulo/>
+   </PathProvider>}/> 
+
+   <Route path="/createaulas"  element = {
+   <PathProvider>
+     <CreateAulas />
+   </PathProvider>}/>
 
 </Route>
 ))

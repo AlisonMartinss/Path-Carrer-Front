@@ -10,10 +10,33 @@ import Dicas from '../../Components/Dicas/Dicas'
 import Button from '../../Components/Button/Button'
 
 // =-=-=-=-= Midias =-=-=-=-= //
-
 import JP2 from '../../assets/Midias/JP2.png'
 
+// =-=-=-=-= Provider =-=-=-=-= //
+
+import { PathContext } from '../../Provider/Provider'
+import { useNavigate } from "react-router-dom"
+import { useContext, useState } from 'react'
+
 function CreateAulas (){
+      
+      const {setClassData} = useContext(PathContext);
+
+      const [indiceClass, setIndiceClass] = useState(1);
+      const nextClass = () => {
+        setIndiceClass((prevIndice) => prevIndice + 1);
+      };
+
+      const [module,setModule] = useState ({
+        modulo:[]
+      });
+
+      const [classData,setClassDataState] = useState ({
+        title:"",
+        link:"",
+        description:"",
+      });
+
     return (
         <main className={styles.main}>
             <header className={styles.head}><CabecalhoPadrao/></header>
@@ -26,10 +49,11 @@ function CreateAulas (){
              </div>
 
              <form className={styles.core_1}>
-               <div className={styles.recado}>Você está editando a aula de indice <strong className={styles.strong}> X</strong></div>
-               <div className={`${styles.inputName} ${styles.overInput}`}><TXTinputP/></div>
-               <div className={`${styles.inputLink} ${styles.overInput}`}><TXTinputP/></div>
-               <div className={styles.inputDesc}><TXTinputM/></div>
+               <div className={styles.recado}>Você está editando a aula de índice<strong className={styles.strong}>{indiceClass}</strong></div>
+
+               <div className={`${styles.inputName} ${styles.overInput}`}><TXTinputP placeholder={"Digite o titulo da aula"}/></div>
+               <div className={`${styles.inputLink} ${styles.overInput}`}><TXTinputP placeholder={"Cole aqui o link do conteudo desta aula"}/></div>
+               <div className={styles.inputDesc}><TXTinputM placeholder={"Descreva os pontos mais interessantes para essa aula"}/></div>
                <div className={styles.Button}>
                 <div className={styles.Buttonover}><Button message={"Enviar"} class="button"/>   </div>
                 <div className={styles.Buttonover}><Button message={"Salvar"} class="Save"/>   </div>
