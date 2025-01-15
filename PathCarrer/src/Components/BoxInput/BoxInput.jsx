@@ -2,8 +2,7 @@ import styles from '../BoxInput/BoxInput.module.css'
 
 function BoxInput (props) {
     return (
-        <main className={styles.main}>
-            <div className={`${styles.message} ${styles.txt}`}>{props.message}</div>
+        <form className={styles.main}>
             <select className={`${styles.options} ${styles.txtover}`} id={props.id} name={props.name}>
 
                 <option  value={props.v1}>{props.txt1}</option>
@@ -25,7 +24,7 @@ function BoxInput (props) {
                 <option  value={props.v15}>{props.txt15}</option>
 
             </select>
-        </main>
+        </form>
 
     )
 }

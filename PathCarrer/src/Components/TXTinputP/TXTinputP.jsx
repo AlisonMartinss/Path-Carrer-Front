@@ -4,7 +4,6 @@ import styles from '../TXTinputP/TXTinputP.module.css'
 function TXTinputP (props){
     return (
         <form className={styles.main}>
-            
             <input onChange={props.func} className={`${styles.input}`} 
             type="text" id={props.id} name={props.name} placeholder={props.placeholder}/>
         </form>

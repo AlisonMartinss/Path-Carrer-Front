@@ -13,14 +13,17 @@
 }
 
 .options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
     margin-left: 6%;
 
     background-color: #A6E675;
     border: #ffff solid 2px;
     border-radius: 8px;
-    width: 13%;
-    height: 35%;
+    width: 92%;
+    height: 92%;
 
     outline: none;
     box-shadow: none;
@@ -32,7 +35,7 @@
 .txt{
     font-family: "Urbanist", serif;
     font-style: normal;
-    font-weight: 300;
+    font-weight: 600;
     font-size: clamp(0.6em, 1vw, 5em);
     color: #625353
 }
@@ -40,7 +43,7 @@
 .txtover{
     font-family: "Urbanist", serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     font-size: clamp(0.6em, 0.8vw, 5em);
     color: #625353
 }
