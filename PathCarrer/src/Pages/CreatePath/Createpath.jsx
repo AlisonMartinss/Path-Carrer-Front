@@ -7,6 +7,13 @@ import BoxInput from '../../Components/BoxInput/BoxInput'
 import Button from '../../Components/Button/Button'
 
 function CreatePath () {
+    const option = [
+        {valueA: 'FIN',txt: 'Educação financeira'},
+        {valueA: 'IA' ,txt: 'Inteligencia artificial'},
+        {valueA: 'MRK',txt: 'Marketing'},
+        {valueA: 'POR',txt: 'Portugues'},
+        {valueA: 'MAT',txt: 'Matematica'}
+    ];
     return (
         <main className={styles.main}>
          <header className={styles.header}>
@@ -30,21 +37,11 @@ function CreatePath () {
                         Seleciona uma <strong className={styles.strong}>categoria</strong> que se encaixa no seu Path
                      </div>
                      <div className={styles.boxArea}>
-                        <div className={styles.boxInput}>
-                         <BoxInput/>
-                        </div>
-                        <div className={styles.boxInput}>
-                         <BoxInput/>
-                        </div>
-                        <div className={styles.boxInput}>
-                         <BoxInput/>
-                        </div>
-                        <div className={styles.boxInput}>
-                         <BoxInput/>
-                        </div>
-                        <div className={styles.boxInput}>
-                         <BoxInput/>
-                        </div>
+                        <div className={styles.boxCategoria}>
+                         <BoxInput
+                         name="adjetivo"
+                         optionE={option} />
+                        </div>   
                      </div>
 
                     </div>
