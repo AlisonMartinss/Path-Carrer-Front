@@ -16,12 +16,13 @@ import JP2 from '../../assets/Midias/JP2.png'
 
 import { PathContext } from '../../Provider/Provider'
 import { useNavigate } from "react-router-dom"
-import { useContext, useState } from 'react'
+import { useContext, useState,useEffect } from 'react'
 
 function CreateAulas (){
       
       const {setClassData} = useContext(PathContext);
 
+      //Contador do indice da aula
       const [indiceClass, setIndiceClass] = useState(1);
       const nextClass = () => {
         setIndiceClass((prevIndice) => prevIndice + 1);
@@ -31,11 +32,48 @@ function CreateAulas (){
         modulo:[]
       });
 
+      //Objeto da aula
       const [classData,setClassDataState] = useState ({
         title:"",
         link:"",
         description:"",
       });
+      
+      // OverSet
+
+      const ClassDataSet = (event) => {
+        const {name, value} = event.target;
+        console.log("Atualizando campo:", name, "com valor:", value);
+        setClassDataState({...classData,[name]:value});
+      };
+
+      // Verify
+
+      const Verify = () => {
+        
+        alert(classData.title)
+        alert(classData.link)
+        alert(classData.description)
+
+        if (classData.title != null && (classData.title).trim() != ""){
+          alert("Campo 'name' OK");
+          if (classData.link != null && (classData.link).trim() != ""){
+           alert("Campo 'link' OK");
+           if (classData.description != null && (classData.description).trim() != ""){
+            alert("Campo 'description' OK");
+           }
+           else {alert("Campo 'description' vazio");}
+          }
+          else {alert("Campo 'link' vazio")}
+        }
+        else {
+          alert("Campo 'name' vazio")
+
+        }}
+
+        useEffect(() => {
+          console.log("O estado classData foi atualizado:", classData);
+        }, [classData]); // Executa toda vez que classData mudar
 
     return (
         <main className={styles.main}>
@@ -51,13 +89,20 @@ function CreateAulas (){
              <form className={styles.core_1}>
                <div className={styles.recado}>Você está editando a aula de índice<strong className={styles.strong}>{indiceClass}</strong></div>
 
-               <div className={`${styles.inputName} ${styles.overInput}`}><TXTinputP placeholder={"Digite o titulo da aula"}/></div>
-               <div className={`${styles.inputLink} ${styles.overInput}`}><TXTinputP placeholder={"Cole aqui o link do conteudo desta aula"}/></div>
-               <div className={styles.inputDesc}><TXTinputM placeholder={"Descreva os pontos mais interessantes para essa aula"}/></div>
+               <div className={`${styles.inputName} ${styles.overInput}`}><TXTinputP id={"title"} name={"title"} func={(event) => ClassDataSet(event)} 
+               placeholder={"Digite o titulo da aula"}/></div>
+
+               <div className={`${styles.inputLink} ${styles.overInput}`}><TXTinputP id={"link"} name={"link"} func={(event) => ClassDataSet(event)} 
+               placeholder={"Cole aqui o link do conteudo desta aula"}/></div>
+
+               <div className={styles.inputDesc}><TXTinputM name={"description"} onChange={(event) => ClassDataSet(event)} 
+               placeholder={"Descreva os pontos mais interessantes para essa aula"}/></div>
+
                <div className={styles.Button}>
                 <div className={styles.Buttonover}><Button message={"Enviar"} class="button"/>   </div>
-                <div className={styles.Buttonover}><Button message={"Salvar"} class="Save"/>   </div>
+                <div className={styles.Buttonover}><Button func={Verify} message={"Salvar"} class="Save"/>   </div>
                </div>
+
              </form>
 
              <div className={styles.tut_2}>
