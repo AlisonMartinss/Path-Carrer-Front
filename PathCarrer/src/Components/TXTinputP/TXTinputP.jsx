@@ -1,11 +1,11 @@
 import styles from '../TXTinputP/TXTinputP.module.css'
 
 //<div className={`${styles.message} ${styles.txtover}`}>{props.message}</div>
-function TXTinputP (props){
+function TXTinputP ({onChange,placeholder,id,name}){
     return (
         <form className={styles.main}>
-            <input onChange={props.func} className={`${styles.input}`} 
-            type="text" id={props.id} name={props.name} placeholder={props.placeholder}/>
+            <input onChange={onChange} className={`${styles.input}`} 
+            type="text" id={id} name={name} placeholder={placeholder}/>
         </form>
     )}
 export default TXTinputP

@@ -2,18 +2,32 @@ import styles from '../CreatePath/CreatePath.module.css'
 
 import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
 import TXTinputP from '../../Components/TXTinputP/TXTinputP'
-import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 import BoxInput from '../../Components/BoxInput/BoxInput'
 import Button from '../../Components/Button/Button'
+import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
+
+import {useState,useEffect } from 'react'
 
 function CreatePath () {
-    const option = [
-        {valueA: 'FIN',txt: 'Educação financeira'},
-        {valueA: 'IA' ,txt: 'Inteligencia artificial'},
-        {valueA: 'MRK',txt: 'Marketing'},
-        {valueA: 'POR',txt: 'Portugues'},
-        {valueA: 'MAT',txt: 'Matematica'}
-    ];
+    const [inputxt, setinputxt] = useState("");
+    const [tags,setTags] = useState([]);
+
+    const halndlechangetags = () =>{
+      if (tags.length < 8){
+         setTags([...tags,inputxt]);
+      }
+      else{
+         alert("Você chegou no limite no numero de #Tags")
+      }}
+
+
+    useEffect(() => {
+      for (let i = 0; i < tags.length; i++){
+         console.log("i: " + i + " " + tags[i])
+
+      }
+    }, [tags]); // Executa toda vez que classData mudar
+
     return (
         <main className={styles.main}>
          <header className={styles.header}>
@@ -41,22 +55,24 @@ function CreatePath () {
                      <div className={styles.boxAdjetivo}><BoxInput/></div>
                      <div className={styles.boxAdjetivo}><BoxInput/></div>
                   </div>
-
-                  <div className={styles.tags}>
-                     <div className={styles.inputTag}>
-                      <div className={styles.button}><Button class={"button"}/></div>
-                      <div className={styles.inputTag_core}><TXTinputP/></div>
-                     </div>
-                     <div className={styles.showTags}>
-
-                     </div>
-                  </div>
                </div>
-
-
-
-               
-              
+               <div className={styles.inputB}>
+                     <div className={styles.tags}>
+                        <div className={styles.ctoC}></div>
+                        <div className={styles.inputTag}>
+                          <div className={styles.button}><Button func={halndlechangetags} class={"click"} message={"submeter"}/></div>
+                          <div className={styles.inputTag_core}><TXTinputP onChange={(e) => setinputxt(e.target.value)}/></div>
+                        </div>
+                     </div>      
+                     <div className={styles.showTags}>       
+                        {tags.map((tag) => (
+                           <div className={styles.tagsElement}>
+                              <div className={styles.tagExcluir}><ButtonIMG value={"tag"} iconi={"RiDeleteBack2Fill"} iconi2={"iconn2"}/></div>
+                              <div className={styles.tagCore}>#{tag}</div>                             
+                           </div>
+                           ))}
+                     </div>
+               </div>     
             </form> 
             </div>
         </main>
