@@ -21,84 +21,42 @@ function CreatePath () {
          </header>
             <div className={styles.core}>
             <form className={styles.form}>
-                <div className={styles.inputsP_core}>
+               <div className={styles.inputA}>
+                  <div className={styles.title_input}><TXTinputP/></div>
 
-                    <div className={styles.inputP}>
+                  <div className={`${styles.txtover} ${styles.ctoA}`}>
+                     Selecione uma <strong className={styles.strong}>categoria</strong> que se encaixa no seu path:
+                  </div>
 
-                     <TXTinputP
-                     name={"name"}
-                     id={"name"}
-                     placeholder={"Crie um nome para seu Path"}/>
+                  <div className={styles.categoriaInput}><BoxInput/></div>
 
-                    </div>
-                    <div className={styles.categoria}>
+                  <div className={`${styles.txtover} ${styles.ctoA}`}>
+                     Selecione cinco <strong className={styles.strong}>adjetivos</strong> que se encaixam no seu path:
+                  </div>
 
-                     <div className={`${styles.messageOver} ${styles.txtover}`}> 
-                        Seleciona uma <strong className={styles.strong}>categoria</strong> que se encaixa no seu Path
+                  <div className={styles.adjetivosInput}>
+                     <div className={styles.boxAdjetivo}><BoxInput/></div>
+                     <div className={styles.boxAdjetivo}><BoxInput/></div>
+                     <div className={styles.boxAdjetivo}><BoxInput/></div>
+                     <div className={styles.boxAdjetivo}><BoxInput/></div>
+                     <div className={styles.boxAdjetivo}><BoxInput/></div>
+                  </div>
+
+                  <div className={styles.tags}>
+                     <div className={styles.inputTag}>
+                      <div className={styles.button}><Button class={"button"}/></div>
+                      <div className={styles.inputTag_core}><TXTinputP/></div>
                      </div>
-                     <div className={styles.boxArea}>
-                        <div className={styles.boxCategoria}>
-                         <BoxInput
-                         name="adjetivo"
-                         optionE={option} />
-                        </div>   
-                     </div>
+                     <div className={styles.showTags}>
 
-                    </div>
-                
-                    <div className={styles.inputM}>
-
-                     <div className={`${styles.messageOver} ${styles.txtover}`}>
-                        Digite <strong className={styles.strong}>tags</strong> que faz parte do seu conteudo
                      </div>
-                     <div className={styles.paraM}>
-                        <TXTinputM
-                        placeholder={"#Desenvolvimento pessoal   #Marketing Digital ..."}/>
-                     </div>
+                  </div>
+               </div>
 
-                    </div>
+
+
                
-                </div>
-
-                <div className={styles.inputsG_core}>
-                    
-                     <div className={`${styles.messageAdjetivos} ${styles.messageOver} ${styles.txtover}`}>
-                        Selecione 5 <strong className={styles.strong}>categorias</strong>
-                        que melhor se encaixa no seu <strong className={styles.strong}> Path</strong>
-                     </div>
-
-                     <div className={styles.adjetivos}>
-                      <div className={styles.boxAdjetivos}>
-                        <BoxInput/>
-                      </div>
-                      <div className={styles.boxAdjetivos}>
-                        <BoxInput/>
-                      </div>
-                      <div className={styles.boxAdjetivos}>
-                        <BoxInput/>
-                      </div>
-                      <div className={styles.boxAdjetivos}>
-                        <BoxInput/>
-                      </div>
-                      <div className={styles.boxAdjetivos}>
-                        <BoxInput/>
-                      </div>
-                     </div>
-
-                     <div className={styles.inputsGG_core}>
-                        <TXTinputM
-                        placeholder={`Adicione uma descrição ao seu Path`}/>
-                     </div>
-
-                     <div className={styles.button}>
-                        <Button
-                        message={"Enviar"}
-                        class={"button"}/>
-                     </div>
-                   
-                    
-
-                </div>
+              
             </form> 
             </div>
         </main>
