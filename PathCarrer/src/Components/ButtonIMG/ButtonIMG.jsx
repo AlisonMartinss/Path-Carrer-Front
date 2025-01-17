@@ -3,13 +3,13 @@ import { BsBookmarksFill } from "react-icons/bs";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { RiPencilRuler2Fill } from "react-icons/ri";
 import { TfiFlagAlt2 } from "react-icons/tfi";
-import { RiDeleteBack2Fill } from "react-icons/ri";
+import { FaDeleteLeft } from "react-icons/fa6";
 
 
 
-function ButtonIMG ({props,value}) {
+function ButtonIMG (props) {
     const comp = {
-        BsBookmarksFill,FaRegTrashAlt,RiPencilRuler2Fill,TfiFlagAlt2,RiDeleteBack2Fill
+        BsBookmarksFill,FaRegTrashAlt,RiPencilRuler2Fill,TfiFlagAlt2,FaDeleteLeft
     }
 
     const Componente =  comp[props.iconi]
