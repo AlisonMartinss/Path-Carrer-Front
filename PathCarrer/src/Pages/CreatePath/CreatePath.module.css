@@ -3,6 +3,11 @@
 }
 
 .main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     width: 100vw;
     height: 100vh;
     background-color: #D9D9D9
@@ -21,7 +26,7 @@
     height: 90vh;
     width: 100vw;
 }
-
+/* Inerente */
 .form{
     overflow-y: scroll;
 
@@ -48,7 +53,7 @@
     align-items: center;
 
     width:88%;
-    height:10.5%;
+    height:6.2vh;
 }
 
 .inputA{
@@ -72,14 +77,25 @@
     height: 80%;
 
     padding-top: 1%;
-
     margin-top: -15%;
+}
+
+.inputC{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: 75%;
+
+    margin-top: -12%;
+    gap: 3%;
 }
 
 .strong{
     font-family: "Urbanist", serif;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 800;
     font-size: clamp(0.6em, 1vw, 5em);
     color: #625353;
 
@@ -115,9 +131,6 @@
     justify-content: center;
     align-items: center;
 
-    width: 90%;
-    height: 10%;
-
     background-color: #fafafa9c;
     border-radius: 8px;
 }
@@ -127,7 +140,7 @@
     flex-direction: column;
     align-items: center;
 
-    width: 90%;
+    width: 100%;
     height: 40%;
 }
 
@@ -152,11 +165,18 @@
     justify-content: center;
     align-items: center;
 
-    width: 100%;
-    height: 20%;
+    background-color: #fafafa9c;
+    border-radius: 8px;
+}
+
+.ctoD{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     background-color: #fafafa9c;
     border-radius: 8px;
+
 }
 
 .button{
@@ -178,14 +198,12 @@
 .showTags{
     display:flex;
     justify-content: flex-start;
-    justify-content: center;
     align-items: center;
 
     width: 90%;
     height: 35%;
 
-    margin-top: 1%;
-    margin-bottom: 1%;
+    gap: 3%;
 
     border-radius: 8px;
     border: solid #ffff 2px;
@@ -200,17 +218,15 @@
     flex-direction: row-reverse;
     align-items: center;
 
-    width: 40%;
+    width: 30%;
     height: 20%;
-
-    margin-left: 0.5%;
-    margin-right: 0.5%;
 
     font-family: "Urbanist", serif;
     font-style: normal;
     font-weight: 400;
     font-size: clamp(0.6em, 0.7vw, 5em);
-    color: #625353
+    color: #625353;
+
 }
 
 .tagExcluir{
@@ -402,18 +418,35 @@
     margin-top: 2%;
 }
 
+/* Inerente */
 
+.inputDesc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40vw;
+    height: 40vh;
+}
+
+
+/* Inerente */
 .txtover{
+    width: 45vw;
+    height: 6vh;
+
     font-family: "Urbanist", serif;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     font-size: clamp(0.6em, 1vw, 5em);
     color: #625353
 }
 
+/* Inerente */
+
 .enviar{
     margin-top: 2%;
-    width: 20%;
-    height: 9%;
+    width: 10vw;
+    height: 7vh;
 }
 

@@ -9,6 +9,7 @@ import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
 
 
 import {useState,useEffect } from 'react'
+import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 
 function CreatePath () {
     const [inputxt, setinputxt] = useState("");
@@ -40,52 +41,50 @@ function CreatePath () {
          <header className={styles.header}>
             <CabecalhoPadrao/>
          </header>
-            <div className={styles.core}>
-            <form className={styles.form}>
-               <div className={styles.inputA}>
-                  <div className={styles.title_input}><TXTinputP placeholder={"Digite o titulo do seu Path"}/></div>
-
-                  <div className={`${styles.txtover} ${styles.ctoA}`}>
+         <form className={styles.form}>
+            <div className={styles.inputA}>
+               <div className={styles.title_input}><TXTinputP placeholder={"Digite o titulo do seu Path"}/></div>
+               <div className={`${styles.txtover} ${styles.ctoA}`}>
                      Selecione uma <strong className={styles.strong}>categoria</strong> que se encaixa no seu <strong className={styles.strong}>Path:</strong>
-                  </div>
-
-                  <div className={styles.categoriaInput}><BoxInput/></div>
-
-                  <div className={`${styles.txtover} ${styles.ctoA}`}>
-                     Selecione cinco <strong className={styles.strong}>adjetivos</strong> que se encaixam no seu <strong className={styles.strong}>Path:</strong>
-                  </div>
-
-                  <div className={styles.adjetivosInput}>
-                     <div className={styles.boxAdjetivo}><BoxInput/></div>
-                     <div className={styles.boxAdjetivo}><BoxInput/></div>
-                     <div className={styles.boxAdjetivo}><BoxInput/></div>
-                     <div className={styles.boxAdjetivo}><BoxInput/></div>
-                     <div className={styles.boxAdjetivo}><BoxInput/></div>
-                  </div>
                </div>
-               <div className={styles.inputB}>
-                     <div className={styles.tags}>
-                        <div className={`${styles.ctoC} ${styles.txtover}`}>Digite <strong className={styles.strong}>palavras chaves</strong> que se relacionam com seu <strong className={styles.strong}>Path:</strong></div>
-                        <div className={styles.inputTag}>
+               <div className={styles.categoriaInput}><BoxInput/></div>
+               <div className={`${styles.txtover} ${styles.ctoA}`}>
+                     Selecione cinco <strong className={styles.strong}>adjetivos</strong> que se encaixam no seu <strong className={styles.strong}>Path:</strong>
+               </div>
+               <div className={styles.adjetivosInput}>
+                  <div className={styles.boxAdjetivo}><BoxInput/></div>
+                  <div className={styles.boxAdjetivo}><BoxInput/></div>
+                  <div className={styles.boxAdjetivo}><BoxInput/></div>
+                  <div className={styles.boxAdjetivo}><BoxInput/></div>
+                  <div className={styles.boxAdjetivo}><BoxInput/></div>
+               </div>
+            </div>
+            <div className={styles.inputB}>
+               <div className={styles.tags}>
+                  <div className={`${styles.ctoC} ${styles.txtover}`}>
+                     Digite <strong className={styles.strong}>palavras chaves</strong> que se relacionam com seu <strong className={styles.strong}>Path:</strong>
+                  </div>
+                  <div className={styles.inputTag}>
                           <div className={styles.button}><Button func={halndlechangetags} class={"click"} message={"submeter"}/></div>
                           <div className={styles.inputTag_core}><TXTinputP placeholder={"#Calculo #Progamação #ilustração . . . "} onChange={(e) => setinputxt(e.target.value)}/></div>
-                        </div>
-                     </div>      
-                     <div className={styles.showTags}>       
-                        {tags.map((tag) => (
-                           <div className={styles.tagsElement}>
-                              <div onClick={() => deleteElement(tag)} className={styles.tagExcluir}><ButtonIMG  iconi={"FaDeleteLeft"} iconi2={"iconn2"}/></div>
-                              <div className={styles.tagCore}>#{tag}</div>                            
-                           </div>
-                           ))}
+                  </div>
+               </div>      
+               <div className={styles.showTags}>       
+                  {tags.map((tag) => (
+                  <div className={styles.tagsElement}>
+                     <div onClick={() => deleteElement(tag)} className={styles.tagExcluir}>
+                        <ButtonIMG  iconi={"FaDeleteLeft"} iconi2={"iconn2"}/>
                      </div>
-
-                     <div className={styles.enviar}><Button class={"button"} message={"Enviar"}/></div>   
+                     <div className={styles.tagCore}>#{tag}</div>                            
+                  </div>))}
                </div>
-
-               
-            </form> 
             </div>
+            <div className={styles.inputC}>
+               <div className={`${styles.ctoD} ${styles.txtover}`}> Descreva o seu <strong className={styles.strong}>Path</strong></div>
+               <div className={styles.inputDesc}><TXTinputM/></div>
+               <div className={styles.enviar}><Button class={"button"} message={"Enviar"}/></div> 
+            </div>
+            </form> 
         </main>
     )
 }
