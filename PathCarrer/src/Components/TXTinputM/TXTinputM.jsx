@@ -1,10 +1,10 @@
 import styles from '../TXTinputM/TXTinputM.module.css'
 
-function TXTinputM (props) {
+function TXTinputM ({onChange,placeholder,name}) {
     return (
-        <form onChange={props.onChange} className={styles.main}>
+        <form onChange={onChange} className={styles.main}>
             <textarea className={`${styles.input}`} 
-            placeholder={props.placeholder} id="description" name={props.name} rows="4" cols="50" 
+            placeholder={placeholder} id="description" name={name} rows="4" cols="50" 
             maxlength="620"></textarea>
         </form>
 

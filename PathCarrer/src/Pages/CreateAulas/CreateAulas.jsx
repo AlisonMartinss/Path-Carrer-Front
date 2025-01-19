@@ -8,6 +8,7 @@ import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 import MessageIMG from '../../Components/messageIMG/messageIMG'
 import Dicas from '../../Components/Dicas/Dicas'
 import Button from '../../Components/Button/Button'
+import BoxInput from '../../Components/BoxInput/BoxInput'
 
 // =-=-=-=-= Midias =-=-=-=-= //
 import JP2 from '../../assets/Midias/JP2.png'
@@ -19,18 +20,37 @@ import { useNavigate } from "react-router-dom"
 import { useContext, useState,useEffect } from 'react'
 
 function CreateAulas (){
+
+  //Input do indice
+  // Entender slice
       
-      const {setClassData} = useContext(PathContext);
+      const [module,setModule] = useState ([]);
 
-      //Contador do indice da aula
-      const [indiceClass, setIndiceClass] = useState(1);
-      const nextClass = () => {
-        setIndiceClass((prevIndice) => prevIndice + 1);
-      };
+      const [indice,SetIndice] = useState(0);
 
-      const [module,setModule] = useState ({
-        modulo:[]
-      });
+      const handleIndice = (event) => {
+        SetIndice(event.target.value);
+      }
+
+      const optionEList = [
+        { valueA: 1, txt: 1 },
+        { valueA: 2, txt: 2 },
+        { valueA: 3, txt: 3 },
+        { valueA: 4, txt: 4 },
+        { valueA: 5, txt: 5 },
+
+        { valueA: 6, txt: 6 },
+        { valueA: 7, txt: 7 },
+        { valueA: 8, txt: 8 },
+        { valueA: 9, txt: 9 },
+        { valueA: 10, txt: 10 },
+
+        { valueA: 11, txt: 11 },
+        { valueA: 12, txt: 12 },
+        { valueA: 13, txt: 13 },
+        { valueA: 14, txt: 14 },
+        { valueA: 15, txt: 15 },
+      ];
 
       //Objeto da aula
       const [classData,setClassDataState] = useState ({
@@ -43,7 +63,6 @@ function CreateAulas (){
 
       const ClassDataSet = (event) => {
         const {name, value} = event.target;
-        console.log("Atualizando campo:", name, "com valor:", value);
         setClassDataState({...classData,[name]:value});
       };
 
@@ -61,6 +80,13 @@ function CreateAulas (){
            alert("Campo 'link' OK");
            if (classData.description != null && (classData.description).trim() != ""){
             alert("Campo 'description' OK");
+             handleModule(indice);
+             setModule((prevModule) =>
+              prevModule.filter((_, elemento) => elemento !== indice)
+            );
+            
+             clear();
+            
            }
            else {alert("Campo 'description' vazio");}
           }
@@ -71,9 +97,32 @@ function CreateAulas (){
 
         }}
 
+        const handleModule = (index) => {
+          setModule((prevModule) => [
+            ...prevModule.slice(0, index-1),
+            classData,
+            ...prevModule.slice(index),
+          ]);
+        };
+        
+        
+
+
+        const clear = () => {
+          setClassDataState({
+            title:"",
+            link:"",
+            description:""
+          })
+        }
+
         useEffect(() => {
-          console.log("O estado classData foi atualizado:", classData);
-        }, [classData]); // Executa toda vez que classData mudar
+
+          for (let i = 0; i < module.length; i++){
+            
+            console.log("Consultando indice: " + i + module[i])
+          }
+        }, [module]); // Executa toda vez que classData mudar
 
     return (
         <main className={styles.main}>
@@ -94,12 +143,13 @@ function CreateAulas (){
              </div>
 
              <form className={styles.form}>
-               <div className={styles.recado}>Você está editando a aula de índice<strong className={styles.strong}>{indiceClass}</strong></div>
+               <div className={styles.recado}>Você está editando a aula de <strong className={styles.strong}>índice</strong> <div className={styles.boxInput}>
+               <BoxInput onChange={(event) => handleIndice(event)} optionE={optionEList}/></div></div>
 
-               <div className={`${styles.inputName} ${styles.overInput}`}><TXTinputP id={"title"} name={"title"} func={(event) => ClassDataSet(event)} 
+               <div className={`${styles.inputName} ${styles.overInput}`}><TXTinputP id={"title"} name={"title"} onChange={(event) => ClassDataSet(event)} 
                placeholder={"Digite o titulo da aula"}/></div>
 
-               <div className={`${styles.inputLink} ${styles.overInput}`}><TXTinputP id={"link"} name={"link"} func={(event) => ClassDataSet(event)} 
+               <div className={`${styles.inputLink} ${styles.overInput}`}><TXTinputP id={"link"} name={"link"} onChange={(event) => ClassDataSet(event)} 
                placeholder={"Cole aqui o link do conteudo desta aula"}/></div>
 
                <div className={styles.inputDesc}><TXTinputM name={"description"} onChange={(event) => ClassDataSet(event)} 
