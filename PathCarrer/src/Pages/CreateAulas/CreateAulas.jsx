@@ -23,34 +23,31 @@ function CreateAulas (){
 
   //Input do indice
   // Entender slice
+  /*
+  { valueA: 1, txt: 1 },
+  */
+
+      
       
       const [module,setModule] = useState ([]);
 
-      const [indice,SetIndice] = useState(0);
+      //Usado na func Verify
+
+      const [indice,SetIndice] = useState();
 
       const handleIndice = (event) => {
-        SetIndice(event.target.value);
+        SetIndice((event.target.value) - 1);
       }
 
-      const optionEList = [
-        { valueA: 1, txt: 1 },
-        { valueA: 2, txt: 2 },
-        { valueA: 3, txt: 3 },
-        { valueA: 4, txt: 4 },
-        { valueA: 5, txt: 5 },
+      const [prevIndice, setPrevIndice] = useState([{valueA:1, txt:1}]);
+      
+      const handlePrevIndice = () => {
+        alert("HandlePrevIndice chamado")
+        const newValue = prevIndice.length;
+        setPrevIndice([...prevIndice,{valueA:(newValue+1),txt:(newValue+1)}]);
 
-        { valueA: 6, txt: 6 },
-        { valueA: 7, txt: 7 },
-        { valueA: 8, txt: 8 },
-        { valueA: 9, txt: 9 },
-        { valueA: 10, txt: 10 },
+      }
 
-        { valueA: 11, txt: 11 },
-        { valueA: 12, txt: 12 },
-        { valueA: 13, txt: 13 },
-        { valueA: 14, txt: 14 },
-        { valueA: 15, txt: 15 },
-      ];
 
       //Objeto da aula
       const [classData,setClassDataState] = useState ({
@@ -75,18 +72,11 @@ function CreateAulas (){
         alert(classData.description)
 
         if (classData.title != null && (classData.title).trim() != ""){
-          alert("Campo 'name' OK");
+          
           if (classData.link != null && (classData.link).trim() != ""){
-           alert("Campo 'link' OK");
+           
            if (classData.description != null && (classData.description).trim() != ""){
-            alert("Campo 'description' OK");
-             handleModule(indice);
-             setModule((prevModule) =>
-              prevModule.filter((_, elemento) => elemento !== indice)
-            );
-            
-             clear();
-            
+             handleModule(indice);//Insiro elemento             
            }
            else {alert("Campo 'description' vazio");}
           }
@@ -97,16 +87,30 @@ function CreateAulas (){
 
         }}
 
-        const handleModule = (index) => {
-          setModule((prevModule) => [
-            ...prevModule.slice(0, index-1),
-            classData,
-            ...prevModule.slice(index),
-          ]);
-        };
-        
-        
+        const realoc = () => {
+          if(module[(indice+1)] !== undefined){
+            alert("Entramos no if")
+            alert(module[(indice)])
+            setModule(
+            module.filter((_, elemento) => elemento !== (indice+1))
+            );//elimino qualquer elemento inutil
+           }
 
+           else {
+           alert("Elemento da ponta")}
+
+           clear();
+        }
+
+        const handleModule = (indice) => {
+          alert("Entramos no handleModule")
+          setModule([
+            ...module.slice(0,indice),
+            classData,
+            ...module.slice(indice),
+
+          ])
+        };
 
         const clear = () => {
           setClassDataState({
@@ -117,12 +121,23 @@ function CreateAulas (){
         }
 
         useEffect(() => {
+          SetIndice(0);
+        }, []); // Apenas no carregamento inicial
 
+        useEffect(() => {
+          alert("Indice atual: " + indice);
+        }, [indice]); // Monitora mudanças em `indice`
+
+        useEffect(() => {
+          realoc();
+        }, [module]); // Monitora mudanças em `indice`
+
+        useEffect(() => {
           for (let i = 0; i < module.length; i++){
-            
-            console.log("Consultando indice: " + i + module[i])
+            console.log(module.length)
+            console.log("Aula de indice: " + i + " -" + JSON.stringify(module[i]))
           }
-        }, [module]); // Executa toda vez que classData mudar
+        }, [module]); // Monitora mudanças em `indice`
 
     return (
         <main className={styles.main}>
@@ -144,7 +159,7 @@ function CreateAulas (){
 
              <form className={styles.form}>
                <div className={styles.recado}>Você está editando a aula de <strong className={styles.strong}>índice</strong> <div className={styles.boxInput}>
-               <BoxInput onChange={(event) => handleIndice(event)} optionE={optionEList}/></div></div>
+               <BoxInput onChange={(event) => handleIndice(event)} optionE={prevIndice}/></div></div>
 
                <div className={`${styles.inputName} ${styles.overInput}`}><TXTinputP id={"title"} name={"title"} onChange={(event) => ClassDataSet(event)} 
                placeholder={"Digite o titulo da aula"}/></div>
@@ -157,7 +172,7 @@ function CreateAulas (){
 
                <div className={styles.Button}>
                 <div className={styles.Buttonover}><Button message={"Enviar"} class="button"/>   </div>
-                <div className={styles.Buttonover}><Button func={Verify} message={"Salvar"} class="Save"/>   </div>
+                <div className={styles.Buttonover}><Button func={() => {Verify(); handlePrevIndice(); }} message={"Salvar"} class="Save"/>   </div>
                </div>
 
              </form>

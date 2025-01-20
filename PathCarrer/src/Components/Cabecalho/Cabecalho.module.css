@@ -29,11 +29,10 @@
   color: rgb(255, 255, 255);
 
   cursor: pointer;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .txtover:hover{
-    transform: scale(1.1);
     color: rgb(255, 255, 255);
 }
 
