@@ -1,0 +1,119 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+}
+
+.header{
+    width: 100%;
+    height: 10%;
+}
+
+.core{
+    display: flex;
+    flex-direction: row-reverse;
+
+    width: 100vw;
+    height: 90vh;
+}
+
+.sideBar{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 40vw;
+    height: 90vh;
+
+    gap: 2%;
+
+    left: 100%;
+
+    background-color: rgba(112, 112, 112, 0.612);
+}
+
+.profile_core{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 5%;
+
+    width: 100%;
+    height: 30%;
+    
+
+    background-color: rgb(99, 99, 255);
+}
+
+.name_medals{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    width: 60%;
+    height: 100%;
+
+    background-color: rgb(30, 30, 227);;
+}
+
+.name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 50%;
+
+    background-color: bisque;
+}
+
+.medals{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 50%;
+
+    background-color: aqua;
+}
+
+.imgProfile{
+    width: 40%;
+    height: 100%;
+
+    background-color: brown;
+}
+
+.adjectives{
+    width: 100%;
+    height: 15%;
+
+    background-color: rgb(238, 241, 61);
+}
+
+.desc{
+    width: 100%;
+    height: 45%;
+
+    background-color: brown;
+}
+
+.content_core{
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(42, 73, 165, 0.339);
+}
+
+.conten_comments{
+    width: 50%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.459);
+}

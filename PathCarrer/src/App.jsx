@@ -11,6 +11,7 @@ import Createpath from './Pages/CreatePath/Createpath'
 import CreateModulo from './Pages/CreateModulo/Createmodulo'
 import Explorer from './Pages/Explorer/Explorer'
 import CreateAulas from './Pages/CreateAulas/CreateAulas'
+import ContentAcess from './Pages/ContentAcess/ContentAcess'
 import Class from './Pages/Class/Class'
 import Loby from './Pages/Loby/Loby'
 
@@ -24,6 +25,7 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
  <Route path="/class" element={<Class nomeDoModulo={"Nome do Modulo"} 
  srcVideo={"https://www.youtube.com/embed/F1xZ_uK2M6c"}/>}/>
  <Route path="/explorer" element={<Explorer/>}/>
+ <Route path="/ContentAcess" element={<ContentAcess/>}/>
 
    <Route path="/createpath"   element = {
    <PathProvider>
