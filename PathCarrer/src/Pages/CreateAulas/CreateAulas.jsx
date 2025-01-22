@@ -87,12 +87,14 @@ function CreateAulas (){
         }
 
         const handleOptionIndice = () => {
-          const index = prevIndice.length;
-          setPrevIndice((prev) => [
+          if (prevIndice.length <  15){
+           const index = prevIndice.length;
+           setPrevIndice((prev) => [
             ...prev,
             { valueA: index + 1, txt: index + 1 }
-          ]);
-        };
+           ]);
+          };
+        }
 
         useEffect(() => {
           SetIndice(0);
