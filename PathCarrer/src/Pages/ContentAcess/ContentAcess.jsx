@@ -18,7 +18,10 @@ function ContentAcess (){
                     <div className={styles.adjectives}></div>
                     <div className={styles.desc}></div>
                 </div>
-                <div className={styles.content_core}>
+                <div className={styles.view_core}>
+                    <div className={styles.content_core}>
+                        <div className={styles.content_show}></div>
+                    </div>
                     <div className={styles.conten_comments}>
                         
                     </div>
