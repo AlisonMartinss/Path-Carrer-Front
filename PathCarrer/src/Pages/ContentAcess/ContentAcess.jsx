@@ -1,6 +1,7 @@
 import styles from '../ContentAcess/ContentAcess.module.css'
 
 import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
+import WindowText from '../../Components/WindowText/WindowText'
 
 function ContentAcess (){
     return(
@@ -20,7 +21,15 @@ function ContentAcess (){
                 </div>
                 <div className={styles.view_core}>
                     <div className={styles.content_core}>
-                        <div className={styles.content_show}></div>
+                        <div className={styles.content_show}>
+                         <div className={styles.content_container}>
+
+                          <div className={styles.moduleElement}>
+                            <WindowText classModel={"mainModel2"} classStyle={"mainStyle4"} txt={"254 para textos grandes"}/>
+                          </div>
+
+                         </div>                      
+                        </div>
                     </div>
                     <div className={styles.conten_comments}>
                         

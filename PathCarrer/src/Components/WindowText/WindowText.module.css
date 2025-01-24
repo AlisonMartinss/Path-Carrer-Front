@@ -20,6 +20,8 @@
 
 
 
+
+
 .mainStyle1{
     background-color: rgb(255, 255, 255);
     border-radius: 25px;
@@ -55,6 +57,18 @@
     transform: translate(6.5%, -4%);
     background-color: #88D23E;
 
+}
+
+.mainStyle3{
+    background-color: rgb(255, 255, 255);
+    border-radius: 25px;
+  
+    margin-top: -2%;
+    cursor: pointer;
+}
+
+.mainStyle4{
+    background-color: #8791AB;
 }
 
 .text{
