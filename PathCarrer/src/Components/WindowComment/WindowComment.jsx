@@ -1,5 +1,4 @@
 import styles from '../WindowComment/WindowComment.module.css'
-import ButtonIMG from '../ButtonIMG/ButtonIMG';
 import RelatedComponents from '../RelatedComponents/RelatedComponents';
 
 

@@ -36,12 +36,12 @@ function RelatedComponents({icon_Aa,icon_Bb,ClasseAfterA,ClasseAfterB,buttonActi
     const Icon_B = icon[icon_Bb];
     return (
         <main className={styles.main}>
-            <div onClick={handleClick} id='comp_A' className={styles.icon_A}>
+            <div onClick={handleClick} id='comp_A' className={styles.icon_Area}>
                 <Icon_A className={`${styles.classeBase} ${isClickedA ? styles[ClasseAfterA] : ""}`}/>
                 <div className={`${styles.txt} ${styles.txtOver}`}>{mensagemA}</div>
             </div>
 
-            <div onClick={handleClick} id='comp_B' className={styles.icon_B}>
+            <div onClick={handleClick} id='comp_B' className={styles.icon_Area}>
                 <Icon_B className={`${styles.classeBase}  ${isClickedB ? styles[ClasseAfterB] : ""}`}/>
                 <div className={`${styles.txt} ${styles.txtOver}`}>{mensagemB}</div>
             </div>
