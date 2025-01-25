@@ -21,13 +21,13 @@ function Window(props) {
         ING,TI,FIN,MKT,IA,POR,EMP,DES
     }
     
-    const Icon = icones[props.iconnnn] || '';
+    const Icon = icones[props.icon] || '';
 
     return (
         <main className={styles.main}>
          <div className={styles.icons}>
-            <div className={`${styles.overIcon}`}><ButtonIMG iconi={"BsBookmarksFill"} iconi2={"iconn"} func={(event) => alert("PIPOCA COM SAL")}/></div>
-            <div className={`${styles.overIcon}`}><ButtonIMG iconi={"FaRegTrashAlt"} iconi2={"iconn2"}/></div>
+            <div className={`${styles.overIcon}`}><ButtonIMG iconV={"BsBookmarksFill"} icon_style={"iconn"} buttonActive={(event) => alert("PIPOCA COM SAL")}/></div>
+            <div className={`${styles.overIcon}`}><ButtonIMG iconV={"FaRegTrashAlt"}   icon_style={"iconn2"}/></div>
          </div>
 
          <div className={styles.titleANDimg}>

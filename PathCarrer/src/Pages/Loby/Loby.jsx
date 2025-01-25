@@ -79,31 +79,31 @@ function Loby () {
                  <div className={styles.preWindow}>
                     <Window
                     title={"Titulo exemplar 01 "}
-                    iconnnn={"IA"}
+                    icon={"IA"}
                     relative={"31/45"}/>
                  </div>
                  <div className={styles.preWindow}>
                     <Window
                       title={"Titulo exemplar 02 "}
-                      iconnnn={"ING"}
+                      icon={"ING"}
                       relative={"31/45"}/>
                  </div>
                  <div className={styles.preWindow}>
                     <Window
                     title={"Titulo exemplar 03 "}
-                    iconnnn={"FIN"}
+                    icon={"FIN"}
                     relative={"31/45"}/> 
                  </div>
                  <div className={styles.preWindow}>
                    <Window
                    title={"Titulo exemplar 04 "}
-                   iconnnn={"MKT"}
+                   icon={"MKT"}
                    relative={"31/45"}/>
                  </div>
                  <div className={styles.preWindow}>
                    <Window
                    title={"Titulo exemplar 05 "}
-                   iconnnn={"POR"}
+                   icon={"POR"}
                    relative={"31/45"}/>
                  </div>
                 </div>
@@ -115,8 +115,8 @@ function Loby () {
                   De<strong className={`${styles.strong}`}>Você</strong>para <strong className={`${styles.strong}`}>Você</strong>
                 </div>
                 <div className={styles.messageCore}>
-                  <div className={styles.WindowText}> <WindowText classModel={"main"} classStyle={"mainStyle1"} txt={"254 para textos grandes"}/></div>
-                   <div className={styles.WindowText}><WindowText classModel={"main"} classStyle={"mainStyle1"} txt={"Fiquei todo empanzinado"}/></div>
+                   <div className={styles.WindowText}> <WindowText classFormat={"main_format_1"} classStyle={"main_Style_1"} txt={"254 para textos grandes"}/></div>
+                   <div className={styles.WindowText}> <WindowText classFormat={"main_format_1"} classStyle={"main_Style_1"} txt={"Fiquei todo empanzinado"}/> </div>
                 </div>
                </div>
              </div>

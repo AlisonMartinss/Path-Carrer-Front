@@ -30,30 +30,6 @@ function ContentAcess (){
                              paragrafo={"Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul"}/>
                           </div>
                           
-                          <div className={styles.module_area}>
-                            <WindowText classFormat={"main_format_1"} classStyle={"main_Style_4"} txt={"254 para textos grandes"}
-                             paragrafo={"Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul"}/>
-                          </div>
-
-                          <div className={styles.module_area}>
-                            <WindowText classFormat={"main_format_1"} classStyle={"main_Style_4"} txt={"254 para textos grandes"}
-                             paragrafo={"Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul"}/>
-                          </div>
-
-                          <div className={styles.module_area}>
-                            <WindowText classFormat={"main_format_1"} classStyle={"main_Style_4"} txt={"254 para textos grandes"}
-                             paragrafo={"Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul"}/>
-                          </div>
-
-                          <div className={styles.module_area}>
-                            <WindowText classFormat={"main_format_1"} classStyle={"main_Style_4"} txt={"254 para textos grandes"}
-                             paragrafo={"Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul"}/>
-                          </div>
-
-                          <div className={styles.module_area}>
-                            <WindowText classFormat={"main_format_1"} classStyle={"main_Style_4"} txt={"254 para textos grandes"}
-                             paragrafo={"Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul Lore ipsul"}/>
-                          </div>                   
                         </div>
                     </div>
 

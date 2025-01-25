@@ -1,15 +1,12 @@
 import styles from '../WindowComment/WindowComment.module.css'
-import { FaStar } from "react-icons/fa6";
+import ButtonIMG from '../ButtonIMG/ButtonIMG';
+import RelatedComponents from '../RelatedComponents/RelatedComponents';
+
 
 function WindowComment (){
 
     return (
         <main className={styles.main}>
-            <header className={styles.header}>
-                
-                <div className={styles.star_area}><FaStar className={styles.star_core}/></div>
-                
-            </header>
             <div className={styles.core}>
                 <div className={styles.img_AND_relative}>
                     <div className={styles.img}></div>
@@ -18,12 +15,13 @@ function WindowComment (){
                 <div className={styles.comment}></div>
             </div>
             <div className={styles.likes}>
-                <div className={styles.like_area}>
-                    <div className={styles.like_core}></div>
-                </div>
-                <div className={styles.deslike_area}>
-                    <div className={styles.deslike_core}></div>
-                </div>
+                <RelatedComponents 
+                icon_Aa={"GrLike"} 
+                ClasseAfterA={"classeAfterAa"}
+                icon_Bb={"GrDislike"}
+                ClasseAfterB={"classeAfterBb"}
+                buttonActive={(e) => ("")}
+                />                             
             </div>
         </main>
     )
