@@ -27,7 +27,7 @@
 
     gap: 2%;
 
-    left: 100%;
+    left: 95%;
 
     background-color: rgba(112, 112, 112, 0.612);
 }
@@ -126,33 +126,69 @@
 .content_show{
     overflow-y: scroll;
 
-    width: 70%;
-    height: 95%;
+    width: 35vw;
+    height: 70vh;
 
     background-color: black;
 
 }
 
-.content_container{
+
+.module_area{
     display: flex;
     justify-content: center;
     align-items: center;
     
+    width: 33vw;
+    height: 14vh;
+    
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+
+    transition: width 0.3s ease, height 0.4s ease 0.2s;
+}
+
+.content_comments{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    width: 40vw;
+    height: 75vh;
+
+    background-color: rgb(86, 176, 255);
+
+}
+
+.comments_options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 15%;
+
+    background-color: aqua;
+}
+
+.comment_show{
     width: 100%;
     height: 100%;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    overflow-y: scroll;
+
+    background-color: rgb(63, 213, 68);
 }
 
-.moduleElement{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+.comment_area{
     width: 95%;
-    height: 23%;
-}
+    height: 60%;
 
-.conten_comments{
-    width: 50vw;
-    height: 90vh;
-    background-color: rgba(0, 0, 0, 0.794);
+    margin-left: 3%;
+
+    background-color: aliceblue;
 }

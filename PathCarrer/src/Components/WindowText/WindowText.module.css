@@ -1,28 +1,16 @@
-.main{
+.main_format_1{
     display: flex;
     justify-content: center;
     align-items: center;
 
   
-    width: 88%;
-    height: 80%;
-}
-
-.mainModel2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-  
-    width: 88%;
-    height: 95%;
+    width: 85%;
+    height: 85%;
 }
 
 
 
-
-
-.mainStyle1{
+.main_Style_1{
     background-color: rgb(255, 255, 255);
     border-radius: 25px;
   
@@ -34,13 +22,13 @@
 
 }
 
-.mainStyle1:hover{
+.main_Style_1:hover{
     box-shadow: -5px 10px 20px rgba(55, 55, 55, 0.76);
     transform: translate(5px, -5px);
 }
 
 
-.mainStyle2{
+.main_Style_2{
 
     background-color: #8791AB;
     border: solid 1px #ffff;
@@ -53,13 +41,13 @@
                 background-color 0.3s ease;
 }
 
-.mainStyle2:hover{
+.main_Style_2:hover{
     transform: translate(6.5%, -4%);
     background-color: #88D23E;
 
 }
 
-.mainStyle3{
+.main_Style_3{
     background-color: rgb(255, 255, 255);
     border-radius: 25px;
   
@@ -67,32 +55,39 @@
     cursor: pointer;
 }
 
-.mainStyle4{
-    background-color: #8791AB;
+.main_Style_4{
+    border-radius: 10px;
+    background-color: #ffffff;
+
+    cursor: pointer;
 }
 
-.text{
-    
+.titulo{
+
     display: flex;
-    justify-content: flex-start;
+    justify-content:flex-start;
     align-items: center;
 
-    margin-top: -5%;
-    margin-left: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
 
-    padding-top: 14%;
-    padding-bottom: 5%;
+    width: 100%;
+    height: 50%;
+
+    background-color: #8791ab00;
+}
 
 
-    width: 90%;
-    height: 80%;
+.textFunc{
+    display: flex;
+
     white-space: pre-wrap;
 
     word-wrap: break-word; /* Quebra palavras muito grandes */
     overflow-wrap: break-word; /* Suporte extra para quebra de palavras */
 }
 
-.overtxt{
+.stylesText{
     font-family: "Urbanist", serif;
     font-style: normal;
     font-weight: 500;

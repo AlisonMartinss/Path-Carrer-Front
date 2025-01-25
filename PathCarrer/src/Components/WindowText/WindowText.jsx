@@ -1,14 +1,14 @@
 import styles from '../WindowText/WindowText.module.css'
 
 function WindowText (props){
-    const classModel = styles[props.classModel] || '';
+    const classFormat = styles[props.classFormat] || '';
     const classStyle = styles[props.classStyle] || '';
     return(
-        <main className={`${classModel} ${classStyle}`}>
-            <p className={`${styles.text} ${styles.overtxt}`}>
-               {props.txt}
-            </p>
-</main>
+        <main className={`${classFormat} ${classStyle}`}>           
+          <p className={`${styles.titulo} ${styles.textFunc} ${styles.stylesText}`}>
+            {props.txt}
+          </p>                          
+        </main>
     )
 }
 

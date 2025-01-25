@@ -16,14 +16,6 @@ import FAV from '../../../src/assets/Midias/Icones/Icone2_02.png'
 import TRH from '../../../src/assets/Midias/Icones/Icone2_01.png'
 
 
-
-
-
-
-
-
-
-
 function Window(props) {
     const icones = {
         ING,TI,FIN,MKT,IA,POR,EMP,DES
@@ -31,7 +23,6 @@ function Window(props) {
     
     const Icon = icones[props.iconnnn] || '';
 
-    
     return (
         <main className={styles.main}>
          <div className={styles.icons}>
