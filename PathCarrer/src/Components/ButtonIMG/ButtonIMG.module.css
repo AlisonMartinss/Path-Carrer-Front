@@ -18,6 +18,13 @@
     transform: scale(1.1);
 }
 
+.const{
+    width: 60%;
+    height: 60%;
+
+    color: rgb(255, 255, 255);
+}
+
 .iconn{
     width: 60%;
     height: 60%;

@@ -10,35 +10,23 @@ import { FaDeleteLeft } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
 import { AiFillLike } from "react-icons/ai";
 import { AiFillDislike } from "react-icons/ai";
+import { RxHamburgerMenu } from "react-icons/rx";
 
-/* =-=-=-=-= Roocks =-=-=-=-= */
+function ButtonIMG ({iconV,icon_style,handleClick,}) {
 
-import { useNavigate } from "react-router-dom"
-import { useState } from 'react'
-
-
-
-function ButtonIMG ({iconV,icon_style,icone_styles_after,buttonActive}) {
-    const [isClicked, setIsClicked] = useState(false);
 
 const comp = {
-    BsBookmarksFill,FaRegTrashAlt,RiPencilRuler2Fill,TfiFlagAlt2,FaDeleteLeft,FaStar,AiFillLike,AiFillDislike
+    BsBookmarksFill,FaRegTrashAlt,RiPencilRuler2Fill,TfiFlagAlt2,FaDeleteLeft,FaStar,AiFillLike,AiFillDislike,RxHamburgerMenu
 }
 
 /* =-=-=-=-= Functions =-=-=-=-= */
 
-const handleClick = () => {
-    if(buttonActive)buttonActive();
-    setIsClicked(!isClicked);
-  };
-
     const Componente =  comp[iconV]
     const classeBase =  styles[icon_style]
-    const classeAfter = styles[icone_styles_after]
 
     return (
         <div onClick={handleClick} className={styles.button}>
-            <Componente className={`${classeBase} ${isClicked ? classeAfter:""}`}/>
+            <Componente className={`${classeBase}`}/>
         </div>
     )
 }

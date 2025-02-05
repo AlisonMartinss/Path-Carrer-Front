@@ -30,8 +30,6 @@
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 
-    cursor: pointer;
-
     background-color: rgba(112, 112, 112, 0.612);
     transition: all 0.3s ease;
 }
@@ -47,8 +45,9 @@
 }
 
 .profile_core{
+    position: relative;
+
     display: flex;
-    flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
 
@@ -56,56 +55,130 @@
 
     width: 100%;
     height: 30%;
-    
 
-    background-color: rgb(99, 99, 255);
+    gap: 1%;
+
 }
 
-.name_medals{
+.on_off_area{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    width: 60%;
-    height: 100%;
+    align-items: flex-start;
 
-    background-color: rgb(30, 30, 227);;
+    width: 10%;
+    height: 90%;
+
+    margin-left:-10%;
+
 }
 
-.name{
+.button_PreArea{
     display: flex;
     justify-content: center;
     align-items: center;
 
     width: 100%;
-    height: 50%;
+    height: 30%;
+}
 
-    background-color: bisque;
+.profile_aspects{
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    top: 15%;
+
+    width: 50%;
+    height: 60%;
+
+    padding: 1%;
+    gap: 2%;
+
+    border-radius: 15px;
+}
+
+.profile_img{
+    width: 30%;
+    height: 75%;
+
+    border-radius: 50%;
+
+    background-color: rgba(108, 108, 108, 0.574);
+    border: 3px solid #ffffff;
+}
+
+.medals_area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+    height: 40%;
+
+    gap: 3%;
 }
 
 .medals{
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
-    width: 100%;
-    height: 50%;
+    width: 30%;
+    height: 90%;
+    border: 2px solid #ffff;
+    border-radius: 10px;
 
-    background-color: aqua;
+    background-color: rgba(108, 108, 108, 0.574);
 }
 
-.imgProfile{
-    width: 40%;
+
+
+
+.profile_main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    width: 75%;
+    height: 95%;
+}
+
+.topArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 95%;
+    height: 65%;
+
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    background-color: black;
+}
+
+.bottomArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 95%;
+    height: 35%;
+
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+    background-color: rgb(255, 255, 255);
+    color: #A8A6A6;
+}
+
+.img{
+    width: 100%;
     height: 100%;
 
-    background-color: brown;
-}
-
-.adjectives{
-    width: 100%;
-    height: 15%;
-
-    background-color: rgb(238, 241, 61);
+    object-fit: cover;
+    overflow: hidden;
 }
 
 .desc{
@@ -178,13 +251,14 @@
 }
 
 .content_show::-webkit-scrollbar{
-    width: 0px;
-    border: none;
-    
+    width: 8px;
+    background-color: #30303000;
+    border-radius: 10px;    
 }
 
 .content_show::-webkit-scrollbar-thumb{
-    background-color: none;
+    background-color:#a7ff4e;
+    border-radius: 10px;
  }
 
 
