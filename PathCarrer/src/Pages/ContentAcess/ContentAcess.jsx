@@ -49,13 +49,35 @@ function ContentAcess (){
                         </div>
 
 
-                        <div className={styles.topArea}><img className={styles.img} src="https://i.pinimg.com/736x/cc/f9/2f/ccf92f19e7045a4b7cfb9c6c6d82495d.jpg" alt="Banner" /></div>
-                        <div className={styles.bottomArea}> AI CALIQUINHA</div>
+                        <div className={styles.topArea}>
+                            <img className={styles.img} src="https://i.pinimg.com/736x/cc/f9/2f/ccf92f19e7045a4b7cfb9c6c6d82495d.jpg" alt="Banner" />
+                        </div>
+                        <div className={`${styles.bottomArea} ${styles.txtA}`}> AI CALIQUINHA</div>
                       </div>                     
                     </div>
 
-                    <div className={styles.adjectives}></div>
-                    <div className={styles.desc}></div>
+                    <div className={`${styles.adjectives_area} ${styles.txtB}`}>
+                        <div className={`${styles.adjectives} ${styles.great}`}>Muito BOM</div>
+                        <div className={`${styles.adjectives} ${styles.great}`}>Muito BOM</div>
+                        <div className={`${styles.adjectives} ${styles.great}`}>Muito BOM</div>
+                        <div className={`${styles.adjectives} ${styles.great}`}>Muito BOM</div>
+                        <div className={`${styles.adjectives} ${styles.great}`}>Muito BOM</div>
+                    </div>
+
+                    <div className={styles.desc_area}>
+                        <div className={`${styles.title_desc} ${styles.txtB}`}>Descrição do Path</div>
+                        <div className={styles.desc_area_main}>
+                            <div className={styles.barra}></div>
+                            <p  className={`${styles.desc} ${styles.txtC}`}>
+                              nspiraçãoSobre a linda capitalDeste nosso grande chãoLá no Rio Grande do NorteBrilha forte essa nação.
+                              No dia vinte e cincoDe dezembro ela nasceuCom seu nome tão bonitoQue o tempo engrandeceuNatal é terra 
+                              queridaQue o povo sempre viveu. Cidade do sol ardenteQue brilha o ano inteiroCom suas praias formosasE 
+                              um calor hospitaleiroSe o turista aqui vemVolta sempre ligeiro. Tem a praia de Ponta NegraE seu belo 
+                              Morro do CarecaCartão-postal co
+                            </p>
+                        </div>
+                        
+                    </div>
                 </div>
 
                 <div className={styles.view_core}>
@@ -75,7 +97,7 @@ function ContentAcess (){
                  </div>
 
                  <div className={styles.content_comments}>
-                    <div className={styles.content_core}>
+                    <div className={`${styles.content_core} ${styles.content_core_comments}`}>
                         <div className={styles.area_plate}><AiOutlineComment className={styles.class_icon}/></div>
 
                         <div className={styles.content_show}>
