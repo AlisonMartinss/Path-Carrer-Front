@@ -61,7 +61,10 @@ function Class (props){
 
                 <div className={styles.conteudo}>
                     <div className={styles.tela}>
-                      <div className={styles.editButton}><ButtonIMG iconi={"RiPencilRuler2Fill"} iconi2={"iconn"}/></div>
+                      <div className={styles.editButton}>
+                        <ButtonIMG iconV={"RiPencilRuler2Fill"} 
+                        icon_style={"iconn"}/>
+                      </div>
 
                       <iframe className={styles.iframe} src={props.srcVideo} frameborder="0"></iframe>
 

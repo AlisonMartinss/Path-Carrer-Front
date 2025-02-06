@@ -73,7 +73,7 @@ function CreatePath () {
                   {tags.map((tag) => (
                   <div className={styles.tagsElement}>
                      <div onClick={() => deleteElement(tag)} className={styles.tagExcluir}>
-                        <ButtonIMG  iconi={"FaDeleteLeft"} iconi2={"iconn2"}/>
+                        <ButtonIMG  iconV={"FaDeleteLeft"} icon_style={"iconn2"}/>
                      </div>
                      <div className={styles.tagCore}>#{tag}</div>                            
                   </div>))}
