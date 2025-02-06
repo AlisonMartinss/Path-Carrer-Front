@@ -20,16 +20,17 @@
 
 /* SIDE BAR */
 
+
 .sideBar{
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    width: 40vw;
-    height: 90vh;
+    
 
     gap: 2%;
+    overflow: hidden;
 
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -38,14 +39,14 @@
     transition: all 0.3s ease;
 }
 
-.endoContainer{
-    left: 95%;
-    transition: all 0.3s ease;
+.sideBar_areaA{
+    width: 40vw;
+    height: 90vh;
 }
 
-.exoContainer{
-    left: 60%;
-    transition: all 0.3s ease;
+.sideBar_areaB{
+    width: 6vw;
+    height: 90vh;
 }
 
 .profile_core{
@@ -61,6 +62,8 @@
     height: 27vh;
 
     gap: 1%;
+
+    background-color: #ff531e00;
 }
 
 .on_off_area{
@@ -69,9 +72,6 @@
 
     width: 10%;
     height: 90%;
-
-    margin-left:-10%;
-
 }
 
 .button_PreArea{
@@ -81,13 +81,22 @@
 
     width: 100%;
     height: 30%;
+
+    cursor: pointer;
 }
 
 .profile_main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+}
+
+.profile_main_area_A{
+    width: 0%;
+    height: 0%;
+}
+
+.profile_main_area_B{
     width: 30vw;
     height: 26vh;
 }
@@ -111,6 +120,16 @@
 
 }
 
+.profile_aspects_A{
+    width: 0%;
+    height: 0%;
+}
+
+.profile_aspects_B{
+    width: 18vw;
+    height: 15vh;
+}
+
 .profile_img{
     width: 38%;
     height: 90%;
@@ -119,6 +138,16 @@
 
     background-color: rgba(108, 108, 108, 0.574);
     border: 3px solid #ffffff;
+}
+
+.profile_img_A{
+    width: 0%;
+    height: 0%;
+}
+
+.profile_img_B{
+    width: 38%;
+    height: 90%;
 }
 
 
@@ -131,6 +160,16 @@
     height: 40%;
 
     gap: 3%;
+}
+
+.medals_area_A{
+    width: 0%;
+    height: 0%;
+}
+
+.medals_area_B{
+    width: 50%;
+    height: 40%;
 }
 
 .medals{
@@ -189,6 +228,16 @@
     border-radius: 12px;
 }
 
+.adjectives_area_A{
+    width: 35vw;
+    height: 10%;
+}
+
+.adjectives_area_B{
+    width: 0%;
+    height: 0%;
+}
+
 .adjectives{
     display: flex;
     justify-content: center;
@@ -202,7 +251,7 @@
 }
 
 .great{
-    background-color: #89f023;
+    background-color: #74d810;
 }
 
 .intermediary{
@@ -240,6 +289,16 @@
     justify-content: center;
     align-items: center;
 
+    width: 98%;
+    height: 95%;
+}
+
+.desc_area_main_A{
+    width: 0%;
+    height: 0%;
+}
+
+.desc_area_main_B{
     width: 98%;
     height: 95%;
 }

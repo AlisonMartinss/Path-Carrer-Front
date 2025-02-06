@@ -69,6 +69,14 @@
     cursor: pointer;
 
 }
+
+.main_Style_6{
+    border-radius: 10px;
+    background-color: #ffffff;
+
+    cursor: pointer;
+    clip-path: polygon(0px 0px, 100% 0px, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0px 100%);
+}
 .titulo{
 
     display: flex;

@@ -2,6 +2,8 @@ import styles from '../RelatedComponents/RelatedComponents.module.css'
 
 import { GrLike } from "react-icons/gr";
 import { GrDislike } from "react-icons/gr";
+import { AiFillLike } from "react-icons/ai";
+import { AiFillDislike } from "react-icons/ai";
 
 import { useContext, useState,useEffect } from 'react'
 
@@ -29,7 +31,7 @@ function RelatedComponents({icon_Aa,icon_Bb,ClasseAfterA,ClasseAfterB,buttonActi
     };
 
     const icon = {
-        GrLike,GrDislike
+        GrLike,GrDislike,AiFillLike,AiFillDislike
     };
 
     const Icon_A = icon[icon_Aa];
@@ -38,12 +40,12 @@ function RelatedComponents({icon_Aa,icon_Bb,ClasseAfterA,ClasseAfterB,buttonActi
         <main className={styles.main}>
             <div onClick={handleClick} id='comp_A' className={styles.icon_Area}>
                 <Icon_A className={`${styles.classeBase} ${isClickedA ? styles[ClasseAfterA] : ""}`}/>
-                <div className={`${styles.txt} ${styles.txtOver}`}>{mensagemA}</div>
+                <div className={`${styles.txtLayout} ${styles.txtOver}`}>{mensagemA}</div>
             </div>
 
             <div onClick={handleClick} id='comp_B' className={styles.icon_Area}>
                 <Icon_B className={`${styles.classeBase}  ${isClickedB ? styles[ClasseAfterB] : ""}`}/>
-                <div className={`${styles.txt} ${styles.txtOver}`}>{mensagemB}</div>
+                <div className={`${styles.txtLayout} ${styles.txtOver}`}>{mensagemB}</div>
             </div>
         </main>
     )

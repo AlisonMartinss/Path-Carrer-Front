@@ -13,10 +13,15 @@ import {useState} from 'react'
 
 function ContentAcess (){
     const [isClicked, setIsClicked] = useState(false);
+    const [view, setView] = useState(false);
 
     const handleClick = () => {
-        alert("side bar")
         setIsClicked((prev) => (!prev))
+        handleClickView();
+    };
+
+    const handleClickView = () => {
+        setView((prev) => (!prev))
     };
 
 
@@ -26,22 +31,21 @@ function ContentAcess (){
             <header className={styles.header}><CabecalhoPadrao/></header>
             <div className={styles.core}>
                 
-                <div className={`${styles.sideBar}   ${isClicked ? styles.endoContainer : styles.exoContainer}`}>
+                <div className={`${styles.sideBar} ${isClicked ? styles.sideBar_areaB : styles.sideBar_areaA}`}>
                     <div className={styles.profile_core}>
                       <div className={styles.on_off_area}>
-                        <div className={styles.button_PreArea}>
+                        <div className={styles.button_PreArea} onClick={(e) => handleClick()}>
                             <ButtonIMG iconV={"RxHamburgerMenu"}
-                            icon_style={"const"}
-                            handleClick={(e) => handleClick()}/>
+                            icon_style={"const"}/>
                         </div>
                       
                       </div>
-                      <div className={styles.profile_main}>
-                        <div className={styles.profile_aspects}>
-                            <div className={styles.profile_img}>
+                      <div className={`${styles.profile_main} ${isClicked ? styles.profile_main_area_A : styles.profile_main_area_B}`}>
+                        <div className={`${styles.profile_aspects} ${isClicked ? styles.profile_aspects_A : styles.profile_aspects_B}`}>
+                            <div className={`${styles.profile_img} ${isClicked ? styles.profile_img_A : styles.profile_img_B}` }>
                                 <img className={styles.img} src="https://i.pinimg.com/736x/20/7b/a9/207ba93842651805eda5de67765197f2.jpg" alt="" />
                             </div>
-                            <div className={styles.medals_area}>
+                            <div className={`${styles.medals_area} ${isClicked ? styles.medals_area_A : styles.medals_area_B}`}>
                                 <div className={styles.medals}><img className={styles.img} src="https://c4.wallpaperflare.com/wallpaper/510/751/778/akira-kaneda-motorcycle-anime-wallpaper-preview.jpg" alt="" /></div>
                                 <div className={styles.medals}><img className={styles.img} src="" alt="" /></div>
                                 <div className={styles.medals}><img className={styles.img} src="" alt="" /></div>
@@ -56,7 +60,7 @@ function ContentAcess (){
                       </div>                     
                     </div>
 
-                    <div className={`${styles.adjectives_area} ${styles.txtB}`}>
+                    <div className={`${styles.adjectives_area} ${styles.txtB} ${isClicked ? styles.adjectives_area_B : styles.adjectives_area_A}`}>
                         <div className={`${styles.adjectives} ${styles.great}`}>Muito BOM</div>
                         <div className={`${styles.adjectives} ${styles.great}`}>Muito BOM</div>
                         <div className={`${styles.adjectives} ${styles.great}`}>Muito BOM</div>
@@ -66,7 +70,7 @@ function ContentAcess (){
 
                     <div className={styles.desc_area}>
                         <div className={`${styles.title_desc} ${styles.txtB}`}>Descrição do Path</div>
-                        <div className={styles.desc_area_main}>
+                        <div className={`${styles.desc_area_main} ${isClicked ? styles.desc_area_main_A : styles.desc_area_main_B}`}>
                             <div className={styles.barra}></div>
                             <p  className={`${styles.desc} ${styles.txtC}`}>
                               nspiraçãoSobre a linda capitalDeste nosso grande chãoLá no Rio Grande do NorteBrilha forte essa nação.
@@ -89,7 +93,7 @@ function ContentAcess (){
                         <div className={styles.content_show}>
 
                          <div className={styles.module_area}>
-                            <WindowText classFormat={"main_format_1"} classStyle={"main_Style_4"} txt={"254 para textos grandes"}/>
+                            <WindowText classFormat={"main_format_1"} classStyle={"main_Style_6"} txt={"254 para textos grandes"}/>
                          </div>
 
                         </div>
