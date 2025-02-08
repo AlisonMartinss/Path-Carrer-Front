@@ -3,10 +3,15 @@ import styles from '../Loby/Loby.module.css'
 // =-=-=-=-=- Componentes =-=-=-=-=- //
 
 import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
-import SearchInput from '../../Components/SearchInput/SearchInput'
-import WindowText from '../../Components/WindowText/WindowText'
 import Button from '../../Components/Button/Button'
-import Window from '../../Components/window/Window'
+import WindowModule from '../../Components/WindowModule/WindowModule'
+import WindowNote from '../../Components/WindowNote/WindowNote'
+import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2'
+import img from '../../assets/Midias/JP2.png'
+
+
+import { useState } from 'react'
+
 
 // =-=-=-=-= Icones =-=-=-=-=- //
 
@@ -14,114 +19,56 @@ import Window from '../../Components/window/Window'
 
 
 function Loby () {
+    const [dayArray,setDayArray] = useState(["All","Seg","Ter","Qua","Qui","Sex","Sab","Dom"]);
+    const [leftElements,setModuleTest] = useState([
+    {iconV: "FaFolderOpen",
+    icon_style: "evenConstStyle",
+    handleClick:""
+    },
+
+    {iconV: "CgProfile",
+    icon_style: "evenConstStyle",
+    handleClick:""
+    }
+    ])
+    const [module,setModule] = useState([]);
+
     return (
+      
         <main className={styles.main}>
-            <header className={styles.header}><CabecalhoPadrao txt1={"Suporte"}txt2={"Pesquisar com base na categoria"}txt3={"Seus Paths"}/></header>
-            <div className={styles.searchArea}>
-               <div className={styles.SearchInputArea}><SearchInput/></div>
+            <header className={styles.header}>
+              <CabecalhoV2 leftElements={leftElements}/>
+            </header>
+            <div className={styles.pre_coreArea}>
+              <div className={styles.coreArea}>
+                  <div className={styles.weekArea}>
+                    {dayArray.map((element) => (
+                      <div className={styles.dayArea}>
+                        <Button class={"day"}
+                        message={element}/>
+                      </div>
+                    ))}
+                  </div>
+                  <div className={styles.moduloArea}>
+                    <div className={styles.moduloArea_core}>
+                      <WindowModule
+                      titleMain={"Nome do Curso"}
+                      subTile={"subTitulo"}
+                      img={img}
+                      />
+                    </div>               
+                  </div>
+              </div>
+            
+            <div className={styles.message_preArea}>
+              <div className={styles.messageMainArea}>
+                <div className={styles.messageArea}>
+                  <WindowNote/>
+                </div>
+              </div>
+
             </div>
-            <div className={styles.core}>
-             <div className={styles.classes}>
-
-                <div className={styles.daysWeek}>
-
-                  <div className={styles.day}>
-                    <Button 
-                    class={"day"}
-                    message={"All"}/>
-                  </div>
-
-                  <div className={styles.day}>
-                    <Button 
-                    class={"day"}
-                    message={"Dom"}/>
-                  </div>
-
-                  <div className={styles.day}>
-                    <Button 
-                    class={"day"}
-                    message={"Seg"}/>
-                  </div>
-
-                  <div className={styles.day}>
-                    <Button 
-                    class={"day"}
-                    message={"Ter"}/>
-                  </div>
-
-                  <div className={styles.day}>
-                    <Button 
-                    class={"day"}
-                    message={"Qua"}/>
-                  </div>
-
-                  <div className={styles.day}>
-                    <Button 
-                    class={"day"}
-                    message={"Qui"}/>
-                  </div>
-
-                  <div className={styles.day}>
-                    <Button 
-                    class={"day"}
-                    message={"Sex"}/>
-                  </div>
-
-                  <div className={styles.day}>
-                    <Button 
-                    class={"day"}
-                    message={"Sab"}/>
-                  </div>
-
-                </div>
-
-                <div className={styles.classes_focus}>
-                 <div className={styles.preWindow}>
-                    <Window
-                    title={"Titulo exemplar 01 "}
-                    icon={"IA"}
-                    relative={"31/45"}/>
-                 </div>
-                 <div className={styles.preWindow}>
-                    <Window
-                      title={"Titulo exemplar 02 "}
-                      icon={"ING"}
-                      relative={"31/45"}/>
-                 </div>
-                 <div className={styles.preWindow}>
-                    <Window
-                    title={"Titulo exemplar 03 "}
-                    icon={"FIN"}
-                    relative={"31/45"}/> 
-                 </div>
-                 <div className={styles.preWindow}>
-                   <Window
-                   title={"Titulo exemplar 04 "}
-                   icon={"MKT"}
-                   relative={"31/45"}/>
-                 </div>
-                 <div className={styles.preWindow}>
-                   <Window
-                   title={"Titulo exemplar 05 "}
-                   icon={"POR"}
-                   relative={"31/45"}/>
-                 </div>
-                </div>
-             </div>
-                
-             <div className={styles.shortMensage}>
-               <div className={styles.messageBody}>
-                <div className={`${styles.messageTitle} ${styles.txtOver}`}> 
-                  De<strong className={`${styles.strong}`}>Você</strong>para <strong className={`${styles.strong}`}>Você</strong>
-                </div>
-                <div className={styles.messageCore}>
-                   <div className={styles.WindowText}> <WindowText classFormat={"main_format_1"} classStyle={"main_Style_1"} txt={"254 para textos grandes"}/></div>
-                   <div className={styles.WindowText}> <WindowText classFormat={"main_format_1"} classStyle={"main_Style_1"} txt={"Fiquei todo empanzinado"}/> </div>
-                </div>
-               </div>
-             </div>
-         </div>
-
+            </div>
         </main>
 
     )

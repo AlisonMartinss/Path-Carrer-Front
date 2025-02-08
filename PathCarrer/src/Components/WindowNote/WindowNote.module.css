@@ -1,0 +1,53 @@
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+
+.style1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 95%;
+    height: 90%;
+    background-color: rgb(255, 255, 255);
+    clip-path: polygon(0px 0px, 100% 0px, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0px 100%);
+    
+    transition: transform 0.4s ease, filter 0.4s ease;   
+}
+
+.style1:hover{
+    transform: translate(5px, -5px);
+}
+
+.noteClass{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 95%;
+    height: 95%;
+}
+
+.textLayout{
+    display: flex;
+
+    white-space: pre-wrap;
+
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+}
+
+.stylesText{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em, 0.8vw, 5em);
+    color: #000000
+}
+

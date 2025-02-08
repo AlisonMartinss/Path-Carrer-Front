@@ -6,7 +6,7 @@
 
     width: 100%;
     height: 100%;
-    border: solid #ffff 2px;
+    border: solid #ffff 0.15vw;
 
     background-color: #A6E675;
     transition: background-color 0.5s;
@@ -18,6 +18,13 @@
     font-weight: 500;
     font-size: clamp(0.6em, 1vw, 5em);
     color: #625353
+}
+
+.button:hover{
+    border: solid #ffff  0.15vw;
+    background-color: #4A8CE1;
+    color: #ffff;
+
 }
 
 .Save{
@@ -49,7 +56,7 @@
 
     width: 100%;
     height: 100%;
-    border: solid #8791AB 2px;
+    border: solid #8F8F8F 0.15vw;
 
     background-color: #ffff;
     transition: background-color 0.5s,border 0.5s,color 0.3s;
@@ -60,9 +67,15 @@
     font-style: normal;
     font-weight: 600;
     font-size: clamp(0.6em, 1vw, 5em);
-    color: #4f4444;
+    color: #8F8F8F;
 
     outline:none
+}
+
+.day:hover{
+    background-color: #3560EE;
+    border: solid 0.15vw #ffffff;
+    color: #ffffff;
 }
 
 .click{
@@ -95,11 +108,7 @@ box-shadow: none;
 transform: translate(-3px, 3px);
 }
 
-.day:hover{
-    background-color: #29fc49;
-    border: solid 2px #ffffff;
-    color: #ffff;
-}
+
 
 .button:hover{
     border: solid #ffff 2px;
