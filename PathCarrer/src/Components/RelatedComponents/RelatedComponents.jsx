@@ -6,6 +6,8 @@ import { AiFillLike } from "react-icons/ai";
 import { AiFillDislike } from "react-icons/ai";
 import { FaStar } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa6";
+import { BiLike } from "react-icons/bi";
+import { BiDislike } from "react-icons/bi";
 
 import { useContext, useState,useEffect } from 'react'
 
@@ -35,7 +37,7 @@ function RelatedComponents({icon_Aa,icon_Bb,ClasseAfterA,ClasseAfterB,buttonActi
     };
 
     const icon = {
-        GrLike,GrDislike,AiFillLike,AiFillDislike,FaStar,FaTrash
+        GrLike,GrDislike,AiFillLike,AiFillDislike,FaStar,FaTrash,BiLike,BiDislike
     };
 
     const Icon_A = icon[icon_Aa];

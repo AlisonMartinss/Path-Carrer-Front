@@ -4,6 +4,7 @@ import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
 import SideBar from '../../Components/SideBar/SideBar'
 import WindowModule from '../../Components/WindowModule/WindowModule';
 import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG';
+import WindowNote from '../../Components/WindowNote/WindowNote';
 
 
 /* IMAGENS */
@@ -95,7 +96,17 @@ function ContentAcess (){
                        <div className={styles.icon_area}><AiOutlineComment className={`${styles.icon_conf}`}/></div>
                       </div>
 
-                      <div className={styles.contentMain}></div>
+                      <div className={styles.contentMain}>
+                        <div className={styles.comment_area}>
+                          <WindowNote
+                          icon_Aa={"BiLike"}
+                          icon_Bb={"BiDislike"}
+                          ClasseAfterA={"classeAfterAa"}
+                          ClasseAfterB={"classeAfterBb"}
+                          className={""}/>
+                        </div>
+
+                      </div>
                     </div>
                 </div> 
              </div>
