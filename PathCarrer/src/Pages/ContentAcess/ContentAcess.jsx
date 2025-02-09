@@ -51,6 +51,33 @@ function ContentAcess (){
                             img={""}/>
                         </div>
 
+                        <div className={styles.content_area}>
+                            <WindowModule
+                            titleMain={"Titulo de um modulo"}
+                            porcent={"100%"}
+                            img={""}/>
+                        </div>
+
+                        <div className={styles.content_area}>
+                            <WindowModule
+                            titleMain={"Titulo de um modulo"}
+                            porcent={"100%"}
+                            img={""}/>
+                        </div>
+
+                        <div className={styles.content_area}>
+                            <WindowModule
+                            titleMain={"Titulo de um modulo"}
+                            porcent={"100%"}
+                            img={""}/>
+                        </div>
+                          <div className={styles.content_area}>
+                            <WindowModule
+                            titleMain={"Titulo de um modulo"}
+                            porcent={"100%"}
+                            img={""}/>
+                        </div>
+
                       </div>
 
                       <div className={styles.buttonAdd}>
