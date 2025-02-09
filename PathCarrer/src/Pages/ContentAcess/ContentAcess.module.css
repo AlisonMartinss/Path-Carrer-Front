@@ -30,8 +30,12 @@
     flex-direction: center;
     align-items: center;
 
-    width: 35%;
+    width: 40%;
     height: 100%;
+}
+
+.sideBar_off{
+    left: 78%;
 }
 /* END - SIDE BAR*/
 

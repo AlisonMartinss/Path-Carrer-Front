@@ -14,15 +14,9 @@ import {useState} from 'react'
 
 function ContentAcess (){
     const [isClicked, setIsClicked] = useState(false);
-    const [view, setView] = useState(false);
-
+ 
     const handleClick = () => {
         setIsClicked((prev) => (!prev))
-        handleClickView();
-    };
-
-    const handleClickView = () => {
-        setView((prev) => (!prev))
     };
 
 
@@ -32,8 +26,9 @@ function ContentAcess (){
             <header className={styles.header}><CabecalhoPadrao/></header>
             <div className={styles.core}>
                 
-                <div className={styles.sideBar}>
-                    <SideBar/>
+                <div className={`${styles.sideBar} ${isClicked ? styles.sideBar_off : styles.sideBar}`} >
+                    <SideBar
+                    handleClick={handleClick}/>
                 </div>
 
                 <div className={styles.view_core}>
