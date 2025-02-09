@@ -1,13 +1,17 @@
 import styles from '../ContentAcess/ContentAcess.module.css'
 
 import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
-import WindowText from '../../Components/WindowText/WindowText'
-import WindowComment from '../../Components/WindowComment/WindowComment'
 import SideBar from '../../Components/SideBar/SideBar'
-import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
+import WindowModule from '../../Components/WindowModule/WindowModule';
+import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG';
+
+
+/* IMAGENS */
 
 import { AiOutlineComment } from "react-icons/ai";
 import { GiBookCover } from "react-icons/gi";
+import { MdBookmarkAdd } from "react-icons/md";
+
 
 import {useState} from 'react'
 
@@ -26,49 +30,51 @@ function ContentAcess (){
             <header className={styles.header}><CabecalhoPadrao/></header>
             <div className={styles.core}>
                 
-                <div className={`${styles.sideBar} ${isClicked ? styles.sideBar_off : styles.sideBar}`} >
-                    <SideBar
-                    handleClick={handleClick}/>
-                </div>
+             <div className={`${isClicked ? styles.sideBarOFF : styles.sideBar}`}>
+                <SideBar
+                handleClick={handleClick}/>                   
+             </div>
 
-                <div className={styles.view_core}>
+             <div className={styles.view_core}>
+                <div className={styles.module_core}>
+                    <div className={styles.module_main}>
 
-                 <div className={styles.content_module}>
-                    <div className={styles.content_core}>
-                        <div className={styles.area_plate}>< GiBookCover className={styles.class_icon} /></div>
+                      <div className={styles.icon}>
+                        <div className={styles.icon_area}><GiBookCover className={styles.icon_conf}/></div>
+                      </div>
 
-                        <div className={styles.content_show}>
-
-                         <div className={styles.module_area}>
-                            <WindowText classFormat={"main_format_1"} classStyle={"main_Style_6"} txt={"254 para textos grandes"}/>
-                         </div>
-
+                      <div className={styles.contentMain}>
+                        <div className={styles.content_area}>
+                            <WindowModule
+                            titleMain={"Titulo de um modulo"}
+                            porcent={"100%"}
+                            img={""}/>
                         </div>
-                    </div>
-                 </div>
 
-                 <div className={styles.content_comments}>
-                    <div className={`${styles.content_core} ${styles.content_core_comments}`}>
-                        <div className={styles.area_plate}><AiOutlineComment className={styles.class_icon}/></div>
+                      </div>
 
-                        <div className={styles.content_show}>
-                            <div className={styles.comment_area}><WindowComment/></div>
-                            <div className={styles.comment_area}><WindowComment/></div>
-                            <div className={styles.comment_area}><WindowComment/></div>
-                            <div className={styles.comment_area}><WindowComment/></div>
-                            <div className={styles.comment_area}><WindowComment/></div>
-                            <div className={styles.comment_area}><WindowComment/></div>
-                            <div className={styles.comment_area}><WindowComment/></div>                                                 
+                      <div className={styles.buttonAdd}>
+                        <div className={styles.LitleIcone}>
+                            <ButtonIMG
+                            iconV={"MdBookmarkAdd"} 
+                            icon_style={"evenConstStyle"}/>
                         </div>
+                      </div>
                     </div>
-
-
-                 </div>
-
-            
-                    
                 </div>
+                <div className={styles.module_core}>
+                    <div className={styles.module_main}>
+                      <div className={styles.icon}>
+                       <div className={styles.icon_area}><AiOutlineComment className={`${styles.icon_conf}`}/></div>
+                      </div>
+
+                      <div className={styles.contentMain}></div>
+                    </div>
+                </div> 
+             </div>
             </div>
+
+                
         </main>
     )
 }

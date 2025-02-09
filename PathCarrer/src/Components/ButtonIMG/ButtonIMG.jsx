@@ -13,13 +13,19 @@ import { AiFillDislike } from "react-icons/ai";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import { FaFolderOpen } from "react-icons/fa";
+import { MdBookmarkAdd } from "react-icons/md";
 
 
 function ButtonIMG ({iconV,icon_style,handleClick,}) {
 
 
 const comp = {
-    BsBookmarksFill,FaRegTrashAlt,RiPencilRuler2Fill,TfiFlagAlt2,FaDeleteLeft,FaStar,AiFillLike,AiFillDislike,RxHamburgerMenu,CgProfile,FaFolderOpen
+    BsBookmarksFill,FaRegTrashAlt,
+    RiPencilRuler2Fill,TfiFlagAlt2,
+    FaDeleteLeft,FaStar,AiFillLike,
+    AiFillDislike,RxHamburgerMenu,
+    CgProfile,FaFolderOpen,
+    MdBookmarkAdd
 }
 
 /* =-=-=-=-= Functions =-=-=-=-= */

@@ -7,18 +7,16 @@ function SideBar ({handleClick}){
     const [arraAuxAdjectives, setArrAuxAdjectives] = useState([1,2,3,4,5])
 
     const [isClicked, setIsClicked] = useState(false);
-    const handleClickSide = () => {
-        
+    const handleClickSide = () => {       
         setIsClicked((prev) => (!prev))
-        handleClick();
-        
+        handleClick();     
     };
 
     return (
         <main className={style.main}>
             
-            <div className={style.on_off}>
-                <div className={style.onOff_main}>
+            <div className={`${isClicked ? style.on_offModed : style.on_off}`}>
+                <div className={`${isClicked ? style.onOff_mainModed : style.onOff_main}`}>
                         <ButtonIMG
                         iconV={"RxHamburgerMenu"}
                         icon_style={"evenConstStyle"}
