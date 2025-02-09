@@ -4,34 +4,38 @@ import { GrLike } from "react-icons/gr";
 import { GrDislike } from "react-icons/gr";
 import { AiFillLike } from "react-icons/ai";
 import { AiFillDislike } from "react-icons/ai";
+import { FaStar } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa6";
 
 import { useContext, useState,useEffect } from 'react'
 
 
 
-function RelatedComponents({icon_Aa,icon_Bb,ClasseAfterA,ClasseAfterB,buttonActive,mensagemA,mensagemB}){
+function RelatedComponents({icon_Aa,icon_Bb,ClasseAfterA,ClasseAfterB,buttonActiveA,buttonActiveB,mensagemA,mensagemB}){
     const [isClickedA, setIsClickedA] = useState(false);
     const [isClickedB, setIsClickedB] = useState(false);
 
     const handleClick = (event) => {
-        buttonActive(event);
+       
         const {id} = event.currentTarget;
         if (id == "comp_A"){
             setIsClickedA((prev) => (!prev))
             if(isClickedB == true){
                 setIsClickedB((prev) => (!prev))
             }
+            buttonActiveA(event);
         }
         else if(id == "comp_B"){
             setIsClickedB((prev) => (!prev))
             if(isClickedA == true){
                 setIsClickedA((prev) => (!prev))
             }
+            buttonActiveB(event)
         }
     };
 
     const icon = {
-        GrLike,GrDislike,AiFillLike,AiFillDislike
+        GrLike,GrDislike,AiFillLike,AiFillDislike,FaStar,FaTrash
     };
 
     const Icon_A = icon[icon_Aa];

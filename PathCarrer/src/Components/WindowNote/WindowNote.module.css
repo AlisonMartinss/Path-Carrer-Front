@@ -10,11 +10,12 @@
 
 .style1{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
 
     width: 95%;
-    height: 90%;
+    height: 95%;
     background-color: rgb(255, 255, 255);
     clip-path: polygon(0px 0px, 100% 0px, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0px 100%);
     
@@ -25,13 +26,26 @@
     transform: translate(5px, -5px);
 }
 
+.userNameArea{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 50%;
+    height: 15%;
+
+    margin-right: 47.5%;
+}
+
 .noteClass{
     display: flex;
     justify-content: center;
     align-items: center;
 
     width: 95%;
-    height: 95%;
+    height:73%;
+
+    margin-right: 2.5%;
 }
 
 .textLayout{
@@ -50,4 +64,13 @@
     font-size: clamp(0.6em, 0.8vw, 5em);
     color: #000000
 }
+
+.likeButton{
+    width: 50%;
+    height: 20%;
+
+    margin-right: 5%;
+}
+
+
 

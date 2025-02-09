@@ -63,7 +63,12 @@ function Loby () {
             <div className={styles.message_preArea}>
               <div className={styles.messageMainArea}>
                 <div className={styles.messageArea}>
-                  <WindowNote/>
+                  <WindowNote
+                  icon_Aa={"FaStar"}
+                  icon_Bb={"FaTrash"}
+                  ClasseAfterA={"classeAfterAa_2"}
+                  ClasseAfterB={"classeAfterBb"}
+                  />
                 </div>
               </div>
 

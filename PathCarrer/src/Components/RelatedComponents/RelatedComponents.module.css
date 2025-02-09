@@ -20,7 +20,7 @@
     padding-left: 1%;
 
     cursor: pointer;
-    background-color:#8b8b8bca;
+    background-color:#575d72e3;
     border-radius: 5px;
 }
 
@@ -28,7 +28,7 @@
     width: 30%;
     height: 80%;
     
-    color: rgb(92, 92, 92);
+    color:#393f54;
 
 }
 
@@ -50,6 +50,11 @@
 .classeAfterBb{
 
     color: rgb(246, 107, 53);
+}
+
+.classeAfterAa_2{
+
+    color: rgb(255, 204, 18);
 }
 
 .txtOver{
