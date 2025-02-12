@@ -7,7 +7,8 @@ import ClassComponent from '../../Components/ClassComponent/ClassComponent'
 import { useState } from 'react'
 
 function Class (){
-
+    const [videoURL,setvideoURL] = useState("L4skN3uWqAg");
+    const [videoZ,setVideoZ] = useState("https://www.youtube.com/embed/"+{videoURL});
     const [classes,Setclasses] = useState([
       { 
         title: "Titulo 01",
@@ -71,7 +72,24 @@ function Class (){
               </div>
 
               <div className={styles.contentArea}>
+                <div className={styles.editar}>
+                    <div className={styles.edit}>
+                      <div className={styles.icon}>
+                        <ButtonIMG
+                        iconV={"TbPencilCog"}
+                        icon_style={"evenConstStyle"}/>
+                      </div>
+                    </div>
+                    <div className={styles.edit}>
+                      <div className={styles.icon}>
+                        <ButtonIMG
+                        iconV={"RxPencil2"}
+                        icon_style={"evenConstStyle"}/>
+                      </div>
+                    </div>
+                </div>
                 <div className={styles.vidArea}>
+                  <iframe className={styles.videoMain} src="https://www.youtube.com/embed/L4skN3uWqAg" frameborder="0"></iframe>
 
                 </div>
                 <div className={`${styles.descArea} ${styles.txt}`}>

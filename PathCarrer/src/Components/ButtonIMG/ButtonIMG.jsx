@@ -15,6 +15,8 @@ import { CgProfile } from "react-icons/cg";
 import { FaFolderOpen } from "react-icons/fa";
 import { MdBookmarkAdd } from "react-icons/md";
 import { FaHouseChimneyWindow } from "react-icons/fa6";
+import { TbPencilCog } from "react-icons/tb";
+import { RxPencil2 } from "react-icons/rx";
 
 
 function ButtonIMG ({iconV,icon_style,handleClick,}) {
@@ -26,7 +28,8 @@ const comp = {
     FaDeleteLeft,FaStar,AiFillLike,
     AiFillDislike,RxHamburgerMenu,
     CgProfile,FaFolderOpen,
-    MdBookmarkAdd,FaHouseChimneyWindow
+    MdBookmarkAdd,FaHouseChimneyWindow,
+    TbPencilCog,RxPencil2
 }
 
 /* =-=-=-=-= Functions =-=-=-=-= */

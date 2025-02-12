@@ -23,7 +23,7 @@
     justify-content: center;
     align-items: center;
     
-    width: 6%;
+    width: 5%;
     height: 30%;
 
     margin-left: 8%;
@@ -34,7 +34,7 @@
 .checkBox{
     opacity: 0;
     cursor: pointer;
-    margin-left: -70%;
+    margin-left: -80%;
 }
 
 .checkmark {
