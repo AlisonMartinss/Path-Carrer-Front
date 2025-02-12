@@ -74,14 +74,14 @@ function Class (){
               <div className={styles.contentArea}>
                 <div className={styles.editar}>
                     <div className={styles.edit}>
-                      <div className={styles.icon}>
+                      <div title="Clique aqui editar o modulo atual" className={styles.icon}>
                         <ButtonIMG
                         iconV={"TbPencilCog"}
                         icon_style={"evenConstStyle"}/>
                       </div>
                     </div>
                     <div className={styles.edit}>
-                      <div className={styles.icon}>
+                      <div title="Clique aqui para editar a aula atual" className={styles.icon}>
                         <ButtonIMG
                         iconV={"RxPencil2"}
                         icon_style={"evenConstStyle"}/>
