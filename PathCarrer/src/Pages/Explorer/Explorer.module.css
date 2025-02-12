@@ -35,52 +35,42 @@
 }
 
 .mainContent{
-    width: 70%;
-    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 70vw;
+    height: 90vh;
 
     overflow-y: scroll;
+    flex-wrap: wrap;
+
+    gap: 2%;
+
     background-color: #BDBEC2;
 }
 
-.agroupContentLine{
+.mainContent::-webkit-scrollbar {
+    width: 1vw; /* Largura da barra */
+}
+
+.mainContent::-webkit-scrollbar-track {
+    background: #9A9FAF; /* Cinza claro */
+}
+
+.mainContent::-webkit-scrollbar-thumb {
+    background: #69718E; /* Azul */
+}
+
+.contentArea{
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 100%;
-    height: 65%;
+    margin-top: 3%;
 
-    gap: 3%;
-
-    flex-wrap: wrap;
-}
-
-.contentArea{
     width: 28%;
-    height: 92.5%;
+    height: 63%;
+
+    border-radius: 1vw;
 }
-
-.coreContent{
-    display: flex;           
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    justify-content: center;
-
-    width: 90%;
-    height: 95%;
-
-    gap: 1%;
-
-    margin-left: 5%;
-    margin-top: 2%;
-}
-
-.content{
-    width: 20%;
-    height: 28%;
-
-    border-radius: 11px;
-
-    background-color: azure;
-}
-

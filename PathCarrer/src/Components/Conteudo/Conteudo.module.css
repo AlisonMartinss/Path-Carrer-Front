@@ -11,6 +11,11 @@
     border-radius: 1vw;
 
     background-color: rgba(123, 123, 123, 0.583);
+    transition: transform 0.2s ease;
+}
+
+.main:hover{
+    transform: scale(1.08);
 }
 
 .thumbMail{

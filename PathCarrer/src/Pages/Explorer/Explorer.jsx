@@ -11,6 +11,7 @@ function Explorer (){
    const [Compass,SetCompass] = useState(0)
    const addCompass = () => {
       SetCompass(Compass+1)
+
    }
    const [pathExplore,SetPathExplore] = useState([
       {
@@ -41,7 +42,268 @@ function Explorer (){
          }],
          PathName: "Aprofundando no Java",
          Category: "Tecnologia"
-      }
+      },
+      {
+         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
+         adjectives:[
+         {
+            name:"Direto Ao ponto",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Aprofundamento",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Interativa",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Criativa",
+            color: "colorAdjectiveNeah"
+         },
+         {
+            name:"Adaptavel",
+            color: "colorAdjectiveBad"
+         }],
+         PathName: "Aprofundando no Java",
+         Category: "Tecnologia"
+      },
+      {
+         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
+         adjectives:[
+         {
+            name:"Direto Ao ponto",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Aprofundamento",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Interativa",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Criativa",
+            color: "colorAdjectiveNeah"
+         },
+         {
+            name:"Adaptavel",
+            color: "colorAdjectiveBad"
+         }],
+         PathName: "Aprofundando no Java",
+         Category: "Tecnologia"
+      },
+      {
+         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
+         adjectives:[
+         {
+            name:"Direto Ao ponto",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Aprofundamento",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Interativa",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Criativa",
+            color: "colorAdjectiveNeah"
+         },
+         {
+            name:"Adaptavel",
+            color: "colorAdjectiveBad"
+         }],
+         PathName: "Aprofundando no Java",
+         Category: "Tecnologia"
+      },
+      {
+         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
+         adjectives:[
+         {
+            name:"Direto Ao ponto",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Aprofundamento",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Interativa",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Criativa",
+            color: "colorAdjectiveNeah"
+         },
+         {
+            name:"Adaptavel",
+            color: "colorAdjectiveBad"
+         }],
+         PathName: "Aprofundando no Java",
+         Category: "Tecnologia"
+      },
+      {
+         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
+         adjectives:[
+         {
+            name:"Direto Ao ponto",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Aprofundamento",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Interativa",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Criativa",
+            color: "colorAdjectiveNeah"
+         },
+         {
+            name:"Adaptavel",
+            color: "colorAdjectiveBad"
+         }],
+         PathName: "Aprofundando no Java",
+         Category: "Tecnologia"
+      },
+      {
+         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
+         adjectives:[
+         {
+            name:"Direto Ao ponto",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Aprofundamento",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Interativa",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Criativa",
+            color: "colorAdjectiveNeah"
+         },
+         {
+            name:"Adaptavel",
+            color: "colorAdjectiveBad"
+         }],
+         PathName: "Aprofundando no Java",
+         Category: "Tecnologia"
+      },
+      {
+         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
+         adjectives:[
+         {
+            name:"Direto Ao ponto",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Aprofundamento",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Interativa",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Criativa",
+            color: "colorAdjectiveNeah"
+         },
+         {
+            name:"Adaptavel",
+            color: "colorAdjectiveBad"
+         }],
+         PathName: "Aprofundando no Java",
+         Category: "Tecnologia"
+      },
+      {
+         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
+         adjectives:[
+         {
+            name:"Direto Ao ponto",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Aprofundamento",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Interativa",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Criativa",
+            color: "colorAdjectiveNeah"
+         },
+         {
+            name:"Adaptavel",
+            color: "colorAdjectiveBad"
+         }],
+         PathName: "Aprofundando no Java",
+         Category: "Tecnologia"
+      },
+      {
+         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
+         adjectives:[
+         {
+            name:"Direto Ao ponto",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Aprofundamento",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Interativa",
+            color: "colorAdjectiveGood"
+         },
+
+         {
+            name:"Criativa",
+            color: "colorAdjectiveNeah"
+         },
+         {
+            name:"Adaptavel",
+            color: "colorAdjectiveBad"
+         }],
+         PathName: "Aprofundando no Java",
+         Category: "Tecnologia"
+      },
       
    ])
     return (
@@ -50,20 +312,19 @@ function Explorer (){
             <div className={styles.core}>
                <div className={styles.sideBar}></div>
                <div className={styles.mainContent}>
-
-                  <div className={styles.agroupContentLine}>
-                     {pathExplore.slice(Compass, Compass+3).map((element) => (
+                  
+                     {pathExplore.map((element) => (
                         <div className={styles.contentArea}>
                            <Conteudo
                            img={element.img}
                            adjectives={element.adjectives}
                            PathName={element.PathName}
                            Category={element.Category}
-                           onClick={""}
+                           onClick={(e) => alert("Teste")}
                            />
                         </div>
                      ))}
-                  </div>
+             
 
                </div>
               
