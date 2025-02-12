@@ -20,6 +20,7 @@ import { useState } from 'react'
 
 function Loby () {
     const [dayArray,setDayArray] = useState(["All","Seg","Ter","Qua","Qui","Sex","Sab","Dom"]);
+
     const [leftElements,setModuleTest] = useState([
     {iconV: "FaFolderOpen",
     icon_style: "evenConstStyle",
@@ -30,7 +31,8 @@ function Loby () {
     icon_style: "evenConstStyle",
     handleClick:""
     }
-    ])
+    ]);
+
     const [module,setModule] = useState([]);
 
     return (
