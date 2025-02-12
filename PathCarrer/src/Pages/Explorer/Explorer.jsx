@@ -7,8 +7,6 @@ import { useState } from 'react'
 import { IoFlameSharp } from "react-icons/io5";
 import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2';
 
-"Aprofundamento","Interativa","Criativa","Adaptavel"
-
 function Explorer (){
    const [onFire,SetonFire] = useState(["Tecnologia Longo","IA","Marketing","Tigrinho","Financias","Enem","CriptoMoedas","Estatistica","Empreendedorismo","Ingles"])
    const [leftElements,SetleftElements] = useState([

@@ -22,8 +22,7 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
 <Route path="/">
  <Route index element={<Loby/>}/>
  <Route path="/loby" element={<Loby/>}/>
- <Route path="/class" element={<Class nomeDoModulo={"Nome do Modulo"} 
- srcVideo={"https://www.youtube.com/embed/F1xZ_uK2M6c"}/>}/>
+ <Route path="/class" element={<Class/>}/>
  <Route path="/explorer" element={<Explorer/>}/>
  <Route path="/ContentAcess" element={<ContentAcess/>}/>
 
