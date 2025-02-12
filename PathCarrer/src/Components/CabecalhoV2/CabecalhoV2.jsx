@@ -5,24 +5,26 @@ import ButtonIMG from '../ButtonIMG/ButtonIMG'
 import SearchInput from '../SearchInput/SearchInput'
 
 
-function CabecalhoV2 ({leftElements=[]}){
+function CabecalhoV2 ({leftElements=[],logoPath}){
     return (
         <main className={style.main}>
             <div className={style.rigthArea}>
-                <a className={style.preLogoArea} href="">
+                <a className={style.preLogoArea} href={logoPath}>
                   <img className={style.logoArea} src={Logo} alt="" />
                 </a>               
             </div>
             <div className={style.searchArea}>
-                <SearchInput/>
+                
             </div>
             <div className={style.leftArea}>
                 {leftElements.map((element) => (
                     <div className={style.iconArea}>
                         <ButtonIMG
+                        className={style.iconConfg}
                         iconV={element.iconV}
                         icon_style={element.icon_style}
-                        handleClick={element.handleClick}/>                  
+                        handleClick={element.handleClick}
+                        />                  
                     </div>
                 ))}
             </div>
