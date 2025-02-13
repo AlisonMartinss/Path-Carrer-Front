@@ -39,6 +39,6 @@
     font-family: "Urbanist", serif;
     font-style: normal;
     font-weight: 300;
-    font-size: clamp(0.6em, 1vw, 5em);
+    font-size: clamp(0.6em, 0.9vw, 5em);
     color: #625353
 }

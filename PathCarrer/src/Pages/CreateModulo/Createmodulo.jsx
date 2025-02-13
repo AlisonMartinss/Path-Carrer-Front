@@ -32,26 +32,26 @@ function CreateModulo () {
                 <CabecalhoPadrao/>
             </header>
             <form className={styles.form}>
-                <div className={styles.moduloName}>
-                    <TXTinputP
-                    func={handleChange}
-                    name={"name"}
-                    placeholder={"Digite o nome do modulo"}/>
-                </div>
+              <div className={styles.moduloName}>
+                <TXTinputP
+                func={handleChange}
+                name={"name"}
+                placeholder={"Digite o nome do modulo"}/>
+              </div>
 
-                <div className={styles.moduloDesc}>
-                    <TXTinputM
-                     func={handleChange}
-                     name={"description"}
-                     placeholder={"Descreva o seu modulo"}/>
-                </div>
+              <div className={styles.moduloDesc}>
+                <TXTinputM
+                func={handleChange}
+                name={"description"}
+                placeholder={"Descreva o seu modulo"}/>
+              </div>
 
-                <div className={styles.Button}>
+              <div className={styles.Button}>
                 <Button
-                  func={redirect}
-                  message={"Enviar"}
-                  class={"button"}/>
-                </div>
+                func={redirect}
+                message={"Enviar"}
+                class={"button"}/>
+              </div>
             </form>
            
         </main>

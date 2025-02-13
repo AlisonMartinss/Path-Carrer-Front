@@ -35,9 +35,6 @@
     height: 100%;
 
     background-color: #7878783a;
-
-    border-top-left-radius: 20px;
-
 }
 
 .recado{
@@ -51,16 +48,15 @@
     width: 45vw;
     height: 6vh;
 
-    border: solid #ffff 2px;
-    border-radius: 8px;
+    border-radius: 0.5vw;
 
-    background-color: #fafafa9c;
+    background-color: #50576C;
 
-    font-family: "Urbanist", serif;
+    font-family: "Urbanist";
     font-style: normal;
     font-weight: 500;
-    font-size: clamp(0.6em, 1vw, 5em);
-    color: #625353
+    font-size: clamp(0.4em, 0.9vw, 5em);
+    color: #ffffff
 }
 
 .overInput{
@@ -115,11 +111,11 @@
     justify-content: center;
     align-items: center;
 
-    font-family: "Urbanist", serif;
+    font-family: "Urbanist";
     font-style: normal;
-    font-weight: 700;
-    font-size: clamp(0.6em, 1vw, 5em);
-    color: #625353;
+    font-weight: 600;
+    font-size: clamp(0.4em, 0.9vw, 5em);
+    color: #ffffff;
 
     margin-left: 0.5%;
     margin-right: 0.5%;
