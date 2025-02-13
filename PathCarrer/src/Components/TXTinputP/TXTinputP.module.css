@@ -14,9 +14,9 @@
     position: relative;
 
 
-    border: #ffff,solid,2px;
-    border-radius: 8px;
-    background-color: #A8A6A6;
+    border: #ffff,solid,0.15vw;
+    border-radius: 0.5vw;
+    background-color: #8D95B2;
 
     width: 93%;
     height: 95%;

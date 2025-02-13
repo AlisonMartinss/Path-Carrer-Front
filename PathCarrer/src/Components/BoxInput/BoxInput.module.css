@@ -19,9 +19,9 @@
     
     margin-left: 6%;
 
-    background-color: #A6E675;
-    border: #ffff solid 2px;
-    border-radius: 8px;
+    background-color: #8D95B2;
+    border: #ffff solid 0.15vw;
+    border-radius: 0.5vw;
     width: 92%;
     height: 92%;
 
@@ -36,14 +36,14 @@
     font-family: "Urbanist", serif;
     font-style: normal;
     font-weight: 600;
-    font-size: clamp(0.6em, 1vw, 5em);
-    color: #625353
+    font-size: clamp(0.4em, 1vw, 5em);
+    color: #ffffff
 }
 
 .txtover{
     font-family: "Urbanist", serif;
     font-style: normal;
     font-weight: 600;
-    font-size: clamp(0.6em, 0.8vw, 5em);
-    color: #625353
+    font-size: clamp(0.4em, 0.8vw, 5em);
+    color: #ffffff
 }
