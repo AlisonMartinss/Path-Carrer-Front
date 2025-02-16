@@ -8,55 +8,48 @@ import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
 
 
 
-import {useState,useEffect } from 'react'
+import {useState,useEffect, useContext } from 'react'
+import {PathStepsContext} from '../../Provider/CreatePathSteps'
 import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 
 function CreatePath () {
-    const [Adjectives,SetAdjectives] = useState([
-      {
-         valueA:"1",
-         txt: "1"
-      },
-      {
-         valueA:"2",
-         txt: "2"
-      },
-      {
-         valueA:"3",
-         txt: "3"
-      },
-      {
-         valueA:"4",
-         txt: "4"
-      },
-      {
-         valueA:"5",
-         txt: "5"
-      },
-    ]);
-    const [inputxt, setinputxt] = useState("");
-    const [tags,setTags] = useState([]);
 
-    const halndlechangetags = () =>{
-      if (tags.length < 8){
-         setTags([...tags,inputxt]);
+   const [oneStap,SetOneStap] = useContext(PathStepsContext)
+
+   const [adjectives,Setadjectives] = useState(
+      {
+         txt:"10",
+         value:"10"
       }
-      else{
-         alert("Você chegou no limite no numero de #Tags")
+   )
+
+   const setInfo = (event) =>{
+      event.preventDefault();
+      const {name,value} = event.target;
+      SetOneStap({[name]:value});
+   }
+    
+   const [inputxt, setinputxt] = useState("");
+   const [tags,setTags] = useState([]);
+
+    const tagsLimits = () =>{
+         if (tags.length < 8){
+            setTags([...tags,inputxt]);
+         }
+         else{
+            alert("Você chegou no limite no numero de #Tags")
       }}
 
-      const deleteElement = (tag) => {
+      const deleteElementTags = (tag) => {
          setTags(tags.filter(elemento => elemento !== tag));
-         // filter mantem os que cuprem a condição
       }
 
 
     useEffect(() => {
       for (let i = 0; i < tags.length; i++){
          console.log("i: " + i + " " + tags[i])
-
       }
-    }, [tags]); // Executa toda vez que classData mudar
+    }, [tags]);
 
     return (
         <main className={styles.main}>
@@ -67,19 +60,28 @@ function CreatePath () {
          <form className={styles.form}>
 
             <div className={styles.input_NameCategoryAdjective}>
-              <div className={styles.title_input}><TXTinputP placeholder={"Digite o titulo do seu Path"}/></div>
+              <div className={styles.title_input}>
+                 <TXTinputP
+                 placeholder={"Digite o titulo do seu Path"}
+                 value={"titulo"}
+                 onChange={setInfo}/>
+              </div>
               <div className={`${styles.txtover} ${styles.CallToAction}`}>
                      Selecione uma <strong className={styles.strong}>categoria</strong> que se encaixa no seu <strong className={styles.strong}>Path:</strong>
               </div>
-              <div className={styles.categoriaInput}><BoxInput/></div>
+              <div className={styles.categoriaInput}>
+                 <BoxInput
+                 onChange={setInfo}
+                 />
+               </div>
               <div className={`${styles.txtover} ${styles.CallToAction}`}>
                Selecione cinco <strong className={styles.strong}>adjetivos</strong> que se encaixam no seu <strong className={styles.strong}>Path:</strong>
               </div>
               <div className={styles.adjetivosInput}>
-               {Adjectives.slice(0,5).map((element) => (
+               {adjectives.slice(0,5).map((element) => (
                   <div className={styles.boxAdjetivo}>
                      <BoxInput
-                        optionE={Adjectives}/>
+                     optionE={adjectives}/>
                   </div>
                ))}
               </div>
@@ -90,7 +92,7 @@ function CreatePath () {
                   Digite <strong className={styles.strong}>palavras chaves</strong> que se relacionam com seu <strong className={styles.strong}>Path:</strong>
                  </div>
                  <div className={styles.inputTag}>
-                     <div className={styles.button}><Button func={halndlechangetags} class={"click"} message={"submeter"}/></div>
+                     <div className={styles.button}><Button func={tagsLimits()} class={"click"} message={"submeter"}/></div>
                      <div className={styles.inputTag_core}><TXTinputP placeholder={"#Calculo #Progamação #ilustração . . . "}
                      onChange={(e) => setinputxt(e.target.value)}/></div>
                   </div>
@@ -98,7 +100,7 @@ function CreatePath () {
                <div className={styles.showTags}>       
                  {tags.map((tag) => (
                    <div className={styles.tagsElement}>
-                     <div onClick={() => deleteElement(tag)} className={styles.tagExcluir}>
+                     <div onClick={() => deleteElementTags(tag)} className={styles.tagExcluir}>
                        <ButtonIMG  iconV={"FaDeleteLeft"} icon_style={"iconn2"}/>
                      </div>
                      <div className={styles.tagCore}>#{tag}</div>                            

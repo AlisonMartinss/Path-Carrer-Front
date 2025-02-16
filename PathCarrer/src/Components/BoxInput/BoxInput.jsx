@@ -6,7 +6,7 @@ function BoxInput ({id, name ,optionE=[],onChange}) {
         <form onChange={onChange} className={styles.main}>
             <select className={`${styles.options} ${styles.txtover}`} id={id} name={name}>
                 {optionE.map((option, index) => (
-                    <option key={index} value={option.valueA}>{option.txt}</option>
+                    <option key={index} value={option.value}>{option.txt}</option>
                 ))}
             </select>
         </form>

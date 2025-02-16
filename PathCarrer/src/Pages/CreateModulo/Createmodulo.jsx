@@ -12,7 +12,7 @@ import { useContext } from 'react'
 
 function CreateModulo () {
     const navigate = useNavigate();
-    const {setModuleData} = useContext(PathContext);
+    const {nameModule,setModuleData} = useContext(PathContext);
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -23,7 +23,6 @@ function CreateModulo () {
     const redirect = (event) =>{
         event.preventDefault();
         navigate('/createaulas');
-
     }
 
     return (
