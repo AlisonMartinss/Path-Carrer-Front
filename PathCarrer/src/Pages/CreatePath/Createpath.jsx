@@ -20,9 +20,24 @@ function CreatePath () {
    const [tags,setTags] = useState([]);
 
    const onFrame = () => {
-      alert("onFrame " + inputxt.value);
+      if (9 >  tags.length){
+         setTags((prev) => ([...prev,inputxt]))
+      }
+      else {
+         alert("Você já usou o limite de palavras chaves")
+      }
    }
 
+   const deleteElementTags = (tag) => {
+      setTags(tags.filter(elemento => elemento !== tag));
+   }
+
+   const intheend = () => {
+      SetOneStap((prevState) => ({
+         ...prevState,
+         tagspath: tags,
+       }));
+   }
    
 
    const [category,SetCategory] = useState([
@@ -135,11 +150,8 @@ function CreatePath () {
 
 
    useEffect(() => {
-      for (let i = 0; i < tags.length; i++){
-         console.log("i: " + i + " " + tags[i])
-
-      }
-    }, [tags]); // Executa toda vez que classData mudar
+      mostrar();
+    }, [oneStap]); // Executa toda vez que classData mudar
 
 
 
@@ -229,7 +241,7 @@ function CreatePath () {
                <Button 
                class={"button"} 
                message={"Enviar"}
-               func={mostrar}/>
+               func={intheend}/>
               </div> 
             </div>
          </form> 
