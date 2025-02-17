@@ -8,48 +8,140 @@ import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
 
 
 
-import {useState,useEffect, useContext } from 'react'
-import {PathStepsContext} from '../../Provider/CreatePathSteps'
+import {useState,useEffect, useContext} from 'react'
+import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 
 function CreatePath () {
 
-   const [oneStap,SetOneStap] = useContext(PathStepsContext)
-
-   const [adjectives,Setadjectives] = useState(
-      {
-         txt:"10",
-         value:"10"
-      }
-   )
-
-   const setInfo = (event) =>{
-      event.preventDefault();
-      const {name,value} = event.target;
-      SetOneStap({[name]:value});
-   }
-    
-   const [inputxt, setinputxt] = useState("");
+ 
+   const {oneStap, SetOneStap} = useContext(PathStepsContext);
+   const [inputxt, setinputxt] = useState();
    const [tags,setTags] = useState([]);
 
-    const tagsLimits = () =>{
-         if (tags.length < 8){
-            setTags([...tags,inputxt]);
-         }
-         else{
-            alert("Você chegou no limite no numero de #Tags")
-      }}
+   const onFrame = () => {
+      alert("onFrame " + inputxt.value);
+   }
 
-      const deleteElementTags = (tag) => {
-         setTags(tags.filter(elemento => elemento !== tag));
-      }
+   
+
+   const [category,SetCategory] = useState([
+      {
+         value:"Selecione",
+         txt: "Selecione"
+      },
+      {
+        value:"Tecnologia",
+        txt: "Tecnologia"
+      },
+      {
+         value:"Marketing",
+         txt: "Marketing"
+      },
+      {
+         value:"Educação",
+         txt: "Educação"
+      },
+      {
+         value:"financeira",
+         txt: "financeira"
+      },
+      {
+         value:"Trafego Pago",
+         txt: "Trafego Pago"
+      },
+      {
+         value:"Emprendedorismo",
+         txt: "Emprendedorismo"
+      },
+      {
+         value:"Enem",
+         txt: "Enem"
+      },
+   ])
 
 
-    useEffect(() => {
+   const [adjectives,Setadjectives] = useState([
+      {
+         value:"Selecione",
+         txt: "Selecione"
+      },
+      {
+         txt:"Objetivo",
+         value:"Objetivo"
+      },
+      {
+         txt:"Pratico",
+         value:"Pratico"
+      },
+      {
+         txt:"revisão",
+         value:"revisão"
+      },
+      {
+         txt:"aplicação teorica",
+         value:"aplicação teorica"
+      },
+      {
+         txt:"aplicação no campo pratico",
+         value:"aplicação no campo pratico"
+      },
+      {
+         txt:"Versátil",
+         value:"Versátil"
+      },
+      {
+         txt:"Descomplicado",
+         value:"Descomplicado"
+      },
+      {
+         txt:"Multidisciplinar",
+         value:"Multidisciplinar"
+      },
+      {
+         txt:"Integrado",
+         value:"Integrado"
+      },
+      {
+         txt:"Imersivo",
+         value:"Imersivo"
+      },
+   ]
+   )
+
+   const setInfo = (event) => {
+      event.preventDefault();
+      const { name, value } = event.target;
+    
+      SetOneStap((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+   };
+
+   const setInfoList = (event) => {
+      event.preventDefault();
+      const { name, value } = event.target;
+    
+      SetOneStap((prevState) => ({
+        ...prevState,
+        [name]: [...prevState.adjectives,value],
+      }));
+   };
+
+   const mostrar = () => {
+      console.log(JSON.stringify(oneStap))
+   }
+
+
+   useEffect(() => {
       for (let i = 0; i < tags.length; i++){
          console.log("i: " + i + " " + tags[i])
+
       }
-    }, [tags]);
+    }, [tags]); // Executa toda vez que classData mudar
+
+
 
     return (
         <main className={styles.main}>
@@ -63,16 +155,21 @@ function CreatePath () {
               <div className={styles.title_input}>
                  <TXTinputP
                  placeholder={"Digite o titulo do seu Path"}
-                 value={"titulo"}
+                 name={"title"}
                  onChange={setInfo}/>
               </div>
               <div className={`${styles.txtover} ${styles.CallToAction}`}>
                      Selecione uma <strong className={styles.strong}>categoria</strong> que se encaixa no seu <strong className={styles.strong}>Path:</strong>
               </div>
               <div className={styles.categoriaInput}>
-                 <BoxInput
-                 onChange={setInfo}
-                 />
+                 
+                  <div className={styles.boxAdjetivo}>
+                     <BoxInput
+                     optionE={category}
+                     onChange={setInfo}
+                     name={"categoria"}/>
+                  </div>
+             
                </div>
               <div className={`${styles.txtover} ${styles.CallToAction}`}>
                Selecione cinco <strong className={styles.strong}>adjetivos</strong> que se encaixam no seu <strong className={styles.strong}>Path:</strong>
@@ -81,36 +178,59 @@ function CreatePath () {
                {adjectives.slice(0,5).map((element) => (
                   <div className={styles.boxAdjetivo}>
                      <BoxInput
-                     optionE={adjectives}/>
+                     optionE={adjectives}
+                     onChange={setInfoList}
+                     name={"adjectives"}/>
                   </div>
                ))}
               </div>
             </div>
+
             <div className={styles.inputTags}>
               <div className={styles.tags}>
                  <div className={`${styles.CallToAction} ${styles.txtover}`}>
                   Digite <strong className={styles.strong}>palavras chaves</strong> que se relacionam com seu <strong className={styles.strong}>Path:</strong>
                  </div>
                  <div className={styles.inputTag}>
-                     <div className={styles.button}><Button func={tagsLimits()} class={"click"} message={"submeter"}/></div>
-                     <div className={styles.inputTag_core}><TXTinputP placeholder={"#Calculo #Progamação #ilustração . . . "}
-                     onChange={(e) => setinputxt(e.target.value)}/></div>
+                     <div className={styles.button}>
+                        <Button func={(e) => onFrame()}
+                        class={"click"}
+                        message={"submeter"}/>                    
+                     </div>
+                     <div className={styles.inputTag_core}>
+                        <TXTinputP
+                        name={"tags"}
+                        placeholder={"#Calculo #Progamação #ilustração . . . "}
+                        onChange={(e) => setinputxt(e.target.value)}                       
+                        />
+                     </div>
                   </div>
-               </div>      
+               </div> 
+
                <div className={styles.showTags}>       
                  {tags.map((tag) => (
-                   <div className={styles.tagsElement}>
-                     <div onClick={() => deleteElementTags(tag)} className={styles.tagExcluir}>
-                       <ButtonIMG  iconV={"FaDeleteLeft"} icon_style={"iconn2"}/>
+                     <div className={styles.tagsElement}>
+                        <div onClick={() => deleteElementTags(tag)} className={styles.tagExcluir}>
+                        <ButtonIMG  iconV={"FaDeleteLeft"} icon_style={"iconn2"}/>
+                        </div>
+                        <div className={styles.tagCore}>#{tag}</div>                           
                      </div>
-                     <div className={styles.tagCore}>#{tag}</div>                            
-                  </div>))}
+                  ))}
                </div>
             </div>
             <div className={styles.inputC}>
               <div className={`${styles.CallToAction} ${styles.txtover}`}> Descreva o seu <strong className={styles.strong}>Path</strong></div>
-              <div className={styles.inputDesc}><TXTinputM/></div>
-              <div className={styles.enviar}><Button class={"button"} message={"Enviar"}/></div> 
+              <div className={styles.inputDesc}>
+               <TXTinputM
+               name={"desc"}
+               onChange={setInfo}/>
+              </div>
+              <div className={styles.enviar}>
+               <Button 
+               class={"button"} 
+               message={"Enviar"}
+               func={mostrar}/>
+              </div> 
             </div>
          </form> 
         </main>

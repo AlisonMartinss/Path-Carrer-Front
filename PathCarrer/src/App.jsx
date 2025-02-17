@@ -17,7 +17,7 @@ import Loby from './Pages/Loby/Loby'
 
 
 import {createBrowserRouter,createRoutesFromElements,RouterProvider, Route} from 'react-router-dom'
-import {PathStepsProvider} from '../src/Provider/CreatePathSteps/CreatePathSteps'
+import { PathStepsProvider } from '../src/Provider/CreatePathSteps/CreatePathSteps'
 
 const browserRouter = createBrowserRouter(createRoutesFromElements(
 <Route path="/">

@@ -5,9 +5,9 @@ export const PathStepsContext = createContext();
 export const PathStepsProvider = ({children}) => {
 
     const [oneStap,SetOneStap] = useState({
-        titulo:"",
+        title:"",
         categoria:"",
-        adjetivos:[],
+        adjectives:[],
         tags:[],
         desc:""
     })

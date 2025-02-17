@@ -49,15 +49,6 @@
     background: #69718E; /* Azul */
 }
 
-.title_input{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width:88%;
-    height:6.2vh;
-}
-
 .input_NameCategoryAdjective{
     display: flex;
     flex-direction: column;
@@ -68,7 +59,19 @@
 
     padding-top: 10%;
     gap: 3%;
+    
 }
+
+.title_input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width:88%;
+    height:6.2vh;
+}
+
+
 
 .inputTags{
     display: flex;
@@ -95,10 +98,17 @@
 }
 
 .categoriaInput{
-    width: 18%;
-    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 90%;
+    height: 12%;
+}
 
-    margin-left: 6%;
+.boxAdjetivo{
+    width: 20%;
+    height: 83.333%;
 }
 
 .adjetivosInput{
@@ -108,12 +118,6 @@
 
     width: 90%;
     height: 12%;
-}
-
-
-.boxAdjetivo{
-    width: 20%;
-    height: 83.333%;
 }
 
 
