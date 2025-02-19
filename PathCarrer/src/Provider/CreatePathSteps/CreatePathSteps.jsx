@@ -12,20 +12,20 @@ export const PathStepsProvider = ({children}) => {
         desc:""
     })
 
-    const {twoStep,setTwoStep} = useState(
+    const [twoStep,setTwoStep] = useState(
         {
             titleModule:"",
             descModule:""
         }
     );
 
-    const [classData,setClassDataState] = useState ([{
+    const [threeStep,setThreeStep] = useState ([{
         title:"",
         link:"",
         description:"",
     }]);
 
-    return <PathStepsContext.Provider value={{oneStap,SetOneStap,twoStep,setTwoStep,classData,setClassDataState}}>
+    return <PathStepsContext.Provider value={{oneStap,SetOneStap,twoStep,setTwoStep,threeStep,setThreeStep}}>
                {children}
            </PathStepsContext.Provider>
 }

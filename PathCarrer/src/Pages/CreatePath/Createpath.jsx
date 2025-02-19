@@ -18,26 +18,6 @@ function CreatePath () {
    const {oneStap, SetOneStap} = useContext(PathStepsContext);
    const [inputxt, setinputxt] = useState();
    const [tags,setTags] = useState([]);
-
-   const onFrame = () => {
-      if (9 >  tags.length){
-         setTags((prev) => ([...prev,inputxt]))
-      }
-      else {
-         alert("Você já usou o limite de palavras chaves")
-      }
-   }
-
-   const deleteElementTags = (tag) => {
-      setTags(tags.filter(elemento => elemento !== tag));
-   }
-
-   const intheend = () => {
-      SetOneStap((prevState) => ({
-         ...prevState,
-         tagspath: tags,
-       }));
-   }
    
 
    const [category,SetCategory] = useState([
@@ -124,6 +104,26 @@ function CreatePath () {
    ]
    )
 
+   const onFrame = () => {
+      if (9 >  tags.length){
+         setTags((prev) => ([...prev,inputxt]))
+      }
+      else {
+         alert("Você já usou o limite de palavras chaves")
+      }
+   }
+
+   const deleteElementTags = (tag) => {
+      setTags(tags.filter(elemento => elemento !== tag));
+   }
+
+   const intheend = () => {
+      SetOneStap((prevState) => ({
+         ...prevState,
+         tagspath: tags,
+      }));
+   }
+
    const setInfo = (event) => {
       event.preventDefault();
       const { name, value } = event.target;
@@ -151,7 +151,7 @@ function CreatePath () {
 
    useEffect(() => {
       mostrar();
-    }, [oneStap]); // Executa toda vez que classData mudar
+    }, [oneStap]);
 
 
 

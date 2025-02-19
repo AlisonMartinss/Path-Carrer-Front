@@ -10,20 +10,27 @@ import { PathContext } from '../../Provider/Provider'
 import { useNavigate } from "react-router-dom"
 import { useContext } from 'react'
 
+import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
+
 function CreateModulo () {
-    const navigate = useNavigate();
-    const {nameModule,setModuleData} = useContext(PathContext);
+    const {twoStep,setTwoStep} = useContext(PathStepsContext);
 
-    const handleChange = (event) => {
-        event.preventDefault();
-        const {name,value} = event.target;
-        setModuleData({[name]:value});
-    }
+    const setInfo = (event) => {
+      event.preventDefault();
+      const { name, value } = event.target;
+    
+      setTwoStep((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    };
 
-    const redirect = (event) =>{
-        event.preventDefault();
-        navigate('/createaulas');
-    }
+   const mostrar = () => {
+    console.log(JSON.stringify(twoStep))
+   }
+    
+
+  
 
     return (
         <main className={styles.main}>
@@ -33,23 +40,24 @@ function CreateModulo () {
             <form className={styles.form}>
               <div className={styles.moduloName}>
                 <TXTinputP
-                func={handleChange}
-                name={"name"}
+                onChange={(e) => setInfo(e)}
+                name={"titleModule"}
                 placeholder={"Digite o nome do modulo"}/>
               </div>
 
               <div className={styles.moduloDesc}>
                 <TXTinputM
-                func={handleChange}
-                name={"description"}
+                onChange={(e) => setInfo(e)}
+                name={"descModule"}
                 placeholder={"Descreva o seu modulo"}/>
               </div>
 
               <div className={styles.Button}>
                 <Button
-                func={redirect}
+                func={(e) => mostrar(e)}
                 message={"Enviar"}
-                class={"button"}/>
+                class={"button"}
+                />
               </div>
             </form>
            
