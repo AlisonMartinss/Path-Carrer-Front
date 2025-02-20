@@ -15,9 +15,16 @@ import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 function CreatePath () {
 
  
-   const {oneStap, SetOneStap} = useContext(PathStepsContext);
+   const {oneStap, SetOneStap,APImodel,SetAPImodel} = useContext(PathStepsContext);
    const [inputxt, setinputxt] = useState();
    const [tags,setTags] = useState([]);
+
+   const handlePermissionAPI = () => {
+      SetAPImodel((prev) => ({
+         ...prev,
+         onePathDTO: { ...prev.onePathDTO, ...oneStap } 
+      })); 
+   }
    
 
    const [category,SetCategory] = useState([
@@ -120,8 +127,9 @@ function CreatePath () {
    const intheend = () => {
       SetOneStap((prevState) => ({
          ...prevState,
-         tagspath: tags,
+         tags: tags,
       }));
+      handlePermissionAPI();
    }
 
    const setInfo = (event) => {
@@ -145,13 +153,22 @@ function CreatePath () {
    };
 
    const mostrar = () => {
-      console.log(JSON.stringify(oneStap))
+      console.log(JSON.stringify(APImodel))
    }
 
 
    useEffect(() => {
+      intheend();
+    },[tags]);
+
+    useEffect(() => {
+      handlePermissionAPI();
       mostrar();
-    }, [oneStap]);
+    },[oneStap]);
+
+
+
+   
 
 
 
@@ -179,7 +196,7 @@ function CreatePath () {
                      <BoxInput
                      optionE={category}
                      onChange={setInfo}
-                     name={"categoria"}/>
+                     name={"category"}/>
                   </div>
              
                </div>
@@ -234,7 +251,7 @@ function CreatePath () {
               <div className={`${styles.CallToAction} ${styles.txtover}`}> Descreva o seu <strong className={styles.strong}>Path</strong></div>
               <div className={styles.inputDesc}>
                <TXTinputM
-               name={"desc"}
+               name={"descPathOver"}
                onChange={setInfo}/>
               </div>
               <div className={styles.enviar}>

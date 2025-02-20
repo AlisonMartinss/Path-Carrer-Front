@@ -6,22 +6,31 @@ export const PathStepsProvider = ({children}) => {
 
     const [oneStap,SetOneStap] = useState({
         title:"",
-        categoria:"",
+        category:"",
         adjectives:[],
-        tagspath:[],
-        desc:""
+        tags:[],
+        descPathOver:""
     })
+
+    const [threeStep,setThreeStep] = useState ([]);
 
     const [twoStep,setTwoStep] = useState(
         {
             titleModule:"",
-            descModule:""
+            descModule:"",
+            ClassList:threeStep
         }
     );
 
-    const [threeStep,setThreeStep] = useState ([]);
+    const [APImodel,SetAPImodel] = useState(
+        {
+            onePathDTO:oneStap,
+            twoPathDTO:
+            twoStep
+        }
+    )
 
-    return <PathStepsContext.Provider value={{oneStap,SetOneStap,twoStep,setTwoStep,threeStep,setThreeStep}}>
+    return <PathStepsContext.Provider value={{oneStap,SetOneStap,twoStep,setTwoStep,threeStep,setThreeStep,APImodel,SetAPImodel}}>
                {children}
            </PathStepsContext.Provider>
 }

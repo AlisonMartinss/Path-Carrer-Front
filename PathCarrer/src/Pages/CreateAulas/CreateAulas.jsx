@@ -23,7 +23,7 @@ import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 
 function CreateAulas (){
 
-  const {threeStep,setThreeStep} = useContext(PathStepsContext);
+  const {threeStep,setThreeStep,APImodel} = useContext(PathStepsContext);
   const [molde,setMolde] = useState(
     {
       title:"",
@@ -52,7 +52,6 @@ function CreateAulas (){
     ...prev,
     head:(e.target.value - 1)
     }))
-    alert(e.target.value - 1);
   }
 
   const verify = (obj) =>{
@@ -101,9 +100,13 @@ function CreateAulas (){
        alert ("Aula adicionada com sucesso");
       }
       else {
-        alert("Se liga no pro")
+        alert("Selecione um indice valido")
       }
   };
+
+  const Finish = () => {
+    alert(console.log(JSON.stringify(APImodel)))
+  }
 
   useEffect(() => {
     for (let i = 0; i < threeStep.length; i++) {
@@ -118,12 +121,7 @@ function CreateAulas (){
         tail:threeStep.length
       }))
       setPlace();
-      alert("indice att")
     }
-
-    else (
-      alert("indice n att")
-    )
 
   }, [threeStep]);
 
@@ -171,7 +169,7 @@ function CreateAulas (){
                </div>
 
                <div className={styles.Button}>
-                <div className={styles.Buttonover}><Button message={"Enviar"} class="button"/>   </div>
+                <div className={styles.Buttonover}><Button func={Finish} message={"Enviar"} class="button"/>   </div>
                 <div className={styles.Buttonover}><Button func={(e) => {setElementClass(e)}} message={"Salvar"} class="Save"/>   </div>
                </div>
 
