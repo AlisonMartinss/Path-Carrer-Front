@@ -37,7 +37,7 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
      <CreateModulo/>
    </PathStepsProvider>}/> 
 
-   <Route path="/createaulas"  element = {
+   <Route path="/createclass"  element = {
    <PathStepsProvider>
      <CreateAulas />
    </PathStepsProvider>}/>

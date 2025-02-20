@@ -15,7 +15,7 @@ import JP2 from '../../assets/Midias/JP2.png'
 
 // =-=-=-=-= Provider =-=-=-=-= //
 
-import { PathContext } from '../../Provider/Provider'
+
 import { useNavigate } from "react-router-dom"
 
 import { useContext, useState,useEffect } from 'react'
@@ -24,16 +24,108 @@ import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 function CreateAulas (){
 
   const {threeStep,setThreeStep} = useContext(PathStepsContext);
+  const [molde,setMolde] = useState(
+    {
+      title:"",
+      link:"",
+      description:"",
+    }
+  )
+
+  const [indice,SetIndice] = useState([
+    {
+      txt:"Selecione"
+    },
+    {
+      txt:1
+    }
+  ]);
+  const [indiceAtual,setIndiceAtual] = useState(
+    {
+      head:0,
+      tail:threeStep.length
+    }
+  );
+
+  const select = (e)  => {
+    setIndiceAtual((prev) => ({
+    ...prev,
+    head:(e.target.value - 1)
+    }))
+    alert(e.target.value - 1);
+  }
+
+  const verify = (obj) =>{
+    if (!obj.title || obj.title.trim() === ""){
+      alert ("Você se esqueceu de colocar o titulo da aula")
+      return false
+    }
+    else if(!obj.title || obj.title.trim() === ""){
+      alert ("Você se esqueceu de colocar o link da aula")
+      return false
+    }
+    else if (!obj.title || obj.title.trim() === "") {
+      alert ("Você se esqueceu de colocar a descrição da aula")
+      return false
+    }
+
+    return true
+  }
+
+  const setPlace = () => {
+    const presentInd = threeStep.length;
+    if (!(presentInd >= 15)){
+    SetIndice((prev) => [...prev,{txt:presentInd + 1}])}
+    else { alert("Você chegou ao limite de aulas") }
+  }
+
+  const setObjectClass = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+
+    setMolde((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
+};
    
-    const setInfo = (event) => {
-      event.preventDefault();
-      const { name, value } = event.target;
+  const setElementClass = () => {
+      
+      if (verify(molde) == true && ((indiceAtual.head + 1) >= 1)){
+        
+        setThreeStep((prevState) => {
+          const newState = [...prevState]; // Copia o array
+          newState[indiceAtual.head] = molde; // Modifica o item pelo índice
+          return newState; // Retorna o novo array
+        });
+       alert ("Aula adicionada com sucesso");
+      }
+      else {
+        alert("Se liga no pro")
+      }
+  };
+
+  useEffect(() => {
+    for (let i = 0; i < threeStep.length; i++) {
+      console.log(JSON.stringify(threeStep))
+    }
     
-      setThreeStep((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    };
+
+    if (threeStep.length > indiceAtual.tail ){
+      setThreeStep((prev) => prev.filter((element) => element !== null && element !== undefined));
+      setIndiceAtual((prev) => 
+      ({...prev,
+        tail:threeStep.length
+      }))
+      setPlace();
+      alert("indice att")
+    }
+
+    else (
+      alert("indice n att")
+    )
+
+  }, [threeStep]);
 
     return (
         <main className={styles.main}>
@@ -55,32 +147,32 @@ function CreateAulas (){
 
              <form className={styles.form}>
                <div className={styles.recado}>Você está editando a aula de <strong className={styles.strong}>índice</strong> <div className={styles.boxInput}>
-               <BoxInput onChange={(e) => handleIndice(e)} optionE={prevIndice}/></div></div>
+               <BoxInput onChange={(e) => select(e)} optionE={indice}/></div></div>
 
                <div className={`${styles.inputName} ${styles.overInput}`}>
                 <TXTinputP
                 name={"title"} 
-                onChange={(e) => setInfo(e)} 
+                onChange={(e) => setObjectClass(e)} 
                 placeholder={"Digite o titulo da aula"}/>
                </div>
 
                <div className={`${styles.inputLink} ${styles.overInput}`}>
                 <TXTinputP
                 name={"link"} 
-                onChange={(e) => setInfo(e)} 
+                onChange={(e) => setObjectClass(e)} 
                 placeholder={"Cole aqui o link do conteudo desta aula"}/>
                </div>
 
                <div className={styles.inputDesc}>
                 <TXTinputM 
                 name={"description"} 
-                onChange={(e) => setInfo(e)} 
+                onChange={(e) => setObjectClass(e)} 
                 placeholder={"Descreva os pontos mais interessantes para essa aula"}/>
                </div>
 
                <div className={styles.Button}>
                 <div className={styles.Buttonover}><Button message={"Enviar"} class="button"/>   </div>
-                <div className={styles.Buttonover}><Button func={() => {handleModule(); }} message={"Salvar"} class="Save"/>   </div>
+                <div className={styles.Buttonover}><Button func={(e) => {setElementClass(e)}} message={"Salvar"} class="Save"/>   </div>
                </div>
 
              </form>

@@ -19,11 +19,7 @@ export const PathStepsProvider = ({children}) => {
         }
     );
 
-    const [threeStep,setThreeStep] = useState ([{
-        title:"",
-        link:"",
-        description:"",
-    }]);
+    const [threeStep,setThreeStep] = useState ([]);
 
     return <PathStepsContext.Provider value={{oneStap,SetOneStap,twoStep,setTwoStep,threeStep,setThreeStep}}>
                {children}
