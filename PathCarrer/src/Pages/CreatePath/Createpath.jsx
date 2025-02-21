@@ -19,6 +19,7 @@ function CreatePath () {
    const navigate = useNavigate(); 
 
    const {oneStap, SetOneStap,SetAPImodel} = useContext(PathStepsContext);
+   const [adjectivesList,setAdjectivesList] = useState([]);
    const [inputxt, setinputxt] = useState("");
    const [tags,setTags] = useState([]);
    
@@ -142,6 +143,20 @@ function CreatePath () {
       }
    }
 
+   const handleAdjective = (e, index) => {
+      const { value } = e.target;
+      
+      console.log("Index:", index);
+      console.log("Value:", value);
+  
+      setAdjectivesList((prev) => {
+          const newList = [...prev];
+          newList[index] = value;
+          console.log("Updated List:", newList);
+          return newList;
+      });
+  };
+  
    const deleteElementTags = (tag) => {
       setTags(tags.filter(elemento => elemento !== tag));
    }
@@ -150,6 +165,10 @@ function CreatePath () {
       SetOneStap((prevState) => ({
          ...prevState,
          tags: tags,
+      }));
+      SetOneStap((prevState) => ({
+         ...prevState,
+         adjectives: adjectivesList,
       }));
       handlePermissionAPI();
       navigate('/createmodulo')
@@ -166,6 +185,11 @@ function CreatePath () {
     useEffect(() => {
       handlePermissionAPI();
     },[oneStap]);// Reforçando a att da API quando o obj é att
+
+    
+    useEffect(() => {
+      console.log("adjectivesList: " + adjectivesList)
+    },[adjectivesList]);// Reforçando a att da API quando o obj é att
 
     return (
         <main className={styles.main}>
@@ -199,11 +223,11 @@ function CreatePath () {
                Selecione cinco <strong className={styles.strong}>adjetivos</strong> que se encaixam no seu <strong className={styles.strong}>Path:</strong>
               </div>
               <div className={styles.adjetivosInput}>
-               {adjectives.slice(0,5).map((element) => (
+               {adjectives.slice(0,5).map((element,key) => (
                   <div className={styles.boxAdjetivo}>
                      <BoxInput
                      optionE={adjectives}
-                     onChange={setInfoList}
+                     onChange={(e) => handleAdjective(e,key)}
                      name={"adjectives"}/>
                   </div>
                ))}

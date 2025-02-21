@@ -54,7 +54,7 @@ function CreateAulas (){
   ]);
   const [indiceAtual,setIndiceAtual] = useState(
     {
-      head:0,
+      head:"Selecione",
       tail:threeStep.length
     }
   );
@@ -64,6 +64,7 @@ function CreateAulas (){
     ...prev,
     head:(e.target.value - 1)
     }))
+    //alert("Indice atual: " + (e.target.value - 1))
   }
 
   const verify = (obj) =>{
