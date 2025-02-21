@@ -3,7 +3,6 @@ import './App.css'
 
 // =-=-=-=-= Providers =-=-=-=-= //
 
-import { PathProvider } from '../src/Provider/Provider'
 
 //=-=-=-=-=-=- Pages imports =-=-=-=-=-=-=-//
 

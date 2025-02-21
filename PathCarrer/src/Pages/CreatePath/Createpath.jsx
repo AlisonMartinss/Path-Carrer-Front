@@ -6,28 +6,29 @@ import BoxInput from '../../Components/BoxInput/BoxInput'
 import Button from '../../Components/Button/Button'
 import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
 
-
-
 import {useState,useEffect, useContext} from 'react'
+import { data, useNavigate } from "react-router-dom"
+import axios from 'axios';
+
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 
 function CreatePath () {
+   // ============== API =================
+   useEffect(function() {
+      axios.get("http://localhost:8080/CRUD").then(function(response){
+         alert(response.data)
+      })
+   },[])
 
- 
-   const {oneStap, SetOneStap,APImodel,SetAPImodel} = useContext(PathStepsContext);
-   const [inputxt, setinputxt] = useState();
+   //====================================
+   const navigate = useNavigate(); 
+
+   const {oneStap, SetOneStap,SetAPImodel} = useContext(PathStepsContext);
+   const [inputxt, setinputxt] = useState("");
    const [tags,setTags] = useState([]);
-
-   const handlePermissionAPI = () => {
-      SetAPImodel((prev) => ({
-         ...prev,
-         onePathDTO: { ...prev.onePathDTO, ...oneStap } 
-      })); 
-   }
    
-
-   const [category,SetCategory] = useState([
+   const [category] = useState([
       {
          value:"Selecione",
          txt: "Selecione"
@@ -63,7 +64,7 @@ function CreatePath () {
    ])
 
 
-   const [adjectives,Setadjectives] = useState([
+   const [adjectives] = useState([
       {
          value:"Selecione",
          txt: "Selecione"
@@ -110,28 +111,7 @@ function CreatePath () {
       },
    ]
    )
-
-   const onFrame = () => {
-      if (9 >  tags.length){
-         setTags((prev) => ([...prev,inputxt]))
-      }
-      else {
-         alert("Você já usou o limite de palavras chaves")
-      }
-   }
-
-   const deleteElementTags = (tag) => {
-      setTags(tags.filter(elemento => elemento !== tag));
-   }
-
-   const intheend = () => {
-      SetOneStap((prevState) => ({
-         ...prevState,
-         tags: tags,
-      }));
-      handlePermissionAPI();
-   }
-
+    
    const setInfo = (event) => {
       event.preventDefault();
       const { name, value } = event.target;
@@ -152,25 +132,46 @@ function CreatePath () {
       }));
    };
 
-   const mostrar = () => {
-      console.log(JSON.stringify(APImodel))
+   const handlePermissionAPI = () => {
+      SetAPImodel((prev) => ({
+         ...prev,
+         onePathDTO: { ...prev.onePathDTO, ...oneStap } 
+      })); 
+   } // Att obj API com o respectivo objeto
+
+   const onFrame = () => {
+      if (9 >  tags.length){
+         setTags((prev) => ([...prev,inputxt]))
+      }
+      else {
+         alert("Você já usou o limite de palavras chaves")
+      }
    }
 
+   const deleteElementTags = (tag) => {
+      setTags(tags.filter(elemento => elemento !== tag));
+   }
+
+   const intheend = () => {
+      SetOneStap((prevState) => ({
+         ...prevState,
+         tags: tags,
+      }));
+      handlePermissionAPI();
+      navigate('/createmodulo')
+   }
 
    useEffect(() => {
-      intheend();
+      SetOneStap((prevState) => ({
+         ...prevState,
+         tags: tags,
+      }));
+      handlePermissionAPI();
     },[tags]);
 
     useEffect(() => {
       handlePermissionAPI();
-      mostrar();
-    },[oneStap]);
-
-
-
-   
-
-
+    },[oneStap]);// Reforçando a att da API quando o obj é att
 
     return (
         <main className={styles.main}>
@@ -265,4 +266,5 @@ function CreatePath () {
         </main>
     )
 }
-export default CreatePath
+
+export default CreatePath;

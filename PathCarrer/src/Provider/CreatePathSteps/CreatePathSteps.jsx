@@ -25,8 +25,7 @@ export const PathStepsProvider = ({children}) => {
     const [APImodel,SetAPImodel] = useState(
         {
             onePathDTO:oneStap,
-            twoPathDTO:
-            twoStep
+            twoPathDTO:twoStep
         }
     )
 

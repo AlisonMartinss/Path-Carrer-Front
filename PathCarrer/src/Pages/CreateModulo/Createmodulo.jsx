@@ -7,13 +7,22 @@ import Button from '../../Components/Button/Button'
 
 
 import { PathContext } from '../../Provider/Provider'
+import {useState,useEffect, useContext} from 'react'
 import { useNavigate } from "react-router-dom"
-import { useContext } from 'react'
-
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 
 function CreateModulo () {
-    const {twoStep,setTwoStep} = useContext(PathStepsContext);
+    const navigate = useNavigate();
+    const {twoStep,setTwoStep,SetAPImodel} = useContext(PathStepsContext);
+
+
+
+    const handlePermissionAPI = () => {
+      SetAPImodel((prev) => ({
+         ...prev,
+         twoPathDTO: { ...prev.twoPathDTO, ...twoStep} 
+      })); 
+    }
 
     const setInfo = (event) => {
       event.preventDefault();
@@ -25,9 +34,15 @@ function CreateModulo () {
       }));
     };
 
-   const mostrar = () => {
-    console.log(JSON.stringify(twoStep))
-   }
+    const nextpage = () => {
+      navigate('/createclass')
+
+    }
+
+
+   useEffect(() => {
+      handlePermissionAPI();
+    },[twoStep]);
     
 
   
@@ -54,7 +69,7 @@ function CreateModulo () {
 
               <div className={styles.Button}>
                 <Button
-                func={(e) => mostrar(e)}
+                func={(e) => nextpage(e)}
                 message={"Enviar"}
                 class={"button"}
                 />
