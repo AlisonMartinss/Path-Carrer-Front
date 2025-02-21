@@ -145,14 +145,10 @@ function CreatePath () {
 
    const handleAdjective = (e, index) => {
       const { value } = e.target;
-      
-      console.log("Index:", index);
-      console.log("Value:", value);
   
       setAdjectivesList((prev) => {
           const newList = [...prev];
           newList[index] = value;
-          console.log("Updated List:", newList);
           return newList;
       });
   };
