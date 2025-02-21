@@ -7,9 +7,9 @@ export const PathStepsProvider = ({children}) => {
     const [oneStap,SetOneStap] = useState({
         title:"",
         category:"",
-        adjectives:[],
+        descPathOver:"",
         tags:[],
-        descPathOver:""
+        adjectives:[]
     })
 
     const [twoStep,setTwoStep] = useState(

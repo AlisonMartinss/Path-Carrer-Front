@@ -123,32 +123,19 @@ function CreateAulas (){
         {
           onePathDTO: 
             {
-              title:"Segundo Path",
-              category:"Testagem",
-              descPathOver:"Feito para testar API",
-              tags: ["testagem","funcionamento","API","Postman","PathCarrer"],
-              adjetives:["Objetivo","interativo","exercicios","topico","aulas longas"]
+              title:oneStap.title,
+              category:oneStap.category,
+              descPathOver:oneStap.descPathOver,
+              tags:oneStap.tags,
+              adjetives:oneStap.adjectives
             },
 
           twoPathDTO:
-        {
-            title:"Segundo Modulo",
-            desc:"Testando o controller da API",
-            ClassList:
-         [
             {
-                title:"1 aula",
-                link:"1 link",
-                description: "1 desc"
-            },
-
-            {
-                title:"2 aula",
-                link:"2 link",
-                description: "2 desc"
+                title:twoStep.titleModule,
+                desc:twoStep.descModule,
+                ClassList:threeStep
             }
-         ]
-        }
 
         }
       )
@@ -161,7 +148,8 @@ function CreateAulas (){
 
   
   const mostrar = (e) => {
-    console.log(JSON.stringify(APImodel))
+    //console.log(JSON.stringify(APImodel))
+    console.log("Adjetivos: " + oneStap.adjectives)
     onSubmitPath(e)
   }
 
