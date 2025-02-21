@@ -8,18 +8,12 @@ import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
 
 import {useState,useEffect, useContext} from 'react'
 import { data, useNavigate } from "react-router-dom"
-import axios from 'axios';
 
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 
 function CreatePath () {
    // ============== API =================
-   useEffect(function() {
-      axios.get("http://localhost:8080/CRUD").then(function(response){
-         alert(response.data)
-      })
-   },[])
 
    //====================================
    const navigate = useNavigate(); 

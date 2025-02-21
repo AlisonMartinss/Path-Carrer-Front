@@ -1,4 +1,5 @@
 import styles from '../CreateAulas/CreateAulas.module.css'
+import axios from 'axios'
 
 // =-=-=-=-=- Componentes =-=-=-=-=- //
 
@@ -23,7 +24,7 @@ import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 
 function CreateAulas (){
 
-  const {threeStep,setThreeStep,SetAPImodel,APImodel} = useContext(PathStepsContext);
+  const {oneStap,twoStep,threeStep,setThreeStep,SetAPImodel,APImodel} = useContext(PathStepsContext);
 
   const handlePermissionAPI = () => {
     SetAPImodel((prev) => ({
@@ -34,7 +35,6 @@ function CreateAulas (){
       }
     }));
   };
-  
 
   const [molde,setMolde] = useState(
     {
@@ -116,6 +116,55 @@ function CreateAulas (){
       }
   };
 
+  async function onSubmitPath (e) {
+    e.preventDefault()
+    try {
+      const response = await axios.post('http://localhost:8080/CRUD/PathCreate',
+        {
+          onePathDTO: 
+            {
+              title:"Segundo Path",
+              category:"Testagem",
+              descPathOver:"Feito para testar API",
+              tags: ["testagem","funcionamento","API","Postman","PathCarrer"],
+              adjetives:["Objetivo","interativo","exercicios","topico","aulas longas"]
+            },
+
+          twoPathDTO:
+        {
+            title:"Segundo Modulo",
+            desc:"Testando o controller da API",
+            ClassList:
+         [
+            {
+                title:"1 aula",
+                link:"1 link",
+                description: "1 desc"
+            },
+
+            {
+                title:"2 aula",
+                link:"2 link",
+                description: "2 desc"
+            }
+         ]
+        }
+
+        }
+      )
+      alert("Aula cadastrada")
+    }catch (err){
+      alert ("Erro")
+      console.log(err)
+    }
+  }
+
+  
+  const mostrar = (e) => {
+    console.log(JSON.stringify(APImodel))
+    onSubmitPath(e)
+  }
+
   useEffect(() => {
     for (let i = 0; i < threeStep.length; i++) {
       console.log(JSON.stringify(threeStep))
@@ -132,10 +181,6 @@ function CreateAulas (){
     }
 
     }, [threeStep]);
-
-    const mostrar = () => {
-      console.log(JSON.stringify(APImodel))
-    }
 
     useEffect(() => {
       handlePermissionAPI();
@@ -185,7 +230,7 @@ function CreateAulas (){
                </div>
 
                <div className={styles.Button}>
-                <div className={styles.Buttonover}><Button func={mostrar} message={"Enviar"} class="button"/>   </div>
+                <div className={styles.Buttonover}><Button func={(e) => mostrar(e)} message={"Enviar"} class="button"/>   </div>
                 <div className={styles.Buttonover}><Button func={(e) => {setElementClass(e)}} message={"Salvar"} class="Save"/>   </div>
                </div>
 

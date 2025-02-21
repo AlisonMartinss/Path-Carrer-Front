@@ -12,15 +12,16 @@ export const PathStepsProvider = ({children}) => {
         descPathOver:""
     })
 
-    const [threeStep,setThreeStep] = useState ([]);
-
     const [twoStep,setTwoStep] = useState(
         {
             titleModule:"",
             descModule:"",
-            ClassList:threeStep
         }
     );
+
+    const [threeStep,setThreeStep] = useState ([]);
+
+
 
     const [APImodel,SetAPImodel] = useState(
         {
