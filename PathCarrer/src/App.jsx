@@ -17,6 +17,7 @@ import Loby from './Pages/Loby/Loby'
 
 import {createBrowserRouter,createRoutesFromElements,RouterProvider, Route} from 'react-router-dom'
 import { PathStepsProvider } from '../src/Provider/CreatePathSteps/CreatePathSteps'
+import UpdatePath from './Pages/UpdatePath/Updatepath'
 
 const browserRouter = createBrowserRouter(createRoutesFromElements(
 <Route path="/">
@@ -26,9 +27,14 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
  <Route path="/explorer" element={<Explorer/>}/>
  <Route path="/ContentAcess" element={<ContentAcess/>}/>
 
-   <Route path="/createpath"   element = {
+   <Route path="/createpath" element = {
    <PathStepsProvider>
-     <Createpath />
+     <Createpath enviarDestino={'/createmodulo'} />
+   </PathStepsProvider>}/>
+
+   <Route path="/updatePath" element = {
+   <PathStepsProvider>
+     <UpdatePath/>
    </PathStepsProvider>}/>
 
    <Route path="/createmodulo" element = {

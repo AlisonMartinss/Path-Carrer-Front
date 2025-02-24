@@ -12,7 +12,7 @@ import { data, useNavigate } from "react-router-dom"
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 
-function CreatePath ({SetcampoModel,subCampoModel}) {
+function CreatePath ({enviarDestino,PreSend}) {
    const navigate = useNavigate(); 
 
    const {oneStap, SetOneStap,SetAPImodel} = useContext(PathStepsContext);
@@ -193,7 +193,8 @@ function CreatePath ({SetcampoModel,subCampoModel}) {
          adjectives: adjectivesList,
       }));
       handlePermissionAPI();
-      navigate('/createmodulo')
+      {PreSend}
+      navigate(enviarDestino)
    }
 
    useEffect(() => {
