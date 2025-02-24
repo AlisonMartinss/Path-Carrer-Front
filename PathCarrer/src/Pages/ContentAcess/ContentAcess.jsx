@@ -18,7 +18,67 @@ import {useState} from 'react'
 
 
 function ContentAcess (){
+    const [classe,SetClasse] = useState("author");
     const [isClicked, setIsClicked] = useState(false);
+    const jsonData = {
+      "onePathDTO": 
+      {
+        "title":"Primeiro Path",
+        "category":"Testagem",
+        "descPathOver":"Feito para testar API",
+        "tags": ["testagem","funcionamento","API","Postman","PathCarrer"],
+        "adjetives":["Objetivo","interativo","exercicios","topico","aulas longas"]
+      },
+   
+      "twoPathDTO":
+           {
+           "title":"Primeiro Modulo",
+           "desc":"Testando o controller da API",
+           "ClassList":
+            [
+               {
+                   "title":"1 aula",
+                   "link":"1 link",
+                   "description": "1 desc"
+               },
+   
+               {
+                   "title":"2 aula",
+                   "link":"2 link",
+                   "description": "2 desc"
+               },
+   
+               {
+                   "title":"3 aula",
+                   "link":"3 link",
+                   "description": "3 desc"
+               },
+   
+               {
+                   "title":"4 aula",
+                   "link":"4 link",
+                   "description": "4 desc"
+               }
+            ]
+           }
+   
+    }
+
+    const ClassDef = () =>{
+
+    }
+
+    const ButtonAddPath = () => {
+      if (classe === "author"){
+        alert("API do autor")
+      }
+      else if (classe === "studentOff"){
+        alert("API do Estudante off")
+      }
+      else {
+        alert("API do Estudante on")
+      }
+    }
  
     const handleClick = () => {
         setIsClicked((prev) => (!prev))
@@ -82,11 +142,31 @@ function ContentAcess (){
                       </div>
 
                       <div className={styles.buttonAdd}>
-                        <div className={styles.LitleIcone}>
-                            <ButtonIMG
-                            iconV={"MdBookmarkAdd"} 
-                            icon_style={"evenConstStyle"}/>
-                        </div>
+                        {
+                          classe === "studentOff" ? (
+                            <div title="Adicionar modulo" className={styles.LitleIcone}>
+                              <ButtonIMG
+                              iconV={"MdBookmarkAdd"} 
+                              icon_style={"evenConstStyle"}
+                              handleClick={(e) => ButtonAddPath(e)}/>
+                            </div>
+                        ): classe === "studentOn" ? (
+                            <div title="Remover modulo do seu inventario" className={styles.LitleIcone}>
+                              <ButtonIMG
+                              iconV={"FaTrash"} 
+                              icon_style={"evenConstStyle"}
+                              handleClick={(e) => ButtonAddPath(e)}/>
+                            </div>
+                        ): classe === "author" ? (
+                            <div title="Editar Path" className={styles.LitleIcone}>
+                              <ButtonIMG
+                              iconV={"TbPencilCog"} 
+                              icon_style={"evenConstStyle"}
+                              handleClick={(e) => ButtonAddPath(e)}/>
+                            </div>
+                        ):null
+                        }
+                      
                       </div>
                     </div>
                 </div>

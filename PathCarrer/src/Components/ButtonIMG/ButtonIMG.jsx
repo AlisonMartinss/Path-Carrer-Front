@@ -17,6 +17,7 @@ import { MdBookmarkAdd } from "react-icons/md";
 import { FaHouseChimneyWindow } from "react-icons/fa6";
 import { TbPencilCog } from "react-icons/tb";
 import { RxPencil2 } from "react-icons/rx";
+import { FaTrash } from "react-icons/fa6";
 
 
 function ButtonIMG ({iconV,icon_style,handleClick,}) {
@@ -29,7 +30,7 @@ const comp = {
     AiFillDislike,RxHamburgerMenu,
     CgProfile,FaFolderOpen,
     MdBookmarkAdd,FaHouseChimneyWindow,
-    TbPencilCog,RxPencil2
+    TbPencilCog,RxPencil2,FaTrash
 }
 
 /* =-=-=-=-= Functions =-=-=-=-= */
