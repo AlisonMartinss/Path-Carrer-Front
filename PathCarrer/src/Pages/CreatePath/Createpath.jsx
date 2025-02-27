@@ -7,14 +7,17 @@ import Button from '../../Components/Button/Button'
 import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
 
 import {useState,useEffect, useContext} from 'react'
-import { data, useNavigate } from "react-router-dom"
 
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 
-function CreatePath ({enviarDestino,PreSend}) {
-   const navigate = useNavigate(); 
+function CreatePath ({PreSend}) {
 
+   /*
+      Componente para tomada de inputs para criação de paths.
+        - PreSend: Ação tomada por ultimo ao clicar em 'enviar'.
+        - As informações obtidas nessa pagina pode ser acessadas pelo context API.
+   */
    const {oneStap, SetOneStap,SetAPImodel} = useContext(PathStepsContext);
    const [adjectivesList,setAdjectivesList] = useState([]);
    const [inputxt, setinputxt] = useState("");
@@ -193,8 +196,7 @@ function CreatePath ({enviarDestino,PreSend}) {
          adjectives: adjectivesList,
       }));
       handlePermissionAPI();
-      {PreSend}
-      navigate(enviarDestino)
+      PreSend();
    }
 
    useEffect(() => {

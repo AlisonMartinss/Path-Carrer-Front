@@ -18,9 +18,10 @@ import { FaHouseChimneyWindow } from "react-icons/fa6";
 import { TbPencilCog } from "react-icons/tb";
 import { RxPencil2 } from "react-icons/rx";
 import { FaTrash } from "react-icons/fa6";
+import { IoIosAddCircle } from "react-icons/io";
 
 
-function ButtonIMG ({iconV,icon_style,handleClick,}) {
+function ButtonIMG ({iconV,icon_style,handleClick,IDValue}) {
 
 
 const comp = {
@@ -30,7 +31,7 @@ const comp = {
     AiFillDislike,RxHamburgerMenu,
     CgProfile,FaFolderOpen,
     MdBookmarkAdd,FaHouseChimneyWindow,
-    TbPencilCog,RxPencil2,FaTrash
+    TbPencilCog,RxPencil2,FaTrash,IoIosAddCircle
 }
 
 /* =-=-=-=-= Functions =-=-=-=-= */
@@ -39,8 +40,8 @@ const comp = {
     const classeBase =  styles[icon_style]
 
     return (
-        <div onClick={handleClick} className={styles.button}>
-            <Componente className={`${classeBase}`}/>
+        <div id={IDValue} onClick={handleClick} className={styles.button}>
+            < Componente className={`${classeBase}`}/>
         </div>
     )
 }

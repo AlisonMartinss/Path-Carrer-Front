@@ -1,5 +1,6 @@
 import styles from '../CreateAulas/CreateAulas.module.css'
 import axios from 'axios'
+import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
 
 // =-=-=-=-=- Componentes =-=-=-=-=- //
 
@@ -64,7 +65,6 @@ function CreateAulas (){
     ...prev,
     head:(e.target.value - 1)
     }))
-    //alert("Indice atual: " + (e.target.value - 1))
   }
 
   const verify = (obj) =>{
@@ -120,7 +120,7 @@ function CreateAulas (){
   async function onSubmitPath (e) {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:8080/CRUD/PathCreate',
+      const response = await httpClient.post('PathCreate',
         {
           onePathDTO: 
             {
@@ -140,7 +140,7 @@ function CreateAulas (){
 
         }
       )
-      alert("Aula cadastrada")
+      alert("Aulas cadastradas")
     }catch (err){
       alert ("Erro")
       console.log(err)

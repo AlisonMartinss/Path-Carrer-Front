@@ -73,23 +73,20 @@ function Class (){
 
               <div className={styles.contentArea}>
                 <div className={styles.editar}>
-                    <div className={styles.edit}>
-                      <div title="Clique aqui editar o modulo atual" className={styles.icon}>
+                    <div title="Clique aqui para editar o modulo atual" className={styles.edit}>                     
                         <ButtonIMG
                         iconV={"TbPencilCog"}
-                        icon_style={"evenConstStyle"}/>
-                      </div>
+                        icon_style={"evenConstStyle"}/>                  
                     </div>
-                    <div className={styles.edit}>
-                      <div title="Clique aqui para editar a aula atual" className={styles.icon}>
+                    <div title="Clique aqui para editar a aula atual" className={styles.edit}>                     
                         <ButtonIMG
-                        iconV={"RxPencil2"}
-                        icon_style={"evenConstStyle"}/>
-                      </div>
-                    </div>
+                          iconV={"RxPencil2"}
+                          icon_style={"evenConstStyle"}
+                        />                     
+                    </div>                   
                 </div>
                 <div className={styles.vidArea}>
-                  <iframe className={styles.videoMain} src="https://www.youtube.com/embed/L4skN3uWqAg" frameborder="0"></iframe>
+                  <iframe className={styles.videoMain} src="https://www.youtube.com/embed/sqIHrGPCYfE" frameborder="0"></iframe>
 
                 </div>
                 <div className={`${styles.descArea} ${styles.txt}`}>
