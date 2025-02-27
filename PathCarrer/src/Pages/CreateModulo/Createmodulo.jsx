@@ -11,7 +11,7 @@ import {useState,useEffect, useContext} from 'react'
 import { useNavigate } from "react-router-dom"
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 
-function CreateModulo () {
+function CreateModulo ({redirec}) {
     const navigate = useNavigate();
     const {twoStep,setTwoStep,SetAPImodel} = useContext(PathStepsContext);
 
@@ -35,8 +35,7 @@ function CreateModulo () {
     };
 
     const nextpage = () => {
-      navigate('/createclass')
-
+      redirec();
     }
 
 

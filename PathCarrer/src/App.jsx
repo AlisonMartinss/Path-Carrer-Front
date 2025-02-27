@@ -19,6 +19,8 @@ import {createBrowserRouter,createRoutesFromElements,RouterProvider, Route} from
 import { PathStepsProvider } from '../src/Provider/CreatePathSteps/CreatePathSteps'
 import UpdatePath from './Pages/UpdatePath/Updatepath'
 import CreatePathPre from './Pages/CreatePathpre/CreatePathPre'
+import CreateClassSelection from './Pages/CreateClassSelection/CreateClassSelection'
+import UpdateModulo from './Pages/ModuleInstances/UpdateModulo'
 
 const browserRouter = createBrowserRouter(createRoutesFromElements(
 <Route path="/">
@@ -34,24 +36,53 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
    </PathStepsProvider>}/>
 
    <Route path="/updatePath" element = {
+    /* Atualiza Path no step 1 */
    <PathStepsProvider>
      <UpdatePath/>
    </PathStepsProvider>}/>
 
-   <Route path="/createmodulo" element = {
+   <Route path="/Createmodulo" element = {
+    /* Faz parte da etapa de criação do path */
    <PathStepsProvider>
      <CreateModulo/>
    </PathStepsProvider>}/>
 
-   <Route path="/Addmodulo" element = {
-   <PathStepsProvider>
-     <CreateModulo/>
-   </PathStepsProvider>}/> 
 
-   <Route path="/createclass"  element = {
+   <Route path="/CreateNewModulo" element = {
+    /* Criar e logo em seguida adicionar modulo em path já existente */
    <PathStepsProvider>
-     <CreateAulas />
+     <UpdateModulo
+     route={"UpdateClass"}/>
    </PathStepsProvider>}/>
+
+   <Route path="/UpdateModulo" element = {
+    /* Atualiza modulo pre existente. OBS: Subistitui TODAS as aulas */
+   <PathStepsProvider>
+     <UpdateModulo
+     route={"UpdateModulo"}/>
+   </PathStepsProvider>}/>
+
+   <Route path="/UpdateModulo/UpdateClass"  element = {
+    /* Etapa onde att as aulas, faz parte do processo de att de modulo */
+   <PathStepsProvider>
+     <CreateClassSelection option={"UpdateModulo"} />
+   </PathStepsProvider>}/>
+
+   <Route path="/CreateClass"  element = {
+    /* Criação de aulas. Faz parte da etapa de criação de Path */
+   <PathStepsProvider>
+     <CreateClassSelection option={"PathCreate"} />
+   </PathStepsProvider>}/>
+
+   <Route path="/UpdateClass"  element = {
+    /* Att aulas em modulo já existentes */
+   <PathStepsProvider>
+     <CreateClassSelection option={"UpadateNewModule"} />
+   </PathStepsProvider>}/>
+
+   
+
+   
 
 </Route>
 ))

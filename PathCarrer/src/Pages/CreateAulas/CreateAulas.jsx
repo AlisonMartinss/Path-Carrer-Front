@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom"
 import { useContext, useState,useEffect } from 'react'
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 
-function CreateAulas (){
+function CreateAulas ({APIoption}){
 
   const {oneStap,twoStep,threeStep,setThreeStep,SetAPImodel,APImodel} = useContext(PathStepsContext);
 
@@ -148,10 +148,8 @@ function CreateAulas (){
   }
 
   
-  const mostrar = (e) => {
-    //console.log(JSON.stringify(APImodel))
-    console.log("Adjetivos: " + oneStap.adjectives)
-    onSubmitPath(e)
+  const completion = (e) => {
+    APIoption(e);
   }
 
   useEffect(() => {
@@ -219,7 +217,7 @@ function CreateAulas (){
                </div>
 
                <div className={styles.Button}>
-                <div className={styles.Buttonover}><Button func={(e) => mostrar(e)} message={"Enviar"} class="button"/>   </div>
+                <div className={styles.Buttonover}><Button func={(e) => completion(e)} message={"Enviar"} class="button"/>   </div>
                 <div className={styles.Buttonover}><Button func={(e) => {setElementClass(e)}} message={"Salvar"} class="Save"/>   </div>
                </div>
 
