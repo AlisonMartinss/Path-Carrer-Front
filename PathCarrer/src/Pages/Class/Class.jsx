@@ -9,6 +9,16 @@ import { useState } from 'react'
 function Class (){
     const [videoURL,setvideoURL] = useState("L4skN3uWqAg");
     const [videoZ,setVideoZ] = useState("https://www.youtube.com/embed/"+{videoURL});
+    const entity = "author";
+    const buttonsRender = 
+    [
+      {
+        core:"editar o modulo",
+        title: "Clique aqui para editar a aula atual",
+        iconV:"TbPencilCog",
+      },
+      {}
+    ]
     const [classes,Setclasses] = useState([
       { 
         title: "Titulo 01",
@@ -72,19 +82,23 @@ function Class (){
               </div>
 
               <div className={styles.contentArea}>
-                <div className={styles.editar}>
-                    <div title="Clique aqui para editar o modulo atual" className={styles.edit}>                     
-                        <ButtonIMG
-                        iconV={"TbPencilCog"}
-                        icon_style={"evenConstStyle"}/>                  
+                {
+                  entity === "author" ? (
+                    <div className={styles.editar}>
+                      <div title="Clique aqui para editar o modulo atual" className={styles.edit}>                     
+                          <ButtonIMG
+                          iconV={"TbPencilCog"}
+                          icon_style={"evenConstStyle"}/>                  
+                      </div>
+                      <div title="Clique aqui para editar a aula atual" className={styles.edit}>                     
+                          <ButtonIMG
+                            iconV={"RxPencil2"}
+                            icon_style={"evenConstStyle"}
+                          />                     
+                      </div>                   
                     </div>
-                    <div title="Clique aqui para editar a aula atual" className={styles.edit}>                     
-                        <ButtonIMG
-                          iconV={"RxPencil2"}
-                          icon_style={"evenConstStyle"}
-                        />                     
-                    </div>                   
-                </div>
+                  ):null}
+               
                 <div className={styles.vidArea}>
                   <iframe className={styles.videoMain} src="https://www.youtube.com/embed/sqIHrGPCYfE" frameborder="0"></iframe>
 

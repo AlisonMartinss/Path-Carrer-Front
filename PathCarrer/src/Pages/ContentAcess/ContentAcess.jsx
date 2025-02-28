@@ -11,9 +11,7 @@ import WindowNote from '../../Components/WindowNote/WindowNote';
 
 import { AiOutlineComment } from "react-icons/ai";
 import { GiBookCover } from "react-icons/gi";
-import { MdBookmarkAdd } from "react-icons/md";
 import {useNavigate } from "react-router-dom"
-
 import {useState} from 'react'
 
 
@@ -206,9 +204,22 @@ function ContentAcess (){
                               )}
                             </div>
                             
-                        ): classe === "studentOn" ? (
+                          ): classe === "studentOn" ? (
+                              <div className={styles.authorAux}>
+                                {buttons.student.slice(0,1).map((element) =>
+                                  <div title="Adicionar modulo" className={styles.LitleIcone}>
+                                    <ButtonIMG
+                                    iconV={element.iconV} 
+                                    icon_style={"evenConstStyle"}                  
+                                    handleClick={(e) => ButtonAddPath(element.id)}
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                              
+                          ): classe === "author" ? (
                             <div className={styles.authorAux}>
-                              {buttons.student.slice(0,1).map((element) =>
+                              {buttons.author.map((element) =>
                                 <div title="Adicionar modulo" className={styles.LitleIcone}>
                                   <ButtonIMG
                                   iconV={element.iconV} 
@@ -216,24 +227,10 @@ function ContentAcess (){
                                   handleClick={(e) => ButtonAddPath(element.id)}
                                   />
                                 </div>
-                              )}
-                            </div>
-                            
-                        ): classe === "author" ? (
-                          <div className={styles.authorAux}>
-                            {buttons.author.map((element) =>
-                              <div title="Adicionar modulo" className={styles.LitleIcone}>
-                                <ButtonIMG
-                                iconV={element.iconV} 
-                                icon_style={"evenConstStyle"}                  
-                                handleClick={(e) => ButtonAddPath(element.id)}
-                                />
-                              </div>
-                            )}                          
-                          </div>                           
-                        ):null
-                        }
-                      
+                              )}                          
+                            </div>                           
+                          ):null
+                        }                      
                       </div>
                     </div>
                 </div>
