@@ -23,6 +23,10 @@ import CreateClassSelection from './Pages/CreateClassSelection/CreateClassSelect
 import UpdateModulo from './Pages/ModuleInstances/UpdateModulo'
 
 const browserRouter = createBrowserRouter(createRoutesFromElements(
+  /*
+   
+  
+  */
 <Route path="/">
  <Route index element={<Loby/>}/>
  <Route path="/loby" element={<Loby/>}/>
@@ -40,6 +44,8 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
    <PathStepsProvider>
      <UpdatePath/>
    </PathStepsProvider>}/>
+
+   {/* Rotas que envolvem atividades com modulos */}
 
    <Route path="/Createmodulo" element = {
     /* Faz parte da etapa de criação do path */
@@ -68,6 +74,8 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
      <CreateClassSelection option={"UpdateModulo"} />
    </PathStepsProvider>}/>
 
+   {/* Rotas que envolvem atividades com Class */}
+
    <Route path="/CreateClass"  element = {
     /* Criação de aulas. Faz parte da etapa de criação de Path */
    <PathStepsProvider>
@@ -75,14 +83,22 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
    </PathStepsProvider>}/>
 
    <Route path="/UpdateClass"  element = {
-    /* Att aulas em modulo já existentes */
+    /* Att aulas (todas as aulas) em modulo já existentes. Faz parte do processo de adicionar novo modulo */
    <PathStepsProvider>
      <CreateClassSelection option={"UpadateNewModule"} />
    </PathStepsProvider>}/>
 
-   
+   <Route path="/UpdateClassUnic"  element = {
+    /* Att uma unica aula. Aula já existente */
+   <PathStepsProvider>
+     <CreateClassSelection option={"UpdateClassUnic"} />
+   </PathStepsProvider>}/>
 
-   
+   <Route path="/UpdateNewClass"  element = {
+    /* Adiciona uma unica aula.*/
+   <PathStepsProvider>
+     <CreateClassSelection option={"UpdateClassUnic"} />
+   </PathStepsProvider>}/>
 
 </Route>
 ))

@@ -1,23 +1,35 @@
 import styles from '../Class/Class.module.css'
 
 import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
-import WindowText from '../../Components/WindowText/WindowText'
 import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
 import ClassComponent from '../../Components/ClassComponent/ClassComponent'
 import { useState } from 'react'
+import {useNavigate } from "react-router-dom"
 
 function Class (){
     const [videoURL,setvideoURL] = useState("L4skN3uWqAg");
     const [videoZ,setVideoZ] = useState("https://www.youtube.com/embed/"+{videoURL});
+    const navigateEditModulo = useNavigate(); 
+    const navigateEditClass = useNavigate();
+    const navigateAddClass  = useNavigate(); 
     const entity = "author";
     const buttonsRender = 
     [
       {
         core:"editar o modulo",
-        title: "Clique aqui para editar a aula atual",
-        iconV:"TbPencilCog",
+        title: "Clique aqui para editar o modulo atual",
+        iconV:"TbPencilCog"
       },
-      {}
+      {
+        core: "editar a aula",
+        title:"Clique aqui para editar a aula atual",
+        iconV:"RxPencil2"
+      },
+      {
+        core: "adicionar aula",
+        title:"Clique aqui para adicionar uma aula",
+        iconV:"IoIosAddCircle"
+      },
     ]
     const [classes,Setclasses] = useState([
       { 
@@ -59,7 +71,25 @@ function Class (){
       { 
         title: "Titulo 10",
       },
-    ]) 
+    ])
+
+    /* ======= FUNC ======= */
+
+    const redirectActivity = (e) => {
+      if (e === "editar o modulo"){
+        alert("API de editar modulo")
+        navigateEditModulo('/UpdateModulo')
+      }
+      else if (e === "editar a aula"){
+        alert("API de editar a aula")
+        navigateEditModulo('/UpdateClassUnic')
+      }
+      else if (e === "adicionar aula"){
+        alert("Adicionar aula")
+      }
+    }
+
+
 
     return (
         <main className={styles.main}>
@@ -85,19 +115,17 @@ function Class (){
                 {
                   entity === "author" ? (
                     <div className={styles.editar}>
-                      <div title="Clique aqui para editar o modulo atual" className={styles.edit}>                     
-                          <ButtonIMG
-                          iconV={"TbPencilCog"}
-                          icon_style={"evenConstStyle"}/>                  
-                      </div>
-                      <div title="Clique aqui para editar a aula atual" className={styles.edit}>                     
-                          <ButtonIMG
-                            iconV={"RxPencil2"}
-                            icon_style={"evenConstStyle"}
-                          />                     
-                      </div>                   
+                      {buttonsRender.map((element) => 
+                        <div title={element.title} className={styles.edit}>                     
+                         <ButtonIMG
+                         iconV={element.iconV}
+                         icon_style={"evenConstStyle"}
+                         handleClick={(e) => redirectActivity(element.core)}/>                  
+                        </div>
+                      )}                 
                     </div>
-                  ):null}
+                  ):null
+                }
                
                 <div className={styles.vidArea}>
                   <iframe className={styles.videoMain} src="https://www.youtube.com/embed/sqIHrGPCYfE" frameborder="0"></iframe>

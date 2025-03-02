@@ -26,6 +26,7 @@ import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 function CreateAulas ({APIoption}){
 
   const {oneStap,twoStep,threeStep,setThreeStep,SetAPImodel,APImodel} = useContext(PathStepsContext);
+  const circumstance = "student";
 
   const handlePermissionAPI = () => {
     SetAPImodel((prev) => ({
@@ -103,17 +104,27 @@ function CreateAulas ({APIoption}){
    
   const setElementClass = () => {
       
-      if (verify(molde) == true && ((indiceAtual.head + 1) >= 1)){
-        
-        setThreeStep((prevState) => {
-          const newState = [...prevState]; // Copia o array
-          newState[indiceAtual.head] = molde; // Modifica o item pelo índice
-          return newState; // Retorna o novo array
-        });
-       alert ("Aula adicionada com sucesso");
-      }
-      else {
-        alert("Selecione um indice valido")
+      if (verify(molde) == true){
+          if (circumstance !== ("CreatePath") && circumstance !== ("EditModulo")){
+            setThreeStep((prevState) => {
+              const newState = [...prevState]; // Copia o array              
+              newState[0] = molde; // Modifica o item pelo índice
+              alert ("Aula adicionada com sucesso");
+              return newState;
+            })
+          }
+          else if (((indiceAtual.head + 1) >= 1)){
+            setThreeStep((prevState) => {
+              const newState = [...prevState]; // Copia o array              
+              newState[indiceAtual.head] = molde; // Modifica o item pelo índice
+              alert ("Aula adicionada com sucesso");
+              return newState;
+            })
+          }
+          else {
+            alert("Selecione um indice valido")
+          }
+          
       }
   };
 
@@ -192,8 +203,15 @@ function CreateAulas ({APIoption}){
              </div>
 
              <form className={styles.form}>
-               <div className={styles.recado}>Você está editando a aula de <strong className={styles.strong}>índice</strong> <div className={styles.boxInput}>
-               <BoxInput onChange={(e) => select(e)} optionE={indice}/></div></div>
+             {(circumstance === "CreatePath" || circumstance === "EditModulo") ? (
+              <div className={styles.recado}>
+                Você está editando a aula de <strong className={styles.strong}>índice</strong> 
+                <div className={styles.boxInput}>
+                  <BoxInput onChange={(e) => select(e)} optionE={indice} />
+                </div>
+              </div>
+            ) : null}
+               
 
                <div className={`${styles.inputName} ${styles.overInput}`}>
                 <TXTinputP

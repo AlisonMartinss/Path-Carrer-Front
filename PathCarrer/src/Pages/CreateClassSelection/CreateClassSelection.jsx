@@ -66,7 +66,62 @@ function CreateClassSelection  ({option}){
         const response = await httpClient.put('UpdateModule',
           {
             id:"67c0cbf4d6744375fc3636a0", // OBTIDO ATRAVES DO LOCAL STORAGE
-            nameModulo:"Primeiro Modulo", // OBTIDO ATRAVES DO LOCAL STORAGE - TITULO DO MODULO QUE PRETENDO MUDAR
+            nameModulo:"modulo  - ATUALIZAR MODULO", // OBTIDO ATRAVES DO LOCAL STORAGE - TITULO DO MODULO QUE PRETENDO MUDAR
+            title:twoStep.titleModule,
+            desc:twoStep.descModule,
+            ClassList:threeStep
+          }
+        )
+        alert("Modulo atualizado")
+      }catch (err){
+        alert ("Erro")
+        console.log(err)
+      }
+    }
+    async function UpdateClassUnic (e) {
+      e.preventDefault()
+      try {
+        const response = await httpClient.put('UpdateClassUnic',
+          {
+            id:"67c0cbf4d6744375fc3636a0", // OBTIDO ATRAVES DO LOCAL STORAGE
+            nameModulo:"modulo  - ATUALIZAR MODULO", // OBTIDO ATRAVES DO LOCAL STORAGE - TITULO DO MODULO QUE PRETENDO MUDAR
+            placeClass:0, //OBTIDO ATRAVES DO LOCAL STORAGE
+            threePath:
+            {
+                title:threeStep[0].title,
+                link:threeStep[0].link,
+                description:threeStep[0].description
+            }
+          }
+        )
+        alert("Aula unica atualizada")
+        console.log
+        (JSON.stringify(
+          {
+            id:"67c0cbf4d6744375fc3636a0",
+            nameModulo:"modulo  - ATUALIZAR MODULO",
+            placeClass:0,
+            threePath:
+            {
+                title:threeStep[0].title,
+                link:threeStep[0].link,
+                description:threeStep[0].description
+            }
+          }
+         )
+        )
+      }catch (err){
+        alert ("Erro")
+        console.log(err)
+      }
+    }
+    async function UpdateModulo (e) {
+      e.preventDefault()
+      try {
+        const response = await httpClient.put('UpdateModule',
+          {
+            id:"67c0cbf4d6744375fc3636a0", // OBTIDO ATRAVES DO LOCAL STORAGE
+            nameModulo:"modulo  - ATUALIZAR MODULO", // OBTIDO ATRAVES DO LOCAL STORAGE - TITULO DO MODULO QUE PRETENDO MUDAR
             title:twoStep.titleModule,
             desc:twoStep.descModule,
             ClassList:threeStep
@@ -79,7 +134,25 @@ function CreateClassSelection  ({option}){
       }
     }
     const APIoptions = {
-      teste,PathCreate,UpadateNewModule,UpdateModulo
+      teste,PathCreate,UpadateNewModule,UpdateModulo,UpdateClassUnic
+    }
+    async function UpdateModulo (e) {
+      e.preventDefault()
+      try {
+        const response = await httpClient.put('UpdateModule',
+          {
+            id:"67c0cbf4d6744375fc3636a0", // OBTIDO ATRAVES DO LOCAL STORAGE
+            nameModulo:"modulo  - ATUALIZAR MODULO", // OBTIDO ATRAVES DO LOCAL STORAGE - TITULO DO MODULO QUE PRETENDO MUDAR
+            title:twoStep.titleModule,
+            desc:twoStep.descModule,
+            ClassList:threeStep
+          }
+        )
+        alert("Modulo atualizado")
+      }catch (err){
+        alert ("Erro")
+        console.log(err)
+      }
     }
 
     return (

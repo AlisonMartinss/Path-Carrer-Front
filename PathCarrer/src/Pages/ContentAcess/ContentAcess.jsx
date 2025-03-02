@@ -77,12 +77,15 @@ function ContentAcess (){
         [
           {
             id:"Adicionar modulo",
-            iconV:"IoIosAddCircle"
+            iconV:"IoIosAddCircle",
+            title:"Adicionar modulo"
           },
           {
             id:"Adicionar path",
-            iconV:"TbPencilCog"
+            iconV:"TbPencilCog",
+            title:"Editar Path"
           }
+          
         ],
         student:
         [
@@ -220,7 +223,7 @@ function ContentAcess (){
                           ): classe === "author" ? (
                             <div className={styles.authorAux}>
                               {buttons.author.map((element) =>
-                                <div title="Adicionar modulo" className={styles.LitleIcone}>
+                                <div title={element.title} className={styles.LitleIcone}>
                                   <ButtonIMG
                                   iconV={element.iconV} 
                                   icon_style={"evenConstStyle"}                  
