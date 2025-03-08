@@ -17,7 +17,7 @@ function CreateClassSelection  ({option}){
     async function PathCreate (e) {
         e.preventDefault()
         try {
-          const response = await httpClient.post('PathCreate',
+          const response = await httpClient.post('CRUD/PathCreate',
             {
               onePathDTO: 
                 {
@@ -46,7 +46,7 @@ function CreateClassSelection  ({option}){
     async function UpadateNewModule (e) {
       e.preventDefault()
       try {
-        const response = await httpClient.post('UpadateNewModule',
+        const response = await httpClient.post('CRUD/UpadateNewModule',
           {
             id:"67bd255d2970aa4c4aaea088",
             title:twoStep.titleModule,
@@ -63,7 +63,7 @@ function CreateClassSelection  ({option}){
     async function UpdateModulo (e) {
       e.preventDefault()
       try {
-        const response = await httpClient.put('UpdateModule',
+        const response = await httpClient.put('CRUD/UpdateModule',
           {
             id:"67c0cbf4d6744375fc3636a0", // OBTIDO ATRAVES DO LOCAL STORAGE
             nameModulo:"modulo  - ATUALIZAR MODULO", // OBTIDO ATRAVES DO LOCAL STORAGE - TITULO DO MODULO QUE PRETENDO MUDAR
@@ -81,7 +81,7 @@ function CreateClassSelection  ({option}){
     async function UpdateClassUnic (e) {
       e.preventDefault()
       try {
-        const response = await httpClient.put('UpdateClassUnic',
+        const response = await httpClient.put('CRUD/UpdateClassUnic',
           {
             id:"67c0cbf4d6744375fc3636a0", // OBTIDO ATRAVES DO LOCAL STORAGE
             nameModulo:"modulo  - ATUALIZAR MODULO", // OBTIDO ATRAVES DO LOCAL STORAGE - TITULO DO MODULO QUE PRETENDO MUDAR
@@ -115,45 +115,10 @@ function CreateClassSelection  ({option}){
         console.log(err)
       }
     }
-    async function UpdateModulo (e) {
-      e.preventDefault()
-      try {
-        const response = await httpClient.put('UpdateModule',
-          {
-            id:"67c0cbf4d6744375fc3636a0", // OBTIDO ATRAVES DO LOCAL STORAGE
-            nameModulo:"modulo  - ATUALIZAR MODULO", // OBTIDO ATRAVES DO LOCAL STORAGE - TITULO DO MODULO QUE PRETENDO MUDAR
-            title:twoStep.titleModule,
-            desc:twoStep.descModule,
-            ClassList:threeStep
-          }
-        )
-        alert("Modulo atualizado")
-      }catch (err){
-        alert ("Erro")
-        console.log(err)
-      }
-    }
     const APIoptions = {
       teste,PathCreate,UpadateNewModule,UpdateModulo,UpdateClassUnic
     }
-    async function UpdateModulo (e) {
-      e.preventDefault()
-      try {
-        const response = await httpClient.put('UpdateModule',
-          {
-            id:"67c0cbf4d6744375fc3636a0", // OBTIDO ATRAVES DO LOCAL STORAGE
-            nameModulo:"modulo  - ATUALIZAR MODULO", // OBTIDO ATRAVES DO LOCAL STORAGE - TITULO DO MODULO QUE PRETENDO MUDAR
-            title:twoStep.titleModule,
-            desc:twoStep.descModule,
-            ClassList:threeStep
-          }
-        )
-        alert("Modulo atualizado")
-      }catch (err){
-        alert ("Erro")
-        console.log(err)
-      }
-    }
+ 
 
     return (
         <CreateAulas

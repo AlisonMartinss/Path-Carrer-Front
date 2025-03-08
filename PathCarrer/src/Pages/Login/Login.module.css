@@ -1,0 +1,58 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.cabecalho{
+    width: 100vw;
+    height: 10vh;
+}
+
+.core{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 50vw;
+    height: 90vh;
+
+    background-color: black;
+}
+
+.loginArea{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-top: 8%;
+
+    width: 40%;
+    height: 50%;
+
+    margin-top: 12%;
+    border-radius: 20px;
+
+    gap: 8%;
+
+    background-color: brown;
+}
+
+.UserArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 86%;
+    height:14%;
+}
+
+.Button{
+    width: 32%;
+    height: 11%;
+}

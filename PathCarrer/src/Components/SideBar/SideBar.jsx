@@ -1,16 +1,22 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import style from '../SideBar/SideBar.module.css'
 import ButtonIMG from '../ButtonIMG/ButtonIMG'
 
-function SideBar ({handleClick}){
-    const [arraAuxMedals, setArrAuxMedals] = useState([1,2,3])
-    const [arraAuxAdjectives, setArrAuxAdjectives] = useState([1,2,3,4,5])
+function SideBar ({handleClick,description,AuthorName,adjectivesList}){
+    const [arraAuxMedals, setArrAuxMedals] = useState([])
+    const [arraAuxAdjectives,setArraAuxAdjectives] = useState(adjectivesList)
 
     const [isClicked, setIsClicked] = useState(false);
     const handleClickSide = () => {       
         setIsClicked((prev) => (!prev))
         handleClick();     
     };
+
+    useEffect(() => {
+        if (Array.isArray(adjectivesList)) {
+            setArraAuxAdjectives(adjectivesList);
+        }
+    }, [adjectivesList]);
 
     return (
         <main className={style.main}>
@@ -38,19 +44,25 @@ function SideBar ({handleClick}){
                             <div className={style.medals_img}></div>
                             ))}
                     </div> 
-                    <div className={style.bottom_area}></div> 
+                    <div className={`${style.bottom_area} ${style.txtOver}`}>{AuthorName}</div> 
                 </div>
 
                 <div className={style.adjectives_area}>
-                    {arraAuxAdjectives.map((element) => (
-                        <div className={style.adjectie_element}></div>
-                    ))}
-
+                    {Array.isArray(arraAuxAdjectives) && arraAuxAdjectives.length > 0 ? (
+                          arraAuxAdjectives.map((element) => (
+                            <div className={`${style.adjectie_element} ${style.txtOver2}`}>
+                                {element.name}
+                            </div>
+                           ))
+                        ) : (
+                        <div className={style.txtOver2}>Não há Adjetivos para exibir.</div>
+                    )}
+                    
                 </div>
 
                 <div className={style.descArea}>
                     <div className={style.barra_desc}></div>
-                    <div className={style.desc_main}></div>
+                    <div className={`${style.desc_main} ${style.txtOver2}`}>{description}</div>
                 </div>
             </div>
         </main>

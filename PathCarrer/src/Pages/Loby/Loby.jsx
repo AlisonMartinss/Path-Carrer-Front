@@ -10,8 +10,9 @@ import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2'
 import img from '../../assets/Midias/JP2.png'
 
 
-import { useState } from 'react'
-
+import { useState,useEffect } from 'react'
+import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
+import { useNavigate } from 'react-router'
 
 // =-=-=-=-= Icones =-=-=-=-=- //
 
@@ -19,6 +20,9 @@ import { useState } from 'react'
 
 
 function Loby () {
+    const navigate = useNavigate(); 
+    const [LobyJSON,SetLobyJSON] = useState({});
+    const [isLoading, setIsLoading] = useState(true); // Estado para controle de carregamento
     const [dayArray,setDayArray] = useState(["All","Seg","Ter","Qua","Qui","Sex","Sab","Dom"]);
 
     const [leftElements,setModuleTest] = useState([
@@ -32,6 +36,53 @@ function Loby () {
     handleClick:""
     }
     ]);
+
+    // ==== API ==== //
+    async function LobyGet () {
+      setIsLoading(true); // Indica que a requisição está em andamento
+      try {
+        const response = await httpClient.post('User/Getloby',
+          {
+            userName:localStorage.getItem("UserName")
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("Token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        alert("Loby chamado com sucesso!");
+        const JSONdata = response.data;
+        localStorage.setItem("LobyInfo",JSON.stringify(JSONdata));
+        SetLobyJSON(JSONdata);
+      }catch (err){
+        alert ("Erro da chamada")
+        console.log(err)
+      }
+      finally {
+        setIsLoading(false); // Sempre será chamado, finalizando o carregamento
+      }
+    }
+
+    const PathAcess = (e,x) => {
+      e.preventDefault();
+      localStorage.setItem("PathID_on",x)
+      navigate('/ContentAcess')
+    }
+
+    useEffect(() => {
+       LobyGet();
+      }, []);
+
+    // ==== useEffect para verificar e processar LobyJSON ==== //
+    useEffect(() => {
+      if (!isLoading && LobyJSON && Array.isArray(LobyJSON.myPaths)) {
+        console.log("Lista: " + JSON.stringify(LobyJSON.myPaths));
+      } else if (!isLoading && LobyJSON) {
+        alert("myPaths não é um array válido");
+      }
+    }, [LobyJSON, isLoading]);
 
     const [module,setModule] = useState([]);
 
@@ -51,14 +102,22 @@ function Loby () {
                       </div>
                     ))}
                   </div>
-                  <div className={styles.moduloArea}>
-                    <div className={styles.moduloArea_core}>
-                      <WindowModule
-                      titleMain={"Nome do Curso"}
-                      subTile={"subTitulo"}
-                      img={img}
-                      />
-                    </div>               
+                  <div className={styles.moduloArea}>             
+                      {/* Verificando se LobyJSON.myPaths é um array e se não está vazio */}
+                        {Array.isArray(LobyJSON.myPaths) && LobyJSON.myPaths.length > 0 ? (
+                          LobyJSON.myPaths.map((element) => (
+                            <div key={element.pathID} className={styles.moduloArea_core}>
+                              <WindowModule
+                                titleMain={element.title}
+                                subTile={element.category}
+                                img={img}                       
+                                onClick={(e) => PathAcess(e,element.pathID)}
+                              />
+                            </div>
+                          ))
+                        ) : (
+                          <div className={`${styles.alert} ${styles.txtOver2}`}>Não há Paths para exibir.</div>
+                        )}
                   </div>
               </div>
             

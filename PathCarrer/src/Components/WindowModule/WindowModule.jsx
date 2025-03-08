@@ -1,8 +1,8 @@
 import style from '../WindowModule/WindowModule.module.css'
 
-function WindowModule ({titleMain,subTile,porcent,img}){
+function WindowModule ({titleMain,subTile,porcent,img,onClick}){
     return (
-        <main className={`${style.main} ${style.style1}`}>
+        <main onClick={onClick} className={`${style.main} ${style.style1}`}>
             <div className={style.Pre_img}>
                 <img  className={style.img} src={img} alt="Icone do curso" />
             </div>

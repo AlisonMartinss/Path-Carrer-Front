@@ -10,7 +10,6 @@ import Createpath from './Pages/CreatePath/Createpath'
 import CreateModulo from './Pages/CreateModulo/Createmodulo'
 import Explorer from './Pages/Explorer/Explorer'
 import CreateAulas from './Pages/CreateAulas/CreateAulas'
-import ContentAcess from './Pages/ContentAcess/ContentAcess'
 import Class from './Pages/Class/Class'
 import Loby from './Pages/Loby/Loby'
 
@@ -21,6 +20,8 @@ import UpdatePath from './Pages/UpdatePath/Updatepath'
 import CreatePathPre from './Pages/CreatePathpre/CreatePathPre'
 import CreateClassSelection from './Pages/CreateClassSelection/CreateClassSelection'
 import UpdateModulo from './Pages/ModuleInstances/UpdateModulo'
+import Login from './Pages/Login/Login'
+import ContentAcess from './Pages/ContentAcess/ContentAcess'
 
 const browserRouter = createBrowserRouter(createRoutesFromElements(
   /*
@@ -29,10 +30,11 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
   */
 <Route path="/">
  <Route index element={<Loby/>}/>
- <Route path="/loby" element={<Loby/>}/>
- <Route path="/class" element={<Class/>}/>
- <Route path="/explorer" element={<Explorer/>}/>
+ <Route path="/Loby" element={<Loby/>}/>
+ <Route path="/Class" element={<Class/>}/>
  <Route path="/ContentAcess" element={<ContentAcess/>}/>
+ <Route path="/Explorer" element={<Explorer/>}/>
+ <Route path="/Login" element={<Login/>}/>
 
    <Route path="/createpath" element = {
    <PathStepsProvider>

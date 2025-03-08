@@ -73,6 +73,24 @@
     width: 0vw;
 }
 
+.alert{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 90%;
+    height: 10%;
+
+    margin-left: 5%;
+    margin-top: 7%;
+
+    border-radius: 0.5vw;
+    border: solid 0.1vw #ffff;
+
+    background-color: rgb(230, 82, 82);
+    
+}
+
 .moduloArea_core{
     display: flex;
     justify-content: center;
@@ -120,11 +138,18 @@
 
 }
 
-
 .txtOver{
     font-family: "Urbanist", serif;
     font-style: normal;
     font-weight: 500;
     font-size: clamp(0.6em, 1vw, 5em);
     color: #625353
+}
+
+.txtOver2{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em, 1vw, 5em);
+    color: #ffffff
 }

@@ -1,5 +1,7 @@
 import styles from '../ContentAcess/ContentAcess.module.css'
 
+/* Componentes */
+
 import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
 import SideBar from '../../Components/SideBar/SideBar'
 import WindowModule from '../../Components/WindowModule/WindowModule';
@@ -12,7 +14,10 @@ import WindowNote from '../../Components/WindowNote/WindowNote';
 import { AiOutlineComment } from "react-icons/ai";
 import { GiBookCover } from "react-icons/gi";
 import {useNavigate } from "react-router-dom"
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
+import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
+
+import { RecuperandoLoby, EntityDef } from '../ContentAcess/ContentAcessAux.js';
 
 
 function ContentAcess (){
@@ -20,57 +25,45 @@ function ContentAcess (){
     - Será usado quando capturarmos o id do botao
   */
   const navigateEditPath = useNavigate(); 
-  const navigateAddModule = useNavigate(); 
+  const navigateAddModule = useNavigate();
+  const navigateIntoModulo = useNavigate(); 
 
-    const [classe,SetClasse] = useState("author"); // Definimos qual o autorithies
+    const [isLoading, setIsLoading] = useState(true);
+    const [classe,SetClasse] = useState(); // Determinamos aqui qual a relação entre user x path
+    const [LobyInfo,SetLobyInfo] = useState(); // Local onde as inforamções do usuario em relação ao seu Loby será armazenada
     const [isClicked, setIsClicked] = useState(false);
-    const jsonData = {
-      "onePathDTO": 
-      {
-        "title":"Primeiro Path",
-        "category":"Testagem",
-        "descPathOver":"Feito para testar API",
-        "tags": ["testagem","funcionamento","API","Postman","PathCarrer"],
-        "adjetives":["Objetivo","interativo","exercicios","topico","aulas longas"]
-      },
-   
-      "twoPathDTO":
-           {
-           "title":"Primeiro Modulo",
-           "desc":"Testando o controller da API",
-           "ClassList":
-            [
-               {
-                   "title":"1 aula",
-                   "link":"1 link",
-                   "description": "1 desc"
-               },
-   
-               {
-                   "title":"2 aula",
-                   "link":"2 link",
-                   "description": "2 desc"
-               },
-   
-               {
-                   "title":"3 aula",
-                   "link":"3 link",
-                   "description": "3 desc"
-               },
-   
-               {
-                   "title":"4 aula",
-                   "link":"4 link",
-                   "description": "4 desc"
-               }
-            ]
-           }
-   
-    }
-    const ClassDef = () =>{
+    const [ContentJSON,setContentJSON] = useState({}); // Conteudo da Resposta da chamada da API. Conteudo do Path
 
+    /* Chamada API - Obter informações sobre o Path 
+      - O formato de respota esperado pela API pode ser visto no arquivo
+      JS desse componente. Busque pelo titulo 'API_JSON - User/GetPath' */
+    async function GetContent() {
+      setIsLoading(true);
+      try {
+        const response = await httpClient.get(
+          `User/GetPath?PathID=${localStorage.getItem("PathID_on")}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("Token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setContentJSON(response.data);
+
+      } catch (err) {
+        console.error("Erro na requisição:", err);
+        alert("Erro da chamada");
+      } finally {
+        setIsLoading(false);
+      }
     }
 
+    const ToIntoModulo = (e,ModuleName) => {
+      e.preventDefault();
+      localStorage.setItem("ModuleON",ModuleName)
+      navigateIntoModulo('/class')
+    }
     const [buttons] = useState(
       {
         author:
@@ -100,7 +93,7 @@ function ContentAcess (){
         ]
       })
 
-    const ButtonAddPath = (e) => {
+    const ButtonAction = (e) => {
       if (classe === "author"){
         alert("API do autor")
         if (e === "Adicionar modulo"){
@@ -133,10 +126,25 @@ function ContentAcess (){
         setIsClicked((prev) => (!prev))
     };
 
-    
+    useEffect(() => { //Chamada inicial para para o carregamento da pagina
+      GetContent(); // Chamada inical para obter informações do Path
+      RecuperandoLoby(SetLobyInfo);
+      EntityDef(ContentJSON,LobyInfo,SetClasse)
+    }, []);
+
+    useEffect(() => { //Chamada inicial para para o carregamento da pagina
+      RecuperandoLoby(SetLobyInfo);
+      EntityDef(ContentJSON,LobyInfo,SetClasse)
+    }, [ContentJSON,LobyInfo]);
 
 
-    return(
+    useEffect(() => {
+      if (!isLoading && ContentJSON) {
+        console.log(ContentJSON.adjectives);
+      }
+    }, [ContentJSON, isLoading]);
+
+    return (
 
         <main className={styles.main}>
             <header className={styles.header}><CabecalhoPadrao/></header>
@@ -144,7 +152,10 @@ function ContentAcess (){
                 
              <div className={`${isClicked ? styles.sideBarOFF : styles.sideBar}`}>
                 <SideBar
-                handleClick={handleClick}/>                   
+                  handleClick={handleClick}
+                  description={ContentJSON.description}
+                  AuthorName={ContentJSON.IdAuthor}
+                  adjectivesList={ContentJSON.adjectives}/>                   
              </div>
 
              <div className={styles.view_core}>
@@ -156,39 +167,21 @@ function ContentAcess (){
                       </div>
 
                       <div className={styles.contentMain}>
-                        <div className={styles.content_area}>
-                            <WindowModule
-                            titleMain={"Titulo de um modulo"}
-                            porcent={"100%"}
-                            img={""}/>
-                        </div>
 
-                        <div className={styles.content_area}>
-                            <WindowModule
-                            titleMain={"Titulo de um modulo"}
-                            porcent={"100%"}
-                            img={""}/>
-                        </div>
-
-                        <div className={styles.content_area}>
-                            <WindowModule
-                            titleMain={"Titulo de um modulo"}
-                            porcent={"100%"}
-                            img={""}/>
-                        </div>
-
-                        <div className={styles.content_area}>
-                            <WindowModule
-                            titleMain={"Titulo de um modulo"}
-                            porcent={"100%"}
-                            img={""}/>
-                        </div>
-                          <div className={styles.content_area}>
-                            <WindowModule
-                            titleMain={"Titulo de um modulo"}
-                            porcent={"100%"}
-                            img={""}/>
-                        </div>
+                        {/* Verificando se ContentJSON.modulos é um array e se não está vazio */}
+                        {Array.isArray(ContentJSON.modulos) && ContentJSON.modulos.length > 0 ? (
+                          ContentJSON.modulos.map((element) => (
+                            <div className={styles.content_area}>
+                              <WindowModule
+                              titleMain={element.name}
+                              porcent={"100%"}
+                              img={""}
+                              onClick={(e) => ToIntoModulo(e , element.name)}/>
+                            </div>
+                          ))
+                        ) : (
+                          <div>Não há módulos para exibir.</div>
+                        )}
 
                       </div>
 
@@ -201,7 +194,7 @@ function ContentAcess (){
                                   <ButtonIMG
                                   iconV={element.iconV} 
                                   icon_style={"evenConstStyle"}                  
-                                  handleClick={(e) => ButtonAddPath(element.id)}
+                                  handleClick={(e) => ButtonAction(element.id)}
                                   />
                                 </div>
                               )}
@@ -210,11 +203,11 @@ function ContentAcess (){
                           ): classe === "studentOn" ? (
                               <div className={styles.authorAux}>
                                 {buttons.student.slice(0,1).map((element) =>
-                                  <div title="Adicionar modulo" className={styles.LitleIcone}>
+                                  <div title="Remover modulo" className={styles.LitleIcone}>
                                     <ButtonIMG
                                     iconV={element.iconV} 
                                     icon_style={"evenConstStyle"}                  
-                                    handleClick={(e) => ButtonAddPath(element.id)}
+                                    handleClick={(e) => ButtonAction(element.id)}
                                     />
                                   </div>
                                 )}
@@ -227,7 +220,7 @@ function ContentAcess (){
                                   <ButtonIMG
                                   iconV={element.iconV} 
                                   icon_style={"evenConstStyle"}                  
-                                  handleClick={(e) => ButtonAddPath(element.id)}
+                                  handleClick={(e) => ButtonAction(element.id)}
                                   />
                                 </div>
                               )}                          
@@ -263,5 +256,4 @@ function ContentAcess (){
         </main>
     )
 }
-
-export default ContentAcess
+export default ContentAcess;

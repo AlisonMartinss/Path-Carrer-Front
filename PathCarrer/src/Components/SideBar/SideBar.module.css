@@ -175,6 +175,10 @@
 
 
 .bottom_area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     width: 100%;
     height: 35%;
 
@@ -243,4 +247,21 @@
     padding: 2%;
 
     border-radius: 0.5vw;
+}
+
+
+.txtOver{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em, 1vw, 5em);
+    color: #000000
+}
+
+.txtOver2{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(0.4em, 0.9vw, 5em);
+    color: #ffffff
 }
