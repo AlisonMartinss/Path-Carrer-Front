@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from '../ClassComponent/ClassComponent.module.css'
 
-function ClassComponent ({title,index,HandleTrue,HandleFalse}){
+function ClassComponent ({title,index,HandleTrue,HandleFalse,onClick}){
     const [Select,SetSelectd] = useState(false);
     const [checkted,setCheckted] = useState(false)
 
@@ -23,7 +23,7 @@ function ClassComponent ({title,index,HandleTrue,HandleFalse}){
 
     return (
         
-        <main className={styles.main}>
+        <main onClick={onClick} className={styles.main}>
             <label className={`${styles.checkBoxArea} ${styles.txt}`}>
                 <input onChange = {(e) => HandleClick()} type="checkbox" checked={checkted} className={styles.checkBox} />
                 <span className={styles.checkmark}></span>

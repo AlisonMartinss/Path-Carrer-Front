@@ -20,10 +20,10 @@ function CabecalhoV2 ({leftElements=[],logoPath}){
                 {leftElements.map((element) => (
                     <div className={style.iconArea}>
                         <ButtonIMG
-                        className={style.iconConfg}
-                        iconV={element.iconV}
-                        icon_style={element.icon_style}
-                        handleClick={element.handleClick}
+                            className={style.iconConfg}
+                            iconV={element.iconV}
+                            icon_style={element.icon_style}
+                            handleClick={element.handleClick}
                         />                  
                     </div>
                 ))}

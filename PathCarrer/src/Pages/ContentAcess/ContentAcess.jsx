@@ -28,10 +28,11 @@ function ContentAcess (){
   const navigateAddModule = useNavigate();
   const navigateIntoModulo = useNavigate(); 
 
-    const [isLoading, setIsLoading] = useState(true);
+    
     const [classe,SetClasse] = useState(); // Determinamos aqui qual a relação entre user x path
     const [LobyInfo,SetLobyInfo] = useState(); // Local onde as inforamções do usuario em relação ao seu Loby será armazenada
     const [isClicked, setIsClicked] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [ContentJSON,setContentJSON] = useState({}); // Conteudo da Resposta da chamada da API. Conteudo do Path
 
     /* Chamada API - Obter informações sobre o Path 
@@ -59,12 +60,12 @@ function ContentAcess (){
       }
     }
 
-    const ToIntoModulo = (e,ModuleName) => {
+    const ToIntoModulo = (e,index) => {
       e.preventDefault();
-      localStorage.setItem("ModuleON",ModuleName)
+      localStorage.setItem("ModuleIndexON",index)
       navigateIntoModulo('/class')
     }
-    const [buttons] = useState(
+    const [buttons] = useState(  // Botoes a serem renderizados.
       {
         author:
         [
@@ -74,7 +75,7 @@ function ContentAcess (){
             title:"Adicionar modulo"
           },
           {
-            id:"Adicionar path",
+            id:"Editar Path",
             iconV:"TbPencilCog",
             title:"Editar Path"
           }
@@ -94,6 +95,8 @@ function ContentAcess (){
       })
 
     const ButtonAction = (e) => {
+    // Nessa função determinamos a ação do Usuario e do autor, que são: Adicionar,
+    // excluir Path e Adicionar modulos, editar path
       if (classe === "author"){
         alert("API do autor")
         if (e === "Adicionar modulo"){
@@ -128,14 +131,9 @@ function ContentAcess (){
 
     useEffect(() => { //Chamada inicial para para o carregamento da pagina
       GetContent(); // Chamada inical para obter informações do Path
-      RecuperandoLoby(SetLobyInfo);
-      EntityDef(ContentJSON,LobyInfo,SetClasse)
     }, []);
 
-    useEffect(() => { //Chamada inicial para para o carregamento da pagina
-      RecuperandoLoby(SetLobyInfo);
-      EntityDef(ContentJSON,LobyInfo,SetClasse)
-    }, [ContentJSON,LobyInfo]);
+
 
 
     useEffect(() => {
@@ -170,17 +168,17 @@ function ContentAcess (){
 
                         {/* Verificando se ContentJSON.modulos é um array e se não está vazio */}
                         {Array.isArray(ContentJSON.modulos) && ContentJSON.modulos.length > 0 ? (
-                          ContentJSON.modulos.map((element) => (
+                          ContentJSON.modulos.map((element,index) => (
                             <div className={styles.content_area}>
                               <WindowModule
                               titleMain={element.name}
                               porcent={"100%"}
                               img={""}
-                              onClick={(e) => ToIntoModulo(e , element.name)}/>
+                              onClick={(e) => ToIntoModulo(e,index)}/>
                             </div>
                           ))
                         ) : (
-                          <div>Não há módulos para exibir.</div>
+                          <div className={`${styles.alert} ${styles.txtOver2}`}>Não há módulos para exibir.</div>
                         )}
 
                       </div>

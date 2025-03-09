@@ -5,7 +5,7 @@ import {useNavigate } from "react-router-dom"
 
 function CreatePathPre (){
     /* 
-        Quando um usuario for criar seu Path, a etapa 01 passa por aqui.
+        Criei esse componente, pq 'CreatePath' é usado em mais de 1 circustancia. Aqui é a step one do path
     */
     const navigate = useNavigate(); 
 

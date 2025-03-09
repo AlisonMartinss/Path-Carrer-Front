@@ -19,6 +19,7 @@ function CreateClassSelection  ({option}){
         try {
           const response = await httpClient.post('CRUD/PathCreate',
             {
+              authorID:localStorage.getItem("UserName"),
               onePathDTO: 
                 {
                   title:oneStap.title,

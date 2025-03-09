@@ -25,16 +25,29 @@ function Loby () {
     const [isLoading, setIsLoading] = useState(true); // Estado para controle de carregamento
     const [dayArray,setDayArray] = useState(["All","Seg","Ter","Qua","Qui","Sex","Sab","Dom"]);
 
-    const [leftElements,setModuleTest] = useState([
-    {iconV: "FaFolderOpen",
-    icon_style: "evenConstStyle",
-    handleClick:""
-    },
-
-    {iconV: "CgProfile",
-    icon_style: "evenConstStyle",
-    handleClick:""
+    const redirecToCreatePath = () => {
+      navigate('/createpath')
     }
+
+    
+
+    const [leftElements,setModuleTest] = useState([
+          {iconV: "FaFolderOpen",
+          icon_style: "evenConstStyle",
+          handleClick:""
+          },
+
+          {iconV: "CgProfile",
+          icon_style: "evenConstStyle",
+          handleClick:""
+          },
+
+          {iconV: "IoIosAddCircle",
+          icon_style: "evenConstStyle",
+          handleClick:redirecToCreatePath
+          }
+
+          
     ]);
 
     // ==== API ==== //
