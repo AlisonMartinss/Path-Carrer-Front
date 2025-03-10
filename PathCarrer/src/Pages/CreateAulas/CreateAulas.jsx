@@ -23,10 +23,9 @@ import { useNavigate } from "react-router-dom"
 import { useContext, useState,useEffect } from 'react'
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 
-function CreateAulas ({APIoption}){
+function CreateAulas ({APIoption,circumstance}){
 
   const {oneStap,twoStep,threeStep,setThreeStep,SetAPImodel,APImodel} = useContext(PathStepsContext);
-  const circumstance = "student";
 
   const handlePermissionAPI = () => {
     SetAPImodel((prev) => ({
@@ -107,16 +106,16 @@ function CreateAulas ({APIoption}){
       if (verify(molde) == true){
           if (circumstance !== ("CreatePath") && circumstance !== ("EditModulo")){
             setThreeStep((prevState) => {
-              const newState = [...prevState]; // Copia o array              
-              newState[0] = molde; // Modifica o item pelo índice
+              const newState = [...prevState];     
+              newState[0] = molde;
               alert ("Aula adicionada com sucesso");
               return newState;
             })
           }
           else if (((indiceAtual.head + 1) >= 1)){
             setThreeStep((prevState) => {
-              const newState = [...prevState]; // Copia o array              
-              newState[indiceAtual.head] = molde; // Modifica o item pelo índice
+              const newState = [...prevState];
+              newState[indiceAtual.head] = molde;
               alert ("Aula adicionada com sucesso");
               return newState;
             })

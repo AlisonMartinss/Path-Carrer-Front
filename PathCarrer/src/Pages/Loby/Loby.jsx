@@ -34,17 +34,20 @@ function Loby () {
     const [leftElements,setModuleTest] = useState([
           {iconV: "FaFolderOpen",
           icon_style: "evenConstStyle",
-          handleClick:""
+          handleClick:"",
+          title:"Seus Paths"
           },
 
           {iconV: "CgProfile",
           icon_style: "evenConstStyle",
-          handleClick:""
+          handleClick:"",
+          title:"Perfil"
           },
 
           {iconV: "IoIosAddCircle",
           icon_style: "evenConstStyle",
-          handleClick:redirecToCreatePath
+          handleClick:redirecToCreatePath,
+          title:"Criar novo path"
           }
 
           

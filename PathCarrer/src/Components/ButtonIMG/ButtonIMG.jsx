@@ -21,7 +21,7 @@ import { FaTrash } from "react-icons/fa6";
 import { IoIosAddCircle } from "react-icons/io";
 
 
-function ButtonIMG ({iconV,icon_style,handleClick,IDValue}) {
+function ButtonIMG ({iconV,icon_style,handleClick,IDValue,title}) {
 
 
 const comp = {
@@ -40,7 +40,7 @@ const comp = {
     const classeBase =  styles[icon_style]
 
     return (
-        <div id={IDValue} onClick={handleClick} className={styles.button}>
+        <div title={title} id={IDValue} onClick={handleClick} className={styles.button}>
             < Componente className={`${classeBase}`}/>
         </div>
     )

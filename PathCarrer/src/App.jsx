@@ -29,7 +29,7 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
   
   */
 <Route path="/">
- <Route index element={<Loby/>}/>
+ <Route index element={<Login/>}/>
  <Route path="/Loby" element={<Loby/>}/>
  <Route path="/Class" element={<Class/>}/>
  <Route path="/ContentAcess" element={<ContentAcess/>}/>
@@ -52,7 +52,8 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
    <Route path="/Createmodulo" element = {
     /* Faz parte da etapa de criação do path */
    <PathStepsProvider>
-     <CreateModulo/>
+     <UpdateModulo
+     route={"CreateClass"}/>
    </PathStepsProvider>}/>
 
 
@@ -73,7 +74,9 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
    <Route path="/UpdateModulo/UpdateClass"  element = {
     /* Etapa onde att as aulas, faz parte do processo de att de modulo */
    <PathStepsProvider>
-     <CreateClassSelection option={"UpdateModulo"} />
+     <CreateClassSelection
+     option={"UpdateModulo"}
+     circumstance={"EditModulo"} />
    </PathStepsProvider>}/>
 
    {/* Rotas que envolvem atividades com Class */}
@@ -81,7 +84,10 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
    <Route path="/CreateClass"  element = {
     /* Criação de aulas. Faz parte da etapa de criação de Path */
    <PathStepsProvider>
-     <CreateClassSelection option={"PathCreate"} />
+     <CreateClassSelection
+     option={"PathCreate"}
+     circumstance={"CreatePath"}
+    />
    </PathStepsProvider>}/>
 
    <Route path="/UpdateClass"  element = {
@@ -99,7 +105,9 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
    <Route path="/UpdateNewClass"  element = {
     /* Adiciona uma unica aula.*/
    <PathStepsProvider>
-     <CreateClassSelection option={"UpdateClassUnic"} />
+     <CreateClassSelection 
+     option={"UpdateNewClass"}
+     circumstance={"other"} />
    </PathStepsProvider>}/>
 
 </Route>

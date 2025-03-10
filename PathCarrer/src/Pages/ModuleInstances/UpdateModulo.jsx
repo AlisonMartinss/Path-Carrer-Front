@@ -7,7 +7,8 @@ function UpdateModulo ({route}) {
     const routes = {
         /* Rotas, para onde vamos após clicar em 'enviar' ? (estando na step 2) */
         UpdateClass: "/UpdateClass",
-        UpdateModulo:"/UpdateModulo/UpdateClass"      
+        UpdateModulo:"/UpdateModulo/UpdateClass",
+        CreateClass:"/CreateClass"    
     };
 
     const redirec = () => {

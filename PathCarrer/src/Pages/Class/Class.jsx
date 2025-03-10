@@ -51,13 +51,14 @@ function Class (){
   }
 
   const ClassSelect = (index) => {
+    localStorage.setItem("ClassIndex",index)
     const ClassON = ContentJSON.modulos[moduleIndex]?.modulocontent?.[index];
     SetClassLinkON(ClassON.link);
     SetDescON(ClassON.description)
   }
 
   const SetEntityFunc = (data) => {
-    const author = data.IdAuthor;  
+    const author = data;  
     if (author === localStorage.getItem("UserName")){
       setEntity("author")
     }
@@ -77,6 +78,7 @@ function Class (){
               if (firstModuleContent) {
                   localStorage.setItem("Class_link", firstModuleContent.link);
                   localStorage.setItem("Class_Desc", firstModuleContent.description);
+                  localStorage.setItem("ClassIndex",0)
                   SetClassLinkON(firstModuleContent.link);
                   SetDescON(firstModuleContent.description);
               }
@@ -85,13 +87,17 @@ function Class (){
   },[ContentJSON]);
 
   useEffect(() => {
+    alert("Delegação de entity")
+
+
     if (ContentJSON && ContentJSON.IdAuthor) {
         console.log("Chamando SetEntity com:", ContentJSON.IdAuthor);
+        console.log(localStorage.getItem("UserName"))
         SetEntityFunc(ContentJSON.IdAuthor);
     } else {
         console.warn("IdAuthor ainda não disponível.");
     }
-}, [ContentJSON]);
+  }, [ContentJSON]);
 
   const redirectActivity = (e) => {
       if (e === "editar o modulo") {
@@ -102,7 +108,7 @@ function Class (){
           navigateEditClass("/UpdateClassUnic");
       } else if (e === "adicionar aula") {
           alert("Adicionar aula");
-          navigateAddClass("/AddClass");
+          navigateAddClass("/UpdateNewClass");
       }
   };
 

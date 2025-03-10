@@ -3,9 +3,9 @@ import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 import { useContext} from 'react'
 
-function CreateClassSelection  ({option}){
+function CreateClassSelection  ({option,circumstance}){
 
-  const {twoStep,threeStep} = useContext(PathStepsContext);
+  const {oneStap,twoStep,threeStep} = useContext(PathStepsContext);
     /* 
         Esse jsx é nescessario pois 'CreateAulas' é usada em varias etapas com
         chamdas para end-points diferentes, então ao usar o componente 'CreateAulas'
@@ -36,11 +36,17 @@ function CreateClassSelection  ({option}){
                     ClassList:threeStep
                 }
     
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                "Content-Type": "application/json",
+              },
             }
           )
           alert("Aulas cadastradas")
         }catch (err){
-          alert ("Erro")
+          alert ("Erro no Create Path")
           console.log(err)
         }
     }
@@ -66,8 +72,8 @@ function CreateClassSelection  ({option}){
       try {
         const response = await httpClient.put('CRUD/UpdateModule',
           {
-            id:"67c0cbf4d6744375fc3636a0", // OBTIDO ATRAVES DO LOCAL STORAGE
-            nameModulo:"modulo  - ATUALIZAR MODULO", // OBTIDO ATRAVES DO LOCAL STORAGE - TITULO DO MODULO QUE PRETENDO MUDAR
+            id:localStorage.getItem("PathID_on"), // OBTIDO ATRAVES DO LOCAL STORAGE
+            indexModule:localStorage.getItem("ModuleIndexON"), // OBTIDO ATRAVES DO LOCAL STORAGE
             title:twoStep.titleModule,
             desc:twoStep.descModule,
             ClassList:threeStep
@@ -84,7 +90,7 @@ function CreateClassSelection  ({option}){
       try {
         const response = await httpClient.put('CRUD/UpdateClassUnic',
           {
-            id:"67c0cbf4d6744375fc3636a0", // OBTIDO ATRAVES DO LOCAL STORAGE
+            id:localStorage.getItem("PathID_on"), // OBTIDO ATRAVES DO LOCAL STORAGE
             nameModulo:"modulo  - ATUALIZAR MODULO", // OBTIDO ATRAVES DO LOCAL STORAGE - TITULO DO MODULO QUE PRETENDO MUDAR
             placeClass:0, //OBTIDO ATRAVES DO LOCAL STORAGE
             threePath:
@@ -116,14 +122,50 @@ function CreateClassSelection  ({option}){
         console.log(err)
       }
     }
+
+    async function UpdateNewClass (e) {
+      e.preventDefault()
+      try {
+        const response = await httpClient.post('CRUD/UpadateNewClass',
+          {
+            id:localStorage.getItem("PathID_on"), // OBTIDO ATRAVES DO LOCAL STORAGE
+            indexModule:localStorage.getItem("ModuleIndexON"), // OBTIDO ATRAVES DO LOCAL STORAGE
+            threePath:
+            {
+                title:threeStep[0].title,
+                link:threeStep[0].link,
+                description:threeStep[0].description
+            }
+          }
+        )
+      }catch (err){
+        console.log(
+          JSON.stringify(
+            {
+              id:localStorage.getItem("PathID_on"), // OBTIDO ATRAVES DO LOCAL STORAGE
+              indexModule:localStorage.getItem("ModuleIndexON"), // OBTIDO ATRAVES DO LOCAL STORAGE
+              threePath:
+              {
+                  title:threeStep[0].title,
+                  link:threeStep[0].link,
+                  description:threeStep[0].description
+              }
+            }
+          )
+        )
+        alert ("Erro em adicionar aula")
+        console.log(err)
+      }
+    }
     const APIoptions = {
-      teste,PathCreate,UpadateNewModule,UpdateModulo,UpdateClassUnic
+      teste,PathCreate,UpadateNewModule,UpdateModulo,UpdateClassUnic,UpdateNewClass
     }
  
 
     return (
         <CreateAulas
          APIoption={APIoptions[option]}
+         circumstance={circumstance}
         />
     )
 }

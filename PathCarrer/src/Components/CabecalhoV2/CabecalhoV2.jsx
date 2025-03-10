@@ -5,7 +5,7 @@ import ButtonIMG from '../ButtonIMG/ButtonIMG'
 import SearchInput from '../SearchInput/SearchInput'
 
 
-function CabecalhoV2 ({leftElements=[],logoPath}){
+function CabecalhoV2 ({leftElements=[],logoPath,title}){
     return (
         <main className={style.main}>
             <div className={style.rigthArea}>
@@ -24,6 +24,7 @@ function CabecalhoV2 ({leftElements=[],logoPath}){
                             iconV={element.iconV}
                             icon_style={element.icon_style}
                             handleClick={element.handleClick}
+                            title={element.title}
                         />                  
                     </div>
                 ))}
