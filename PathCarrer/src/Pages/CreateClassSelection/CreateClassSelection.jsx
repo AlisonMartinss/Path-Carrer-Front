@@ -85,83 +85,87 @@ function CreateClassSelection  ({option,circumstance}){
         console.log(err)
       }
     }
-    async function UpdateClassUnic (e) {
-      e.preventDefault()
+    async function UpdateClassUnic(e) {
+      e.preventDefault();
+  
       try {
-        const response = await httpClient.put('CRUD/UpdateClassUnic',
-          {
-            id:localStorage.getItem("PathID_on"), // OBTIDO ATRAVES DO LOCAL STORAGE
-            nameModulo:"modulo  - ATUALIZAR MODULO", // OBTIDO ATRAVES DO LOCAL STORAGE - TITULO DO MODULO QUE PRETENDO MUDAR
-            placeClass:0, //OBTIDO ATRAVES DO LOCAL STORAGE
-            threePath:
-            {
-                title:threeStep[0].title,
-                link:threeStep[0].link,
-                description:threeStep[0].description
-            }
-          }
-        )
-        alert("Aula unica atualizada")
-        console.log
-        (JSON.stringify(
-          {
-            id:"67c0cbf4d6744375fc3636a0",
-            nameModulo:"modulo  - ATUALIZAR MODULO",
-            placeClass:0,
-            threePath:
-            {
-                title:threeStep[0].title,
-                link:threeStep[0].link,
-                description:threeStep[0].description
-            }
-          }
-         )
-        )
-      }catch (err){
-        alert ("Erro")
-        console.log(err)
+          // Faz a requisição PUT para atualizar a aula
+          const response = await httpClient.put(
+              'CRUD/UpdateClassUnic',
+              {
+                  id: localStorage.getItem("PathID_on"),
+                  indexModule: localStorage.getItem("ModuleIndexON"),
+                  indexClass: localStorage.getItem("indexClass"),
+                  threePath: {
+                      title: threeStep[0].title,
+                      link: threeStep[0].link,
+                      description: threeStep[0].description
+                  }
+              },
+              {
+                  headers: {
+                      Authorization: `Bearer ${localStorage.getItem("Token")}`, // Inclui o token de autenticação
+                      "Content-Type": "application/json" // Define o tipo de conteúdo
+                  }
+              }
+          );
+  
+          // Exibe mensagem de sucesso
+          alert("Aula única atualizada com sucesso!");
+  
+          // Log de depuração (opcional)
+          console.log("Resposta da API:", response.data);
+      } catch (err) {
+          // Exibe mensagem de erro
+          alert("Erro ao atualizar a aula. Verifique o console para mais detalhes.");
+  
+          // Log detalhado do erro
+          console.error("Erro completo:", err);
+          console.error("Resposta do servidor:", err.response?.data);
       }
     }
-
-    async function UpdateNewClass (e) {
-      e.preventDefault()
+    async function UpdateNewClass(e) {
+      e.preventDefault();
+  
       try {
-        const response = await httpClient.post('CRUD/UpadateNewClass',
-          {
-            id:localStorage.getItem("PathID_on"), // OBTIDO ATRAVES DO LOCAL STORAGE
-            indexModule:localStorage.getItem("ModuleIndexON"), // OBTIDO ATRAVES DO LOCAL STORAGE
-            threePath:
-            {
-                title:threeStep[0].title,
-                link:threeStep[0].link,
-                description:threeStep[0].description
-            }
-          }
-        )
-      }catch (err){
-        console.log(
-          JSON.stringify(
-            {
-              id:localStorage.getItem("PathID_on"), // OBTIDO ATRAVES DO LOCAL STORAGE
-              indexModule:localStorage.getItem("ModuleIndexON"), // OBTIDO ATRAVES DO LOCAL STORAGE
-              threePath:
+          // Faz a requisição POST para atualizar a aula
+          const response = await httpClient.post(
+              'CRUD/UpadateNewClass', // Endpoint corrigido
               {
-                  title:threeStep[0].title,
-                  link:threeStep[0].link,
-                  description:threeStep[0].description
+                  id: localStorage.getItem("PathID_on"),
+                  indexModule: localStorage.getItem("ModuleIndexON"),
+                  threePath: {
+                      title: threeStep[0].title,
+                      link: threeStep[0].link,
+                      description: threeStep[0].description
+                  }
+              },
+              {
+                  headers: {
+                      Authorization: `Bearer ${localStorage.getItem("Token")}`, // Inclui o token de autenticação
+                      "Content-Type": "application/json" // Define o tipo de conteúdo
+                  }
               }
-            }
-          )
-        )
-        alert ("Erro em adicionar aula")
-        console.log(err)
+          );
+  
+          // Exibe mensagem de sucesso
+          alert("Aula atualizada com sucesso!");
+  
+          // Log de depuração (opcional)
+          console.log("Resposta da API:", response.data);
+      } catch (err) {
+          // Exibe mensagem de erro
+          alert("Erro ao atualizar a aula. Verifique o console para mais detalhes.");
+  
+          // Log detalhado do erro
+          console.error("Erro completo:", err);
+          console.error("Resposta do servidor:", err.response?.data);
       }
     }
     const APIoptions = {
       teste,PathCreate,UpadateNewModule,UpdateModulo,UpdateClassUnic,UpdateNewClass
     }
  
-
     return (
         <CreateAulas
          APIoption={APIoptions[option]}

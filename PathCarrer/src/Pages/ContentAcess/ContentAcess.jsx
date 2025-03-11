@@ -29,7 +29,7 @@ function ContentAcess (){
   const navigateIntoModulo = useNavigate(); 
 
     
-    const [classe,SetClasse] = useState(); // Determinamos aqui qual a relação entre user x path
+    const [classe,SetClasse] = useState("author"); // Determinamos aqui qual a relação entre user x path
     const [LobyInfo,SetLobyInfo] = useState(); // Local onde as inforamções do usuario em relação ao seu Loby será armazenada
     const [isClicked, setIsClicked] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -65,6 +65,7 @@ function ContentAcess (){
       localStorage.setItem("ModuleIndexON",index)
       navigateIntoModulo('/class')
     }
+    
     const [buttons] = useState(  // Botoes a serem renderizados.
       {
         author:

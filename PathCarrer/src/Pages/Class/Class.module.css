@@ -109,12 +109,12 @@
     align-items: center;
 
     width: 5vw;
-    height: 20vh;
+    height: 30vh;
 
     left: 2%;
     top: 8.5%;
 
-    gap: 5%;
+    gap: 2%;
 }
 
 .edit{
@@ -122,10 +122,16 @@
     justify-content: center;
     align-items: center;
 
-    width: 2.30vw;
-    border-radius: 2.5vw;
+    width: 2vw;
+    border-radius: 2vw;
 
     background-color: #051b67;
+    transition: 0.5s;
+}
+
+.edit:hover{
+    background-color:#6e8aed;
+    transition: 0.5s;
 }
 
 .edit::before {

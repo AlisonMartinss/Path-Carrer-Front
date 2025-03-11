@@ -68,16 +68,12 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
     /* Atualiza modulo pre existente. OBS: Subistitui TODAS as aulas */
    <PathStepsProvider>
      <UpdateModulo
-     route={"UpdateModulo"}/>
+      route={"UpdateModulo"}
+      APIroute={"UpdateModule"}
+     />
    </PathStepsProvider>}/>
 
-   <Route path="/UpdateModulo/UpdateClass"  element = {
-    /* Etapa onde att as aulas, faz parte do processo de att de modulo */
-   <PathStepsProvider>
-     <CreateClassSelection
-     option={"UpdateModulo"}
-     circumstance={"EditModulo"} />
-   </PathStepsProvider>}/>
+   
 
    {/* Rotas que envolvem atividades com Class */}
 
@@ -90,6 +86,14 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
     />
    </PathStepsProvider>}/>
 
+   <Route path="/UpdateModulo/UpdateClass"  element = {
+    /* Etapa onde att as aulas, faz parte do processo de att de modulo */
+   <PathStepsProvider>
+     <CreateClassSelection
+     option={"UpdateModulo"}
+     circumstance={"EditModulo"} />
+   </PathStepsProvider>}/>
+
    <Route path="/UpdateClass"  element = {
     /* Att aulas (todas as aulas) em modulo já existentes. Faz parte do processo de adicionar novo modulo */
    <PathStepsProvider>
@@ -99,7 +103,9 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
    <Route path="/UpdateClassUnic"  element = {
     /* Att uma unica aula. Aula já existente */
    <PathStepsProvider>
-     <CreateClassSelection option={"UpdateClassUnic"} />
+     <CreateClassSelection
+     option={"UpdateClassUnic"}
+     circumstance={"Other"} />
    </PathStepsProvider>}/>
 
    <Route path="/UpdateNewClass"  element = {

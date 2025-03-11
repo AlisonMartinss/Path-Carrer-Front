@@ -5,14 +5,10 @@ import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
 import Button from '../../Components/Button/Button'
 
-
-import { PathContext } from '../../Provider/Provider'
-import {useState,useEffect, useContext} from 'react'
-import { useNavigate } from "react-router-dom"
+import {useEffect, useContext} from 'react'
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 
-function CreateModulo ({redirec}) {
-    const navigate = useNavigate();
+function CreateModulo ({redirec,APIroute}) {
     const {twoStep,setTwoStep,SetAPImodel} = useContext(PathStepsContext);
 
 
@@ -35,7 +31,9 @@ function CreateModulo ({redirec}) {
     };
 
     const nextpage = () => {
-      redirec();
+      if (APIroute !== null){
+        APIroute();}
+      else {redirec();}
     }
 
 

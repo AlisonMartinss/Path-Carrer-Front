@@ -19,7 +19,7 @@ import { TbPencilCog } from "react-icons/tb";
 import { RxPencil2 } from "react-icons/rx";
 import { FaTrash } from "react-icons/fa6";
 import { IoIosAddCircle } from "react-icons/io";
-
+import { HiOutlineTrash } from "react-icons/hi2";
 
 function ButtonIMG ({iconV,icon_style,handleClick,IDValue,title}) {
 
@@ -31,7 +31,7 @@ const comp = {
     AiFillDislike,RxHamburgerMenu,
     CgProfile,FaFolderOpen,
     MdBookmarkAdd,FaHouseChimneyWindow,
-    TbPencilCog,RxPencil2,FaTrash,IoIosAddCircle
+    TbPencilCog,RxPencil2,FaTrash,IoIosAddCircle,HiOutlineTrash
 }
 
 /* =-=-=-=-= Functions =-=-=-=-= */
