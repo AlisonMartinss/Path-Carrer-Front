@@ -9,31 +9,56 @@ import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG';
 import WindowNote from '../../Components/WindowNote/WindowNote';
 
 
-/* IMAGENS */
+/* Recursos */
 
 import { AiOutlineComment } from "react-icons/ai";
 import { GiBookCover } from "react-icons/gi";
 import {useNavigate } from "react-router-dom"
 import {useState,useEffect} from 'react'
 import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
-
-import { RecuperandoLoby, EntityDef } from '../ContentAcess/ContentAcessAux.js';
+import { AddPath,RemovePath} from '../ContentAcess/ContentAcessAux.js';
 
 
 function ContentAcess (){
   /* 
     - Será usado quando capturarmos o id do botao
   */
-  const navigateEditPath = useNavigate(); 
-  const navigateAddModule = useNavigate();
-  const navigateIntoModulo = useNavigate(); 
 
+    const navigate = useNavigate();
     
-    const [classe,SetClasse] = useState("author"); // Determinamos aqui qual a relação entre user x path
+    const [Entity,SetEntity] = useState(null); // Determinamos aqui qual a relação entre user x path
     const [LobyInfo,SetLobyInfo] = useState(); // Local onde as inforamções do usuario em relação ao seu Loby será armazenada
     const [isClicked, setIsClicked] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [ContentJSON,setContentJSON] = useState({}); // Conteudo da Resposta da chamada da API. Conteudo do Path
+    const [buttons] = useState(  // Botoes a serem renderizados.
+      {
+        author:
+        [
+          {
+            id:"Adicionar modulo",
+            iconV:"IoIosAddCircle",
+            title:"Adicionar modulo"
+          },
+          {
+            id:"Editar Path",
+            iconV:"TbPencilCog",
+            title:"Editar Path"
+          }
+          
+        ],
+        student:
+        [
+          {
+            id:"Student-on-remove",
+            iconV:"HiOutlineTrash"
+          },
+          {
+            id:"Student-off-add",
+            iconV:"MdBookmarkAdd"
+          }
+        ]
+    })
 
     /* Chamada API - Obter informações sobre o Path 
       - O formato de respota esperado pela API pode ser visto no arquivo
@@ -60,49 +85,67 @@ function ContentAcess (){
       }
     }
 
+    async function LobyGet () {
+      setIsLoading(true); // Indica que a requisição está em andamento
+      try {
+        const response = await httpClient.post('User/Getloby',
+          {
+            userName:localStorage.getItem("UserName")
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("Token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        const JSONdata = response.data;
+        localStorage.setItem("LobyInfo",JSON.stringify(JSONdata));
+      }catch (err){
+        alert ("Erro da chamada")
+        console.log(err)
+      }
+      finally {
+        setIsLoading(false); // Sempre será chamado, finalizando o carregamento
+      }
+    }
+
     const ToIntoModulo = (e,index) => {
       e.preventDefault();
       localStorage.setItem("ModuleIndexON",index)
-      navigateIntoModulo('/class')
+      navigate('/class')
     }
     
-    const [buttons] = useState(  // Botoes a serem renderizados.
-      {
-        author:
-        [
-          {
-            id:"Adicionar modulo",
-            iconV:"IoIosAddCircle",
-            title:"Adicionar modulo"
-          },
-          {
-            id:"Editar Path",
-            iconV:"TbPencilCog",
-            title:"Editar Path"
-          }
-          
-        ],
-        student:
-        [
-          {
-            id:"Student-on-remove",
-            iconV:"FaTrash"
-          },
-          {
-            id:"Student-off-add",
-            iconV:"MdBookmarkAdd"
-          }
-        ]
-      })
+    const SetEntityFunc = (data,lobyData) => {
+        const author = data; // Nome do autor
+        const Loby = lobyData.myPaths;
+        if (author === localStorage.getItem("UserName")){
+          alert("O caba")
+          SetEntity("author")
+        }
+        else {
+            const isStudentOn = Loby.some((element) => {
+              return element.pathID === localStorage.getItem("PathID_on");
+            });
+        
+            if (isStudentOn) {
+                alert("Estudante ativo");
+                SetEntity("studentOn");
+            } else {
+                alert("Novato");
+                SetEntity("studentOff");
+            }
+        }
+    };  
 
     const ButtonAction = (e) => {
     // Nessa função determinamos a ação do Usuario e do autor, que são: Adicionar,
     // excluir Path e Adicionar modulos, editar path
-      if (classe === "author"){
+      if (Entity === "author"){
         alert("API do autor")
         if (e === "Adicionar modulo"){
           alert("Adicionar modulo")
-          navigateAddModule('')
+          navigate('')
         }
         else if (e === "Adicionar path"){
           alert("Adicionar path")
@@ -111,36 +154,35 @@ function ContentAcess (){
           alert("Ação n indentificada")
         }
       }
-      else if (classe === "studentOff"){
+      else if (Entity === "studentOff"){
         alert("API do Estudante off")
         if (e === "Student-off-add"){
-          alert("Student-off-add")
+          AddPath();
         }
       }
-      else if (classe === "studentOn") {
+      else if (Entity === "studentOn") {
         alert("API do Estudante on")
         if (e === "Student-on-remove"){
-          alert("Student-on-remove")
+          RemovePath();
         }
         
       }
     }
- 
+
     const handleClick = () => {
         setIsClicked((prev) => (!prev))
     };
 
     useEffect(() => { //Chamada inicial para para o carregamento da pagina
-      GetContent(); // Chamada inical para obter informações do Path
+      GetContent();// Chamada inical para obter informações do Path
+      LobyGet();
+      
     }, []);
 
 
-
-
     useEffect(() => {
-      if (!isLoading && ContentJSON) {
-        console.log(ContentJSON.adjectives);
-      }
+      const MyPathList = JSON.parse(localStorage.getItem("LobyInfo"));
+      SetEntityFunc(ContentJSON.IdAuthor,MyPathList);
     }, [ContentJSON, isLoading]);
 
     return (
@@ -186,10 +228,10 @@ function ContentAcess (){
 
                       <div className={styles.buttonAdd}>
                         {
-                          classe === "studentOff" ? (
+                          Entity === "studentOff" ? (
                             <div className={styles.authorAux}>
                                {buttons.student.slice(1,2).map((element) =>
-                                <div title="Adicionar modulo" className={styles.LitleIcone}>
+                                <div title="Adicionar Path" className={styles.LitleIcone}>
                                   <ButtonIMG
                                   iconV={element.iconV} 
                                   icon_style={"evenConstStyle"}                  
@@ -199,10 +241,10 @@ function ContentAcess (){
                               )}
                             </div>
                             
-                          ): classe === "studentOn" ? (
+                          ): Entity === "studentOn" ? (
                               <div className={styles.authorAux}>
                                 {buttons.student.slice(0,1).map((element) =>
-                                  <div title="Remover modulo" className={styles.LitleIcone}>
+                                  <div title="Remover Path" className={styles.LitleIcone}>
                                     <ButtonIMG
                                     iconV={element.iconV} 
                                     icon_style={"evenConstStyle"}                  
@@ -212,7 +254,7 @@ function ContentAcess (){
                                 )}
                               </div>
                               
-                          ): classe === "author" ? (
+                          ): Entity === "author" ? (
                             <div className={styles.authorAux}>
                               {buttons.author.map((element) =>
                                 <div title={element.title} className={styles.LitleIcone}>
