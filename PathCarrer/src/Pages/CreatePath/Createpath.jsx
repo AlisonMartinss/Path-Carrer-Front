@@ -14,11 +14,40 @@ import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 function CreatePath ({PreSend}) {
 
    /*
-      Componente para tomada de inputs para criação de paths.
-        - PreSend: Ação tomada por ultimo ao clicar em 'enviar'.
-        - As informações obtidas nessa pagina pode ser acessadas pelo context API.
+      Estados:
+
+       - adjectivesList: Lista de adjetivos a escolher.
+       - inputxt: Armazena a tag digitada.
+       - tags: Lista de tags.
+       - category: Lista de categorias a escolher.
+       - adjectives: Lista de adjetivos a escolher.
+
+      Funções: 
+      
+       - handlePermissionAPI: Serve para atualizar determinado campo do context API com as informações
+         aqui obtidas, as informações atuais estão sendo colocadas no campo 'oneStap'
+         e sendo redirecionadas para o modelo contido no context API.
+
+       - setInfo: Para os campos de input que contem um input de somente uma informação
+         como por exemplo input de titulo. Nos baseamos na propriedade 'name' da
+         tag HTML para saber qual campo no Context API devemos preencher.
+
+       - handleAdjective: Adiciona um novo adjetivo e Garante a atualização 
+         circular do array.
+         
+       - AddTag: idem.
+
+       - deleteElementTags: idem.
+
+       - intheend: Ao final ao clicar em enviar:
+         (a) Adicionamos a lista 'tags' que está presente no context API 
+             a lista de tags local.
+             
+         (b) Adicionamos a lista 'adjectives' que está presente no context API 
+             a lista de adjectives local.  
    */
    const {oneStap, SetOneStap,SetAPImodel} = useContext(PathStepsContext);
+
    const [adjectivesList,setAdjectivesList] = useState([]);
    const [inputxt, setinputxt] = useState("");
    const [tags,setTags] = useState([]);
@@ -140,8 +169,6 @@ function CreatePath ({PreSend}) {
         [name]: value,
       }));
    };
-
-  
 
    const handleAdjective = (e, index) => {
       /*
