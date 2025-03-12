@@ -8,6 +8,7 @@ export const PathStepsProvider = ({children}) => {
         title:"",
         category:"",
         descPathOver:"",
+        banner:"",
         tags:[],
         adjectives:[]
     })

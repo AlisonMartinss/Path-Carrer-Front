@@ -3,6 +3,8 @@
 }
 
 .main{
+    position: relative;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,6 +18,17 @@
 .header{
     width: 100vw;
     height: 10vh;
+}
+
+.PathPrev{
+    position: absolute;
+
+    right: 3%;
+    
+    width: 20vw;
+    height: 60vh;
+
+    border-radius: 1vw;
 }
 
 .core{
@@ -82,7 +95,7 @@
     height: 80%;
 
     padding-top: 1%;
-    margin-top: -15%;
+    margin-top: 0.5%;
 }
 
 .inputC{
@@ -432,7 +445,7 @@
 
     font-family: "Urbanist", serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     font-size: clamp(0.4em, 1vw, 5em);
     color: #ffffff
 }
@@ -440,7 +453,7 @@
 .strong{
     font-family: "Urbanist", serif;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     font-size: clamp(0.4em, 1vw, 5em);
     color: #ffffff;
 

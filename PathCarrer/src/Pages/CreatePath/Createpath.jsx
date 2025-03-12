@@ -9,7 +9,9 @@ import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
 import {useState,useEffect, useContext} from 'react'
 
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
+
 import TXTinputM from '../../Components/TXTinputM/TXTinputM'
+import Conteudo from '../../Components/Conteudo/Conteudo'
 
 function CreatePath ({PreSend}) {
 
@@ -49,6 +51,7 @@ function CreatePath ({PreSend}) {
    const {oneStap, SetOneStap,SetAPImodel} = useContext(PathStepsContext);
 
    const [adjectivesList,setAdjectivesList] = useState([]);
+   const [adjectiveAux,setAdjectiveAux] = useState([]); // Ajuda na previa de renderização do path
    const [inputxt, setinputxt] = useState("");
    const [tags,setTags] = useState([]);
    
@@ -176,9 +179,16 @@ function CreatePath ({PreSend}) {
         circular do array.
       */
       const { value } = e.target;
+      const object = {name:value};
+
+      setAdjectiveAux((prev) => {
+         const newList = [...prev]; // Copia da antiga 
+         newList[index] = object;
+         return newList;
+      });
   
       setAdjectivesList((prev) => {
-          const newList = [...prev];
+          const newList = [...prev]; // Copia da antiga 
           newList[index] = value;
           return newList;
       });
@@ -244,6 +254,16 @@ function CreatePath ({PreSend}) {
             <CabecalhoPadrao/>
          </header>
 
+         <div className={styles.PathPrev}>
+            <Conteudo
+               img={oneStap.banner}
+               adjectives={adjectiveAux}
+               PathName={oneStap.title}
+               Category={oneStap.category}
+               onClick={(e) => alert("Esta é uma previa de como será apresentado o seu Path para outros usuarios")}
+            />
+         </div>
+
          <form className={styles.form}>
 
             <div className={styles.input_NameCategoryAdjective}>
@@ -278,6 +298,17 @@ function CreatePath ({PreSend}) {
                      name={"adjectives"}/>
                   </div>
                ))}
+              </div>
+
+              <div className={`${styles.txtover} ${styles.CallToAction}`}>
+                Escolha uma imagem que irá compor a <strong className={styles.strong}> capa do seu path </strong> 
+              </div>
+
+              <div className={styles.title_input}>
+                 <TXTinputP
+                 placeholder={"Cole aqui o link da imagem"}
+                 name={"banner"}
+                 onChange={setInfo}/>
               </div>
             </div>
 
