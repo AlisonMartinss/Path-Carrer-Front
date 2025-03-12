@@ -93,7 +93,7 @@ function Explorer (){
                   pathExplore.map((element) => (
                      <div className={styles.contentArea}>
                         <Conteudo
-                           img={element.img}
+                           img={element.banner}
                            adjectives={element.adjectivesElements}
                            PathName={element.title}
                            Category={element.category}

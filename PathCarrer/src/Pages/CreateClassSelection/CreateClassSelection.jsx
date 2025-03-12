@@ -25,6 +25,7 @@ function CreateClassSelection  ({option,circumstance}){
                   title:oneStap.title,
                   category:oneStap.category,
                   descPathOver:oneStap.descPathOver,
+                  banner:oneStap.banner,
                   tags:oneStap.tags,
                   adjetives:oneStap.adjectives
                 },

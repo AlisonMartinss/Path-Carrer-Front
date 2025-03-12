@@ -22,6 +22,15 @@ function UpdateModulo ({route,APIroute}) {
         navigate(routes[route]);
     };
 
+    const APIrouteFunc = () => {
+        if (APIroute !== null){
+           return APIoptions[APIroute]  
+        }
+        else {
+            return null
+        }
+    }
+
     async function UpdateModule(e) {
         if (e) {
             e.preventDefault(); // Previne o comportamento padrão do evento, se o parâmetro 'e' estiver presente
@@ -66,7 +75,7 @@ function UpdateModulo ({route,APIroute}) {
     return (
         <CreateModulo
          redirec={(e) => redirec(e)}
-         APIroute={APIoptions[APIroute]}
+         APIroute={APIrouteFunc()}
         />
     )
 }
