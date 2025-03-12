@@ -1,3 +1,10 @@
+/* Temporario */
+
+.color{
+    background-color: #51D27C;
+}
+
+
 .main{
     display: flex;
     flex-direction: column;
@@ -15,7 +22,7 @@
 }
 
 .main:hover{
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 .thumbMail{

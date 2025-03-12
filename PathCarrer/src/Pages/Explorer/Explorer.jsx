@@ -1,14 +1,20 @@
 import styles from '../Explorer/Explorer.module.css'
 
-import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
+
+import { useEffect, useState } from 'react'
+import { IoFlameSharp } from "react-icons/io5";
+
+import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2';
 import Conteudo from '../../Components/Conteudo/Conteudo'
 
-import { useState } from 'react'
-import { IoFlameSharp } from "react-icons/io5";
-import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2';
+import { Explore, CategoryExplorer } from './ExplorerAux';
+import { useNavigate } from 'react-router';
 
 function Explorer (){
-   const [onFire,SetonFire] = useState(["Tecnologia Longo","IA","Marketing","Tigrinho","Financias","Enem","CriptoMoedas","Estatistica","Empreendedorismo","Ingles"])
+
+   const navigate = useNavigate();    
+   const [onFire,SetonFire] = useState(["Tecnologia Longo","IA","Marketing","Tigrinho","Outro","Financias","Enem","CriptoMoedas","Estatistica","Empreendedorismo","Ingles"])
+   const [pathExplore,SetPathExplore] = useState(null);
    const [leftElements,SetleftElements] = useState([
       {
          iconV:"FaHouseChimneyWindow",
@@ -17,300 +23,49 @@ function Explorer (){
       }
    ])
 
+   const ClickonPath = (e) =>{
+      localStorage.setItem("PathID_on",e);
+      navigate('/ContentAcess')   
+   }
 
-   const [pathExplore,SetPathExplore] = useState([
-      {
-         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
-         adjectives:[
-         {
-            name:"Direto Ao ponto",
-            color: "colorAdjectiveGood"
-         },
+   const ClickCategory = (e) => {
+      const fetchData = async () => {
+      try{
+         const contentPath = await CategoryExplorer(e);
+         console.log("API Response:", contentPath); // Verifica os dados no console
+         if (Array.isArray(contentPath)) {
+            SetPathExplore(contentPath); // Só define se for um array
+         } else {
+            SetPathExplore([]); // Evita erro se a API retornar um valor inválido
+         }   
+       }
+      catch (error) {
+         console.error("Erro ao buscar Category Explorer:", error);
+         SetPathExplore([]); // Em caso de erro, evita erro de `.map()`
+       }
+      }
+      fetchData();
+   }
 
-         {
-            name:"Aprofundamento",
-            color: "colorAdjectiveGood"
-         },
 
-         {
-            name:"Interativa",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Criativa",
-            color: "colorAdjectiveNeah"
-         },
-         {
-            name:"Adaptavel",
-            color: "colorAdjectiveBad"
-         }],
-         PathName: "Aprofundando no Java",
-         Category: "Tecnologia"
-      },
-      {
-         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
-         adjectives:[
-         {
-            name:"Direto Ao ponto",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Aprofundamento",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Interativa",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Criativa",
-            color: "colorAdjectiveNeah"
-         },
-         {
-            name:"Adaptavel",
-            color: "colorAdjectiveBad"
-         }],
-         PathName: "Aprofundando no Java",
-         Category: "Tecnologia"
-      },
-      {
-         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
-         adjectives:[
-         {
-            name:"Direto Ao ponto",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Aprofundamento",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Interativa",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Criativa",
-            color: "colorAdjectiveNeah"
-         },
-         {
-            name:"Adaptavel",
-            color: "colorAdjectiveBad"
-         }],
-         PathName: "Aprofundando no Java",
-         Category: "Tecnologia"
-      },
-      {
-         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
-         adjectives:[
-         {
-            name:"Direto Ao ponto",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Aprofundamento",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Interativa",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Criativa",
-            color: "colorAdjectiveNeah"
-         },
-         {
-            name:"Adaptavel",
-            color: "colorAdjectiveBad"
-         }],
-         PathName: "Aprofundando no Java",
-         Category: "Tecnologia"
-      },
-      {
-         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
-         adjectives:[
-         {
-            name:"Direto Ao ponto",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Aprofundamento",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Interativa",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Criativa",
-            color: "colorAdjectiveNeah"
-         },
-         {
-            name:"Adaptavel",
-            color: "colorAdjectiveBad"
-         }],
-         PathName: "Aprofundando no Java",
-         Category: "Tecnologia"
-      },
-      {
-         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
-         adjectives:[
-         {
-            name:"Direto Ao ponto",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Aprofundamento",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Interativa",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Criativa",
-            color: "colorAdjectiveNeah"
-         },
-         {
-            name:"Adaptavel",
-            color: "colorAdjectiveBad"
-         }],
-         PathName: "Aprofundando no Java",
-         Category: "Tecnologia"
-      },
-      {
-         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
-         adjectives:[
-         {
-            name:"Direto Ao ponto",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Aprofundamento",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Interativa",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Criativa",
-            color: "colorAdjectiveNeah"
-         },
-         {
-            name:"Adaptavel",
-            color: "colorAdjectiveBad"
-         }],
-         PathName: "Aprofundando no Java",
-         Category: "Tecnologia"
-      },
-      {
-         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
-         adjectives:[
-         {
-            name:"Direto Ao ponto",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Aprofundamento",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Interativa",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Criativa",
-            color: "colorAdjectiveNeah"
-         },
-         {
-            name:"Adaptavel",
-            color: "colorAdjectiveBad"
-         }],
-         PathName: "Aprofundando no Java",
-         Category: "Tecnologia"
-      },
-      {
-         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
-         adjectives:[
-         {
-            name:"Direto Ao ponto",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Aprofundamento",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Interativa",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Criativa",
-            color: "colorAdjectiveNeah"
-         },
-         {
-            name:"Adaptavel",
-            color: "colorAdjectiveBad"
-         }],
-         PathName: "Aprofundando no Java",
-         Category: "Tecnologia"
-      },
-      {
-         img:"https://i.pinimg.com/736x/e1/8c/ee/e18ceea602708d05d3088cadcb4bacbe.jpg",
-         adjectives:[
-         {
-            name:"Direto Ao ponto",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Aprofundamento",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Interativa",
-            color: "colorAdjectiveGood"
-         },
-
-         {
-            name:"Criativa",
-            color: "colorAdjectiveNeah"
-         },
-         {
-            name:"Adaptavel",
-            color: "colorAdjectiveBad"
-         }],
-         PathName: "Aprofundando no Java",
-         Category: "Tecnologia"
-      },
+      useEffect(() => {
+         const fetchData = async () => {
+            try {
+               const contentPath = await Explore(); // Aguarda a Promise ser resolvida
+               console.log("API Response:", contentPath); // Verifica os dados no console
+               if (Array.isArray(contentPath)) {
+                  SetPathExplore(contentPath); // Só define se for um array
+               } else {
+                  SetPathExplore([]); // Evita erro se a API retornar um valor inválido
+               }
+            } catch (error) {
+               console.error("Erro ao buscar explorer:", error);
+               SetPathExplore([]); // Em caso de erro, evita erro de `.map()`
+            }
+         };
       
-   ])
+         fetchData(); // Chama a função assíncrona dentro do useEffect
+      }, []);
     return (
         <main className={styles.main}>
             <header className={styles.header}>
@@ -319,32 +74,14 @@ function Explorer (){
             <div className={styles.core}>
 
                <div className={styles.sideBar}>
-
-                  <div className={styles.onFire}>
-
-                     <div className={`${styles.onFire_tite} ${styles.txt1}`}>
-                        <div className={styles.onFire_title_main}>
-                           Tá todo mundo vendo
-                        </div>
-                        <div className={styles.onFire_icon}>
-                           <IoFlameSharp
-                           className={styles.icon}/>
-                        </div>
-                     </div>
-
-                     <div className={styles.onFire_main}>
-                        {onFire.map((element) => (
-                           <div className={`${styles.onFireElement} ${styles.txt3}`}>{element}</div>
-                        ))}
-
-                     </div>
-                  </div>
-
+                  
                   <div className={styles.categorys}>
                      <div className={`${styles.categorysTitle} ${styles.txt1}`}>Pesquise por Categoria</div>
                      <div className={`${styles.categorysElements} ${styles.txt3}`}>
                         {onFire.map((element) => (
-                           <div className={styles.CategoryElementMain}>{element}</div>
+                           <div className={styles.CategoryElementMain} onClick={(e) => ClickCategory(element)}>
+                              {element}
+                           </div>
                         ))}
                      </div>
                   </div>
@@ -352,17 +89,20 @@ function Explorer (){
                </div>
 
                <div className={styles.mainContent}>                 
-                     {pathExplore.map((element) => (
-                        <div className={styles.contentArea}>
-                           <Conteudo
+               {Array.isArray(pathExplore) && pathExplore.length > 0 ? (
+                  pathExplore.map((element) => (
+                     <div className={styles.contentArea}>
+                        <Conteudo
                            img={element.img}
-                           adjectives={element.adjectives}
-                           PathName={element.PathName}
-                           Category={element.Category}
-                           onClick={(e) => alert("Teste")}
-                           />
-                        </div>
-                     ))}
+                           adjectives={element.adjectivesElements}
+                           PathName={element.title}
+                           Category={element.category}
+                           onClick={(e) => ClickonPath(element.id)}
+                        />
+                     </div>
+                  ))) : (
+                  <div>Não há Paths para exibir.</div>
+               )}
                </div>
               
             </div>

@@ -1,9 +1,10 @@
 import styles from '../Conteudo/Conteudo.module.css'
 import ButtonIMG from '../ButtonIMG/ButtonIMG'
 
+// Fazer ajuste em element color
 
 
-function Conteudo ({img,adjectives=[],PathName,Category,onClick}){
+function Conteudo ({img,adjectives,PathName,Category,onClick}){
     return (
         <div onClick={onClick} className={styles.main}>
             <div className={styles.thumbMail}>
@@ -18,14 +19,14 @@ function Conteudo ({img,adjectives=[],PathName,Category,onClick}){
                         <div className={styles.adjectiveLines}>
                             <div className={`${styles.ajdLine} ${styles.txt3}`}>
                                 {adjectives.slice(0,3).map((element) => (
-                                    <div className={`${styles.adjective} ${styles[element.color]}`}>
+                                    <div className={`${styles.adjective} ${styles.color}`}>
                                         {element.name}
                                     </div>
                                 ))}
                             </div>
                             <div className={`${styles.ajdLine} ${styles.txt3}`}>
                                 {adjectives.slice(3,5).map((element) => (
-                                    <div className={`${styles.adjective} ${styles[element.color]}`}>
+                                    <div className={`${styles.adjective} ${styles.color}`}>
                                         {element.name}
                                     </div>
                                 ))}
