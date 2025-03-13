@@ -31,7 +31,7 @@ const comp = {
     AiFillDislike,RxHamburgerMenu,
     CgProfile,FaFolderOpen,
     MdBookmarkAdd,FaHouseChimneyWindow,
-    TbPencilCog,RxPencil2,FaTrash,IoIosAddCircle,HiOutlineTrash
+    TbPencilCog,RxPencil2,FaTrash,IoIosAddCircle,HiOutlineTrash,
 }
 
 /* =-=-=-=-= Functions =-=-=-=-= */

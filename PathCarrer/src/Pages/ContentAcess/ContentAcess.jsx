@@ -196,6 +196,8 @@ function ContentAcess (){
                   handleClick={handleClick}
                   description={ContentJSON.description}
                   AuthorName={ContentJSON.IdAuthor}
+                  imgPerfil={ContentJSON.PictureProfile}
+                  imgBanner={ContentJSON.BannerProfile}
                   adjectivesList={ContentJSON.adjectives}/>                   
              </div>
 

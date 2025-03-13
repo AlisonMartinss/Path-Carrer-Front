@@ -22,6 +22,7 @@ import CreateClassSelection from './Pages/CreateClassSelection/CreateClassSelect
 import UpdateModulo from './Pages/ModuleInstances/UpdateModulo'
 import Login from './Pages/Login/Login'
 import ContentAcess from './Pages/ContentAcess/ContentAcess'
+import ViewProfile from './Pages/Viewprofile/ViewProfile'
 
 const browserRouter = createBrowserRouter(createRoutesFromElements(
   /*
@@ -35,6 +36,7 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
  <Route path="/ContentAcess" element={<ContentAcess/>}/>
  <Route path="/Explorer" element={<Explorer/>}/>
  <Route path="/Login" element={<Login/>}/>
+ <Route path="/ViewProfile" element={<ViewProfile/>}/>
 
    <Route path="/createpath" element = {
    <PathStepsProvider>

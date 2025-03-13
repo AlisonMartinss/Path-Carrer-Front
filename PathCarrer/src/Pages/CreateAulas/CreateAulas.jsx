@@ -99,7 +99,7 @@ function CreateAulas ({APIoption,circumstance}){
       ...prevState,
       [name]: value
     }));
-};
+  };
    
   const setElementClass = () => {
       
