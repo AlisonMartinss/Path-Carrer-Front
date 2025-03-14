@@ -23,19 +23,81 @@
 }
 
 .sideBar{
-    width: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 17vw;
     height: 90vh;
 
-    background-color: #9A9FAF;
+    gap: 2%;
+}
+
+.pseudoSideBar{
+    position: relative; /* Garante um contexto de empilhamento */
+    overflow: visible; /* Permite que elementos filhos ultrapassem */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 1%;
+
+    width: 17vw;
+    height: 90vh;
+
+    background-color: #9a9faf;
+
+    z-index: 1;
+}
+
+.operacao{
+    position: absolute;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 95%;
+    height: 6%;
+
+    padding-left: 5%;
+
+    border-radius: 0.5vw;
+    border: solid #ffffff 0.15vw;
+
+    background-color: #ffff ;
+    z-index: 1;
+
+    gap: 3%;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.operacao:hover{
+    transform: translate(0.8vw, -0.5vh);
+    background-color: #18287f;
+    border: solid #ffffff 0.15vw;
+    color: #ffff;
+    z-index: 2; /* Eleva acima dos outros elementos */
+    
+}
+
+.pos1{
+    top: 33%;
+}
+
+.pos2{
+    top: 40%;
 }
 
 .profile{
     display: flex;
     justify-content: center;
     align-items: flex-start;
-
-    overflow-y: scroll;
-    flex-wrap: wrap;
 
     gap: 3%;
 
@@ -45,15 +107,33 @@
     background-color: #BDBEC2;
 }
 
-.profile::-webkit-scrollbar {
+.ProfileEdit{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    overflow-y: scroll;
+    flex-wrap: wrap;
+
+    gap: 3%;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #BDBEC2;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.ProfileEdit::-webkit-scrollbar {
     width: 0.8vw; /* Largura da barra */
 }
 
-.profile::-webkit-scrollbar-track {
+.ProfileEdit::-webkit-scrollbar-track {
     background: #9A9FAF; /* Cinza claro */
 }
 
-.profile::-webkit-scrollbar-thumb {
+.ProfileEdit::-webkit-scrollbar-thumb {
     background: #69718E; /* Azul */
 }
 
@@ -182,6 +262,103 @@
     margin-bottom: 5%;
 }
 
+.sensive{
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 5%;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #BDBEC2;
+    transition: all 0.3s ease-in-out;
+}
+
+.noticeBoard{
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 28%;
+    height: 6.5%;
+
+    border-radius: 0.4vw;
+
+    background-color: #ffffff;
+}
+
+.newPassword{
+    top: 8%;
+    left: 20%;
+}
+
+.deleteProfile{
+    top: 54%;
+    left: 20%;
+
+    gap: 2%;
+}
+
+.passworldArea{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 70%;
+    height: 35%;
+
+    gap: 3%;
+
+    margin-top: 10%;
+    padding-top: 5%;
+    border-radius: 0.8vw;
+
+    background-color:#7b7f8d;
+}
+
+.password{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 85%;
+    height: 20%;
+}
+
+.waring{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 75%;
+    height: 15%;
+
+    margin-bottom: 5%;
+
+    border-radius: 0.3vw;
+    border: solid #ffff 0.10vw;
+
+    background-color: #e26161;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.buttonPassword{
+    margin-top: 3%;
+    margin-bottom: 3%;
+
+    width: 23%;
+    height: 15%;
+}
+
 .img{
     position: absolute;
 
@@ -196,6 +373,48 @@
     overflow: hidden;
 
     background-color: #0000003f;
+}
+
+.deleteArea{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 70%;
+    height: 35%;
+
+    gap: 5%;
+
+    padding-top: 5%;
+    border-radius: 0.8vw;
+
+    background-color:#7b7f8d;
+}
+
+.deleteAreaButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30%;
+    height: 20%;
+
+    gap: 3%;
+
+    border-radius: 0.5vw;
+    border: solid 0.1vw #ffff;
+
+    background-color: #473c3c;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.deleteAreaButton:hover{
+    transition: all 0.3s ease-in-out;
+    background-color: #e26161;
 }
 
 
@@ -213,4 +432,12 @@
     font-weight: 500;
     font-size: clamp(0.4em, 0.9vw, 5em);
     color: #ffffff
+}
+
+.txtover3{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em, 1vw, 5em);
+    color: #000000
 }
