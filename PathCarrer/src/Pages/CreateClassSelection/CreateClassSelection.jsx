@@ -56,10 +56,16 @@ function CreateClassSelection  ({option,circumstance}){
       try {
         const response = await httpClient.post('CRUD/UpadateNewModule',
           {
-            id:"67bd255d2970aa4c4aaea088",
+            PathID:localStorage.getItem("PathID_on"),
             title:twoStep.titleModule,
             desc:twoStep.descModule,
             ClassList:threeStep
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("Token")}`,
+              "Content-Type": "application/json",
+            },
           }
         )
         alert("Modulo adicionado")

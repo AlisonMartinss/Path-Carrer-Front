@@ -29,7 +29,7 @@
 
     font-family: "Urbanist", serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 300;
     font-size: clamp(0.6em, 1vw, 5em);
     color: #ffffff
 }

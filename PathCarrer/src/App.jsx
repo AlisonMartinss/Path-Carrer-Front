@@ -65,6 +65,7 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
    <PathStepsProvider>
      <UpdateModulo
      route={"UpdateClass"}
+     APIroute={null}
      />
    </PathStepsProvider>}/>
 
@@ -101,7 +102,9 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
    <Route path="/UpdateClass"  element = {
     /* Att aulas (todas as aulas) em modulo já existentes. Faz parte do processo de adicionar novo modulo */
    <PathStepsProvider>
-     <CreateClassSelection option={"UpadateNewModule"} />
+     <CreateClassSelection
+     option={"UpadateNewModule"}
+     circumstance={"EditModulo"}/>
    </PathStepsProvider>}/>
 
    <Route path="/UpdateClassUnic"  element = {

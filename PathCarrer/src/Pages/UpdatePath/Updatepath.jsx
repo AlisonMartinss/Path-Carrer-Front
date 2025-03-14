@@ -13,20 +13,28 @@ function UpdatePath () {
 
     async function PreSend (e) {
       try {
-        const response = await httpClient.put('PathUpdate',
-        {
-         id:"67bd255d2970aa4c4aaea088",   
-         onePathDTO: 
-         {
-            title:oneStap.title,
-            category:oneStap.category,
-            descPathOver:oneStap.descPathOver,
-            tags:oneStap.tags,
-            adjetives:oneStap.adjectives
-         }
-        })
+        const response = await httpClient.put('CRUD/PathUpdate',
+            {
+            PathID:localStorage.getItem("PathID_on"),   
+            onePathDTO: 
+            {
+                title:oneStap.title,
+                category:oneStap.category,
+                descPathOver:oneStap.descPathOver,
+                banner:oneStap.banner,
+                tags:oneStap.tags,
+                adjetives:oneStap.adjectives
+            }
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                "Content-Type": "application/json",
+              },
+            }
+        )
         alert("Path atualizado")
-        navigate('/')
+        navigate('/loby')
         }catch (err){
           alert ("Erro")
           console.log(err)

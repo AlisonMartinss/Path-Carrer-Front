@@ -63,27 +63,31 @@ function ContentAcess (){
     /* Chamada API - Obter informações sobre o Path 
       - O formato de respota esperado pela API pode ser visto no arquivo
       JS desse componente. Busque pelo titulo 'API_JSON - User/GetPath' */
-    async function GetContent() {
-      setIsLoading(true);
-      try {
-        const response = await httpClient.get(
-          `User/GetPath?PathID=${localStorage.getItem("PathID_on")}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("Token")}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        setContentJSON(response.data);
-
-      } catch (err) {
-        console.error("Erro na requisição:", err);
-        alert("Erro da chamada");
-      } finally {
-        setIsLoading(false);
+      async function GetContent() {
+        setIsLoading(true);
+        try {
+          const response = await httpClient.get(
+            `User/GetPath?PathID=${localStorage.getItem("PathID_on")}`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+      
+          const content = response.data;
+          setContentJSON(content);
+          const MyPathList = JSON.parse(localStorage.getItem("LobyInfo"));
+          SetEntityFunc(content.IdAuthor, MyPathList);
+          
+        } catch (err) {
+          console.error("Erro na requisição:", err);
+          alert("Erro da chamada");
+        } finally {
+          setIsLoading(false);
+        }
       }
-    }
 
     async function LobyGet () {
       setIsLoading(true); // Indica que a requisição está em andamento
@@ -117,7 +121,7 @@ function ContentAcess (){
     }
     
     const SetEntityFunc = (data,lobyData) => {
-        const author = data; // Nome do autor
+        const author = data;
         const Loby = lobyData.myPaths;
         if (author === localStorage.getItem("UserName")){
           alert("O caba")
@@ -125,7 +129,7 @@ function ContentAcess (){
         }
         else {
             const isStudentOn = Loby.some((element) => {
-              return element.pathID === localStorage.getItem("PathID_on");
+            return element.pathID === localStorage.getItem("PathID_on");
             });
         
             if (isStudentOn) {
@@ -145,10 +149,11 @@ function ContentAcess (){
         alert("API do autor")
         if (e === "Adicionar modulo"){
           alert("Adicionar modulo")
-          navigate('')
+          navigate('/CreateNewModulo')
         }
-        else if (e === "Adicionar path"){
-          alert("Adicionar path")
+        else if (e === "Editar Path"){
+          alert("Editar Path")
+          navigate('/updatePath')
         }
         else {
           alert("Ação n indentificada")
@@ -173,17 +178,10 @@ function ContentAcess (){
         setIsClicked((prev) => (!prev))
     };
 
-    useEffect(() => { //Chamada inicial para para o carregamento da pagina
-      GetContent();// Chamada inical para obter informações do Path
-      LobyGet();
-      
-    }, []);
-
-
     useEffect(() => {
-      const MyPathList = JSON.parse(localStorage.getItem("LobyInfo"));
-      SetEntityFunc(ContentJSON.IdAuthor,MyPathList);
-    }, [ContentJSON, isLoading]);
+      GetContent();
+      LobyGet();
+    }, []);
 
     return (
 
