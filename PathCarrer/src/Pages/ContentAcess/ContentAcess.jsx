@@ -44,6 +44,11 @@ function ContentAcess (){
             id:"Editar Path",
             iconV:"TbPencilCog",
             title:"Editar Path"
+          },
+          {
+            id:"Deletar Path",
+            iconV:"HiOutlineTrash",
+            title:"Deletar Path"
           }
           
         ],
@@ -63,63 +68,7 @@ function ContentAcess (){
     /* Chamada API - Obter informações sobre o Path 
       - O formato de respota esperado pela API pode ser visto no arquivo
       JS desse componente. Busque pelo titulo 'API_JSON - User/GetPath' */
-      async function GetContent() {
-        setIsLoading(true);
-        try {
-          const response = await httpClient.get(
-            `User/GetPath?PathID=${localStorage.getItem("PathID_on")}`,
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("Token")}`,
-                "Content-Type": "application/json",
-              },
-            }
-          );
-      
-          const content = response.data;
-          setContentJSON(content);
-          const MyPathList = JSON.parse(localStorage.getItem("LobyInfo"));
-          SetEntityFunc(content.IdAuthor, MyPathList);
-          
-        } catch (err) {
-          console.error("Erro na requisição:", err);
-          alert("Erro da chamada");
-        } finally {
-          setIsLoading(false);
-        }
-      }
 
-    async function LobyGet () {
-      setIsLoading(true); // Indica que a requisição está em andamento
-      try {
-        const response = await httpClient.post('User/Getloby',
-          {
-            userName:localStorage.getItem("UserName")
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("Token")}`,
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        const JSONdata = response.data;
-        localStorage.setItem("LobyInfo",JSON.stringify(JSONdata));
-      }catch (err){
-        alert ("Erro da chamada")
-        console.log(err)
-      }
-      finally {
-        setIsLoading(false); // Sempre será chamado, finalizando o carregamento
-      }
-    }
-
-    const ToIntoModulo = (e,index) => {
-      e.preventDefault();
-      localStorage.setItem("ModuleIndexON",index)
-      navigate('/class')
-    }
-    
     const SetEntityFunc = (data,lobyData) => {
         const author = data;
         const Loby = lobyData.myPaths;
@@ -140,7 +89,84 @@ function ContentAcess (){
                 SetEntity("studentOff");
             }
         }
-    };  
+    };    
+    async function GetContent() {
+        setIsLoading(true);
+        try {
+          const response = await httpClient.get(
+            `User/GetPath?PathID=${localStorage.getItem("PathID_on")}`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+      
+          const content = response.data;
+          setContentJSON(content);
+          const MyPathList = JSON.parse(localStorage.getItem("LobyInfo"));
+          SetEntityFunc(content.IdAuthor, MyPathList);
+          
+        } catch (err) {
+          console.error("Erro na requisição:", err);
+          alert("Erro da chamada GetContent");
+        } finally {
+          setIsLoading(false);
+        }
+    }
+    async function LobyGet () {
+      setIsLoading(true); // Indica que a requisição está em andamento
+      try {
+        const response = await httpClient.post('User/Getloby',
+          {
+            userName:localStorage.getItem("UserName")
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("Token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        const JSONdata = response.data;
+        localStorage.setItem("LobyInfo",JSON.stringify(JSONdata));
+      }catch (err){
+        alert ("Erro da chamada LobtGet")
+        console.log(err)
+      }
+      finally {
+        setIsLoading(false); // Sempre será chamado, finalizando o carregamento
+      }
+    }
+    const ToIntoModulo = (e,index) => {
+      e.preventDefault();
+      localStorage.setItem("ModuleIndexON",index)
+      navigate('/class')
+    }
+    async function PathDelete () {
+      setIsLoading(true); // requisição está em andamento
+      try {
+        const response = await httpClient.post('CRUD/PathDelete',
+          {
+            PathID:localStorage.getItem("PathID_on")
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("Token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+      }catch (err){
+        alert ("Erro da chamada Delete path")
+        console.log(err)
+      }
+      finally {
+        setIsLoading(false); // Sempre será chamado, finalizando o carregamento
+      }
+    }
+    
 
     const ButtonAction = (e) => {
     // Nessa função determinamos a ação do Usuario e do autor, que são: Adicionar,
@@ -154,6 +180,11 @@ function ContentAcess (){
         else if (e === "Editar Path"){
           alert("Editar Path")
           navigate('/updatePath')
+        }
+        else if (e === "Deletar Path"){
+          alert("Deletar Path")
+          PathDelete();
+
         }
         else {
           alert("Ação n indentificada")

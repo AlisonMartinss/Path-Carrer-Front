@@ -6,8 +6,15 @@ import ClassComponent from '../../Components/ClassComponent/ClassComponent'
 import {useState,useEffect} from 'react'
 import {useNavigate } from "react-router-dom"
 import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
+import { LiaComments } from "react-icons/lia";
+import Comment from '../../Components/Comment/Comment'
 
 import { DeleteClassUnicAPI, DeleteModule} from './ClassAux';
+
+
+// ===== Arquivos não componentes ===== //
+
+import { formatarNumero } from '../../Components/JSuteis/conversao.js'
 
 function Class (){
   /*
@@ -37,10 +44,21 @@ function Class (){
      - contem renderizações prematuras. 
   */
   const [isLoading, setIsLoading] = useState(true); // Precavine renderizações prematuras
-
+  
   const [ClassLinkON, SetClassLinkON] = useState(null); // Usados para carregar link e desc da aula assistida
+  const [respotasAoComment,SetAnswerOn] = useState(true);
   const [DescON, SetDescON] = useState(null);
   const moduleIndex = localStorage.getItem("ModuleIndexON");
+
+  // === Estados e Aux do forum ==== //
+
+  const [forumON,SetForum] = useState(false); // Usado para saber se deve-se carregar o forum.
+  const [answer,SetAnswer] = useState(
+    {
+      active:false, // sUsado para saber se devemos carregar as respostas
+      commentON:null
+    }
+  ) // Indice do comentario a qual pretendo ver resposta ou resonder
 
   const [entity, setEntity] = useState(null); // Estado que faz parte da definição se que está vendo o modulo é o author
   const buttonsRender = [ // Botoes a serem rendereizado caso entity = author
@@ -74,6 +92,7 @@ async function GetContent() {
 }
 
 const ClassSelect = (index) => {
+  SetForum(false);
   localStorage.setItem("ClassIndex",index)
   const ClassON = ContentJSON.modulos[moduleIndex]?.modulocontent?.[index];
   SetClassLinkON(ClassON.link);
@@ -109,6 +128,22 @@ const redirectActivity = (e) => {
     navigate('/Loby')
   
   }
+};
+
+const viewAnswers = (element) => {
+  SetAnswer((prevState) => (
+    {
+      prevState,
+      active:true,
+      commentON:element
+    }));
+}
+
+const resetAnswers = () => {
+  SetAnswer({
+    active: false,
+    indexComment: null
+  });
 };
 
   useEffect(() => {
@@ -182,31 +217,100 @@ const redirectActivity = (e) => {
                         ) : (
                         <div>Não há Aulas para exibir.</div>
                 )}
+                <div onClick={(e) => SetForum((prev) => !prev)} className={`${styles.forumArea} ${styles.txt3}`}>
+                   <LiaComments
+                   className={styles.icone}/>
+                   Forum do modulo 
+                </div>
               </div>
 
-              <div className={styles.contentArea}>
-                {
-                  entity === "author" ? (
-                    <div className={styles.editar}>
-                      {buttonsRender.map((element) => 
-                        <div title={element.title} className={styles.edit}>                     
-                         <ButtonIMG
-                         iconV={element.iconV}
-                         icon_style={"evenConstStyle"}
-                         handleClick={(e) => redirectActivity(element.core)}/>                  
+              {forumON === false ? (
+                  <div className={styles.contentArea}>
+                    {
+                      entity === "author" ? (
+                        <div className={styles.editar}>
+                          {buttonsRender.map((element) => 
+                            <div title={element.title} className={styles.edit}>                     
+                            <ButtonIMG
+                            iconV={element.iconV}
+                            icon_style={"evenConstStyle"}
+                            handleClick={(e) => redirectActivity(element.core)}/>                  
+                            </div>
+                          )}                 
                         </div>
-                      )}                 
+                      ):null
+                    }
+                    <div className={styles.vidArea}>
+                      <iframe className={styles.videoMain} src={`https://www.youtube.com/embed/${ClassLinkON}`} frameborder="0"></iframe>
                     </div>
-                  ):null
-                }
-               
-                <div className={styles.vidArea}>
-                  <iframe className={styles.videoMain} src={`https://www.youtube.com/embed/${ClassLinkON}`} frameborder="0"></iframe>
+                    <div className={`${styles.descArea} ${styles.txt}`}>
+                      {DescON}
+                    </div>
+                  </div>
+
+              ):
+                <div className={styles.forumCore}>
+
+                    {answer.active === false ? 
+                    (
+                      <div className={styles.forumScroll}>
+                      {
+                        ContentJSON.comments.map((element,index) => (
+                          <div className={styles.comment}>
+                            <Comment
+                            nickName={`${element.userId}`}
+                            comment={element.comment}
+                            imgURL={"https://cdn.meutimao.com.br/_upload/torcida-do-corinthians/2021/12/11/sheldon-cooper_pw5.jpg"}
+                            onClickIcon1={(e) => viewAnswers(element)}
+                            nAnswers={Array.isArray(element.answers) ? formatarNumero(element.answers.length) : 0}/>
+                          </div>
+                          
+                        ))
+                      }
+                      </div>
+                    )
+                    :
+                    <div className={styles.forumScroll}>
+
+                      <div className={styles.leave}>
+                        <ButtonIMG
+                        iconV={"IoChevronBackCircleSharp"}
+                        icon_style={"evenConstStyle"}
+                        handleClick={(e) => resetAnswers()}
+                        title={"Voltar"}
+                        />
+                      </div>
+                      
+                      <div className={styles.commentAnswerTComment}>
+                          <Comment
+                            nickName={answer.commentON.userId}
+                            comment={answer.commentON.comment}
+                            imgURL={"https://cdn.meutimao.com.br/_upload/torcida-do-corinthians/2021/12/11/sheldon-cooper_pw5.jpg"}
+                            onClickIcon1={(e) => alert("Vc já está no indice")}
+                            nAnswers={Array.isArray(answer.commentON.answers) ? formatarNumero(answer.commentON.answers.length) : 0}
+                          />
+                      </div>
+
+                      {answer.commentON.answers.map((element) => (
+                        <div className={styles.commentAnswer}>
+                          <Comment
+                            nickName={`${element.userId}`}
+                            comment={element.comment}
+                            imgURL={"https://cdn.meutimao.com.br/_upload/torcida-do-corinthians/2021/12/11/sheldon-cooper_pw5.jpg"}
+                            onClickIcon1={(e) => viewAnswers(element)}
+                            nAnswers={Array.isArray(element.answers) ? formatarNumero(element.answers.length) : 0}
+                          />
+                        </div>
+                      ))}
+
+                      
+                    </div>
+                    }
+                    
                 </div>
-                <div className={`${styles.descArea} ${styles.txt}`}>
-                  {DescON}
-                </div>
-              </div>
+              }
+
+              
 
             </div>            
                     

@@ -1,3 +1,30 @@
+/* ==== @KeyFrames ==== */
+
+@keyframes emergirBaixo {
+    0% { transform: translate(0, 20px); }   /* Posição inicial */
+    50% { transform: translate(0px, 0px); }  /* Direita e cima */
+    100% { transform: translate(0, 0); }  /* Volta ao normal */
+}
+
+@keyframes emergirDireita {
+    0% { transform: translate(50px, 0px); }   /* Posição inicial */
+    50% { transform: translate(0px, 0px); }  /* Direita e cima */
+    100% { transform: translate(0, 0); }  /* Volta ao normal */
+}
+
+@keyframes emergirDireita2 {
+    0% { transform: translate(50px, 0px); }   /* Posição inicial */
+    50% { transform: translate(0px, 0px); }  /* Direita e cima */
+    100% { transform: translate(0, 0); }  /* Volta ao normal */
+}
+
+@keyframes emergirEsquerda {
+    0% { transform: translate(-50px, 0px); }   /* Posição inicial */
+    50% { transform: translate(0px, 0px); }  /* Direita e cima */
+    100% { transform: translate(0, 0); }  /* Volta ao normal */
+}
+
+
 .main{
     display: flex;
     flex-direction: column;
@@ -68,6 +95,31 @@
     margin-top: 2%;
 }
 
+.forumArea{
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;
+    height: 10%;
+
+    margin-top: 2%;
+
+    transition: all 0.2s ease;
+    border-bottom: solid 0.1vw #ffff;
+
+    cursor: pointer;
+}
+
+.forumArea:hover{
+    background-color: #69718E;
+}
+
+.icone{
+    width: 10%;
+    height: 44%;
+}
+
 /* FIM SIDEBAR */
 
 .contentArea{
@@ -98,6 +150,16 @@
 
 .contentArea::-webkit-scrollbar-thumb {
     background: #69718E; /* Azul */
+}
+
+.contentCore{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
 }
 
 .editar{
@@ -188,6 +250,132 @@
 
 }
 
+.forumCore{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 73vw;
+    height: 90vh;
+
+    background-color:#D9D9D9 ;
+
+    gap: 10%;
+
+}
+
+.forumScroll{
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 55vw;
+    height: 89vh;
+
+    overflow-y: scroll;
+    flex-wrap: wrap;
+
+    background-color:#747B97 ;
+
+    padding-bottom: 1vh;
+
+    gap: 3%;
+}
+
+.forumScroll::-webkit-scrollbar {
+    width: 0.8vw; /* Largura da barra */
+}
+
+.forumScroll::-webkit-scrollbar-track {
+    background: #9A9FAF; /* Cinza claro */
+}
+
+.forumScroll::-webkit-scrollbar-thumb {
+    background: #2f3447; /* Azul */
+}
+
+.comment{
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    width: 80%;
+    height: 35%;
+
+}
+
+
+.answersArea{
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 100%;
+    height: 100%;
+
+    overflow-y: scroll;
+    flex-wrap: wrap;
+
+    background-color:#747B97 ;
+
+    gap: 3%;
+}
+
+.commentAnswerTComment{
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    width: 80%;
+    height: 35%;
+
+    margin-left: -15%;
+    animation: emergirDireita 0.8s ease-out 
+
+}
+
+.commentAnswer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    width: 80%;
+    height: 35%;
+
+    margin-left: 12%;
+    animation: emergirEsquerda 0.8s ease-out 
+    
+
+}
+
+.leave{
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 3vw;
+    height: 3vw;
+
+    left: 3%;
+    top: 2%;
+
+    z-index: 2;
+    animation: emergirBaixo 0.8s ease-out 
+}
+
 .txt{
     font-family: "Urbanist", serif;
     font-style: normal;
@@ -204,4 +392,10 @@
     color: #ffffff
 }
 
-
+.txt3{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.4em,1.0vw, 5em);
+    color: #ffffff
+}

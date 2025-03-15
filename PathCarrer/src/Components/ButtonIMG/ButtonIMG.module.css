@@ -124,3 +124,16 @@
 
     color: rgb(255, 255, 255);
 }
+
+.evenConstStyleBlue{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 60%;
+    height: 60%;
+
+    cursor: pointer;
+
+    color: #40496A;
+}

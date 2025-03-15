@@ -6,10 +6,8 @@ import './App.css'
 
 //=-=-=-=-=-=- Pages imports =-=-=-=-=-=-=-//
 
-import Createpath from './Pages/CreatePath/Createpath'
-import CreateModulo from './Pages/CreateModulo/Createmodulo'
+
 import Explorer from './Pages/Explorer/Explorer'
-import CreateAulas from './Pages/CreateAulas/CreateAulas'
 import Class from './Pages/Class/Class'
 import Loby from './Pages/Loby/Loby'
 
