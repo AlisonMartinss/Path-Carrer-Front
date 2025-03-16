@@ -13,7 +13,7 @@ function UpdatePath () {
 
     async function PreSend (e) {
       try {
-        const response = await httpClient.put('CRUD/PathUpdate',
+        const response = await httpClient.post('CRUD/PathUpdate',
             {
             PathID:localStorage.getItem("PathID_on"),   
             onePathDTO: 

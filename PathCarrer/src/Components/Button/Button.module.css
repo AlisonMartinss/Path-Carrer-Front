@@ -17,7 +17,7 @@
     font-family: "Urbanist";
     font-style: normal;
     font-weight: 500;
-    font-size: clamp(0.6em, 1vw, 5em);
+    font-size: clamp(0.6em, 0.9vw, 5em);
     color: #ffffff
 }
 

@@ -1,7 +1,7 @@
 import styles from '../Comment/Comment.module.css'
 import ButtonIMG from '../ButtonIMG/ButtonIMG'
 
-function Comment ({imgURL,comment,nickName,onClickIcon1,onClickIcon2,nAnswers}){
+function Comment ({imgURL,comment,nickName,onClickIcon1,onClickIcon2,responseAction,nAnswers}){
     return (
         <div className={styles.main}>
             <div className={styles.perfilArea}>
@@ -38,7 +38,7 @@ function Comment ({imgURL,comment,nickName,onClickIcon1,onClickIcon2,nAnswers}){
                 :null}
 
             </div>
-            <div className={`${styles.answerAction} ${styles.txtover}`}>
+            <div onClick={responseAction} className={`${styles.answerAction} ${styles.txtover}`}>
                 responder
             </div>
             <div className={styles.commentMain}>

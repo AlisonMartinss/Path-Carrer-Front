@@ -65,3 +65,49 @@ export async function DeleteModule(e) {
         alert("Erro ao excluir modulo.");
     }
 }
+
+export async function PostCommentFunc(addressCore,commentCore) {
+    console.log("commentCore: " + commentCore)
+    try {
+        const response = await httpClient.post(
+            'interactions/PostComment',
+            {           
+                PathID:localStorage.getItem("PathID_on"),
+                userID:localStorage.getItem("UserName"),
+                comment:commentCore,
+                address:addressCore
+            },
+            {   
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("Token")}`, 
+                    "Content-Type": "application/json"
+                }
+            }           
+        );
+        alert("Comentario postado com sucesso")
+    } catch (err) {
+        alert("Erro ao deletar comentario.");
+    }
+}
+
+export async function DeleteComment(addressCore) {
+    try {
+        const response = await httpClient.post(
+            'interactions/DeleteComment',
+            {           
+                PathID:localStorage.getItem("PathID_on"),
+                userID:localStorage.getItem("UserName"),
+                address:addressCore
+            },
+            {   
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("Token")}`, 
+                    "Content-Type": "application/json"
+                }
+            }           
+        );
+        alert("Comentario deletado com sucesso")
+    } catch (err) {
+        alert("Erro ao deletar comentario.");
+    }
+}

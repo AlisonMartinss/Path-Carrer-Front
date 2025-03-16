@@ -23,6 +23,7 @@ import { HiOutlineTrash } from "react-icons/hi2";
 import { TiGroup } from "react-icons/ti";
 import { CgComment } from "react-icons/cg";
 import { IoChevronBackCircleSharp } from "react-icons/io5";
+import { IoIosCloseCircle } from "react-icons/io";
 
 function ButtonIMG ({iconV,icon_style,handleClick,IDValue,title}) {
 
@@ -35,7 +36,8 @@ const comp = {
     CgProfile,FaFolderOpen,
     MdBookmarkAdd,FaHouseChimneyWindow,
     TbPencilCog,RxPencil2,FaTrash,IoIosAddCircle,
-    HiOutlineTrash,TiGroup,CgComment,IoChevronBackCircleSharp
+    HiOutlineTrash,TiGroup,CgComment,
+    IoChevronBackCircleSharp,IoIosCloseCircle
 }
 
 /* =-=-=-=-= Functions =-=-=-=-= */

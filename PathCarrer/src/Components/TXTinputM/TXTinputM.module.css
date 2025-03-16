@@ -25,8 +25,8 @@
 
     font-family: "Urbanist", serif;
     font-style: normal;
-    font-weight: 300;
-    font-size: clamp(0.4em, 1vw, 5em);
+    font-weight: 500;
+    font-size: clamp(0.4em, 0.9vw, 5em);
     color: #ffffff;
 
 
@@ -38,7 +38,7 @@
 .txtover{
     font-family: "Urbanist", serif;
     font-style: normal;
-    font-weight: 300;
+    font-weight: 500;
     font-size: clamp(0.6em, 0.9vw, 5em);
     color: #ffffff
 }

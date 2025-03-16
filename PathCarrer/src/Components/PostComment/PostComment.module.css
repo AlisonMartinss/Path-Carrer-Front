@@ -1,0 +1,48 @@
+@keyframes emergirDireita {
+    0% { transform: translate(90%, 0px); }   /* Posição inicial */
+    50% { transform: translate(0px, 0px); }  /* Direita e cima */
+    100% { transform: translate(0, 0); }  /* Volta ao normal */
+}
+
+.main{
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #051c69bc;
+    border-radius: 1vw;
+
+    animation: emergirDireita 0.8s ease-out 
+}
+
+.inputTXT{
+    width:95%;
+    height:85%;
+}
+
+.Button{
+    width: 20%;
+    height: 15%;
+
+    margin-bottom: 2%;
+}
+
+.icon{
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 20%;
+    height: 12%;
+
+    right: -6.0%;
+    top: 1%;
+}
