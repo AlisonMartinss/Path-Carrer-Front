@@ -24,6 +24,9 @@ import { TiGroup } from "react-icons/ti";
 import { CgComment } from "react-icons/cg";
 import { IoChevronBackCircleSharp } from "react-icons/io5";
 import { IoIosCloseCircle } from "react-icons/io";
+import { MdSend } from "react-icons/md";
+import { CiEdit } from "react-icons/ci"; // lapis - soft
+import { BsSendFill } from "react-icons/bs";
 
 function ButtonIMG ({iconV,icon_style,handleClick,IDValue,title}) {
 
@@ -37,7 +40,8 @@ const comp = {
     MdBookmarkAdd,FaHouseChimneyWindow,
     TbPencilCog,RxPencil2,FaTrash,IoIosAddCircle,
     HiOutlineTrash,TiGroup,CgComment,
-    IoChevronBackCircleSharp,IoIosCloseCircle
+    IoChevronBackCircleSharp,IoIosCloseCircle,
+    MdSend,CiEdit,BsSendFill
 }
 
 /* =-=-=-=-= Functions =-=-=-=-= */

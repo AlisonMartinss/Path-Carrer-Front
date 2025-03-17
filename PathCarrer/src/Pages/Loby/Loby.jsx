@@ -14,8 +14,9 @@ import { useState,useEffect } from 'react'
 import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
 import { useNavigate } from 'react-router'
 
-// =-=-=-=-= Icones =-=-=-=-=- //
+// =-=-=-=-= Arquivos auxiliares =-=-=-=-=- //
 
+import { LobyGet } from '../../Components/1he GlobalFunctions/GlobalFunctions'
 
 
 
@@ -54,33 +55,16 @@ function Loby () {
     ]);
 
     // ==== API ==== //
-    async function LobyGet () {
-      setIsLoading(true); // Indica que a requisição está em andamento
-      try {
-        const response = await httpClient.post('User/Getloby',
-          {
-            userName:localStorage.getItem("UserName")
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("Token")}`,
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        alert("Loby chamado com sucesso!");
-        const JSONdata = response.data;
-        localStorage.setItem("LobyInfo",JSON.stringify(JSONdata));
-        SetLobyJSON(JSONdata);
-      }catch (err){
-        alert ("Erro da chamada")
-        console.log(err)
-      }
-      finally {
-        setIsLoading(false); // Sempre será chamado, finalizando o carregamento
+
+    async function GetLobyON() {
+      const dados = await LobyGet();
+      if (!dados) {
+        console.log("Erro ao buscar informações do Loby.");
+      } else {
+        SetLobyJSON(dados)
       }
     }
-
+    
     const PathAcess = (e,x) => {
       e.preventDefault();
       localStorage.setItem("PathID_on",x)
@@ -88,8 +72,8 @@ function Loby () {
     }
 
     useEffect(() => {
-       LobyGet();
-      }, []);
+       GetLobyON();
+    }, []);
 
     // ==== useEffect para verificar e processar LobyJSON ==== //
     useEffect(() => {

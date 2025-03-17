@@ -12,6 +12,10 @@ import { TbAlertTriangleFilled } from "react-icons/tb";
 import { PiSwapDuotone } from "react-icons/pi";
 import { HiOutlineTrash } from "react-icons/hi2";
 
+// ==== Arquivos nescessarios ==== //
+
+import { LobyGet } from '../../Components/1he GlobalFunctions/GlobalFunctions';
+
 
 
 // Hooks
@@ -37,7 +41,6 @@ function ViewProfile (){
         if (e) {
             e.preventDefault(); 
         }
-    
         try {
             const response = await httpClient.put(
                 'User/NewName',
@@ -51,7 +54,8 @@ function ViewProfile (){
                         "Content-Type": "application/json" 
                     }
                 }           
-            ) 
+            )
+            GetLobyON();
         } catch (err) {
             alert("Erro ao remover o Path.");
         }
@@ -77,6 +81,7 @@ function ViewProfile (){
                     }
                 }           
             );
+            GetLobyON();
         } catch (err) {
             alert("Erro ao atualizar fotos.");
         }
@@ -101,6 +106,7 @@ function ViewProfile (){
                     }
                 }           
             );
+            GetLobyON();
         } catch (err) {
             alert("Erro ao atualizar fotos.");
         }
@@ -126,6 +132,7 @@ function ViewProfile (){
                     }
                 }           
             );
+            
         } catch (err) {
             alert("Erro ao atualizar fotos.");
         }
@@ -152,6 +159,13 @@ function ViewProfile (){
             );
         } catch (err) {
             alert("Erro ao deletar conta.");
+        }
+    }
+
+    async function GetLobyON() {
+        const dados = await LobyGet();
+        if (!dados) {
+         console.log("Erro ao buscar informações do Loby.");
         }
     }
 

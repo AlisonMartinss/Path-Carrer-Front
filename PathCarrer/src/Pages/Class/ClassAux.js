@@ -67,7 +67,6 @@ export async function DeleteModule(e) {
 }
 
 export async function PostCommentFunc(addressCore,commentCore) {
-    console.log("commentCore: " + commentCore)
     try {
         const response = await httpClient.post(
             'interactions/PostComment',
@@ -86,7 +85,7 @@ export async function PostCommentFunc(addressCore,commentCore) {
         );
         alert("Comentario postado com sucesso")
     } catch (err) {
-        alert("Erro ao deletar comentario.");
+        alert("Erro ao postar comentario.");
     }
 }
 

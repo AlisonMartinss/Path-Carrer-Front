@@ -47,7 +47,6 @@ function Class (){
   const [isLoading, setIsLoading] = useState(true); // Precavine renderizações prematuras
   
   const [ClassLinkON, SetClassLinkON] = useState(null); // Usados para carregar link e desc da aula assistida
-  const [respotasAoComment,SetAnswerOn] = useState(true);
   const [DescON, SetDescON] = useState(null);
   const moduleIndex = localStorage.getItem("ModuleIndexON");
 
@@ -59,10 +58,18 @@ function Class (){
       addresON:[]
     });
   const [forumON,SetForum] = useState(false); // Usado para saber se deve-se carregar o forum.
-  const [answer,SetAnswer] = useState(
+
+  const [answerCurrent,SetAnswerCurrent] = useState( // Esse estado ajuda a nos manter na pagina correta do comentario que interagimos
     {
-      active:false, // sUsado para saber se devemos carregar as respostas
-      commentON:null
+      active:false,
+      deleteActive:false,
+      addres:null
+    }
+  );
+  const [answer,SetAnswer] = useState( // Trabalhamos aqui quando lidamos com respostas ao comentario de alguem
+    {
+      active:false,  // Usado para saber se devemos carregar as respostas
+      commentON:null // Comentario que deve ser carregado caso estivermos vendo respostas
     }
   ) // Indice do comentario a qual pretendo ver resposta ou resonder
 
@@ -115,28 +122,23 @@ const ClassSelect = (index) => {
 
 const redirectActivity = (e) => {
   if (e === "editar o modulo") {
-      alert("API de editar módulo");
       navigate("/UpdateModulo");
   } else if (e === "editar a aula") {
-      alert("API de editar a aula");
       navigate("/UpdateClassUnic");
   } else if (e === "adicionar aula") {
-      alert("Adicionar aula");
       navigate("/UpdateNewClass");
   }
   else if (e == "excluir a aula"){
-    alert("Excluir aula API")
     DeleteClassUnicAPI();
   }
   else if (e == "excluir modulo"){
-    alert("excluir modulo")
     DeleteModule();
     navigate('/Loby')
   
   }
 };
 
-const viewAnswers = (element) => {
+const viewAnswers = (element) => { // Neste ponto ativamos a visu de respostas
   SetAnswer((prevState) => (
     {
       prevState,
@@ -145,19 +147,51 @@ const viewAnswers = (element) => {
     }));
 }
 
-const resetAnswers = () => {
+const resetAnswers = () => { // Reset
   SetAnswer({
     active: false,
     indexComment: null
   });
 };
 
-const MakeComment = (comment) => {
-  SetPostComment((prevState) => (
-    {
-      prevState,
-      commentMain:comment
-    }));
+async function CallPostComment (addresX,commentCore) {
+  /**
+   * Reponder:
+   * (addred,comment)
+   *  API
+   *  pego o endereço anteriormente pego e carrego (onde? )
+   * 
+   * SetAnswerCurrent - onde guardo o endereço antes de td
+   */
+  
+  SetAnswerCurrent((prev) => ({...prev,addres:addresX})) 
+  await PostCommentFunc(addresX,commentCore);
+  await GetContent();
+  SetAnswerCurrent((prev) => ({...prev,active:true}))
+}
+
+
+async function CallDeleteComment (addresX) {
+  /**
+   * Reponder:
+   * (addred,comment)
+   *  API
+   *  pego o endereço anteriormente pego e carrego (onde? )
+   * 
+   * SetAnswerCurrent - onde guardo o endereço antes de td
+   */
+  SetAnswerCurrent((prev) => ({...prev,addres:addresX})) 
+  await DeleteComment(addresX);
+  await GetContent();
+  SetAnswerCurrent((prev) => ({...prev,deleteActive:true}))
+}
+
+const captchaAnswer = (addres,casas) => {
+  let currentComment = ContentJSON.comments[addres[0]];
+  for (let i = 1; i < (addres.length - casas) ; i++ ){
+    currentComment = currentComment.answers[addres[i]]
+  }
+  return currentComment
 }
 
 
@@ -182,15 +216,64 @@ const MakeComment = (comment) => {
       }
   },[ContentJSON]);
 
-  useEffect(() => {
+  useEffect(() => { // Delegar Modulo x user
     if (ContentJSON && ContentJSON.IdAuthor) {
-        console.log("Chamando SetEntity com:", ContentJSON.IdAuthor);
-        console.log(localStorage.getItem("UserName"))
         SetEntityFunc(ContentJSON.IdAuthor);
     } else {
         console.warn("IdAuthor ainda não disponível.");
     }
   }, [ContentJSON]);
+
+  useEffect(() => {
+    if (ContentJSON && ContentJSON.comments && answerCurrent.active === true) {
+      let PseudoAddres = [];
+      if (!(answerCurrent.addres[0] === undefined)) {
+        PseudoAddres = captchaAnswer(answerCurrent.addres,0)
+        SetAnswer((prevState) => (
+          {
+            ...prevState,
+            active:true,
+            commentON:PseudoAddres
+          }));
+      }
+      else {
+        PseudoAddres = captchaAnswer([0],0)
+        SetAnswer((prevState) => (
+          {
+            ...prevState,
+            active:false,
+            commentON:PseudoAddres
+          }));
+      }
+    }
+  },[ContentJSON,answerCurrent.active])
+
+  useEffect(() => {
+    if (ContentJSON && ContentJSON.comments && answerCurrent.deleteActive === true) {
+
+      if (answerCurrent.addres.length > 1){
+      const AnswerON = captchaAnswer(answerCurrent.addres,1)
+        SetAnswer((prevState) => (
+          {
+            ...prevState,
+            commentON:AnswerON,
+          }
+        ));
+      }
+      else{
+        const AnswerON = captchaAnswer(answerCurrent.addres,1)
+        SetAnswer((prevState) => (
+          {
+            ...prevState,
+            active:false,
+            commentON:AnswerON,
+          }
+        ));
+
+      }
+        
+    }
+  },[ContentJSON,answerCurrent.deleteActive])
 
   
 
@@ -222,11 +305,12 @@ const MakeComment = (comment) => {
                           ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].modulocontent.map((element,index) => (                           
                             <div className={styles.classArea}>
                                 <ClassComponent
-                                title={element.title}
-                                index={index+1}
-                                HandleTrue = {(e) => alert("")}
-                                HandleFalse= {(e) => alert("")}
-                                onClick={(e) => ClassSelect(index,ContentJSON)}/>
+                                  title={element.title}
+                                  index={index+1}
+                                  HandleTrue = {(e) => alert("")}
+                                  HandleFalse= {(e) => alert("")}
+                                  onClick={(e) => ClassSelect(index,ContentJSON)}
+                                />
                             </div>
                           ))
                         ) : (
@@ -247,9 +331,9 @@ const MakeComment = (comment) => {
                           {buttonsRender.map((element) => 
                             <div title={element.title} className={styles.edit}>                     
                             <ButtonIMG
-                            iconV={element.iconV}
-                            icon_style={"evenConstStyle"}
-                            handleClick={(e) => redirectActivity(element.core)}/>                  
+                              iconV={element.iconV}
+                              icon_style={"evenConstStyle"}
+                              handleClick={(e) => redirectActivity(element.core)}/>                  
                             </div>
                           )}                 
                         </div>
@@ -264,34 +348,48 @@ const MakeComment = (comment) => {
                   </div>
 
               ):
+              
                 <div className={styles.forumCore}>
+
+                  <div className={styles.forumTopPost}>
+                    <ButtonIMG
+                      iconV={"CiEdit"}
+                      icon_style={"evenConstStyleBlue"}
+                      handleClick={(e) => SetPostComment((prevState) => ({prevState,active:true,addresON:[]}))}
+                      title={"Postar comentario no forum"}
+                    />
+                  </div>
+
+                  
+
+
                   {PostCommentON.active === true ?
                   (
                     <div className={styles.PostCommentArea}>
                      <PostComment
-                      onClose={(e) => SetPostComment((prevState) => ({prevState,active:false}))}
+                      onClose= {(e) => SetPostComment((prevState) => ({prevState,active:false}))}
                       inputTXT={(e) => SetPostComment((prev) => ({...prev,commentMain:e.target.value}))}
-                      buttonON={(e) => PostCommentFunc(PostCommentON.addresON,PostCommentON.commentMain)}
+                      buttonON={(e) => CallPostComment(PostCommentON.addresON,PostCommentON.commentMain)}
                      />
                     </div>
                   )
                   :null}
                   
 
-                    {answer.active === false ? 
+                  {answer.active === false ? 
                     (
                       <div className={styles.forumScroll}>
                       {
-                        ContentJSON.comments.map((element,index) => (
+                        ContentJSON.comments.map((element) => (
                           <div className={styles.comment}>
                             <Comment
-                              nickName={`${element.userId}`}
+                              nickName={`${element.userName}`}
                               comment={element.comment}
-                              imgURL={"https://cdn.meutimao.com.br/_upload/torcida-do-corinthians/2021/12/11/sheldon-cooper_pw5.jpg"}
+                              imgURL={element.pictureProfile}
                               onClickIcon1={(e) => viewAnswers(element)}
                               nAnswers={Array.isArray(element.answers) ? formatarNumero(element.answers.length) : 0}
                               responseAction={(e) => SetPostComment((prevState) => ({prevState,active:true,addresON:element.address}))}
-                              onClickIcon2={(e) => DeleteComment(element.address)}
+                              onClickIcon2={(e) => CallDeleteComment(element.address)}
                             />
                           </div>
                           
@@ -300,6 +398,8 @@ const MakeComment = (comment) => {
                       </div>
                     )
                     :
+                    /* Neste ponto vemos ativamos as 'answers' */
+                    
                     <div className={styles.forumScroll}>
 
                       <div className={styles.leave}>
@@ -313,40 +413,42 @@ const MakeComment = (comment) => {
                       
                       <div className={styles.commentAnswerTComment}>
                           <Comment
-                            nickName={answer.commentON.userId}
+                            nickName={answer.commentON.userName}
                             comment={answer.commentON.comment}
-                            imgURL={"https://cdn.meutimao.com.br/_upload/torcida-do-corinthians/2021/12/11/sheldon-cooper_pw5.jpg"}
+                            imgURL={answer.commentON.pictureProfile}
                             onClickIcon1={(e) => alert("Vc já está no indice")}
                             nAnswers={Array.isArray(answer.commentON.answers) ? formatarNumero(answer.commentON.answers.length) : 0}
                             responseAction={(e) => SetPostComment((prevState) => ({prevState,active:true,addresON:answer.commentON.address}))}
-                            onClickIcon2={(e) => DeleteComment(element.address)}
+                            onClickIcon2={(e) => CallDeleteComment(answer.commentON.address)}
                           />
                       </div>
 
                       {answer.commentON.answers.map((element) => (
                         <div className={styles.commentAnswer}>
                           <Comment
-                            nickName={`${element.userId}`}
+                            nickName={`${element.userName}`}
                             comment={element.comment}
-                            imgURL={"https://cdn.meutimao.com.br/_upload/torcida-do-corinthians/2021/12/11/sheldon-cooper_pw5.jpg"}
+                            imgURL={element.pictureProfile}
                             onClickIcon1={(e) => viewAnswers(element)}
                             nAnswers={Array.isArray(element.answers) ? formatarNumero(element.answers.length) : 0}
                             responseAction={(e) => SetPostComment((prevState) => ({prevState,active:true,addresON:element.address}))}
-                            onClickIcon2={(e) => DeleteComment(element.address)}
+                            onClickIcon2={(e) => CallDeleteComment(element.address)}
                           />
                         </div>
                       ))}
 
                       
                     </div>
-                    }
+                  }
                     
                 </div>
+              
               }
 
               
-
-            </div>            
+              
+            </div>
+                       
                     
           
         </main>

@@ -3,7 +3,6 @@ import styles from '../PostComment/PostComment.module.css'
 // ==== Componentes ====
 
 import TXTinputM from '../TXTinputM/TXTinputM';
-import Button from '../Button/Button';
 import ButtonIMG from '../ButtonIMG/ButtonIMG';
 
 function PostComment ({onClose,inputTXT,buttonON}){
@@ -24,10 +23,11 @@ function PostComment ({onClose,inputTXT,buttonON}){
                 />
             </div>
             <div className={styles.Button}>
-                <Button
-                    message={"Postar comentario"}
-                    class={"button"}
-                    func={buttonON}
+                <ButtonIMG
+                    iconV={"BsSendFill"}
+                    icon_style={"evenConstStyleBlue"}
+                    handleClick={buttonON}
+                    title={"Postar !"}
                 />
             </div>
         </div>

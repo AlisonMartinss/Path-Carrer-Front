@@ -1,6 +1,7 @@
 @keyframes emergirDireita {
-    0% { transform: translate(90%, 0px); }   /* Posição inicial */
-    50% { transform: translate(0px, 0px); }  /* Direita e cima */
+    0%   { transform: translate(90%, 0px); }   /* Posição inicial */
+    30%  { transform: translate(-5%, 0px);}
+    65%  { transform: translate( 2%, 0px);}
     100% { transform: translate(0, 0); }  /* Volta ao normal */
 }
 
@@ -12,10 +13,10 @@
     justify-content: flex-start;
     align-items: center;
 
-    width: 100%;
+    width: 94%;
     height: 100%;
 
-    background-color: #051c69bc;
+    background-color: #00000084;
     border-radius: 1vw;
 
     animation: emergirDireita 0.8s ease-out 
@@ -27,10 +28,33 @@
 }
 
 .Button{
-    width: 20%;
-    height: 15%;
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 3vw;
+    border-radius: 2vw;
+
+    background-color: #ffff;
+    transition: 0.5s;
+
+    bottom: 4%;
+    right: 10%;
 
     margin-bottom: 2%;
+}
+
+.Button:hover{
+    background-color:#6e8aed;
+    transition: 0.5s;
+}
+
+.Button::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
 }
 
 .icon{

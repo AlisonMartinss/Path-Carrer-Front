@@ -41,18 +41,28 @@
 
 .core{
     display: flex;
+    flex-direction: row-reverse;
     justify-content: flex-start;
     align-items: center;
 
     width: 100vw;
     height: 90vh;
+    
 }
 
 .sideBar{
-    width: 25vw;
+    position: relative;
+    overflow: visible; /* Permite que elementos filhos ultrapassem */
+
+    width: 23vw;
     height: 90vh;
 
-    background-color: #99a7db7a;
+    border-left: 0.2vw solid #ffff;
+
+
+    background-color: #2a3764;
+
+    z-index: 2;
 }
 
 .titlePath{
@@ -70,6 +80,7 @@
 }
 
 .classAreaAll{
+    
     width: 23vw;
     height: 73vh;
 
@@ -82,17 +93,16 @@
     width: 0.0vw; /* Largura da barra */
 }
 
-
-
 .classArea{
+    position: relative;
+    overflow: visible; /* Permite que elementos filhos ultrapassem */
+    
     display:  flex;
     justify-content: center;
     align-items: center;
     
     width: 100%;
     height: 10%;
-
-    margin-top: 2%;
 }
 
 .forumArea{
@@ -112,7 +122,8 @@
 }
 
 .forumArea:hover{
-    background-color: #69718E;
+    color: #051b67;
+    background-color: #ffffff;
 }
 
 .icone{
@@ -129,19 +140,17 @@
     justify-content: center;
     align-items: flex-start;
 
-    width: 73vw;
+    width: 77vw;
     height: 90vh;
 
     overflow-y: scroll;
     flex-wrap: wrap;
 
-    background-color:#D9D9D9 ;
-
     gap: 10%;
 }
 
 .contentArea::-webkit-scrollbar {
-    width: 1vw; /* Largura da barra */
+    width: 0vw; /* Largura da barra */
 }
 
 .contentArea::-webkit-scrollbar-track {
@@ -160,6 +169,7 @@
 
     width: 100%;
     height: 100%;
+    
 }
 
 .editar{
@@ -173,7 +183,7 @@
     width: 5vw;
     height: 30vh;
 
-    left: 2%;
+    right: 4%;
     top: 8.5%;
 
     gap: 2%;
@@ -205,8 +215,6 @@
 .icon{
     width: 55%;
     height: 55%;
-
-    background-color: aqua;
 }
 
 .vidArea{
@@ -219,8 +227,8 @@
     background-color: #393F54;
     border-radius: 1vw;
 
-    width: 74%;
-    height: 74%;
+    width: 80%;
+    height: 75%;
 }
 
 .videoMain{
@@ -240,7 +248,7 @@
     background-color: #69718E;
     border-radius: 1vw;
 
-    width: 70%;
+    width: 76%;
     min-height: 50%;
 
     margin-bottom: 5%;
@@ -257,12 +265,44 @@
     justify-content: center;
     align-items: flex-start;
 
-    width: 73vw;
+    width: 60vw;
     height: 90vh;
 
-    background-color:#D9D9D9 ;
+    background-color:#747B97 ;
 
     gap: 10%;
+}
+
+.forumTopPost{
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    bottom: 14%;
+    right: 8%;
+
+    width: 3vw;
+    border-radius: 2vw;
+
+    background-color: #ffff;
+    transition: 0.5s;
+
+    z-index: 2;
+
+    animation: emergirBaixo 0.8s ease-out 
+}
+
+.forumTopPost:hover{
+    background-color:#6e8aed;
+    transition: 0.5s;
+}
+
+.forumTopPost::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
 }
 
 .PostCommentArea{
@@ -272,13 +312,26 @@
     justify-content: center;
     align-items: flex-start;
 
-    width: 60%;
-    height: 50%;
+    width: 80%;
+    height: 60%;
 
     left: 15%;
     top: 20%;
 
     z-index: 3;
+}
+
+.backScroll{
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 75vw;
+    height: 90vh;
+
+    background-color: #6e8aed;
 }
 
 .forumScroll{
@@ -288,21 +341,22 @@
     justify-content: center;
     align-items: flex-start;
 
-    width: 55vw;
-    height: 89vh;
+    width: 75%;
+    height: 90vh;
 
     overflow-y: scroll;
     flex-wrap: wrap;
 
     background-color:#747B97 ;
 
-    padding-bottom: 1vh;
 
-    gap: 3%;
+    gap: 1%;
+
+    z-index: 1;
 }
 
 .forumScroll::-webkit-scrollbar {
-    width: 0.8vw; /* Largura da barra */
+    width: 0vw; /* Largura da barra */
 }
 
 .forumScroll::-webkit-scrollbar-track {
@@ -321,9 +375,8 @@
     justify-content: center;
     align-items: center;
     
-    width: 80%;
-    height: 35%;
-
+    width: 100%;
+    height: 40%;
 }
 
 
@@ -372,8 +425,6 @@
 
     margin-left: 12%;
     animation: emergirEsquerda 0.8s ease-out 
-    
-
 }
 
 .leave{

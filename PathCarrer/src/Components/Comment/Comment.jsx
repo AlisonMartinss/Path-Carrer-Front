@@ -38,9 +38,12 @@ function Comment ({imgURL,comment,nickName,onClickIcon1,onClickIcon2,responseAct
                 :null}
 
             </div>
-            <div onClick={responseAction} className={`${styles.answerAction} ${styles.txtover}`}>
+            {responseAction !== null ? (
+             <div onClick={responseAction} className={`${styles.answerAction} ${styles.txtover}`}>
                 responder
-            </div>
+             </div>
+            ):null}
+            
             <div className={styles.commentMain}>
               <div className={`${styles.commentCore} ${styles.txtover2}`}>
                 {comment}
