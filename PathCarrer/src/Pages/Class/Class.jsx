@@ -10,6 +10,7 @@ import { LiaComments } from "react-icons/lia";
 import Comment from '../../Components/Comment/Comment'
 import PostComment from '../../Components/PostComment/PostComment.jsx'
 import { PiBookOpenDuotone } from "react-icons/pi";
+import LoadIcon from '../../Components/LoadIcon/LoadIcon.jsx'
 
 import { DeleteClassUnicAPI, DeleteModule, PostCommentFunc, DeleteComment} from './ClassAux';
 
@@ -294,12 +295,26 @@ const captchaAnswer = (addres,casas) => {
   
 
   if (isLoading) { // Enquanto espera resposta da API.
-      return <div>Carregando...</div>;
+      return <div className={styles.telaLoad}>
+         <header className={styles.header}><CabecalhoPadrao/></header>
+         <div className={styles.telaLoad_loadMessage}>
+           <LoadIcon
+           iconV={null}
+           msg={"Carregando informações do modulo"}/>
+         </div>
+        </div>;
   }
 
   if (!ContentJSON?.modulos || !Array.isArray(ContentJSON.modulos)) {
       console.log(ContentJSON.modulos);
-      return <div>Erro ao carregar os dados do módulo.</div>;
+      return <div className={styles.telaLoad}>
+      <header className={styles.header}><CabecalhoPadrao/></header>
+      <div className={styles.telaLoad_loadMessage}>
+        <LoadIcon
+        iconV={"BiSolidMessageSquareError"}
+        msg={"Erro ao carregar informações do modulo"}/>
+      </div>
+     </div>;
   }
 
     return (

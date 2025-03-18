@@ -44,8 +44,6 @@ const comp = {
     MdSend,CiEdit,BsSendFill
 }
 
-/* =-=-=-=-= Functions =-=-=-=-= */
-
     const Componente =  comp[iconV]
     const classeBase =  styles[icon_style]
 

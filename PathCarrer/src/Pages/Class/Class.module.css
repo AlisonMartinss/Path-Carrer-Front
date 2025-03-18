@@ -24,6 +24,31 @@
     100% { transform: translate(0, 0); }  /* Volta ao normal */
 }
 
+/* Tela de Load */
+
+.telaLoad{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.telaLoad_loadMessage{
+    position: relative;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 10%;
+
+    width: 20vw;
+    height: 25vh;
+}
+
 
 .main{
     display: flex;
@@ -58,11 +83,15 @@
     height: 90vh;
 
     border-left: 0.2vw solid #ffff;
-
-
     background-color: #2a3764;
 
+    overflow-y: scroll;
+
     z-index: 2;
+}
+
+.sideBar::-webkit-scrollbar {
+    width: 0.0vw; /* Largura da barra */
 }
 
 .titlePath{
