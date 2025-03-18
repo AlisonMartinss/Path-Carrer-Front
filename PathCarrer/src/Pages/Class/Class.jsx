@@ -9,6 +9,7 @@ import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
 import { LiaComments } from "react-icons/lia";
 import Comment from '../../Components/Comment/Comment'
 import PostComment from '../../Components/PostComment/PostComment.jsx'
+import { PiBookOpenDuotone } from "react-icons/pi";
 
 import { DeleteClassUnicAPI, DeleteModule, PostCommentFunc, DeleteComment} from './ClassAux';
 
@@ -154,6 +155,16 @@ const resetAnswers = () => { // Reset
   });
 };
 
+const resetAnswerCurrent = () => { // Reset
+  SetAnswerCurrent({
+    active: false,
+    deleteActive: false
+  });
+};
+
+
+
+
 async function CallPostComment (addresX,commentCore) {
   /**
    * Reponder:
@@ -235,6 +246,7 @@ const captchaAnswer = (addres,casas) => {
             active:true,
             commentON:PseudoAddres
           }));
+          resetAnswerCurrent()  
       }
       else {
         PseudoAddres = captchaAnswer([0],0)
@@ -244,12 +256,15 @@ const captchaAnswer = (addres,casas) => {
             active:false,
             commentON:PseudoAddres
           }));
+
+        resetAnswerCurrent()    
       }
     }
   },[ContentJSON,answerCurrent.active])
 
   useEffect(() => {
     if (ContentJSON && ContentJSON.comments && answerCurrent.deleteActive === true) {
+      console.log(answer)
 
       if (answerCurrent.addres.length > 1){
       const AnswerON = captchaAnswer(answerCurrent.addres,1)
@@ -259,6 +274,7 @@ const captchaAnswer = (addres,casas) => {
             commentON:AnswerON,
           }
         ));
+        resetAnswerCurrent()    
       }
       else{
         const AnswerON = captchaAnswer(answerCurrent.addres,1)
@@ -269,11 +285,11 @@ const captchaAnswer = (addres,casas) => {
             commentON:AnswerON,
           }
         ));
-
+        resetAnswerCurrent()  
       }
         
     }
-  },[ContentJSON,answerCurrent.deleteActive])
+  },[ContentJSON,answerCurrent.deleteActive=== true])
 
   
 
@@ -302,7 +318,8 @@ const captchaAnswer = (addres,casas) => {
 
                 {/* Verificando se ContentJSON.modulos é um array e se não está vazio */}
                 {Array.isArray(ContentJSON.modulos) && ContentJSON.modulos.length > 0 ? (
-                          ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].modulocontent.map((element,index) => (                           
+                          ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].modulocontent.map((element,index) => (
+                                                       
                             <div className={styles.classArea}>
                                 <ClassComponent
                                   title={element.title}
@@ -324,31 +341,39 @@ const captchaAnswer = (addres,casas) => {
               </div>
 
               {forumON === false ? (
-                  <div className={styles.contentArea}>
-                    {
-                      entity === "author" ? (
-                        <div className={styles.editar}>
-                          {buttonsRender.map((element) => 
-                            <div title={element.title} className={styles.edit}>                     
-                            <ButtonIMG
-                              iconV={element.iconV}
-                              icon_style={"evenConstStyle"}
-                              handleClick={(e) => redirectActivity(element.core)}/>                  
-                            </div>
-                          )}                 
-                        </div>
-                      ):null
-                    }
-                    <div className={styles.vidArea}>
-                      <iframe className={styles.videoMain} src={`https://www.youtube.com/embed/${ClassLinkON}`} frameborder="0"></iframe>
-                    </div>
-                    <div className={`${styles.descArea} ${styles.txt}`}>
-                      {DescON}
-                    </div>
-                  </div>
+                localStorage.getItem("ClassIndex") !== "0" ? (
 
+                  <div className={styles.contentArea}>
+                  {
+                    entity === "author" ? (
+                      <div className={styles.editar}>
+                        {buttonsRender.map((element) => 
+                          <div title={element.title} className={styles.edit}>                     
+                          <ButtonIMG
+                            iconV={element.iconV}
+                            icon_style={"evenConstStyle"}
+                            handleClick={(e) => redirectActivity(element.core)}/>                  
+                          </div>
+                        )}                 
+                      </div>
+                    ):null
+                  }
+                  <div className={styles.vidArea}>
+                    <iframe className={styles.videoMain} src={`https://www.youtube.com/embed/${ClassLinkON}`} frameborder="0"></iframe>
+                  </div>
+                  <div className={`${styles.descArea} ${styles.txt}`}>
+                    {DescON}
+                  </div>
+                </div> 
+                ):
+                <div className={styles.apresentacao}>
+                  <div className={`${styles.tituloModulo} ${styles.txt3}`}>
+                    <PiBookOpenDuotone/>
+                    {ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].name}
+                  </div>
+                  <div className={`${styles.desc} ${styles.txt3}`}>{DescON}</div>
+                </div>
               ):
-              
                 <div className={styles.forumCore}>
 
                   <div className={styles.forumTopPost}>
@@ -360,8 +385,6 @@ const captchaAnswer = (addres,casas) => {
                     />
                   </div>
 
-                  
-
 
                   {PostCommentON.active === true ?
                   (
@@ -370,6 +393,7 @@ const captchaAnswer = (addres,casas) => {
                       onClose= {(e) => SetPostComment((prevState) => ({prevState,active:false}))}
                       inputTXT={(e) => SetPostComment((prev) => ({...prev,commentMain:e.target.value}))}
                       buttonON={(e) => CallPostComment(PostCommentON.addresON,PostCommentON.commentMain)}
+                      maxlength={"230"}
                      />
                     </div>
                   )
@@ -377,24 +401,35 @@ const captchaAnswer = (addres,casas) => {
                   
 
                   {answer.active === false ? 
-                    (
+                    ( 
                       <div className={styles.forumScroll}>
-                      {
-                        ContentJSON.comments.map((element) => (
-                          <div className={styles.comment}>
-                            <Comment
-                              nickName={`${element.userName}`}
-                              comment={element.comment}
-                              imgURL={element.pictureProfile}
-                              onClickIcon1={(e) => viewAnswers(element)}
-                              nAnswers={Array.isArray(element.answers) ? formatarNumero(element.answers.length) : 0}
-                              responseAction={(e) => SetPostComment((prevState) => ({prevState,active:true,addresON:element.address}))}
-                              onClickIcon2={(e) => CallDeleteComment(element.address)}
-                            />
+                        {ContentJSON.comments.length > 0 ? (
+                          ContentJSON.comments.map((element) => (
+                            <div className={styles.comment} key={element.address.join("-")}>
+                              <Comment
+                                nickName={`${element.userName}`}
+                                comment={element.comment}
+                                imgURL={element.pictureProfile}
+                                onClickIcon1={() => viewAnswers(element)}
+                                nAnswers={Array.isArray(element.answers) ? formatarNumero(element.answers.length) : 0}
+                                responseAction={() => SetPostComment((prevState) => ({
+                                  ...prevState, active: true, addresON: element.address
+                                }))}
+                                onClickIcon2={() => CallDeleteComment(element.address)}
+                              />
+                            </div>
+                          ))
+                        ) : (
+                          <div className={`${styles.CTOforum} ${styles.txt3}`}>
+                            <div className={styles.CTOforum_img}>
+                              <img className={styles.img} src="https://usagif.com/wp-content/uploads/cat-typing-12.gif" alt="CTO" />
+                            </div>
+
+                            <div className={styles.CTOforum_txt}>
+                              Seja o primeiro a cometar no forum !
+                            </div>
                           </div>
-                          
-                        ))
-                      }
+                        )}
                       </div>
                     )
                     :
@@ -416,12 +451,16 @@ const captchaAnswer = (addres,casas) => {
                             nickName={answer.commentON.userName}
                             comment={answer.commentON.comment}
                             imgURL={answer.commentON.pictureProfile}
-                            onClickIcon1={(e) => alert("Vc já está no indice")}
+                            onClickIcon1={(e) => alert("Você já está no espaço de respostas desse comentario")}
                             nAnswers={Array.isArray(answer.commentON.answers) ? formatarNumero(answer.commentON.answers.length) : 0}
                             responseAction={(e) => SetPostComment((prevState) => ({prevState,active:true,addresON:answer.commentON.address}))}
                             onClickIcon2={(e) => CallDeleteComment(answer.commentON.address)}
                           />
                       </div>
+                      {answer.commentON.answers.length !== 0 ? (
+                        <div className={styles.linhaSeparadora}></div>
+                      ):null}
+                      
 
                       {answer.commentON.answers.map((element) => (
                         <div className={styles.commentAnswer}>

@@ -70,3 +70,27 @@
     right: -6.0%;
     top: 1%;
 }
+
+.cRestantes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30%;
+    height: 10%;
+
+    margin-left: -50%;
+    margin-top: -5%;
+
+    background-color: rgba(77, 89, 187, 0.662);
+    border-radius: 0.5vw;
+
+}
+
+.txt{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.4em,0.9vw, 5em);
+    color: #ffffff
+}

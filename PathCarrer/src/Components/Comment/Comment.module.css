@@ -152,7 +152,9 @@ height: 85%;
     
 
     width: 90%;
-    height: 90%;
+    min-height: 90%;
+
+    word-wrap: break-word;
 
     border-radius: 0.8vw;
     margin-right: 3%;
@@ -172,6 +174,8 @@ height: 85%;
 
     margin-top: 2%;
     margin-right: -6%;
+
+    white-space: pre-wrap;
 }
 
 .txtover{
