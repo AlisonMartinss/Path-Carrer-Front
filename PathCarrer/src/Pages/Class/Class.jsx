@@ -152,14 +152,44 @@ const redirectActivity = (e) => {
   }
 };
 
-const viewAnswers = (element) => { // Neste ponto ativamos a visu de respostas
-  console.log(element)
-  SetAnswer((prevState) => (
-    {
-      prevState,
-      active:true,
-      commentON:element
-    }));
+const viewAnswers = (elementZ) => { // Neste ponto ativamos a visu de respostas
+
+    async function fetchComments(elementZ) {
+      const updatedComments = 
+      {
+        userName:elementZ.userName,
+        pictureProfile:elementZ.pictureProfile,
+        worldIDDesvio:elementZ.worldIDDesvio,
+        comment:elementZ.comment,
+        address:elementZ.address,
+        answers:[]
+      };
+
+      for (const element of elementZ.answers) {
+        try {
+          const user = await GetInfoUser(element.worldIDDesvio);
+          updatedComments.answers.push({
+            userName: user.userName,
+            pictureProfile: user.PictureProfile,
+            worldIDDesvio: element.worldIDDesvio,
+            comment: element.comment,
+            address: element.address,
+            answers:element.answers
+          });
+        } catch (error) {
+          console.error("Erro ao buscar usuário:", error);
+        }
+      }
+      console.log(updatedComments)
+
+    SetAnswer((prevState) => (
+      {
+        active:true,
+        commentON:updatedComments
+      }));
+  };
+
+  fetchComments(elementZ)
 }
 
 const resetAnswers = () => { // Reset
