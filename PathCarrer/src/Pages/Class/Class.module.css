@@ -477,9 +477,6 @@
 
     background-color:#747B97 ;
 
-
-    gap: 1%;
-
     z-index: 1;
 }
 
@@ -502,8 +499,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    margin-top: 2%;
     
     width: 95%;
     height: 40%;
