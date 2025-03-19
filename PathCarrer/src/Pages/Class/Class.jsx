@@ -13,6 +13,7 @@ import { PiBookOpenDuotone } from "react-icons/pi";
 import LoadIcon from '../../Components/LoadIcon/LoadIcon.jsx'
 
 import { DeleteClassUnicAPI, DeleteModule, PostCommentFunc, DeleteComment} from './ClassAux';
+import { GetInfoUser } from '../../Components/1he GlobalFunctions/GlobalFunctions.js'
 
 
 // ==== Context API ==== //
@@ -45,7 +46,6 @@ function Class (){
   */
 
   const navigate = useNavigate();
-  const {SetModeleON} = useContext(PathStepsContext);
   const [ContentJSON, setContentJSON] = useState(); // Conteúdo da resposta da API
 
   /* 
@@ -54,12 +54,17 @@ function Class (){
      - contem renderizações prematuras. 
   */
   const [isLoading, setIsLoading] = useState(true); // Precavine renderizações prematuras
-  
+  const [forumRender,SetForumRender] = useState(
+    {
+      topicComments:[],
+      answerInON:{}
+    }
+  )
   const [ClassLinkON, SetClassLinkON] = useState(null); // Usados para carregar link e desc da aula assistida
   const [DescON, SetDescON] = useState(null);
   const moduleIndex = localStorage.getItem("ModuleIndexON");
 
-  // === Estados e Aux do forum e respostas ==== //
+  // ==== Estados e Aux do forum e respostas ==== //
   const[PostCommentON,SetPostComment] = useState(
     {
       active:false,
@@ -148,6 +153,8 @@ const redirectActivity = (e) => {
 };
 
 const viewAnswers = (element) => { // Neste ponto ativamos a visu de respostas
+  console.log("Resposta: ")
+  console.log(element)
   SetAnswer((prevState) => (
     {
       prevState,
@@ -236,6 +243,35 @@ const captchaAnswer = (addres,casas) => {
       }
   },[ContentJSON]);
 
+  useEffect(() => {
+    alert("Carregando forum")
+    async function fetchComments() {
+      const updatedComments = [];
+  
+      for (const element of ContentJSON.comments) {
+        try {
+          const user = await GetInfoUser(element.worldIDDesvio);
+          updatedComments.push({
+            userName: user.userName,
+            pictureProfile: user.PictureProfile,
+            worldIDDesvio: element.worldIDDesvio,
+            comment: element.comment,
+            address: element.address,
+            answers: element.answers
+          });
+          console.log("foto: " + user.PictureProfile)
+        } catch (error) {
+          console.error("Erro ao buscar usuário:", error);
+        }
+      }
+      console.log(updatedComments)
+  
+      SetForumRender((prev) => ({...prev,topicComments:updatedComments})); // Atualiza o estado com todos os comentários de uma vez
+    };
+
+    fetchComments()
+  }, [forumON===true,answer.active===false]);
+
   useEffect(() => { // Delegar Modulo x user
     if (ContentJSON && ContentJSON.IdAuthor) {
         SetEntityFunc(ContentJSON.IdAuthor);
@@ -244,7 +280,7 @@ const captchaAnswer = (addres,casas) => {
     }
   }, [ContentJSON]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (ContentJSON && ContentJSON.comments && answerCurrent.active === true) {
       let PseudoAddres = [];
       if (!(answerCurrent.addres[0] === undefined)) {
@@ -269,9 +305,9 @@ const captchaAnswer = (addres,casas) => {
         resetAnswerCurrent()    
       }
     }
-  },[ContentJSON,answerCurrent.active])
+  },[ContentJSON,answerCurrent.active])*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (ContentJSON && ContentJSON.comments && answerCurrent.deleteActive === true) {
       console.log(answer)
 
@@ -298,7 +334,7 @@ const captchaAnswer = (addres,casas) => {
       }
         
     }
-  },[ContentJSON,answerCurrent.deleteActive=== true])
+  },[ContentJSON,answerCurrent.deleteActive=== true])*/
 
   
 
@@ -327,7 +363,7 @@ const captchaAnswer = (addres,casas) => {
 
     return (
         <main className={styles.main}>
-            <header className={styles.header}><CabecalhoPadrao/></header>
+            <header className={styles.header}><CabecalhoV2/></header>
             <div className={styles.core}>
 
               <div className={styles.sideBar}>
@@ -423,11 +459,11 @@ const captchaAnswer = (addres,casas) => {
                   :null}
                   
 
-                  {answer.active === false ? 
+                  {answer.active === false ? // COMENTARIOS DE TOPICO. Neste ponto forumON = true.
                     ( 
                       <div className={styles.forumScroll}>
-                        {ContentJSON.comments.length > 0 ? (
-                          ContentJSON.comments.map((element) => (
+                        {forumRender.topicComments.length > 0 ? (
+                          forumRender.topicComments.map((element) => (
                             <div className={styles.comment} key={element.address.join("-")}>
                               <Comment
                                 nickName={`${element.userName}`}
