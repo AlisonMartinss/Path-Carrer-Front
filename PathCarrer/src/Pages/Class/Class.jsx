@@ -153,7 +153,6 @@ const redirectActivity = (e) => {
 };
 
 const viewAnswers = (element) => { // Neste ponto ativamos a visu de respostas
-  console.log("Resposta: ")
   console.log(element)
   SetAnswer((prevState) => (
     {
@@ -243,6 +242,7 @@ const captchaAnswer = (addres,casas) => {
       }
   },[ContentJSON]);
 
+
   useEffect(() => {
     alert("Carregando forum")
     async function fetchComments() {
@@ -257,7 +257,7 @@ const captchaAnswer = (addres,casas) => {
             worldIDDesvio: element.worldIDDesvio,
             comment: element.comment,
             address: element.address,
-            answers: element.answers
+            answers:element.answers
           });
           console.log("foto: " + user.PictureProfile)
         } catch (error) {
@@ -363,7 +363,7 @@ const captchaAnswer = (addres,casas) => {
 
     return (
         <main className={styles.main}>
-            <header className={styles.header}><CabecalhoV2/></header>
+            <header className={styles.header}><CabecalhoPadrao/></header>
             <div className={styles.core}>
 
               <div className={styles.sideBar}>
@@ -459,7 +459,7 @@ const captchaAnswer = (addres,casas) => {
                   :null}
                   
 
-                  {answer.active === false ? // COMENTARIOS DE TOPICO. Neste ponto forumON = true.
+                  {answer.active === false ? // Neste ponto forumON = true.
                     ( 
                       <div className={styles.forumScroll}>
                         {forumRender.topicComments.length > 0 ? (
