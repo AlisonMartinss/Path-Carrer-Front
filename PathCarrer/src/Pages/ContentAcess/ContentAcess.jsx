@@ -22,7 +22,16 @@ import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2.jsx';
 
 function ContentAcess (){
   /* 
-    - Será usado quando capturarmos o id do botao
+     ==== Explicações
+
+     - SetEntityFunc: Definir relação User x Path
+     - GetContent: informações sobre o Paht.
+     - ToIntoModulo: É ativada quando entramos em um modulo,consequentimente 
+       setamos as informações nescessarias para obter informações nescessarias
+       para esse modulo.
+       -
+    -  PathDelete: Chamada quando vamos deletar o path 
+    -  ButtonAction: indentifica qual função estamos chamando quando o user aperta algum botao.
   */
 
     const navigate = useNavigate();
@@ -72,9 +81,8 @@ function ContentAcess (){
 
     const SetEntityFunc = (data,lobyData) => {
         const author = data;
-        const Loby = lobyData.myPaths;
+        const Loby = JSON.parse(localStorage.getItem("LobyInfo")).myPaths;
         if (author === localStorage.getItem("UserName")){
-          alert("O caba")
           SetEntity("author")
         }
         else {
@@ -83,10 +91,8 @@ function ContentAcess (){
             });
         
             if (isStudentOn) {
-                alert("Estudante ativo");
                 SetEntity("studentOn");
             } else {
-                alert("Novato");
                 SetEntity("studentOff");
             }
         }
@@ -116,30 +122,6 @@ function ContentAcess (){
           setIsLoading(false);
         }
     }
-    async function LobyGet () {
-      setIsLoading(true); // Indica que a requisição está em andamento
-      try {
-        const response = await httpClient.post('User/Getloby',
-          {
-            userName:localStorage.getItem("UserName")
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("Token")}`,
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        const JSONdata = response.data;
-        localStorage.setItem("LobyInfo",JSON.stringify(JSONdata));
-      }catch (err){
-        alert ("Erro da chamada LobtGet")
-        console.log(err)
-      }
-      finally {
-        setIsLoading(false); // Sempre será chamado, finalizando o carregamento
-      }
-    }
     const ToIntoModulo = (e,index) => {
       e.preventDefault();
       localStorage.setItem("ModuleIndexON",index)
@@ -160,8 +142,7 @@ function ContentAcess (){
           }
         )
       }catch (err){
-        alert ("Erro da chamada Delete path")
-        console.log(err)
+        alert ("Erro em remover Path")
       }
       finally {
         setIsLoading(false); // Sempre será chamado, finalizando o carregamento
@@ -173,17 +154,13 @@ function ContentAcess (){
     // Nessa função determinamos a ação do Usuario e do autor, que são: Adicionar,
     // excluir Path e Adicionar modulos, editar path
       if (Entity === "author"){
-        alert("API do autor")
         if (e === "Adicionar modulo"){
-          alert("Adicionar modulo")
           navigate('/CreateNewModulo')
         }
         else if (e === "Editar Path"){
-          alert("Editar Path")
           navigate('/updatePath')
         }
         else if (e === "Deletar Path"){
-          alert("Deletar Path")
           PathDelete();
 
         }
@@ -192,13 +169,11 @@ function ContentAcess (){
         }
       }
       else if (Entity === "studentOff"){
-        alert("API do Estudante off")
         if (e === "Student-off-add"){
           AddPath();
         }
       }
       else if (Entity === "studentOn") {
-        alert("API do Estudante on")
         if (e === "Student-on-remove"){
           RemovePath();
         }
@@ -212,7 +187,6 @@ function ContentAcess (){
 
     useEffect(() => {
       GetContent();
-      LobyGet();
     }, []);
 
     return (

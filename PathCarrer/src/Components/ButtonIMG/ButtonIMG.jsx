@@ -28,6 +28,7 @@ import { MdSend } from "react-icons/md";
 import { CiEdit } from "react-icons/ci"; // lapis - soft
 import { BsSendFill } from "react-icons/bs";
 import { IoHome } from "react-icons/io5";
+import { IoIosCompass } from "react-icons/io";
 
 function ButtonIMG ({iconV,icon_style,handleClick,IDValue,title}) {
 
@@ -42,7 +43,7 @@ const comp = {
     TbPencilCog,RxPencil2,FaTrash,IoIosAddCircle,
     HiOutlineTrash,TiGroup,CgComment,
     IoChevronBackCircleSharp,IoIosCloseCircle,
-    MdSend,CiEdit,BsSendFill,IoHome
+    MdSend,CiEdit,BsSendFill,IoHome,IoIosCompass
     
 }
 

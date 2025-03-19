@@ -36,12 +36,16 @@ function CabecalhoV2 ({logoPath,title}){
               handleClick:() => navigate('/createPath'),
               title:"Criar novo path"
               },
-              
               {iconV: "IoHome",
                 icon_style: "evenConstStyle",
                 handleClick:() => navigate('/Loby'),
                 title:"voltar para o loby"
-              }  
+              },
+              {iconV: "IoIosCompass",
+                icon_style: "evenConstStyle",
+                handleClick:() => navigate('/explorer'),
+                title:"voltar para o loby"
+              }
         ]);
 
 
