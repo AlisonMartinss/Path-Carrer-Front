@@ -12,6 +12,7 @@ import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 
 import TXTinputM from '../../Components/TXTinputM/TXTinputM'
 import Conteudo from '../../Components/Conteudo/Conteudo'
+import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2'
 
 function CreatePath ({PreSend}) {
 
@@ -251,7 +252,7 @@ function CreatePath ({PreSend}) {
     return (
         <main className={styles.main}>
          <header className={styles.header}>
-            <CabecalhoPadrao/>
+            <CabecalhoV2/>
          </header>
 
          <div className={styles.PathPrev}>

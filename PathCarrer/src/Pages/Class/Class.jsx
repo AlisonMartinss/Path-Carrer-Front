@@ -3,7 +3,7 @@ import styles from '../Class/Class.module.css'
 import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
 import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
 import ClassComponent from '../../Components/ClassComponent/ClassComponent'
-import {useState,useEffect} from 'react'
+import {useState,useEffect,useContext} from 'react'
 import {useNavigate } from "react-router-dom"
 import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
 import { LiaComments } from "react-icons/lia";
@@ -15,9 +15,15 @@ import LoadIcon from '../../Components/LoadIcon/LoadIcon.jsx'
 import { DeleteClassUnicAPI, DeleteModule, PostCommentFunc, DeleteComment} from './ClassAux';
 
 
+// ==== Context API ==== //
+
+import { PathStepsContext } from '../../Provider/CreatePathSteps/CreatePathSteps.jsx'
+
+
 // ===== Arquivos não componentes ===== //
 
 import { formatarNumero } from '../../Components/JSuteis/conversao.js'
+import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2.jsx'
 
 function Class (){
   /*
@@ -39,6 +45,7 @@ function Class (){
   */
 
   const navigate = useNavigate();
+  const {SetModeleON} = useContext(PathStepsContext);
   const [ContentJSON, setContentJSON] = useState(); // Conteúdo da resposta da API
 
   /* 
@@ -215,6 +222,7 @@ const captchaAnswer = (addres,casas) => {
       if (ContentJSON?.modulos && Array.isArray(ContentJSON.modulos)) {
           
           if (moduleIndex !== null && !isNaN(moduleIndex) && moduleIndex >= 0 && moduleIndex < ContentJSON.modulos.length) {
+              localStorage.setItem("moduleON",JSON.stringify(ContentJSON.modulos[moduleIndex]));
               const firstModuleContent = ContentJSON.modulos[moduleIndex]?.modulocontent?.[0];
               
               if (firstModuleContent) {
@@ -296,7 +304,7 @@ const captchaAnswer = (addres,casas) => {
 
   if (isLoading) { // Enquanto espera resposta da API.
       return <div className={styles.telaLoad}>
-         <header className={styles.header}><CabecalhoPadrao/></header>
+         <header className={styles.header}><CabecalhoV2/></header>
          <div className={styles.telaLoad_loadMessage}>
            <LoadIcon
            iconV={null}

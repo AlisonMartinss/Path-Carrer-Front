@@ -30,29 +30,6 @@ function Loby () {
       navigate('/createpath')
     }
 
-    
-
-    const [leftElements,setModuleTest] = useState([
-          {iconV: "FaFolderOpen",
-          icon_style: "evenConstStyle",
-          handleClick:"",
-          title:"Seus Paths"
-          },
-
-          {iconV: "CgProfile",
-          icon_style: "evenConstStyle",
-          handleClick:"",
-          title:"Perfil"
-          },
-
-          {iconV: "IoIosAddCircle",
-          icon_style: "evenConstStyle",
-          handleClick:redirecToCreatePath,
-          title:"Criar novo path"
-          }
-
-          
-    ]);
 
     // ==== API ==== //
 
@@ -90,7 +67,7 @@ function Loby () {
       
         <main className={styles.main}>
             <header className={styles.header}>
-              <CabecalhoV2 leftElements={leftElements}/>
+              <CabecalhoV2/>
             </header>
             <div className={styles.pre_coreArea}>
               <div className={styles.coreArea}>

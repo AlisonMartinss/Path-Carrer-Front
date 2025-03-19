@@ -31,7 +31,9 @@ export const PathStepsProvider = ({children}) => {
         }
     )
 
-    return <PathStepsContext.Provider value={{oneStap,SetOneStap,twoStep,setTwoStep,threeStep,setThreeStep,APImodel,SetAPImodel}}>
+    const [modeleON,SetModeleON] = useState([]);
+
+    return <PathStepsContext.Provider value={{oneStap,SetOneStap,twoStep,setTwoStep,threeStep,setThreeStep,APImodel,SetAPImodel,modeleON,SetModeleON}}>
                {children}
            </PathStepsContext.Provider>
 }

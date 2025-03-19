@@ -27,6 +27,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 import { MdSend } from "react-icons/md";
 import { CiEdit } from "react-icons/ci"; // lapis - soft
 import { BsSendFill } from "react-icons/bs";
+import { IoHome } from "react-icons/io5";
 
 function ButtonIMG ({iconV,icon_style,handleClick,IDValue,title}) {
 
@@ -41,14 +42,15 @@ const comp = {
     TbPencilCog,RxPencil2,FaTrash,IoIosAddCircle,
     HiOutlineTrash,TiGroup,CgComment,
     IoChevronBackCircleSharp,IoIosCloseCircle,
-    MdSend,CiEdit,BsSendFill
+    MdSend,CiEdit,BsSendFill,IoHome
+    
 }
 
     const Componente =  comp[iconV]
     const classeBase =  styles[icon_style]
 
     return (
-        <div title={title} id={IDValue} onClick={handleClick} className={styles.button}>
+        <div title={title} id={IDValue} onClick={(e) => handleClick(e)} className={styles.button}>
             < Componente className={`${classeBase}`}/>
         </div>
     )

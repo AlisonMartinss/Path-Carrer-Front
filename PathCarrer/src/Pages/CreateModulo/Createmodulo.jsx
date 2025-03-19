@@ -7,6 +7,7 @@ import Button from '../../Components/Button/Button'
 
 import {useEffect, useContext} from 'react'
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
+import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2'
 
 function CreateModulo ({redirec,APIroute}) {
     const {twoStep,setTwoStep,SetAPImodel} = useContext(PathStepsContext);
@@ -47,7 +48,7 @@ function CreateModulo ({redirec,APIroute}) {
     return (
         <main className={styles.main}>
             <header className={styles.header}>
-                <CabecalhoPadrao/>
+                <CabecalhoV2/>
             </header>
             <form className={styles.form}>
               <div className={styles.moduloName}>

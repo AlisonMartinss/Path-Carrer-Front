@@ -17,6 +17,7 @@ import {useNavigate } from "react-router-dom"
 import {useState,useEffect} from 'react'
 import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
 import { AddPath,RemovePath} from '../ContentAcess/ContentAcessAux.js';
+import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2.jsx';
 
 
 function ContentAcess (){
@@ -217,7 +218,7 @@ function ContentAcess (){
     return (
 
         <main className={styles.main}>
-            <header className={styles.header}><CabecalhoPadrao/></header>
+            <header className={styles.header}><CabecalhoV2/></header>
             <div className={styles.core}>
                 
              <div className={`${isClicked ? styles.sideBarOFF : styles.sideBar}`}>

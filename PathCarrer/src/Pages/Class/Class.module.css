@@ -77,7 +77,6 @@
 
 .sideBar{
     position: relative;
-    overflow: visible; /* Permite que elementos filhos ultrapassem */
 
     width: 23vw;
     height: 90vh;

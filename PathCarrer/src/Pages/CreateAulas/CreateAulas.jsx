@@ -1,6 +1,4 @@
 import styles from '../CreateAulas/CreateAulas.module.css'
-import axios from 'axios'
-import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
 
 // =-=-=-=-=- Componentes =-=-=-=-=- //
 
@@ -15,17 +13,37 @@ import BoxInput from '../../Components/BoxInput/BoxInput'
 // =-=-=-=-= Midias =-=-=-=-= //
 import JP2 from '../../assets/Midias/JP2.png'
 
-// =-=-=-=-= Provider =-=-=-=-= //
+/*
+  ===== Explicações =====
+
+  - handlePermissionAPI: Quando clicado em 'enviar' a lista (lista de objeto de aula) formulada aqui 
+    será delegada em 'threeStep'.
+  - verify: verifica se a aula está nos padrões adequados.
+  - select: seleciona indice.
+  - completion: ativa a API passada em APIoption.
+  - setPlace: Quando uma aula é adicionada, essa função adiciona mais um indice disponivel na lista
+    que baseia os indices disponiveis.
+  - setObjectClass: Quando obtemos os inputs das aulas (titulo,link, e desc), nessa função colocamos
+    os devidos inputs nos devidos atributos do objeto 'molde' (que o modelo de aula)
+  - setElementClass: Insere elemento na lista de aulas que será enviada.  
+ 
+  - molde: modelo (classe) de aula.
+  - indice: indica os indices disponiveis para aulas.
+  - indiceAtual: indice do elemento que atualmente está sendo editado. 'head' indica 
+    o indice do elemento que está sendo editado. 'tail' tamanho atual da lista para indicarmos indices coerentes.
+    
+*/
 
 
 import { useNavigate } from "react-router-dom"
 
 import { useContext, useState,useEffect } from 'react'
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
+import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2'
 
 function CreateAulas ({APIoption,circumstance}){
 
-  const {oneStap,twoStep,threeStep,setThreeStep,SetAPImodel,APImodel} = useContext(PathStepsContext);
+  const {threeStep,setThreeStep,SetAPImodel,modeleON} = useContext(PathStepsContext);
 
   const handlePermissionAPI = () => {
     SetAPImodel((prev) => ({
@@ -105,20 +123,35 @@ function CreateAulas ({APIoption,circumstance}){
       
       if (verify(molde) == true){
           if (circumstance !== ("CreatePath") && circumstance !== ("EditModulo")){
-            setThreeStep((prevState) => {
-              const newState = [...prevState];     
-              newState[0] = molde;
-              alert ("Aula adicionada com sucesso");
-              return newState;
-            })
+            if (modeleON.some(item => item.title === molde.title)){
+              setThreeStep((prevState) => {
+                const newState = [...prevState];     
+                newState[0] = molde;
+                alert ("Aula adicionada com sucesso");
+                return newState;
+              })
+            }
+            
+            else {
+              alert("Já existe uma aula com esse titulo")
+            }
+            
+
+            
+            
           }
           else if (((indiceAtual.head + 1) >= 1)){
-            setThreeStep((prevState) => {
-              const newState = [...prevState];
-              newState[indiceAtual.head] = molde;
-              alert ("Aula adicionada com sucesso");
-              return newState;
-            })
+            if (!(JSON.parse(localStorage.getItem("moduleON")).some(item => item.title === molde.title))){
+              setThreeStep((prevState) => {
+                const newState = [...prevState];
+                newState[indiceAtual.head] = molde;
+                alert ("Aula adicionada com sucesso");
+                return newState;
+              })
+            }
+            else {
+              alert("Já existe uma aula com esse titulo")
+            }
           }
           else {
             alert("Selecione um indice valido")
@@ -126,36 +159,6 @@ function CreateAulas ({APIoption,circumstance}){
           
       }
   };
-
-  async function onSubmitPath (e) {
-    e.preventDefault()
-    try {
-      const response = await httpClient.post('PathCreate',
-        {
-          onePathDTO: 
-            {
-              title:oneStap.title,
-              category:oneStap.category,
-              descPathOver:oneStap.descPathOver,
-              tags:oneStap.tags,
-              adjetives:oneStap.adjectives
-            },
-
-          twoPathDTO:
-            {
-                title:twoStep.titleModule,
-                desc:twoStep.descModule,
-                ClassList:threeStep
-            }
-
-        }
-      )
-      alert("Aulas cadastradas")
-    }catch (err){
-      alert ("Erro")
-      console.log(err)
-    }
-  }
 
   
   const completion = (e) => {
@@ -185,7 +188,7 @@ function CreateAulas ({APIoption,circumstance}){
 
     return (
         <main className={styles.main}>
-            <header className={styles.head}><CabecalhoPadrao/></header>
+            <header className={styles.head}><CabecalhoV2/></header>
 
             <div className={styles.core}>
 
