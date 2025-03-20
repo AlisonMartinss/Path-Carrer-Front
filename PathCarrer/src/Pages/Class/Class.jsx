@@ -67,16 +67,17 @@ function Class (){
   // ==== Estados e Aux do forum e respostas ==== //
   const[PostCommentON,SetPostComment] = useState(
     {
-      active:false,
-      commentMain:"",
-      addresON:[]
+      active:false, // renderizar caixa de input de texto
+      commentMain:"", // comentario em questão
+      addresON:[], // emdereço do pai do futuro comentario
+      elementX:{} // OBJ pai
     });
   const [forumON,SetForum] = useState(false); // Usado para saber se deve-se carregar o forum.
 
   const [answerCurrent,SetAnswerCurrent] = useState( // Esse estado ajuda a nos manter na pagina correta do comentario que interagimos
     {
-      active:false,
-      deleteActive:false,
+      active:false, // Para chamar o userEffect caso estivermos postando comentario
+      deleteActive:false, // Para chamar o userEffect caso estivermos deletando comentario
       addres:null
     }
   );
@@ -152,45 +153,75 @@ const redirectActivity = (e) => {
   }
 };
 
-const viewAnswers = (elementZ) => { // Neste ponto ativamos a visu de respostas
-
-    async function fetchComments(elementZ) {
-      const updatedComments = 
-      {
-        userName:elementZ.userName,
-        pictureProfile:elementZ.pictureProfile,
-        worldIDDesvio:elementZ.worldIDDesvio,
-        comment:elementZ.comment,
-        address:elementZ.address,
-        answers:[]
-      };
-
-      for (const element of elementZ.answers) {
-        try {
-          const user = await GetInfoUser(element.worldIDDesvio);
-          updatedComments.answers.push({
-            userName: user.userName,
-            pictureProfile: user.PictureProfile,
-            worldIDDesvio: element.worldIDDesvio,
-            comment: element.comment,
-            address: element.address,
-            answers:element.answers
-          });
-        } catch (error) {
-          console.error("Erro ao buscar usuário:", error);
-        }
-      }
-      console.log(updatedComments)
-
-    SetAnswer((prevState) => (
-      {
-        active:true,
-        commentON:updatedComments
-      }));
+async function fetchCommentOBJ(elementZ) {
+  const updatedComments = 
+  {
+    userName:elementZ.userName,
+    pictureProfile:elementZ.pictureProfile,
+    worldIDDesvio:elementZ.worldIDDesvio,
+    comment:elementZ.comment,
+    address:elementZ.address,
+    answers:[]
   };
 
-  fetchComments(elementZ)
-}
+  for (const element of elementZ.answers) {
+    try {
+      const user = await GetInfoUser(element.worldIDDesvio);
+      updatedComments.answers.push({
+        userName: user.userName,
+        pictureProfile: user.PictureProfile,
+        worldIDDesvio: element.worldIDDesvio,
+        comment: element.comment,
+        address: element.address,
+        answers:element.answers
+      });
+    } catch (error) {
+      console.error("Erro ao buscar usuário:", error);
+    }
+  }
+
+  return updatedComments;
+};
+
+async function fetchCommentOBJfromJSON(elementZ) {
+  const userA = await GetInfoUser(elementZ.worldIDDesvio);
+  const updatedComments = 
+  {
+    userName:userA.userName,
+    pictureProfile:userA.PictureProfile,
+    worldIDDesvio:elementZ.worldIDDesvio,
+    comment:elementZ.comment,
+    address:elementZ.address,
+    answers:[]
+  };
+
+  for (const element of elementZ.answers) {
+    try {
+      const users = await GetInfoUser(element.worldIDDesvio);
+      updatedComments.answers.push({
+        userName: users.userName,
+        pictureProfile: users.PictureProfile,
+        worldIDDesvio: element.worldIDDesvio,
+        comment: element.comment,
+        address: element.address,
+        answers:element.answers
+      });
+    } catch (error) {
+      console.error("Erro ao buscar usuário:", error);
+    }
+  }
+
+  return updatedComments;
+};
+
+const viewAnswers = async (elementZ) => { // Agora a função é assíncrona
+  const OBJ = await fetchCommentOBJ(elementZ); // Espera a resposta corretamente
+
+  SetAnswer(() => ({
+    active: true,
+    commentON: OBJ
+  }));
+};
 
 const resetAnswers = () => { // Reset
   SetAnswer({
@@ -209,7 +240,7 @@ const resetAnswerCurrent = () => { // Reset
 
 
 
-async function CallPostComment (addresX,commentCore) {
+async function CallPostComment (addresX,commentCore,elementX) {
   /**
    * Reponder:
    * (addred,comment)
@@ -241,12 +272,15 @@ async function CallDeleteComment (addresX) {
   SetAnswerCurrent((prev) => ({...prev,deleteActive:true}))
 }
 
-const captchaAnswer = (addres,casas) => {
+async function captchaAnswer (addres,casas) {
   let currentComment = ContentJSON.comments[addres[0]];
   for (let i = 1; i < (addres.length - casas) ; i++ ){
     currentComment = currentComment.answers[addres[i]]
   }
-  return currentComment
+  console.log(currentComment)
+  console.log("=================================")
+  console.log(await fetchCommentOBJfromJSON(currentComment))
+  return await fetchCommentOBJfromJSON(currentComment)
 }
 
 
@@ -274,7 +308,6 @@ const captchaAnswer = (addres,casas) => {
 
 
   useEffect(() => {
-    alert("Carregando forum")
     async function fetchComments() {
       const updatedComments = [];
   
@@ -310,7 +343,7 @@ const captchaAnswer = (addres,casas) => {
     }
   }, [ContentJSON]);
 
-  /*useEffect(() => {
+  useEffect(() => { // quando postado um comentario, essa estrutura redireciona.
     if (ContentJSON && ContentJSON.comments && answerCurrent.active === true) {
       let PseudoAddres = [];
       if (!(answerCurrent.addres[0] === undefined)) {
@@ -319,7 +352,7 @@ const captchaAnswer = (addres,casas) => {
           {
             ...prevState,
             active:true,
-            commentON:PseudoAddres
+            commentON:captchaAnswer(answerCurrent.addres,0)
           }));
           resetAnswerCurrent()  
       }
@@ -329,15 +362,14 @@ const captchaAnswer = (addres,casas) => {
           {
             ...prevState,
             active:false,
-            commentON:PseudoAddres
           }));
 
         resetAnswerCurrent()    
       }
     }
-  },[ContentJSON,answerCurrent.active])*/
+  },[ContentJSON,answerCurrent.active === true])
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (ContentJSON && ContentJSON.comments && answerCurrent.deleteActive === true) {
       console.log(answer)
 
@@ -364,7 +396,7 @@ const captchaAnswer = (addres,casas) => {
       }
         
     }
-  },[ContentJSON,answerCurrent.deleteActive=== true])*/
+  },[ContentJSON,answerCurrent.deleteActive=== true])
 
   
 
@@ -502,7 +534,7 @@ const captchaAnswer = (addres,casas) => {
                                 onClickIcon1={() => viewAnswers(element)}
                                 nAnswers={Array.isArray(element.answers) ? formatarNumero(element.answers.length) : 0}
                                 responseAction={() => SetPostComment((prevState) => ({
-                                  ...prevState, active: true, addresON: element.address
+                                  ...prevState, active: true, addresON: element.address, elementX:element
                                 }))}
                                 onClickIcon2={() => CallDeleteComment(element.address)}
                               />
@@ -523,8 +555,8 @@ const captchaAnswer = (addres,casas) => {
                     )
                     :
                     /* Neste ponto vemos ativamos as 'answers' */
-                    
-                    <div className={styles.forumScroll}>
+                    // forumON === true e answer.active === true
+                    <div className={styles.forumScroll}> 
 
                       <div className={styles.leave}>
                         <ButtonIMG
@@ -542,10 +574,12 @@ const captchaAnswer = (addres,casas) => {
                             imgURL={answer.commentON.pictureProfile}
                             onClickIcon1={(e) => alert("Você já está no espaço de respostas desse comentario")}
                             nAnswers={Array.isArray(answer.commentON.answers) ? formatarNumero(answer.commentON.answers.length) : 0}
-                            responseAction={(e) => SetPostComment((prevState) => ({prevState,active:true,addresON:answer.commentON.address}))}
+                            responseAction={(e) => SetPostComment((prevState) => (
+                              {prevState,active:true,addresON:answer.commentON.address, elementX:answer.commentON}))}
                             onClickIcon2={(e) => CallDeleteComment(answer.commentON.address)}
                           />
                       </div>
+
                       {answer.commentON.answers.length !== 0 ? (
                         <div className={styles.linhaSeparadora}></div>
                       ):null}
@@ -559,7 +593,8 @@ const captchaAnswer = (addres,casas) => {
                             imgURL={element.pictureProfile}
                             onClickIcon1={(e) => viewAnswers(element)}
                             nAnswers={Array.isArray(element.answers) ? formatarNumero(element.answers.length) : 0}
-                            responseAction={(e) => SetPostComment((prevState) => ({prevState,active:true,addresON:element.address}))}
+                            responseAction={(e) => SetPostComment((prevState) => (
+                              {prevState,active:true,addresON:element.address, elementX:element}))}
                             onClickIcon2={(e) => CallDeleteComment(element.address)}
                           />
                         </div>
