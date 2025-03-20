@@ -78,7 +78,7 @@ function Class (){
     {
       active:false, // Para chamar o userEffect caso estivermos postando comentario
       deleteActive:false, // Para chamar o userEffect caso estivermos deletando comentario
-      addres:null
+      addres:[]
     }
   );
   const [answer,SetAnswer] = useState( // Trabalhamos aqui quando lidamos com respostas ao comentario de alguem
@@ -216,7 +216,6 @@ async function fetchCommentOBJfromJSON(elementZ) {
 
 const viewAnswers = async (elementZ) => { // Agora a função é assíncrona
   const OBJ = await fetchCommentOBJ(elementZ); // Espera a resposta corretamente
-
   SetAnswer(() => ({
     active: true,
     commentON: OBJ
@@ -240,7 +239,7 @@ const resetAnswerCurrent = () => { // Reset
 
 
 
-async function CallPostComment (addresX,commentCore,elementX) {
+async function CallPostComment (addresX,commentCore) {
   /**
    * Reponder:
    * (addred,comment)
@@ -272,26 +271,24 @@ async function CallDeleteComment (addresX) {
   SetAnswerCurrent((prev) => ({...prev,deleteActive:true}))
 }
 
-async function captchaAnswer (addres,casas) {
+function captchaAnswer (addres,casas) {
   let currentComment = ContentJSON.comments[addres[0]];
   for (let i = 1; i < (addres.length - casas) ; i++ ){
     currentComment = currentComment.answers[addres[i]]
   }
-  console.log(currentComment)
-  console.log("=================================")
-  console.log(await fetchCommentOBJfromJSON(currentComment))
-  return await fetchCommentOBJfromJSON(currentComment)
+  return currentComment;
 }
 
 
+  /* ORI-1.0 */
   useEffect(() => {
       GetContent();
   }, []);
-
+  /* ORI-1.1 */
   useEffect(() => {
       if (ContentJSON?.modulos && Array.isArray(ContentJSON.modulos)) {
           
-          if (moduleIndex !== null && !isNaN(moduleIndex) && moduleIndex >= 0 && moduleIndex < ContentJSON.modulos.length) {
+          if (moduleIndex !== null && !isNaN(moduleIndex)) {
               localStorage.setItem("moduleON",JSON.stringify(ContentJSON.modulos[moduleIndex]));
               const firstModuleContent = ContentJSON.modulos[moduleIndex]?.modulocontent?.[0];
               
@@ -307,8 +304,8 @@ async function captchaAnswer (addres,casas) {
   },[ContentJSON]);
 
 
-  useEffect(() => {
-    async function fetchComments() {
+  useEffect(() => { // Chamado quando user clica em forum, será carregado comnetarios de topicos
+    async function fetchComments() { 
       const updatedComments = [];
   
       for (const element of ContentJSON.comments) {
@@ -322,19 +319,20 @@ async function captchaAnswer (addres,casas) {
             address: element.address,
             answers:element.answers
           });
-          console.log("foto: " + user.PictureProfile)
         } catch (error) {
           console.error("Erro ao buscar usuário:", error);
         }
       }
       console.log(updatedComments)
   
-      SetForumRender((prev) => ({...prev,topicComments:updatedComments})); // Atualiza o estado com todos os comentários de uma vez
+      SetForumRender((prev) => ({...prev,topicComments:updatedComments})); 
     };
 
     fetchComments()
-  }, [forumON===true,answer.active===false]);
+    }, [forumON,answer.active]);
 
+
+  /* ORI-1.2 */
   useEffect(() => { // Delegar Modulo x user
     if (ContentJSON && ContentJSON.IdAuthor) {
         SetEntityFunc(ContentJSON.IdAuthor);
@@ -343,34 +341,142 @@ async function captchaAnswer (addres,casas) {
     }
   }, [ContentJSON]);
 
-  useEffect(() => { // quando postado um comentario, essa estrutura redireciona.
+  useEffect(() => { 
     if (ContentJSON && ContentJSON.comments && answerCurrent.active === true) {
-      let PseudoAddres = [];
+      alert("active");
+  
       if (!(answerCurrent.addres[0] === undefined)) {
-        PseudoAddres = captchaAnswer(answerCurrent.addres,0)
-        SetAnswer((prevState) => (
-          {
-            ...prevState,
-            active:true,
-            commentON:captchaAnswer(answerCurrent.addres,0)
-          }));
-          resetAnswerCurrent()  
-      }
-      else {
-        PseudoAddres = captchaAnswer([0],0)
-        SetAnswer((prevState) => (
-          {
-            ...prevState,
-            active:false,
-          }));
+        (async () => { 
+          try {
+            const AnswerObject = captchaAnswer(answerCurrent.addres, 0);
+  
+            console.log("🔍 AnswerObject:", AnswerObject);
+            if (!AnswerObject) {
+              throw new Error(" AnswerObject está indefinido!");
+            }
+            if (!AnswerObject.worldIDDesvio) {
+              throw new Error(" AnswerObject.worldIDDesvio está indefinido!");
+            }
+  
+            console.log(" Buscando usuário com worldIDDesvio:", AnswerObject.worldIDDesvio);
 
-        resetAnswerCurrent()    
+            const userA = await GetInfoUser(AnswerObject.worldIDDesvio);
+  
+            console.log("✅ userA recebido:", userA);
+            if (!userA) {
+              throw new Error(" userA.data está indefinido ou não contem os dados esperados!");
+            }
+  
+            const updatedComments = {
+              userName: userA.userName,
+              pictureProfile: userA.PictureProfile,
+              worldIDDesvio: AnswerObject.worldIDDesvio,
+              comment: AnswerObject.comment,
+              address: AnswerObject.address,
+              answers: [],
+            };
+  
+            for (const element of AnswerObject.answers) {
+              try {
+                console.log("Buscando usser na resposta:", element.worldIDDesvio);
+                const users = await GetInfoUser(element.worldIDDesvio);
+  
+                if (!users) {
+                  throw new Error(` User com worldIDDesvio ${element.worldIDDesvio} não encontrado!`);
+                }
+  
+                updatedComments.answers.push({
+                  userName: users.userName,
+                  pictureProfile: users.PictureProfile,
+                  worldIDDesvio: element.worldIDDesvio,
+                  comment: element.comment,
+                  address: element.address,
+                  answers: element.answers,
+                });
+              } catch (error) {
+                console.error("Erro ao buscar user na lista de respostas:", error);
+              }
+            }
+  
+            SetAnswer((prevState) => ({
+              ...prevState,
+              active: true,
+              commentON: updatedComments,
+            }));
+  
+          } catch (error) {
+            console.error(" Erro ao obter informacoes do comentario:", error);
+            alert("Erro ao obter informacoes do comentario");
+          }
+        })();
+      } 
+      else {
+        alert("Else");
+
+        (async () => {
+          try {
+            const updatedComments = [];
+        
+            if (!Array.isArray(ContentJSON.comments)) {
+              throw new Error("Lista de comentarios nao definida ou nao é um array.");
+            }
+        
+            for (const element of ContentJSON.comments) {
+              try {
+                console.log(` Buscando usuario com worldIDDesvio: ${element.worldIDDesvio}`);
+        
+                const user = await GetInfoUser(element.worldIDDesvio);
+                if (!user) {
+                  throw new Error(`Usuario com worldIDDesvio ${element.worldIDDesvio} nao encontrado!`);
+                }
+        
+                updatedComments.push({
+                  userName: user.userName,
+                  pictureProfile: user.PictureProfile,
+                  worldIDDesvio: element.worldIDDesvio,
+                  comment: element.comment,
+                  address: element.address,
+                  answers: element.answers
+                });
+        
+              } catch (error) {
+                console.error(" Erro ao atribuir atributos ao usuario:", error);
+              }
+            }
+        
+            console.log("updatedComments preenchido:", updatedComments);
+        
+            SetForumRender((prev) => ({
+              ...prev,
+              topicComments: updatedComments
+            }));
+        
+          } catch (error) {
+            console.error(" Erro geral na atualizacao dos comentarios:", error);
+          } finally {
+            // Agora chamamos SetAnswer e resetAnswerCurrent APÓS o processamento assíncrono
+            SetAnswer((prevState) => ({
+              ...prevState,
+              active: false,
+            }));
+        
+            resetAnswerCurrent();
+          }
+        
+        })();
       }
-    }
-  },[ContentJSON,answerCurrent.active === true])
+
+
+
+    
+  }}, [ContentJSON, answerCurrent.active]);
+  
+  
 
   useEffect(() => {
     if (ContentJSON && ContentJSON.comments && answerCurrent.deleteActive === true) {
+      alert("deleteActive")
+      /*
       console.log(answer)
 
       if (answerCurrent.addres.length > 1){
@@ -393,10 +499,10 @@ async function captchaAnswer (addres,casas) {
           }
         ));
         resetAnswerCurrent()  
-      }
+      }*/
         
     }
-  },[ContentJSON,answerCurrent.deleteActive=== true])
+  },[ContentJSON,answerCurrent.deleteActive])
 
   
 
@@ -425,11 +531,12 @@ async function captchaAnswer (addres,casas) {
 
     return (
         <main className={styles.main}>
-            <header className={styles.header}><CabecalhoPadrao/></header>
+            <header className={styles.header}><CabecalhoV2/></header>
             <div className={styles.core}>
-
+              {/* ORI-2.0 */} 
               <div className={styles.sideBar}>
                 <div className={`${styles.titlePath} ${styles.txt2}`}>
+                  {/* ORI - 2.1 */}
                   {ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].name !== null ? (
                     ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].name
                   ):
@@ -438,9 +545,9 @@ async function captchaAnswer (addres,casas) {
                 </div>
 
                 {/* Verificando se ContentJSON.modulos é um array e se não está vazio */}
+                {/* ORI - 2.2 */}
                 {Array.isArray(ContentJSON.modulos) && ContentJSON.modulos.length > 0 ? (
-                          ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].modulocontent.map((element,index) => (
-                                                       
+                          ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].modulocontent.map((element,index) => (            
                             <div className={styles.classArea}>
                                 <ClassComponent
                                   title={element.title}
@@ -460,13 +567,14 @@ async function captchaAnswer (addres,casas) {
                    Forum do modulo 
                 </div>
               </div>
-
+              {/*  Até este ponto lidamos com sidebar  */}
+              {/*  ORI-3.0  */}
               {forumON === false ? (
-                localStorage.getItem("ClassIndex") !== "0" ? (
-
+                /* ORI-3.1 */
+                localStorage.getItem("ClassIndex") !== "0" ? ( /* ORI-3.1.1 */
                   <div className={styles.contentArea}>
                   {
-                    entity === "author" ? (
+                    entity === "author" ? ( //ORI-3.1.2
                       <div className={styles.editar}>
                         {buttonsRender.map((element) => 
                           <div title={element.title} className={styles.edit}>                     
@@ -487,7 +595,7 @@ async function captchaAnswer (addres,casas) {
                   </div>
                 </div> 
                 ):
-                <div className={styles.apresentacao}>
+                <div className={styles.apresentacao}> {/*ORI-3.1.4*/}
                   <div className={`${styles.tituloModulo} ${styles.txt3}`}>
                     <PiBookOpenDuotone/>
                     {ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].name}
@@ -495,6 +603,9 @@ async function captchaAnswer (addres,casas) {
                   <div className={`${styles.desc} ${styles.txt3}`}>{DescON}</div>
                 </div>
               ):
+
+              /* Até este ponto lidamos com side bar e renderização de conteudo ou apresentação */
+
                 <div className={styles.forumCore}>
 
                   <div className={styles.forumTopPost}>
@@ -521,12 +632,14 @@ async function captchaAnswer (addres,casas) {
                   :null}
                   
 
-                  {answer.active === false ? // Neste ponto forumON = true.
+                  {answer.active === false ? 
+                  // Neste ponto forumON = true. Logo renderizaremos comentarios postados diretamente
+                  //  no forum ou eventuais respostas a estes
                     ( 
                       <div className={styles.forumScroll}>
                         {forumRender.topicComments.length > 0 ? (
                           forumRender.topicComments.map((element) => (
-                            <div className={styles.comment} key={element.address.join("-")}>
+                            <div className={styles.comment}>
                               <Comment
                                 nickName={`${element.userName}`}
                                 comment={element.comment}
@@ -575,10 +688,13 @@ async function captchaAnswer (addres,casas) {
                             onClickIcon1={(e) => alert("Você já está no espaço de respostas desse comentario")}
                             nAnswers={Array.isArray(answer.commentON.answers) ? formatarNumero(answer.commentON.answers.length) : 0}
                             responseAction={(e) => SetPostComment((prevState) => (
-                              {prevState,active:true,addresON:answer.commentON.address, elementX:answer.commentON}))}
+                            {prevState,active:true,addresON:answer.commentON.address, elementX:answer.commentON}))}
                             onClickIcon2={(e) => CallDeleteComment(answer.commentON.address)}
                           />
                       </div>
+
+                      {console.log("Aqui está o JSON:")}
+                      {console.log(answer.commentON)}
 
                       {answer.commentON.answers.length !== 0 ? (
                         <div className={styles.linhaSeparadora}></div>
@@ -611,10 +727,7 @@ async function captchaAnswer (addres,casas) {
               
               
             </div>
-                       
-                    
-          
-        </main>
+          </main>
 
     )
 }

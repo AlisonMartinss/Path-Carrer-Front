@@ -5,6 +5,7 @@ import httpClient from '../../APIs/PathCarrerAPI/PathCarrer';
  * 
  * Chamadas - API:
  * 
+ * - GetContent: Busca o conteudo do Path
  * - DeleteClassUnicAPI: Deleta a unica aula atual.
  * - DeleteModule: Deleta o modulo atual.
  * 
@@ -14,6 +15,27 @@ import httpClient from '../../APIs/PathCarrerAPI/PathCarrer';
  *   aos estados os atributos nescessarios para ver a aula.
  * 
  */
+
+
+export async function GetContent() {
+    try {
+        const response = await httpClient.get(
+            `User/GetPath?PathID=${localStorage.getItem("PathID_on")}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        return response.data
+    }
+    
+     catch (err) {
+        console.error("Erro na requisição:", err);
+        alert("Erro na chamada");
+    }
+}
 
 
 
