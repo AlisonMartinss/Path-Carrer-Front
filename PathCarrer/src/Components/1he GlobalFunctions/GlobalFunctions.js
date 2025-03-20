@@ -4,11 +4,10 @@ export async function LobyGet() {
     try {
       const username = localStorage.getItem("UserName");
       const token = localStorage.getItem("Token");
-  
-      // Verifica se os valores necessários estão disponíveis
+
       if (!username || !token) {
         alert("Erro: Usuário ou Token não encontrado no localStorage.");
-        return null; // Retorna null para indicar erro
+        return null;
       }
   
       const response = await httpClient.get(`User/Getloby?username=${username}`, {

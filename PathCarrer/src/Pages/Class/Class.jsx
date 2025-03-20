@@ -350,7 +350,7 @@ function captchaAnswer (addres,casas) {
           try {
             const AnswerObject = captchaAnswer(answerCurrent.addres, 0);
   
-            console.log("🔍 AnswerObject:", AnswerObject);
+            console.log("AnswerObject:", AnswerObject);
             if (!AnswerObject) {
               throw new Error(" AnswerObject está indefinido!");
             }
@@ -362,7 +362,7 @@ function captchaAnswer (addres,casas) {
 
             const userA = await GetInfoUser(AnswerObject.worldIDDesvio);
   
-            console.log("✅ userA recebido:", userA);
+            console.log("userA recebido:", userA);
             if (!userA) {
               throw new Error(" userA.data está indefinido ou não contem os dados esperados!");
             }

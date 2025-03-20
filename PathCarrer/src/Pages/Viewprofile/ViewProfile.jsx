@@ -23,7 +23,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 function ViewProfile (){
-    const navigate = useNavigate;
+    const navigate = useNavigate();
     const [option,SetOption] = useState(true)
     const [newPassword,SetnewPassword] = useState({password:"",newPassword:"",CurrentPassword:"",CurrentPasswordDelete:""})
     const [LobyInfo,SetLobyInfo] = useState(JSON.parse(localStorage.getItem("LobyInfo")));
@@ -37,7 +37,7 @@ function ViewProfile (){
         }
     )
 
-    async function NewName(e) { // Função para atualizar nome do usuario
+    async function NewName(e) { 
         if (e) {
             e.preventDefault(); 
         }
@@ -45,8 +45,8 @@ function ViewProfile (){
             const response = await httpClient.put(
                 'User/NewName',
                 { 
-                    userName:localStorage.getItem("UserName"),
-                    newUsername:ProfileAt.nickName
+                    userName: localStorage.getItem("UserName"),
+                    newUsername: ProfileAt.nickName
                 },
                 {   
                     headers: {
@@ -54,12 +54,17 @@ function ViewProfile (){
                         "Content-Type": "application/json" 
                     }
                 }           
-            )
-            GetLobyON();
+            );
+            
+            localStorage.setItem("UserName", ProfileAt.nickName);
+            alert("Faça login novamente");
+            setTimeout(() => navigate('/Login'), 500);
+    
         } catch (err) {
             alert("Erro ao remover o Path.");
         }
     }
+    
 
     async function PictureProfile(e) { // Função para foto e/ou banner de usuario
         if (e) {
