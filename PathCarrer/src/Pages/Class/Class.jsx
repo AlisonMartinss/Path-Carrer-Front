@@ -257,14 +257,6 @@ async function CallPostComment (addresX,commentCore) {
 
 
 async function CallDeleteComment (addresX) {
-  /**
-   * Reponder:
-   * (addred,comment)
-   *  API
-   *  pego o endereço anteriormente pego e carrego (onde? )
-   * 
-   * SetAnswerCurrent - onde guardo o endereço antes de td
-   */
   SetAnswerCurrent((prev) => ({...prev,addres:addresX})) 
   await DeleteComment(addresX);
   await GetContent();
@@ -465,42 +457,127 @@ function captchaAnswer (addres,casas) {
         
         })();
       }
-
-
-
-    
   }}, [ContentJSON, answerCurrent.active]);
   
-  
-
   useEffect(() => {
     if (ContentJSON && ContentJSON.comments && answerCurrent.deleteActive === true) {
-      alert("deleteActive")
-      /*
-      console.log(answer)
+      if (answerCurrent.addres.length > 1){ // Em resposta a alguem
+        (
+          async () => {
+            try {
+              const AnswerObject = captchaAnswer(answerCurrent.addres, 1);
+              if (!AnswerObject) {
+                throw new Error(" AnswerObject está indefinido!");
+              }
+              console.log("AnswerOBJ: ")
+              console.log(AnswerObject)
+             if (!AnswerObject.worldIDDesvio){
+              throw new Error(" AnswerObject.worldIDDesvio está indefinido!");
+             }
+             const userA = await GetInfoUser(AnswerObject.worldIDDesvio);
+              if (!userA) {
+                throw new Error(" userA.data está indefinido ou não contem os dados esperados!");
+             }
+             console.log("UserA: ")
+             console.log(userA)
+  
+            const updatedComments = {
+              userName: userA.userName,
+              pictureProfile: userA.PictureProfile,
+              worldIDDesvio: AnswerObject.worldIDDesvio,
+              comment: AnswerObject.comment,
+              address: AnswerObject.address,
+              answers: [],
+            };
+  
+              for (const element of AnswerObject.answers) {
+                try {
+                  const users = await GetInfoUser(element.worldIDDesvio);
+    
+                  if (!users) {
+                    throw new Error(` User com worldIDDesvio ${element.worldIDDesvio} não encontrado!`);
+                  }
+    
+                  updatedComments.answers.push({
+                    userName: users.userName,
+                    pictureProfile: users.PictureProfile,
+                    worldIDDesvio: element.worldIDDesvio,
+                    comment: element.comment,
+                    address: element.address,
+                    answers: element.answers,
+                  });
+                } catch (error) {
+                  console.error("Erro ao buscar user na lista de respostas:", error);
+                }
 
-      if (answerCurrent.addres.length > 1){
-      const AnswerON = captchaAnswer(answerCurrent.addres,1)
-        SetAnswer((prevState) => (
-          {
-            ...prevState,
-            commentON:AnswerON,
+              }
+              console.log("updatedComments: ")
+              console.log(updatedComments)
+
+              SetAnswer((prevState) => ({
+                ...prevState,
+                active: true,
+                commentON: updatedComments,
+              }));
+            }
+            catch {
+              alert("Erro ao obter informacoes do comentario");
+            }
+
           }
-        ));
-        resetAnswerCurrent()    
+        )();   
       }
       else{
-        const AnswerON = captchaAnswer(answerCurrent.addres,1)
-        SetAnswer((prevState) => (
-          {
-            ...prevState,
-            active:false,
-            commentON:AnswerON,
-          }
-        ));
-        resetAnswerCurrent()  
-      }*/
+        (async () => {
+          try {
+            const updatedComments = [];
         
+            if (!Array.isArray(ContentJSON.comments)) {
+              throw new Error("Lista de comentarios nao definida ou nao é um array.");
+            }
+        
+            for (const element of ContentJSON.comments) {
+              try {
+                console.log(` Buscando usuario com worldIDDesvio: ${element.worldIDDesvio}`);
+        
+                const user = await GetInfoUser(element.worldIDDesvio);
+                if (!user) {
+                  throw new Error(`Usuario com worldIDDesvio ${element.worldIDDesvio} nao encontrado!`);
+                }
+        
+                updatedComments.push({
+                  userName: user.userName,
+                  pictureProfile: user.PictureProfile,
+                  worldIDDesvio: element.worldIDDesvio,
+                  comment: element.comment,
+                  address: element.address,
+                  answers: element.answers
+                });
+        
+              } catch (error) {
+                console.error(" Erro ao atribuir atributos ao usuario:", error);
+              }
+            }
+        
+            SetForumRender((prev) => ({
+              ...prev,
+              topicComments: updatedComments
+            }));
+        
+          } catch (error) {
+            console.error(" Erro geral na atualizacao dos comentarios:", error);
+          } finally {
+            // Agora chamamos SetAnswer e resetAnswerCurrent APÓS o processamento assíncrono
+            SetAnswer((prevState) => ({
+              ...prevState,
+              active: false,
+            }));
+        
+            resetAnswerCurrent();
+          }
+        
+        })();
+      } 
     }
   },[ContentJSON,answerCurrent.deleteActive])
 
@@ -692,9 +769,6 @@ function captchaAnswer (addres,casas) {
                             onClickIcon2={(e) => CallDeleteComment(answer.commentON.address)}
                           />
                       </div>
-
-                      {console.log("Aqui está o JSON:")}
-                      {console.log(answer.commentON)}
 
                       {answer.commentON.answers.length !== 0 ? (
                         <div className={styles.linhaSeparadora}></div>
