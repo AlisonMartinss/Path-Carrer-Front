@@ -264,8 +264,8 @@ async function CallDeleteComment (addresX) {
 }
 
 function captchaAnswer (addres,casas) {
-  let currentComment = ContentJSON.comments[addres[0]];
-  for (let i = 1; i < (addres.length - casas) ; i++ ){
+  let currentComment = ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[addres[1]];
+  for (let i = 2; i < (addres.length - casas) ; i++ ){
     currentComment = currentComment.answers[addres[i]]
   }
   return currentComment;
@@ -299,8 +299,7 @@ function captchaAnswer (addres,casas) {
   useEffect(() => { // Chamado quando user clica em forum, será carregado comnetarios de topicos
     async function fetchComments() { 
       const updatedComments = [];
-  
-      for (const element of ContentJSON.comments) {
+      for (const element of ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments) {
         try {
           const user = await GetInfoUser(element.worldIDDesvio);
           updatedComments.push({
@@ -334,10 +333,10 @@ function captchaAnswer (addres,casas) {
   }, [ContentJSON]);
 
   useEffect(() => { 
-    if (ContentJSON && ContentJSON.comments && answerCurrent.active === true) {
+    if (ContentJSON && ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments && answerCurrent.active === true) {
       alert("active");
   
-      if (!(answerCurrent.addres[0] === undefined)) {
+      if (!(answerCurrent.addres.length < 2)) {
         (async () => { 
           try {
             const AnswerObject = captchaAnswer(answerCurrent.addres, 0);
@@ -389,7 +388,8 @@ function captchaAnswer (addres,casas) {
                 console.error("Erro ao buscar user na lista de respostas:", error);
               }
             }
-  
+
+            SetForumRender((prev) => ({prev,topicComments:ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments}))
             SetAnswer((prevState) => ({
               ...prevState,
               active: true,
@@ -409,11 +409,11 @@ function captchaAnswer (addres,casas) {
           try {
             const updatedComments = [];
         
-            if (!Array.isArray(ContentJSON.comments)) {
+            if (!Array.isArray(ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments)) {
               throw new Error("Lista de comentarios nao definida ou nao é um array.");
             }
         
-            for (const element of ContentJSON.comments) {
+            for (const element of ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments) {
               try {
                 console.log(` Buscando usuario com worldIDDesvio: ${element.worldIDDesvio}`);
         
@@ -460,8 +460,8 @@ function captchaAnswer (addres,casas) {
   }}, [ContentJSON, answerCurrent.active]);
   
   useEffect(() => {
-    if (ContentJSON && ContentJSON.comments && answerCurrent.deleteActive === true) {
-      if (answerCurrent.addres.length > 1){ // Em resposta a alguem
+    if (ContentJSON && ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments && answerCurrent.deleteActive === true) {
+      if (answerCurrent.addres.length > 2){ // Em resposta a alguem
         (
           async () => {
             try {
@@ -532,11 +532,11 @@ function captchaAnswer (addres,casas) {
           try {
             const updatedComments = [];
         
-            if (!Array.isArray(ContentJSON.comments)) {
+            if (!Array.isArray(ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments)) {
               throw new Error("Lista de comentarios nao definida ou nao é um array.");
             }
         
-            for (const element of ContentJSON.comments) {
+            for (const element of ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments) {
               try {
                 console.log(` Buscando usuario com worldIDDesvio: ${element.worldIDDesvio}`);
         
@@ -689,7 +689,8 @@ function captchaAnswer (addres,casas) {
                     <ButtonIMG
                       iconV={"CiEdit"}
                       icon_style={"evenConstStyleBlue"}
-                      handleClick={(e) => SetPostComment((prevState) => ({prevState,active:true,addresON:[]}))}
+                      handleClick={(e) => SetPostComment((prevState) => 
+                      ({prevState,active:true,addresON:[localStorage.getItem("ModuleIndexON")]}))}
                       title={"Postar comentario no forum"}
                     />
                   </div>
