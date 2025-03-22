@@ -16,13 +16,18 @@ import { useNavigate } from 'react-router'
 
 // =-=-=-=-= Arquivos auxiliares =-=-=-=-=- //
 
-import { LobyGet } from '../../Components/1he GlobalFunctions/GlobalFunctions'
+import { LobyGet,ShortPath } from '../../Components/1he GlobalFunctions/GlobalFunctions'
 
 
 
 function Loby () {
     const navigate = useNavigate(); 
-    const [LobyJSON,SetLobyJSON] = useState({});
+    const [LobyJSON,SetLobyJSON] = useState(
+      {
+        bruto:{},
+        lapidado:[],
+        brutoAct:false
+      });
     const [isLoading, setIsLoading] = useState(true); // Estado para controle de carregamento
     const [dayArray,setDayArray] = useState(["All","Seg","Ter","Qua","Qui","Sex","Sab","Dom"]);
 
@@ -35,10 +40,12 @@ function Loby () {
 
     async function GetLobyON() {
       const dados = await LobyGet();
+      console.log("dados: ")
+      console.log(dados)
       if (!dados) {
         console.log("Erro ao buscar informações do Loby.");
       } else {
-        SetLobyJSON(dados)
+        SetLobyJSON((prev) => ({...prev,bruto:dados,brutoAct:true}))
       }
     }
     
@@ -49,17 +56,50 @@ function Loby () {
     }
 
     useEffect(() => {
-       GetLobyON();
+      GetLobyON();
     }, []);
 
     // ==== useEffect para verificar e processar LobyJSON ==== //
     useEffect(() => {
-      if (!isLoading && LobyJSON && Array.isArray(LobyJSON.myPaths)) {
-        console.log("Lista: " + JSON.stringify(LobyJSON.myPaths));
-      } else if (!isLoading && LobyJSON) {
-        alert("myPaths não é um array válido");
-      }
-    }, [LobyJSON, isLoading]);
+      if (LobyJSON.brutoAct === true) {
+          (async () => {
+              const objKeys = Object.keys(LobyJSON.bruto.myPaths);
+              const ShortPathList = [];
+  
+              try {
+                  for (const element of objKeys) {
+                      console.log("Keys:", element);
+  
+                      // 🚨 Certifique-se de que `GetShortPath` é uma função válida!
+                      let Path = await ShortPath(element); 
+                      const SeeClass = LobyJSON.bruto.myPaths.{element}.Object.keys(moduleSeenList)
+  
+                      if (Path === null || Path === undefined) {
+                          throw new Error("Erro ao buscar informações curtas do Path");
+                      }
+  
+                      ShortPathList.push({
+                          id: Path.id,
+                          title: Path.title,
+                          category: Path.category,
+                          nClass: Path.nClass,
+                          conclusion:LobyJSON.bruto.myPaths.element.Object.keys(moduleSeenList)
+                      });
+                  }
+  
+                  // Atualiza o estado com os dados processados
+                  SetLobyJSON((prev) => ({ ...prev, lapidado: ShortPathList }));
+  
+              } catch (error) {
+                  console.error("Erro ao formular Path:", error);
+              }
+          })();
+  
+         
+  
+       }
+      }, [LobyJSON.brutoAct]); 
+  
 
     const [module,setModule] = useState([]);
 
@@ -81,14 +121,14 @@ function Loby () {
                   </div>
                   <div className={styles.moduloArea}>             
                       {/* Verificando se LobyJSON.myPaths é um array e se não está vazio */}
-                        {Array.isArray(LobyJSON.myPaths) && LobyJSON.myPaths.length > 0 ? (
-                          LobyJSON.myPaths.map((element) => (
-                            <div key={element.pathID} className={styles.moduloArea_core}>
+                        {Array.isArray(LobyJSON.lapidado) && Object.keys(LobyJSON.lapidado).length > 0 ? (
+                          LobyJSON.lapidado.map((element) => (
+                            <div key={element.id} className={styles.moduloArea_core}>
                               <WindowModule
                                 titleMain={element.title}
                                 subTile={element.category}
                                 img={img}                       
-                                onClick={(e) => PathAcess(e,element.pathID)}
+                                onClick={(e) => PathAcess(e,element.id)}
                               />
                             </div>
                           ))

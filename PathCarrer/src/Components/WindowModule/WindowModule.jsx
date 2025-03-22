@@ -11,7 +11,9 @@ function WindowModule ({titleMain,subTile,porcent,img,onClick}){
                 <div className={`${style.sub_title} ${style.txtOver2}`}>{subTile}</div>              
             </div>
             <div className={style.Relative}>
-                <div className={`${style.relative_content} ${style.txtOver}`}>{porcent}</div>
+                <div className={`${style.relative_content} ${style.txtOver}`}>
+                    {porcent}
+                </div>
             </div>
         </main>
 

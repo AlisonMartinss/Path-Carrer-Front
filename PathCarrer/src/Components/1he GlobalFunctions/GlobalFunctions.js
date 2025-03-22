@@ -1,4 +1,30 @@
 import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
+export async function ShortPath(PathID) {
+  try {
+    const token = localStorage.getItem("Token");
+
+    if (!PathID || !token) {
+      alert("Erro: PathID ou Token não encontrado.");
+      return null;
+    }
+
+    const response = await httpClient.get(`Short?PathID=${PathID}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const JSONdata = response.data;
+    localStorage.setItem("LobyInfo", JSON.stringify(JSONdata));
+
+    return JSONdata;
+  } catch (err) {
+    alert("Erro na chamada do Loby!");
+    console.error("Erro na requisição:", err);
+    return null; // Retorna null em caso de erro para evitar valores indefinidos
+  }
+}
 
 export async function LobyGet() {
     try {
