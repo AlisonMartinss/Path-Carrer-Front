@@ -37,7 +37,7 @@ function ContentAcess (){
     const navigate = useNavigate();
     
     const [Entity,SetEntity] = useState(null); // Determinamos aqui qual a relação entre user x path
-    const [LobyInfo,SetLobyInfo] = useState(); // Local onde as inforamções do usuario em relação ao seu Loby será armazenada
+    const [ModuleInfo,SetLobyInfo] = useState({}); // Local onde as inforamções do usuario em relação ao seu Loby será armazenada
     const [isClicked, setIsClicked] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [ContentJSON,setContentJSON] = useState({}); // Conteudo da Resposta da chamada da API. Conteudo do Path
@@ -79,14 +79,14 @@ function ContentAcess (){
       - O formato de respota esperado pela API pode ser visto no arquivo
       JS desse componente. Busque pelo titulo 'API_JSON - User/GetPath' */
 
-    const SetEntityFunc = (data,lobyData) => {
+    const SetEntityFunc = (data) => {
         const author = data;
-        const Loby = JSON.parse(localStorage.getItem("LobyInfo")).myPaths;
+        const LobyModules = JSON.parse(localStorage.getItem("MyPathsInfo"));
         if (author === localStorage.getItem("UserName")){
           SetEntity("author")
         }
         else {
-            const isStudentOn = Loby.some((element) => {
+            const isStudentOn = LobyModules.some((element) => {
             return element.pathID === localStorage.getItem("PathID_on");
             });
         
@@ -112,8 +112,7 @@ function ContentAcess (){
       
           const content = response.data;
           setContentJSON(content);
-          const MyPathList = JSON.parse(localStorage.getItem("LobyInfo"));
-          SetEntityFunc(content.IdAuthor, MyPathList);
+          SetEntityFunc(content.IdAuthor);
           
         } catch (err) {
           console.error("Erro na requisição:", err);
@@ -189,6 +188,12 @@ function ContentAcess (){
       GetContent();
     }, []);
 
+    useEffect(() => {
+      let MyModuleON = JSON.parse(localStorage.getItem("MyModuleON"));
+      SetLobyInfo(MyModuleON.MyPahs[MyModuleON.indexModule])
+      console.log(MyModuleON.MyPahs[MyModuleON.indexModule])
+    }, [ContentJSON]);
+
     return (
 
         <main className={styles.main}>
@@ -216,12 +221,11 @@ function ContentAcess (){
                       <div className={styles.contentMain}>
 
                         {/* Verificando se ContentJSON.modulos é um array e se não está vazio */}
-                        {Array.isArray(ContentJSON.modulos) && ContentJSON.modulos.length > 0 ? (
-                          ContentJSON.modulos.map((element,index) => (
+                        {Array.isArray(ContentJSON.modulos) && ContentJSON.modulos.length > 0  ? (
+                        ContentJSON.modulos.map((element,index) => (
                             <div className={styles.content_area}>
                               <WindowModule
                               titleMain={element.name}
-                              porcent={"100%"}
                               img={""}
                               onClick={(e) => ToIntoModulo(e,index)}/>
                             </div>

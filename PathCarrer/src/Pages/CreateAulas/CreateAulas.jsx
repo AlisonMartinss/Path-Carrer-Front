@@ -120,10 +120,12 @@ function CreateAulas ({APIoption,circumstance}){
   };
    
   const setElementClass = () => {
-      
+      alert("setElementClass")
       if (verify(molde) == true){
           if (circumstance !== ("CreatePath") && circumstance !== ("EditModulo")){
-            if (modeleON.some(item => item.title === molde.title)){
+            alert("Dentro")
+            console.log(JSON.parse(localStorage.getItem("moduleON")).modulocontent)
+            if (!(JSON.parse(localStorage.getItem("moduleON")).modulocontent.some(item => item.title === molde.title))){
               setThreeStep((prevState) => {
                 const newState = [...prevState];     
                 newState[0] = molde;
@@ -135,10 +137,7 @@ function CreateAulas ({APIoption,circumstance}){
             else {
               alert("Já existe uma aula com esse titulo")
             }
-            
 
-            
-            
           }
           else if (((indiceAtual.head + 1) >= 1)){
             if (!(JSON.parse(localStorage.getItem("moduleON")).some(item => item.title === molde.title))){

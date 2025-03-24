@@ -103,7 +103,18 @@
 
     margin-right: 2%;
 
+}
+
+.Green{
     background-color: #51d27c;
+}
+
+.Yellow{
+    background-color: #E5CD45;
+}
+
+.red{
+    background-color: #e32b46;
 }
 
 .relative_content{

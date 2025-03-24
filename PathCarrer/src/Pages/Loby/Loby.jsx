@@ -21,7 +21,7 @@ import { LobyGet,ShortPath } from '../../Components/1he GlobalFunctions/GlobalFu
 
 
 function Loby () {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const [LobyJSON,SetLobyJSON] = useState(
       {
         bruto:{},
@@ -40,8 +40,6 @@ function Loby () {
 
     async function GetLobyON() {
       const dados = await LobyGet();
-      console.log("dados: ")
-      console.log(dados)
       if (!dados) {
         console.log("Erro ao buscar informações do Loby.");
       } else {
@@ -61,33 +59,54 @@ function Loby () {
 
     // ==== useEffect para verificar e processar LobyJSON ==== //
     useEffect(() => {
+
       if (LobyJSON.brutoAct === true) {
+        
           (async () => {
               const objKeys = Object.keys(LobyJSON.bruto.myPaths);
               const ShortPathList = [];
+              
   
               try {
                   for (const element of objKeys) {
-                      console.log("Keys:", element);
-  
-                      // 🚨 Certifique-se de que `GetShortPath` é uma função válida!
+                      let ClassSee = 0;
+                      
                       let Path = await ShortPath(element); 
-                      const SeeClass = LobyJSON.bruto.myPaths.{element}.Object.keys(moduleSeenList)
-  
-                      if (Path === null || Path === undefined) {
-                          throw new Error("Erro ao buscar informações curtas do Path");
+                      console.log("Path: ")
+                      console.log(Path)
+
+                      console.log("LobyJSON.brutoAct: ")
+                      console.log(LobyJSON.bruto)
+
+                      console.log("LobyJSON.brutoAct.myPaths: ")
+                      console.log(LobyJSON.bruto.myPaths)
+
+                      console.log("LobyJSON.brutoAct.myPaths[element]: ")
+                      console.log(LobyJSON.bruto.myPaths[element])
+
+                      let ClassSeeByAuthor = LobyJSON.bruto.myPaths[element].classSee;
+
+                      console.log("ClassSee: ")
+                      console.log(ClassSeeByAuthor)
+
+                      console.log("ClassPresent: ")
+                      console.log( Path.classPresent)
+
+                      for (const element of ClassSeeByAuthor){
+                        if ( Path.classPresent.find(x => x === element)){
+                          ClassSee++
+                        }
                       }
   
                       ShortPathList.push({
                           id: Path.id,
                           title: Path.title,
                           category: Path.category,
-                          nClass: Path.nClass,
-                          conclusion:LobyJSON.bruto.myPaths.element.Object.keys(moduleSeenList)
-                      });
+                          nClass: Path.classPresent.length,
+                          nClassYep: ClassSee,
+                      });  
                   }
-  
-                  // Atualiza o estado com os dados processados
+
                   SetLobyJSON((prev) => ({ ...prev, lapidado: ShortPathList }));
   
               } catch (error) {
@@ -95,13 +114,8 @@ function Loby () {
               }
           })();
   
-         
-  
        }
       }, [LobyJSON.brutoAct]); 
-  
-
-    const [module,setModule] = useState([]);
 
     return (
       
@@ -127,7 +141,9 @@ function Loby () {
                               <WindowModule
                                 titleMain={element.title}
                                 subTile={element.category}
-                                img={img}                       
+                                img={img}
+                                nClass={element.nClass}
+                                nClassYep={element.nClassYep}
                                 onClick={(e) => PathAcess(e,element.id)}
                               />
                             </div>
