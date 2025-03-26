@@ -1,38 +1,41 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from '../ClassComponent/ClassComponent.module.css'
 
-function ClassComponent ({title,index,HandleTrue,HandleFalse,onClick}){
-    const [Select,SetSelectd] = useState(false);
-    const [checkted,setCheckted] = useState(false)
+function ClassComponent({ title, index, HandleTrue, HandleFalse, Start, onClick }) {
+    const [isSelected, setIsSelected] = useState(false);
 
-    const HandleClick = () => {
-        if (Select == true){
-            SetSelectd((prev) => (!prev))
-            setCheckted((prev) => (!prev))
-            HandleTrue();
-            alert("Olha:" + Select)
-            
+    const handleToggle = () => {
+        setIsSelected((prev) => {
+            const newState = !prev;
+            newState ? HandleTrue() : HandleFalse(); // Chama a função correta
+            return newState;
+        });
+    };
+
+    useEffect(() => {
+        if (Start){
+            setIsSelected(true)
         }
-        else {
-            SetSelectd((prev) => (!prev))
-            setCheckted((prev) => (!prev))
-            HandleFalse();
-            alert("Olha:" + Select)
-        }
-    }
+    },[])
+
+    
 
     return (
-        
         <main onClick={onClick} className={styles.main}>
             <label className={`${styles.checkBoxArea} ${styles.txt}`}>
-                <input onChange = {(e) => HandleClick()} type="checkbox" checked={checkted} className={styles.checkBox} />
+                <input 
+                    type="checkbox" 
+                    checked={isSelected} 
+                    onChange={handleToggle} 
+                    className={styles.checkBox} 
+                />
                 <span className={styles.checkmark}></span>
             </label>
             <div className={`${styles.titleMain} ${styles.txt}`}>
                 {index}. {title}
             </div>
         </main>
-    )
+    );
 }
 
-export default ClassComponent
+export default ClassComponent;

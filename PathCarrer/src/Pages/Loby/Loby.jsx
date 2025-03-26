@@ -106,7 +106,7 @@ function Loby () {
                           nClassYep: ClassSee,
                       });  
                   }
-
+                  
                   SetLobyJSON((prev) => ({ ...prev, lapidado: ShortPathList }));
   
               } catch (error) {

@@ -12,7 +12,7 @@ import PostComment from '../../Components/PostComment/PostComment.jsx'
 import { PiBookOpenDuotone } from "react-icons/pi";
 import LoadIcon from '../../Components/LoadIcon/LoadIcon.jsx'
 
-import { DeleteClassUnicAPI, DeleteModule, PostCommentFunc, DeleteComment} from './ClassAux';
+import { DeleteClassUnicAPI, DeleteModule, PostCommentFunc, DeleteComment, AddSeeClass, RemoveSeeClass} from './ClassAux';
 import { GetInfoUser } from '../../Components/1he GlobalFunctions/GlobalFunctions.js'
 
 
@@ -53,6 +53,7 @@ function Class (){
      - Fazem parte na definição do conteudo assistido 
      - contem renderizações prematuras. 
   */
+  const [ClassFilterElements,SetClassFilter] = useState([]) 
   const [isLoading, setIsLoading] = useState(true); // Precavine renderizações prematuras
   const [forumRender,SetForumRender] = useState(
     {
@@ -263,6 +264,14 @@ async function CallDeleteComment (addresX) {
   SetAnswerCurrent((prev) => ({...prev,deleteActive:true}))
 }
 
+async function CallSeeClass (IDClass) {
+  await AddSeeClass(IDClass)
+}
+
+async function CallOFFSeeClass (IDClass) {
+  await RemoveSeeClass(IDClass)
+}
+
 function captchaAnswer (addres,casas) {
   let currentComment = ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[addres[1]];
   for (let i = 2; i < (addres.length - casas) ; i++ ){
@@ -291,8 +300,30 @@ function captchaAnswer (addres,casas) {
                   SetClassLinkON(firstModuleContent.link);
                   SetDescON(firstModuleContent.description);
               }
+
+              const ClassSeeYep = JSON.parse(localStorage.getItem("ClassYepList"))
+
+              for (const element of ContentJSON.modulos[moduleIndex].modulocontent) {
+                SetClassFilter((prev) => {
+                  if (!prev.some(classe => classe.core.id === element.id)) {
+                    return [
+                      ...prev,
+                      {
+                        onSee: ClassSeeYep?.includes(element.id), // true se incluso, false caso contrário
+                        core: element
+                      }
+                    ];
+                  }
+                  return prev; // Retorna o estado original se já existir
+                });
+              }
+              
+
+
           }
       }
+
+    
   },[ContentJSON]);
 
 
@@ -321,7 +352,6 @@ function captchaAnswer (addres,casas) {
 
     fetchComments()
     }, [forumON,answer.active]);
-
 
   /* ORI-1.2 */
   useEffect(() => { // Delegar Modulo x user
@@ -624,13 +654,15 @@ function captchaAnswer (addres,casas) {
                 {/* Verificando se ContentJSON.modulos é um array e se não está vazio */}
                 {/* ORI - 2.2 */}
                 {Array.isArray(ContentJSON.modulos) && ContentJSON.modulos.length > 0 ? (
-                          ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].modulocontent.map((element,index) => (            
+                          ClassFilterElements.map((element,index) => (            
                             <div className={styles.classArea}>
                                 <ClassComponent
-                                  title={element.title}
+                                  title={element.core.title}
                                   index={index+1}
-                                  HandleTrue = {(e) => alert("")}
-                                  HandleFalse= {(e) => alert("")}
+                                  HandleTrue = {(e) => CallSeeClass(element.core.id)}
+                                  HandleFalse= {(e) => CallOFFSeeClass(element.core.id)}
+                                  Start={element.onSee}
+                                  
                                   onClick={(e) => ClassSelect(index,ContentJSON)}
                                 />
                             </div>

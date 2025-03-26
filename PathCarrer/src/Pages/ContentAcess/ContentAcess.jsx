@@ -18,6 +18,7 @@ import {useState,useEffect} from 'react'
 import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
 import { AddPath,RemovePath} from '../ContentAcess/ContentAcessAux.js';
 import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2.jsx';
+import { LobyGet } from '../../Components/1he GlobalFunctions/GlobalFunctions.js';
 
 
 function ContentAcess (){
@@ -37,8 +38,8 @@ function ContentAcess (){
     const navigate = useNavigate();
     
     const [Entity,SetEntity] = useState(null); // Determinamos aqui qual a relação entre user x path
-    const [ModuleInfo,SetLobyInfo] = useState({}); // Local onde as inforamções do usuario em relação ao seu Loby será armazenada
     const [isClicked, setIsClicked] = useState(false);
+    const [ModuleListRef, SetModuleListRef] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [ContentJSON,setContentJSON] = useState({}); // Conteudo da Resposta da chamada da API. Conteudo do Path
     const [buttons] = useState(  // Botoes a serem renderizados.
@@ -121,9 +122,10 @@ function ContentAcess (){
           setIsLoading(false);
         }
     }
-    const ToIntoModulo = (e,index) => {
+    const ToIntoModulo = (e,index,ClassYepList) => {
       e.preventDefault();
       localStorage.setItem("ModuleIndexON",index)
+      localStorage.setItem("ClassYepList",JSON.stringify(ClassYepList))
       navigate('/class')
     }
     async function PathDelete () {
@@ -147,8 +149,6 @@ function ContentAcess (){
         setIsLoading(false); // Sempre será chamado, finalizando o carregamento
       }
     }
-    
-
     const ButtonAction = (e) => {
     // Nessa função determinamos a ação do Usuario e do autor, que são: Adicionar,
     // excluir Path e Adicionar modulos, editar path
@@ -179,20 +179,81 @@ function ContentAcess (){
         
       }
     }
-
     const handleClick = () => {
         setIsClicked((prev) => (!prev))
     };
 
     useEffect(() => {
+      if (!isLoading) { // ✅ Evita execução prematura
+        (async () => {
+          try {
+            const LobyInfo = await LobyGet();
+            let nClassYep = 0;
+    
+            console.log("ContentJSON.modulos:", ContentJSON.modulos);
+    
+            const pathId = localStorage.getItem("PathID_on");
+    
+            if (!pathId || !LobyInfo.myPaths[pathId]) { // ✅ Tratamento de erro para pathId
+              console.error("Erro: PathID_on inválido ou não encontrado em myPaths");
+              return;
+            }
+    
+            console.log("moduleSeens:", LobyInfo.myPaths[pathId].moduleSeens);
+    
+            for (const element of ContentJSON.modulos) {
+              let i = 0;
+              let elementsClassYep = []
+              for (const classe of element.modulocontent) {
+                let ListaDeAulasDoModulo = LobyInfo.myPaths[pathId].moduleSeens[i]?.classSeens;
+    
+                if (ListaDeAulasDoModulo?.includes(classe.id)) { // ✅ Correção do `find`
+                  elementsClassYep.push(classe.id)
+                  nClassYep++;
+                }
+              }
+    
+              console.log("Verificando se o módulo já foi adicionado...");
+    
+              SetModuleListRef(prev => {
+                if (!prev.some(mod => mod.titleMain === element.name)) {
+                  console.log("Adicionando módulo:", element.name);
+                  return [
+                    ...prev,
+                    {
+                      titleMain: element.name,
+                      nClassYep: nClassYep,
+                      nClass: element.modulocontent.length,
+                      elementsClassYep:elementsClassYep
+                    },
+                  ];
+                }
+                console.log(`Módulo "${element.name}" já existe.`);
+                return prev; // ✅ Se já existe, mantém o estado sem mudanças.
+              });
+    
+              i++;
+              nClassYep = 0;
+              elementsClassYep = []
+            }
+            console.log("Processamento concluído.");
+          } catch (error) {
+            console.error("Erro ao processar módulos:", error);
+          }
+        })(); // ✅ Chamando a função imediatamente
+      }
+    }, [ContentJSON, isLoading]); // ✅ Dependências corretas
+    
+    
+    useEffect(() => {
       GetContent();
     }, []);
 
+
     useEffect(() => {
-      let MyModuleON = JSON.parse(localStorage.getItem("MyModuleON"));
-      SetLobyInfo(MyModuleON.MyPahs[MyModuleON.indexModule])
-      console.log(MyModuleON.MyPahs[MyModuleON.indexModule])
-    }, [ContentJSON]);
+      console.log("ModuleListRef: ")
+      console.log(ModuleListRef)
+    }, [ModuleListRef]);
 
     return (
 
@@ -222,12 +283,14 @@ function ContentAcess (){
 
                         {/* Verificando se ContentJSON.modulos é um array e se não está vazio */}
                         {Array.isArray(ContentJSON.modulos) && ContentJSON.modulos.length > 0  ? (
-                        ContentJSON.modulos.map((element,index) => (
+                        ModuleListRef.map((element,index) => (
                             <div className={styles.content_area}>
                               <WindowModule
-                              titleMain={element.name}
+                              titleMain={element.titleMain}
                               img={""}
-                              onClick={(e) => ToIntoModulo(e,index)}/>
+                              nClassYep={element.nClassYep}
+                              nClass={element.nClass}
+                              onClick={(e) => ToIntoModulo(e,index,element.elementsClassYep)}/>
                             </div>
                           ))
                         ) : (

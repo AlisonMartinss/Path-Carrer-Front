@@ -132,3 +132,51 @@ export async function DeleteComment(addressCore) {
         alert("Erro ao deletar comentario.");
     }
 }
+
+
+
+export async function AddSeeClass(IDclass) {
+    try {
+        const response = await httpClient.post(
+            'User/AddSeeClass',
+            {           
+                UserName:localStorage.getItem("UserName"),
+                PathID:localStorage.getItem("PathID_on"),
+                IDclass:IDclass,
+                indexModule:localStorage.getItem("ModuleIndexON")
+            },
+            {   
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("Token")}`, 
+                    "Content-Type": "application/json"
+                }
+            }           
+        );
+        alert("Aula vista")
+    } catch (err) {
+        alert("Erro ver aula.");
+    }
+}
+
+export async function RemoveSeeClass(IDclass) {
+    try {
+        const response = await httpClient.post(
+            'User/RemoveSeeClass',
+            {           
+                UserName:localStorage.getItem("UserName"),
+                PathID:localStorage.getItem("PathID_on"),
+                IDclass:IDclass,
+                indexModule:localStorage.getItem("ModuleIndexON")
+            },
+            {   
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("Token")}`, 
+                    "Content-Type": "application/json"
+                }
+            }           
+        );
+        alert("Aula des-vista")
+    } catch (err) {
+        alert("Erro ver desver aula.");
+    }
+}
