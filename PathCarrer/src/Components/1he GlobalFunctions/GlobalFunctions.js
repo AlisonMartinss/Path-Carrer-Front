@@ -75,3 +75,35 @@ export async function GetInfoUser(userName) {
     return null; // Retorna null em caso de erro para evitar valores indefinidos
   }
 }
+
+export async function ElementCommentInfo(Gen, commentID) {
+  try {
+    const token = localStorage.getItem("Token");
+    const PathID = localStorage.getItem("PathID_on");
+    const indexModule = localStorage.getItem("ModuleIndexON");
+
+    if (!token) {
+      alert("Erro: Faça login novamente");
+      return null;
+    }
+
+    if (!PathID || !indexModule) {
+      console.error("Erro: PathID ou indexModule não encontrados no localStorage.");
+      return null;
+    }
+
+    const url = `Short/ElementCommentInfo?PathID=${encodeURIComponent(PathID)}&indexModule=${encodeURIComponent(indexModule)}&Gen=${Gen}&commentID=${encodeURIComponent(commentID)}`;
+
+    const response = await httpClient.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    console.error("Erro na requisição:", err);
+    throw err; // Opcional: Lança o erro para melhor tratamento
+  }
+}

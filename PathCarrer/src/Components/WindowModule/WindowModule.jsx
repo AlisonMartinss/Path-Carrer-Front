@@ -3,7 +3,7 @@ import style from '../WindowModule/WindowModule.module.css'
 function WindowModule ({titleMain,subTile,nClassYep,nClass,img,onClick}){
     let porcent = Math.trunc(nClassYep*100/nClass);
     function SetColor () {
-        if (nClass !== null && nClassYep !== null){
+        if (nClass !== null && nClass !== undefined  && nClassYep !== null && nClassYep !== undefined){
             if (porcent < 50){
                 return "red"
             }

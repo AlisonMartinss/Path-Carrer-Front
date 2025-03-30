@@ -12,7 +12,10 @@ import PostComment from '../../Components/PostComment/PostComment.jsx'
 import { PiBookOpenDuotone } from "react-icons/pi";
 import LoadIcon from '../../Components/LoadIcon/LoadIcon.jsx'
 
-import { DeleteClassUnicAPI, DeleteModule, PostCommentFunc, DeleteComment, AddSeeClass, RemoveSeeClass} from './ClassAux';
+import { DeleteClassUnicAPI, DeleteModule, PostCommentFunc, 
+         AddSeeClass, RemoveSeeClass, ElementCommentInfo,PostCommentFunc4,DeleteComment} from './ClassAux';
+
+
 import { GetInfoUser } from '../../Components/1he GlobalFunctions/GlobalFunctions.js'
 
 
@@ -70,8 +73,7 @@ function Class (){
     {
       active:false, // renderizar caixa de input de texto
       commentMain:"", // comentario em questão
-      addresON:[], // emdereço do pai do futuro comentario
-      elementX:{} // OBJ pai
+      elementX:{} // OBJ pai - a quem estou respondendo
     });
   const [forumON,SetForum] = useState(false); // Usado para saber se deve-se carregar o forum.
 
@@ -85,7 +87,8 @@ function Class (){
   const [answer,SetAnswer] = useState( // Trabalhamos aqui quando lidamos com respostas ao comentario de alguem
     {
       active:false,  // Usado para saber se devemos carregar as respostas
-      commentON:null // Comentario que deve ser carregado caso estivermos vendo respostas
+      TOPcommentON:{}, // Comentario que deve ser carregado caso estivermos vendo respostas
+      answers:[]
     }
   ) // Indice do comentario a qual pretendo ver resposta ou resonder
 
@@ -112,6 +115,7 @@ async function GetContent() {
             }
         );
         setContentJSON(response.data);
+        return response.data
     } catch (err) {
         console.error("Erro na requisição:", err);
         alert("Erro na chamada");
@@ -127,7 +131,6 @@ const ClassSelect = (index) => {
   SetClassLinkON(ClassON.link);
   SetDescON(ClassON.description)
 }
-
 
   const SetEntityFunc = (data) => {
     const author = data;  
@@ -184,43 +187,216 @@ async function fetchCommentOBJ(elementZ) {
   return updatedComments;
 };
 
-async function fetchCommentOBJfromJSON(elementZ) {
-  const userA = await GetInfoUser(elementZ.worldIDDesvio);
-  const updatedComments = 
-  {
-    userName:userA.userName,
-    pictureProfile:userA.PictureProfile,
-    worldIDDesvio:elementZ.worldIDDesvio,
-    comment:elementZ.comment,
-    address:elementZ.address,
-    answers:[]
-  };
+const viewAnswers = async (element) => {
+  const answersAPIresponse = await ElementCommentInfo(element.gen+1,element.id);
 
-  for (const element of elementZ.answers) {
-    try {
-      const users = await GetInfoUser(element.worldIDDesvio);
-      updatedComments.answers.push({
-        userName: users.userName,
-        pictureProfile: users.PictureProfile,
-        worldIDDesvio: element.worldIDDesvio,
-        comment: element.comment,
-        address: element.address,
-        answers:element.answers
-      });
-    } catch (error) {
-      console.error("Erro ao buscar usuário:", error);
+  console.log("answersAPIresponse: ")
+  console.log(Object.values(answersAPIresponse.data))
+
+  const answers = [];
+
+  for (const element of Object.values(answersAPIresponse.data)){
+    console.log("userWordID: ")
+    console.log(element.userWordID)
+    const user = await GetInfoUser(element.userWordID);
+    const nAnswers = await ElementCommentInfo(element.gen,element.id);
+
+    let xAnswers = 0;
+
+    try{
+       xAnswers = Object.values(nAnswers.data)
     }
-  }
+    catch {
+      xAnswers = 0;
+    }
 
-  return updatedComments;
+    console.log("xAnswers")
+    console.log(xAnswers)
+
+    answers.push(
+      {
+        userName: user.userName,
+        pictureProfile: user.PictureProfile,
+        userWordID: element.userWordID,
+        comment: element.comment,
+        fatherID:element.fatherID,
+        nAnswers:xAnswers,
+        gen:element.gen,
+        id:element.id
+      }
+    )
+  }
+  console.log("answers: ")
+  console.log(answers)
+
+  console.log("element: ")
+  console.log(element)
+
+  SetAnswer(
+    {
+      TOPcommentON:element,
+      answers:answers,
+      active:true
+    }
+  )
+  
 };
 
-const viewAnswers = async (elementZ) => { // Agora a função é assíncrona
-  const OBJ = await fetchCommentOBJ(elementZ); // Espera a resposta corretamente
-  SetAnswer(() => ({
-    active: true,
-    commentON: OBJ
-  }));
+const BuildPostComment = (element) => {
+  SetPostComment((prev) => ({active:true,elementX:element}))
+  alert("!")
+}
+
+const PostCommentFuncX = async () => {
+  const element = PostCommentON.elementX;
+  if (PostCommentON.elementX !== undefined){
+    alert("Em respota a alguem")
+    console.log("PostCommentON.elementX")
+    console.log(PostCommentON.elementX)
+    try {
+      await PostCommentFunc4(element.gen+1,element.id,PostCommentON.commentMain);
+      SetPostComment((prev) => ({...prev,commentMain:"",elementX:{}}))
+      viewAnswers(element)
+    }catch {
+      console.log("Erro ao postar comment")
+  
+    }
+  }else {
+    alert("Direto no forum")
+    console.log("PostCommentON.commentMain")
+    console.log(PostCommentON.commentMain)
+    await PostCommentFunc4(0,"Xae243467çiva#a124",PostCommentON.commentMain);
+    const localJSON =  await GetContent();
+
+    const updatedComments = [];
+      const forumPosts = Object.values(localJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[0].fatherList.forumPost);
+      console.log("forumPosts: ")
+      console.log(forumPosts)
+
+      for (const post of forumPosts) {
+        try {
+          const user = await GetInfoUser(post.userWordID);
+
+          console.log("user: ")
+          console.log(user)
+
+          const nAnswersBuild = await ElementCommentInfo(1, post.id);
+          console.log("nAnswersBuild: ")
+          console.log(nAnswersBuild)
+
+          let nAnswers = [];
+
+          if (nAnswersBuild && nAnswersBuild.data) {  // ✅ Evita acessar undefined
+            nAnswers = Object.values(nAnswersBuild.data);
+          } else {
+            console.warn(`Nenhuma resposta encontrada para o comentário ${post.id}`);
+          }
+
+          console.log("Coment em x: ")
+          console.log(post.comment)
+
+          updatedComments.push({
+            userName: user.userName,
+            pictureProfile: user.PictureProfile,
+            userWordID: post.userWordID,
+            comment: post.comment,
+            fatherID:post.fatherID,
+            nAnswers:nAnswers,
+            gen:post.gen,
+            id:post.id
+          });
+
+        } catch (error) {
+          console.error("Erro ao buscar usuário:", error);
+        }
+      }
+
+      SetForumRender((prev) => ({...prev,topicComments:updatedComments})); 
+
+
+
+
+    
+  }
+
+ 
+};
+
+
+const DeleteCommentAux = async (element,fatherOBJ) => {
+  try {
+    const elementY = 
+    {
+      gen:element.gen,
+      fatherID:element.fatherID,
+      id:element.id
+    }
+
+    console.log("elementY: ")
+    console.log(elementY)
+
+    await DeleteComment(element.gen,element.fatherID,element.id);
+    if (fatherOBJ !== null){
+     viewAnswers(fatherOBJ)
+    }
+    else {
+      alert("123")
+      let mouseList = forumRender.topicComments;
+      mouseList.findIndex(elementR => elementR.id === element.id)
+      
+      SetForumRender((prev) => ({...prev,topicComments:mouseList}))
+      SetAnswer((prev) => ({...prev,active:false}))
+
+      const localJSON =  await GetContent();
+
+    const updatedComments = [];
+      const forumPosts = Object.values(localJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[0].fatherList.forumPost);
+      console.log("forumPosts: ")
+      console.log(forumPosts)
+
+      for (const post of forumPosts) {
+        try {
+          const user = await GetInfoUser(post.userWordID);
+
+          console.log("user: ")
+          console.log(user)
+
+          const nAnswersBuild = await ElementCommentInfo(1, post.id);
+          console.log("nAnswersBuild: ")
+          console.log(nAnswersBuild)
+
+          let nAnswers = [];
+
+          if (nAnswersBuild && nAnswersBuild.data) {  // ✅ Evita acessar undefined
+            nAnswers = Object.values(nAnswersBuild.data);
+          } else {
+            console.warn(`Nenhuma resposta encontrada para o comentário ${post.id}`);
+          }
+
+          console.log("Coment em x: ")
+          console.log(post.comment)
+
+          updatedComments.push({
+            userName: user.userName,
+            pictureProfile: user.PictureProfile,
+            userWordID: post.userWordID,
+            comment: post.comment,
+            fatherID:post.fatherID,
+            nAnswers:nAnswers,
+            gen:post.gen,
+            id:post.id
+          });
+
+        } catch (error) {
+          console.error("Erro ao buscar usuário:", error);
+        }
+      }
+
+      SetForumRender((prev) => ({...prev,topicComments:updatedComments})); 
+    }
+  }catch {
+    console.log("Erro ao deletar comment")
+  }
 };
 
 const resetAnswers = () => { // Reset
@@ -236,6 +412,8 @@ const resetAnswerCurrent = () => { // Reset
     deleteActive: false
   });
 };
+
+
 
 
 
@@ -301,25 +479,42 @@ function captchaAnswer (addres,casas) {
                   SetDescON(firstModuleContent.description);
               }
 
-              const ClassSeeYep = JSON.parse(localStorage.getItem("ClassYepList"))
-
-              for (const element of ContentJSON.modulos[moduleIndex].modulocontent) {
-                SetClassFilter((prev) => {
-                  if (!prev.some(classe => classe.core.id === element.id)) {
-                    return [
-                      ...prev,
-                      {
-                        onSee: ClassSeeYep?.includes(element.id), // true se incluso, false caso contrário
-                        core: element
-                      }
-                    ];
-                  }
-                  return prev; // Retorna o estado original se já existir
-                });
+              if (localStorage.getItem("ClassYepList") != null && localStorage.getItem("ClassYepList") != "undefined"){
+                console.log("ClassSeeYep: ")
+                console.log(JSON.parse(localStorage.getItem("ClassYepList")))
+                const ClassSeeYep = JSON.parse(localStorage.getItem("ClassYepList"))
+                for (const element of ContentJSON.modulos[moduleIndex].modulocontent) {
+                  SetClassFilter((prev) => {
+                    if (!prev.some(classe => classe.core.id === element.id)) {
+                      return [
+                        ...prev,
+                        {
+                          onSee: ClassSeeYep?.includes(element.id), // true se incluso, false caso contrário
+                          core: element
+                        }
+                      ];
+                    }
+                    return prev; // Retorna o estado original se já existir
+                  });
+                }
               }
-              
 
-
+              else {
+                for (const element of ContentJSON.modulos[moduleIndex].modulocontent) {
+                  SetClassFilter((prev) => {
+                    if (!prev.some(classe => classe.core.id === element.id)) {
+                      return [
+                        ...prev,
+                        {
+                          onSee: "noAdd", // true se incluso, false caso contrário
+                          core: element
+                        }
+                      ];
+                    }
+                    return prev; // Retorna o estado original se já existir
+                  });
+                }
+              }
           }
       }
 
@@ -328,25 +523,55 @@ function captchaAnswer (addres,casas) {
 
 
   useEffect(() => { // Chamado quando user clica em forum, será carregado comnetarios de topicos
+    /*
+     Nesta etapa do processo, para cada comentario postado diretamente no forum,
+     passará por um filtro onde definiremos qual sua foto de perfil
+    
+    
+    */
     async function fetchComments() { 
+      alert("JSON: ")
       const updatedComments = [];
-      for (const element of ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments) {
+      const forumPosts = Object.values(ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[0].fatherList.forumPost);
+      console.log("forumPosts: ")
+      console.log(forumPosts)
+
+      for (const post of forumPosts) {
         try {
-          const user = await GetInfoUser(element.worldIDDesvio);
+          const user = await GetInfoUser(post.userWordID);
+
+          console.log("user: ")
+          console.log(user)
+
+          const nAnswersBuild = await ElementCommentInfo(1, post.id);
+          console.log("nAnswersBuild: ")
+          console.log(nAnswersBuild)
+
+          let nAnswers = [];
+
+          if (nAnswersBuild && nAnswersBuild.data) {  // ✅ Evita acessar undefined
+            nAnswers = Object.values(nAnswersBuild.data);
+          } else {
+            console.warn(`Nenhuma resposta encontrada para o comentário ${post.id}`);
+          }
+
           updatedComments.push({
             userName: user.userName,
             pictureProfile: user.PictureProfile,
-            worldIDDesvio: element.worldIDDesvio,
-            comment: element.comment,
-            address: element.address,
-            answers:element.answers
+            userWordID: post.userWordID,
+            comment: post.comment,
+            fatherID:post.fatherID,
+            nAnswers:nAnswers,
+            gen:post.gen,
+            id:post.id
           });
+
         } catch (error) {
           console.error("Erro ao buscar usuário:", error);
         }
       }
+
       console.log(updatedComments)
-  
       SetForumRender((prev) => ({...prev,topicComments:updatedComments})); 
     };
 
@@ -734,7 +959,7 @@ function captchaAnswer (addres,casas) {
                      <PostComment
                       onClose= {(e) => SetPostComment((prevState) => ({prevState,active:false}))}
                       inputTXT={(e) => SetPostComment((prev) => ({...prev,commentMain:e.target.value}))}
-                      buttonON={(e) => CallPostComment(PostCommentON.addresON,PostCommentON.commentMain)}
+                      buttonON={(e) => PostCommentFuncX()}
                       maxlength={"230"}
                      />
                     </div>
@@ -754,12 +979,10 @@ function captchaAnswer (addres,casas) {
                                 nickName={`${element.userName}`}
                                 comment={element.comment}
                                 imgURL={element.pictureProfile}
-                                onClickIcon1={() => viewAnswers(element)}
-                                nAnswers={Array.isArray(element.answers) ? formatarNumero(element.answers.length) : 0}
-                                responseAction={() => SetPostComment((prevState) => ({
-                                  ...prevState, active: true, addresON: element.address, elementX:element
-                                }))}
-                                onClickIcon2={() => CallDeleteComment(element.address)}
+                                onClickIcon1={(e) => viewAnswers(element)}
+                                nAnswers={Array.isArray(element.nAnswers) ? formatarNumero(element.nAnswers.length) : 0}
+                                responseAction={(e) => BuildPostComment(element)}
+                                onClickIcon2={() => DeleteCommentAux(element,null)}
                               />
                             </div>
                           ))
@@ -792,23 +1015,22 @@ function captchaAnswer (addres,casas) {
                       
                       <div className={styles.commentAnswerTComment}>
                           <Comment
-                            nickName={answer.commentON.userName}
-                            comment={answer.commentON.comment}
-                            imgURL={answer.commentON.pictureProfile}
+                            nickName={answer.TOPcommentON.userName}
+                            comment={answer.TOPcommentON.comment}
+                            imgURL={answer.TOPcommentON.pictureProfile}
                             onClickIcon1={(e) => alert("Você já está no espaço de respostas desse comentario")}
-                            nAnswers={Array.isArray(answer.commentON.answers) ? formatarNumero(answer.commentON.answers.length) : 0}
-                            responseAction={(e) => SetPostComment((prevState) => (
-                            {prevState,active:true,addresON:answer.commentON.address, elementX:answer.commentON}))}
-                            onClickIcon2={(e) => CallDeleteComment(answer.commentON.address)}
+                            nAnswers={Array.isArray(answer.TOPcommentON.nAnswers) ? formatarNumero(answer.TOPcommentON.nAnswers.length) : 0}
+                            responseAction={(e) => BuildPostComment(answer.TOPcommentON)}
+                            onClickIcon2={(e) =>DeleteCommentAux(answer.TOPcommentON,null)}
                           />
                       </div>
 
-                      {answer.commentON.answers.length !== 0 ? (
+                      {answer.answers.length !== 0 ? (
                         <div className={styles.linhaSeparadora}></div>
                       ):null}
                       
 
-                      {answer.commentON.answers.map((element) => (
+                      {answer.answers.map((element) => (
                         <div className={styles.commentAnswer}>
                           <Comment
                             nickName={`${element.userName}`}
@@ -816,9 +1038,8 @@ function captchaAnswer (addres,casas) {
                             imgURL={element.pictureProfile}
                             onClickIcon1={(e) => viewAnswers(element)}
                             nAnswers={Array.isArray(element.answers) ? formatarNumero(element.answers.length) : 0}
-                            responseAction={(e) => SetPostComment((prevState) => (
-                              {prevState,active:true,addresON:element.address, elementX:element}))}
-                            onClickIcon2={(e) => CallDeleteComment(element.address)}
+                            responseAction={(e) => BuildPostComment(element)}
+                            onClickIcon2={(e) => DeleteCommentAux(element,answer.TOPcommentON)}
                           />
                         </div>
                       ))}

@@ -13,8 +13,12 @@ function ClassComponent({ title, index, HandleTrue, HandleFalse, Start, onClick 
     };
 
     useEffect(() => {
-        if (Start){
+        console.log(Start)
+        if (Start !== "noAdd"){
             setIsSelected(true)
+        }
+        else {
+            setIsSelected("noAdd")
         }
     },[])
 
@@ -22,15 +26,18 @@ function ClassComponent({ title, index, HandleTrue, HandleFalse, Start, onClick 
 
     return (
         <main onClick={onClick} className={styles.main}>
-            <label className={`${styles.checkBoxArea} ${styles.txt}`}>
-                <input 
-                    type="checkbox" 
-                    checked={isSelected} 
-                    onChange={handleToggle} 
-                    className={styles.checkBox} 
-                />
-                <span className={styles.checkmark}></span>
-            </label>
+            {Start !== "noAdd" ? (
+                <label className={`${styles.checkBoxArea} ${styles.txt}`}>
+                    <input 
+                        type="checkbox" 
+                        checked={isSelected} 
+                        onChange={handleToggle} 
+                        className={styles.checkBox} 
+                    />
+                    <span className={styles.checkmark}></span>
+                </label>
+            ):null}
+            
             <div className={`${styles.titleMain} ${styles.txt}`}>
                 {index}. {title}
             </div>

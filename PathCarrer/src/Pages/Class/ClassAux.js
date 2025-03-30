@@ -111,29 +111,6 @@ export async function PostCommentFunc(addressCore,commentCore) {
     }
 }
 
-export async function DeleteComment(addressCore) {
-    try {
-        const response = await httpClient.post(
-            'interactions/DeleteComment',
-            {           
-                PathID:localStorage.getItem("PathID_on"),
-                userID:localStorage.getItem("UserName"),
-                address:addressCore
-            },
-            {   
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("Token")}`, 
-                    "Content-Type": "application/json"
-                }
-            }           
-        );
-        alert("Comentario deletado com sucesso")
-    } catch (err) {
-        alert("Erro ao deletar comentario.");
-    }
-}
-
-
 
 export async function AddSeeClass(IDclass) {
     try {
@@ -178,5 +155,146 @@ export async function RemoveSeeClass(IDclass) {
         alert("Aula des-vista")
     } catch (err) {
         alert("Erro ver desver aula.");
+    }
+}
+
+export async function ElementCommentInfo(Gen, commentID) {
+    try {
+      const token = localStorage.getItem("Token");
+      const PathID = localStorage.getItem("PathID_on");
+      const indexModule = localStorage.getItem("ModuleIndexON");
+  
+      if (!token) {
+        alert("Erro: Faça login novamente");
+        return null;
+      }
+  
+      if (!PathID || !indexModule) {
+        console.error("Erro: PathID ou indexModule não encontrados no localStorage.");
+        return null;
+      }
+  
+      const url = `Short/ElementCommentInfo?PathID=${encodeURIComponent(PathID)}&indexModule=${encodeURIComponent(indexModule)}&Gen=${Gen}&commentID=${encodeURIComponent(commentID)}`;
+  
+      const response = await httpClient.get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+  
+      return response.data;
+    } catch (err) {
+      console.error("Erro na requisição:", err);
+      throw err; // Opcional: Lança o erro para melhor tratamento
+    }
+}
+
+export async function PostCommentFunc4(Gen, fatherID, comment) {
+    try {
+        // Pegando valores do localStorage de forma segura
+        const userName = localStorage.getItem("UserName");
+        const pathID = localStorage.getItem("PathID_on");
+        const indexModule = localStorage.getItem("ModuleIndexON");
+        const token = localStorage.getItem("Token");
+
+        // Verificando se há valores nulos ou indefinidos antes de fazer a requisição
+        if (!userName || !pathID || !indexModule || !token) {
+            console.error("Erro: Dados ausentes no localStorage");
+            alert("Erro: Informações do usuário ou caminho ausentes.");
+            return { success: false, message: "Dados ausentes" };
+        }
+
+        // Fazendo a requisição
+        const response = await httpClient.post(
+            "interactions/PostComment",
+            {
+                userName: userName,
+                PathID: pathID,
+                indexModule: indexModule,
+                Gen: Gen,
+                fatherID: fatherID,
+                comment: comment
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+        // Checando se a resposta da API foi bem-sucedida
+        if (response.status >= 200 && response.status < 300) {
+            alert("Comentário postado com sucesso!");
+            return { success: true, data: response.data };
+        } else {
+            console.error("Erro ao postar comentário:", response.statusText);
+            alert("Erro ao postar comentário. Tente novamente.");
+            return { success: false, message: response.statusText };
+        }
+    } catch (err) {
+        console.error("Erro ao postar comentário:", err);
+        alert("Erro ao postar comentário. Verifique sua conexão.");
+        return { success: false, message: err.message };
+    }
+}
+
+export async function DeleteComment(Gen, fatherID, commentID) {
+    try {
+        // Pegando valores do localStorage de forma segura
+        const userName = localStorage.getItem("UserName");
+        const pathID = localStorage.getItem("PathID_on");
+        const indexModule = localStorage.getItem("ModuleIndexON");
+        const token = localStorage.getItem("Token");
+
+        // Verificando se há valores nulos ou indefinidos antes de fazer a requisição
+        if (!userName || !pathID || !indexModule || !token) {
+            console.error("Erro: Dados ausentes no localStorage");
+            alert("Erro: Informações do usuário ou caminho ausentes.");
+            return { success: false, message: "Dados ausentes" };
+        }
+
+        const x = 
+        {
+            Gen0:Gen,
+            fatherID0:fatherID,
+            commentID0:commentID
+        }
+        console.log("x: ")
+        console.log(x)
+
+        // Fazendo a requisição
+        const response = await httpClient.post(
+            "interactions/DeleteComment",
+            {
+                
+                PathID: pathID,
+                indexModule: indexModule,
+                Gen: Gen,
+                fatherID: fatherID,
+                commentID: commentID
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+        // Checando se a resposta da API foi bem-sucedida
+        if (response.status >= 200 && response.status < 300) {
+            alert("Comentário deletado com sucesso!");
+            return { success: true, data: response.data };
+        } else {
+            console.error("Erro ao deletar comentário:", response.statusText);
+            alert("Erro ao deletar comentário. Tente novamente.");
+            return { success: false, message: response.statusText };
+        }
+    } catch (err) {
+        console.error("Erro ao deletar comentário:", err);
+        alert("Erro ao deletar comentário. Verifique sua conexão.");
+        return { success: false, message: err.message };
     }
 }

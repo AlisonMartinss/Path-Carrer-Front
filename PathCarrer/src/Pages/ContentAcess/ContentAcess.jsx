@@ -97,7 +97,8 @@ function ContentAcess (){
                 SetEntity("studentOff");
             }
         }
-    };    
+    };  
+
     async function GetContent() {
         setIsLoading(true);
         try {
@@ -122,12 +123,16 @@ function ContentAcess (){
           setIsLoading(false);
         }
     }
-    const ToIntoModulo = (e,index,ClassYepList) => {
+
+
+    const ToIntoModulo = (e,index,ClassYepList) => { // Usado quando selecionamos um modulo
       e.preventDefault();
       localStorage.setItem("ModuleIndexON",index)
       localStorage.setItem("ClassYepList",JSON.stringify(ClassYepList))
       navigate('/class')
     }
+
+
     async function PathDelete () {
       setIsLoading(true); // requisição está em andamento
       try {
@@ -194,8 +199,9 @@ function ContentAcess (){
     
             const pathId = localStorage.getItem("PathID_on");
     
-            if (!pathId || !LobyInfo.myPaths[pathId]) { // ✅ Tratamento de erro para pathId
-              console.error("Erro: PathID_on inválido ou não encontrado em myPaths");
+            if (!pathId || !LobyInfo.myPaths[pathId]) { // Verifica se tal Path está na lista de MyPaths
+              console.error("não encontrado em myPaths");
+              SetModuleListRef(ContentJSON.modulos)
               return;
             }
     
@@ -221,7 +227,7 @@ function ContentAcess (){
                   return [
                     ...prev,
                     {
-                      titleMain: element.name,
+                      name: element.name,
                       nClassYep: nClassYep,
                       nClass: element.modulocontent.length,
                       elementsClassYep:elementsClassYep
@@ -286,7 +292,7 @@ function ContentAcess (){
                         ModuleListRef.map((element,index) => (
                             <div className={styles.content_area}>
                               <WindowModule
-                              titleMain={element.titleMain}
+                              titleMain={element.name}
                               img={""}
                               nClassYep={element.nClassYep}
                               nClass={element.nClass}
