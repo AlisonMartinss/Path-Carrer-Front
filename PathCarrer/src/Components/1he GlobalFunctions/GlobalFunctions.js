@@ -1,4 +1,5 @@
 import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
+
 export async function ShortPath(PathID) {
   try {
     const token = localStorage.getItem("Token");
@@ -16,11 +17,9 @@ export async function ShortPath(PathID) {
     });
 
     const JSONdata = response.data;
-    localStorage.setItem("LobyInfo", JSON.stringify(JSONdata));
-
     return JSONdata;
   } catch (err) {
-    alert("Erro na chamada do Loby!");
+    alert("Erro na chamada do ShortPath!");
     console.error("Erro na requisição:", err);
     return null; // Retorna null em caso de erro para evitar valores indefinidos
   }

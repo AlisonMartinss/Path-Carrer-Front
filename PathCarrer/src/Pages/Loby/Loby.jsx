@@ -24,98 +24,90 @@ function Loby () {
     const navigate = useNavigate();
     const [LobyJSON,SetLobyJSON] = useState(
       {
-        bruto:{},
-        lapidado:[],
-        brutoAct:false
+        JSONdata:{},
+        MyPathIDList:[],
+        RefPathList:[],
+        isLoading:false
       });
-    const [isLoading, setIsLoading] = useState(true); // Estado para controle de carregamento
+      
     const [dayArray,setDayArray] = useState(["All","Seg","Ter","Qua","Qui","Sex","Sab","Dom"]);
 
-    const redirecToCreatePath = () => {
-      navigate('/createpath')
-    }
-
-
-    // ==== API ==== //
-
-    async function GetLobyON() {
-      const dados = await LobyGet();
-      if (!dados) {
-        console.log("Erro ao buscar informações do Loby.");
-      } else {
-        SetLobyJSON((prev) => ({...prev,bruto:dados,brutoAct:true}))
-      }
-    }
     
-    const PathAcess = (e,x) => {
+    const PathAcess = (e,x) => { // Quando clicado em algum path
       e.preventDefault();
       localStorage.setItem("PathID_on",x)
       navigate('/ContentAcess')
     }
 
     useEffect(() => {
-      GetLobyON();
-    }, []);
+      (async () => {
+        try {
+        const data = await LobyGet();
+        SetLobyJSON((prev) => ({...prev,isLoading:true}))
+        SetLobyJSON((prev) => ({...prev,JSONdata:data,MyPathIDList:Object.keys(data.myPaths)}))
+        SetLobyJSON((prev) => ({...prev,isLoading:false}))
+        }catch {
+          console.error("Erro em buscar dados nescessarios para o preenchimento do loby")
+        }
+      })();
 
-    // ==== useEffect para verificar e processar LobyJSON ==== //
+    },[]);
+
     useEffect(() => {
-
-      if (LobyJSON.brutoAct === true) {
+      // Atribuição de informação para lista de Path
+      if (LobyJSON.isLoading === false && LobyJSON.MyPathIDList !== undefined){
         
-          (async () => {
-              const objKeys = Object.keys(LobyJSON.bruto.myPaths);
-              const ShortPathList = [];
-              
-  
-              try {
-                  for (const element of objKeys) {
-                      let ClassSee = 0;
-                      
-                      let Path = await ShortPath(element); 
-                      console.log("Path: ")
-                      console.log(Path)
+        (async () => {
+          console.info("Iniciando tratativa dos elementos de MyPaths")
+          try {
+            let RefList = [];
+            for (const element of LobyJSON.MyPathIDList){
+              const Path_data = await ShortPath(element);
 
-                      console.log("LobyJSON.brutoAct: ")
-                      console.log(LobyJSON.bruto)
-
-                      console.log("LobyJSON.brutoAct.myPaths: ")
-                      console.log(LobyJSON.bruto.myPaths)
-
-                      console.log("LobyJSON.brutoAct.myPaths[element]: ")
-                      console.log(LobyJSON.bruto.myPaths[element])
-
-                      let ClassSeeByAuthor = LobyJSON.bruto.myPaths[element].classSee;
-
-                      console.log("ClassSee: ")
-                      console.log(ClassSeeByAuthor)
-
-                      console.log("ClassPresent: ")
-                      console.log( Path.classPresent)
-
-                      for (const element of ClassSeeByAuthor){
-                        if ( Path.classPresent.find(x => x === element)){
-                          ClassSee++
-                        }
-                      }
-  
-                      ShortPathList.push({
-                          id: Path.id,
-                          title: Path.title,
-                          category: Path.category,
-                          nClass: Path.classPresent.length,
-                          nClassYep: ClassSee,
-                      });  
-                  }
-                  
-                  SetLobyJSON((prev) => ({ ...prev, lapidado: ShortPathList }));
-  
-              } catch (error) {
-                  console.error("Erro ao formular Path:", error);
+              if (Path_data === null || Path_data === undefined){
+                console.error("Erro ao busacar Path");
+                continue;
               }
-          })();
+
+              let obj = 
+              {
+                title:Path_data.title,
+                category:Path_data.category,
+                classPresent:Path_data.classPresent,
+                id:Path_data.id
+              }
+
+              console.log("OBJ Tratado: ")
+              console.log(obj)
+
+              RefList.push(obj)
+            }
+            console.log("RefList: ")
+            console.log(RefList)
+            SetLobyJSON((prev) => ({...prev,RefPathList:RefList}))
+          }
+          catch (error){
+            console.error("Erro em atribuir informações aos Path da sua lista MyPaths: ", error)
+          }
+        })()
+      }
+
+      }, [LobyJSON.MyPathIDList,LobyJSON.isLoading]); 
+
+    useEffect(() => {
+        (async () => {
+          try {
+          const data = await LobyGet();
+          SetLobyJSON((prev) => ({...prev,isLoading:true}))
+          SetLobyJSON((prev) => ({...prev,JSONdata:data,MyPathIDList:Object.keys(data.myPaths)}))
+          SetLobyJSON((prev) => ({...prev,isLoading:false}))
+          }catch {
+            console.error("Erro em buscar dados nescessarios para o preenchimento do loby")
+          }
+        })();
   
-       }
-      }, [LobyJSON.brutoAct]); 
+      },[]);
+    
 
     return (
       
@@ -135,16 +127,16 @@ function Loby () {
                   </div>
                   <div className={styles.moduloArea}>             
                       {/* Verificando se LobyJSON.myPaths é um array e se não está vazio */}
-                        {Array.isArray(LobyJSON.lapidado) && Object.keys(LobyJSON.lapidado).length > 0 ? (
-                          LobyJSON.lapidado.map((element) => (
+                        {Array.isArray(LobyJSON.RefPathList) && Object.keys(LobyJSON.RefPathList).length > 0 ? (
+                          LobyJSON.RefPathList.map((element) => (
                             <div key={element.id} className={styles.moduloArea_core}>
                               <WindowModule
                                 titleMain={element.title}
                                 subTile={element.category}
-                                img={img}
-                                nClass={element.nClass}
-                                nClassYep={element.nClassYep}
                                 onClick={(e) => PathAcess(e,element.id)}
+                                img={img}
+                                nClass={100}
+                                nClassYep={10}
                               />
                             </div>
                           ))

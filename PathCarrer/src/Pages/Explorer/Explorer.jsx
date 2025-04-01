@@ -55,6 +55,7 @@ function Explorer (){
                console.log("API Response:", contentPath); // Verifica os dados no console
                if (Array.isArray(contentPath)) {
                   SetPathExplore(contentPath); // Só define se for um array
+                  console.log(contentPath)
                } else {
                   SetPathExplore([]); // Evita erro se a API retornar um valor inválido
                }
@@ -98,6 +99,7 @@ function Explorer (){
                            PathName={element.title}
                            Category={element.category}
                            onClick={(e) => ClickonPath(element.id)}
+                           views={element.everAdd}
                         />
                      </div>
                   ))) : (

@@ -1,13 +1,10 @@
 import httpClient from '../../APIs/PathCarrerAPI/PathCarrer';
+import { LobyGet } from '../../Components/1he GlobalFunctions/GlobalFunctions';
 
-export async function AddPath(e) {
-    if (e) {
-        e.preventDefault();
-    }
-
+export async function AddPath() {
     try {
         const response = await httpClient.post(
-            'User/AddPath',
+            'User/AddPathID',
             {           
                 userName:localStorage.getItem("UserName"),
                 PathID:localStorage.getItem("PathID_on")
@@ -25,10 +22,7 @@ export async function AddPath(e) {
 }
 
 
-export async function RemovePath(e) {
-    if (e) {
-        e.preventDefault(); 
-    }
+export async function RemovePath() {
 
     try {
         const response = await httpClient.put(
@@ -47,4 +41,25 @@ export async function RemovePath(e) {
     } catch (err) {
         alert("Erro ao remover o Path.");
     }
+}
+
+export function UserPathOrder (PathID,authorPath,MyPathList){
+    console.info("Definindo relação Path x User")
+    if (localStorage.getItem("UserName") === authorPath){
+        return 2
+    }
+    else  {
+        console.log("MyPathList");
+        console.log(MyPathList);
+
+        let x =  MyPathList.findIndex(element => element === PathID)
+
+        if (x !== -1 ){
+            return 1
+        }
+        else {
+            return 0
+        } 
+    }
+
 }

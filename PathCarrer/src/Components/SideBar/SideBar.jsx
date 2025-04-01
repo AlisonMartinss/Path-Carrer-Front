@@ -33,7 +33,9 @@ function SideBar ({handleClick,description,AuthorName,adjectivesList,imgPerfil,i
             <div className={`${style.mainArea} ${isClicked ? style.mainAreaOFF : style.mainAreaON}`}>
                 <div className={style.autor_aspects}>
                     <div className={style.top_area}>
-                        <img className={style.img}  src={imgBanner} alt="" />
+                        <img className={style.img}  src={imgBanner === null || imgBanner === undefined ? (
+                            "https://i.pinimg.com/736x/67/6b/af/676baf8a4f3421d483771650a031e0a1.jpg"
+                        ):imgBanner} alt="" />
                     </div>
 
                     <div className={`${style.profile_props} ${isClicked ? style.profile_propsOFF : style.profile_props}`}>

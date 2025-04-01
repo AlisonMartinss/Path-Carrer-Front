@@ -16,9 +16,10 @@ import { GiBookCover } from "react-icons/gi";
 import {useNavigate } from "react-router-dom"
 import {useState,useEffect} from 'react'
 import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
-import { AddPath,RemovePath} from '../ContentAcess/ContentAcessAux.js';
 import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2.jsx';
 import { LobyGet } from '../../Components/1he GlobalFunctions/GlobalFunctions.js';
+
+import { AddPath,RemovePath,UserPathOrder} from '../ContentAcess/ContentAcessAux.js';
 
 
 function ContentAcess (){
@@ -37,7 +38,7 @@ function ContentAcess (){
 
     const navigate = useNavigate();
     
-    const [Entity,SetEntity] = useState(null); // Determinamos aqui qual a relação entre user x path
+    const [Entity,SetEntity] = useState(""); // Determinamos aqui qual a relação entre user x path
     const [isClicked, setIsClicked] = useState(false);
     const [ModuleListRef, SetModuleListRef] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -78,26 +79,7 @@ function ContentAcess (){
 
     /* Chamada API - Obter informações sobre o Path 
       - O formato de respota esperado pela API pode ser visto no arquivo
-      JS desse componente. Busque pelo titulo 'API_JSON - User/GetPath' */
-
-    const SetEntityFunc = (data) => {
-        const author = data;
-        const LobyModules = JSON.parse(localStorage.getItem("MyPathsInfo"));
-        if (author === localStorage.getItem("UserName")){
-          SetEntity("author")
-        }
-        else {
-            const isStudentOn = LobyModules.some((element) => {
-            return element.pathID === localStorage.getItem("PathID_on");
-            });
-        
-            if (isStudentOn) {
-                SetEntity("studentOn");
-            } else {
-                SetEntity("studentOff");
-            }
-        }
-    };  
+      JS desse componente. Busque pelo titulo 'API_JSON - User/GetPath' */  
 
     async function GetContent() {
         setIsLoading(true);
@@ -114,7 +96,6 @@ function ContentAcess (){
       
           const content = response.data;
           setContentJSON(content);
-          SetEntityFunc(content.IdAuthor);
           
         } catch (err) {
           console.error("Erro na requisição:", err);
@@ -123,16 +104,12 @@ function ContentAcess (){
           setIsLoading(false);
         }
     }
-
-
     const ToIntoModulo = (e,index,ClassYepList) => { // Usado quando selecionamos um modulo
       e.preventDefault();
       localStorage.setItem("ModuleIndexON",index)
       localStorage.setItem("ClassYepList",JSON.stringify(ClassYepList))
       navigate('/class')
     }
-
-
     async function PathDelete () {
       setIsLoading(true); // requisição está em andamento
       try {
@@ -154,7 +131,7 @@ function ContentAcess (){
         setIsLoading(false); // Sempre será chamado, finalizando o carregamento
       }
     }
-    const ButtonAction = (e) => {
+    async function ButtonAction (e) {
     // Nessa função determinamos a ação do Usuario e do autor, que são: Adicionar,
     // excluir Path e Adicionar modulos, editar path
       if (Entity === "author"){
@@ -163,6 +140,7 @@ function ContentAcess (){
         }
         else if (e === "Editar Path"){
           navigate('/updatePath')
+          
         }
         else if (e === "Deletar Path"){
           PathDelete();
@@ -174,17 +152,19 @@ function ContentAcess (){
       }
       else if (Entity === "studentOff"){
         if (e === "Student-off-add"){
-          AddPath();
+          await AddPath();
+          window.location.reload();
         }
       }
       else if (Entity === "studentOn") {
         if (e === "Student-on-remove"){
-          RemovePath();
+          await RemovePath();
+          window.location.reload();
         }
         
       }
     }
-    const handleClick = () => {
+    const handleClick = () => { // Controle do side bar
         setIsClicked((prev) => (!prev))
     };
 
@@ -255,11 +235,21 @@ function ContentAcess (){
       GetContent();
     }, []);
 
-
     useEffect(() => {
-      console.log("ModuleListRef: ")
-      console.log(ModuleListRef)
-    }, [ModuleListRef]);
+      const MyPathList = Object.keys(JSON.parse(localStorage.getItem("LobyInfo")).myPaths);
+      const relaction = UserPathOrder(localStorage.getItem("PathID_on"),ContentJSON.IdAuthor,MyPathList);
+
+          if (relaction === 2){
+            SetEntity("author")
+          }
+          else if (relaction === 0){
+            SetEntity("studentOff")
+          }
+          else if (relaction === 1){
+            SetEntity("studentOn")
+          }
+      
+    }, [ContentJSON,isLoading]);
 
     return (
 

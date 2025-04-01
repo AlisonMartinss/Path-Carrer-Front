@@ -188,16 +188,12 @@ async function fetchCommentOBJ(elementZ) {
 };
 
 const viewAnswers = async (element) => {
-  const answersAPIresponse = await ElementCommentInfo(element.gen+1,element.id);
-
-  console.log("answersAPIresponse: ")
-  console.log(Object.values(answersAPIresponse.data))
+  const answersAPIresponse = await ElementCommentInfo(element.gen,element.id);
 
   const answers = [];
 
   for (const element of Object.values(answersAPIresponse.data)){
-    console.log("userWordID: ")
-    console.log(element.userWordID)
+
     const user = await GetInfoUser(element.userWordID);
     const nAnswers = await ElementCommentInfo(element.gen,element.id);
 
@@ -209,9 +205,6 @@ const viewAnswers = async (element) => {
     catch {
       xAnswers = 0;
     }
-
-    console.log("xAnswers")
-    console.log(xAnswers)
 
     answers.push(
       {
@@ -226,11 +219,6 @@ const viewAnswers = async (element) => {
       }
     )
   }
-  console.log("answers: ")
-  console.log(answers)
-
-  console.log("element: ")
-  console.log(element)
 
   SetAnswer(
     {
@@ -248,41 +236,30 @@ const BuildPostComment = (element) => {
 }
 
 const PostCommentFuncX = async () => {
+  console.info("inProgrees - PostCommentFuncX (Postando comentario)")
   const element = PostCommentON.elementX;
   if (PostCommentON.elementX !== undefined){
-    alert("Em respota a alguem")
-    console.log("PostCommentON.elementX")
-    console.log(PostCommentON.elementX)
+    console.info("father - true")
     try {
       await PostCommentFunc4(element.gen+1,element.id,PostCommentON.commentMain);
       SetPostComment((prev) => ({...prev,commentMain:"",elementX:{}}))
       viewAnswers(element)
     }catch {
       console.log("Erro ao postar comment")
-  
     }
   }else {
-    alert("Direto no forum")
-    console.log("PostCommentON.commentMain")
-    console.log(PostCommentON.commentMain)
+    console.info("father - false")
     await PostCommentFunc4(0,"Xae243467çiva#a124",PostCommentON.commentMain);
     const localJSON =  await GetContent();
 
-    const updatedComments = [];
+      const updatedComments = [];
       const forumPosts = Object.values(localJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[0].fatherList.forumPost);
-      console.log("forumPosts: ")
-      console.log(forumPosts)
 
       for (const post of forumPosts) {
         try {
           const user = await GetInfoUser(post.userWordID);
 
-          console.log("user: ")
-          console.log(user)
-
-          const nAnswersBuild = await ElementCommentInfo(1, post.id);
-          console.log("nAnswersBuild: ")
-          console.log(nAnswersBuild)
+          const nAnswersBuild = await ElementCommentInfo(0, post.id);
 
           let nAnswers = [];
 
@@ -291,9 +268,6 @@ const PostCommentFuncX = async () => {
           } else {
             console.warn(`Nenhuma resposta encontrada para o comentário ${post.id}`);
           }
-
-          console.log("Coment em x: ")
-          console.log(post.comment)
 
           updatedComments.push({
             userName: user.userName,
@@ -312,11 +286,6 @@ const PostCommentFuncX = async () => {
       }
 
       SetForumRender((prev) => ({...prev,topicComments:updatedComments})); 
-
-
-
-
-    
   }
 
  
@@ -332,15 +301,11 @@ const DeleteCommentAux = async (element,fatherOBJ) => {
       id:element.id
     }
 
-    console.log("elementY: ")
-    console.log(elementY)
-
     await DeleteComment(element.gen,element.fatherID,element.id);
     if (fatherOBJ !== null){
      viewAnswers(fatherOBJ)
     }
     else {
-      alert("123")
       let mouseList = forumRender.topicComments;
       mouseList.findIndex(elementR => elementR.id === element.id)
       
@@ -361,7 +326,7 @@ const DeleteCommentAux = async (element,fatherOBJ) => {
           console.log("user: ")
           console.log(user)
 
-          const nAnswersBuild = await ElementCommentInfo(1, post.id);
+          const nAnswersBuild = await ElementCommentInfo(0, post.id);
           console.log("nAnswersBuild: ")
           console.log(nAnswersBuild)
 
@@ -529,21 +494,18 @@ function captchaAnswer (addres,casas) {
     
     
     */
-    async function fetchComments() { 
-      alert("JSON: ")
+    async function fetchComments() {
+      console.info("Carregando comentarios do forum ") 
       const updatedComments = [];
       const forumPosts = Object.values(ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[0].fatherList.forumPost);
-      console.log("forumPosts: ")
-      console.log(forumPosts)
 
+      console.info("Atribuições") 
+     
       for (const post of forumPosts) {
         try {
           const user = await GetInfoUser(post.userWordID);
 
-          console.log("user: ")
-          console.log(user)
-
-          const nAnswersBuild = await ElementCommentInfo(1, post.id);
+          const nAnswersBuild = await ElementCommentInfo(0, post.id);
           console.log("nAnswersBuild: ")
           console.log(nAnswersBuild)
 

@@ -29,8 +29,8 @@ function Login (){
                 password:user.password
             })
 
-          alert("Login");
           const token = response.data.Token;
+          localStorage.clear();
           localStorage.setItem("Token",token)
           localStorage.setItem("UserName",user.userName)
           navigate('/loby');
