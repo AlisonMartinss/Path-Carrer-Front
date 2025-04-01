@@ -69,16 +69,25 @@ function Loby () {
                 continue;
               }
 
+              const ClassAlredyView = LobyJSON.JSONdata.myPaths[element].classSee;
+              let nYepClass = 0;
+
+              for (const classe of ClassAlredyView){
+                if (Path_data.classPresent.includes(classe)){
+                  nYepClass++
+                }
+              }
+
+
               let obj = 
               {
                 title:Path_data.title,
                 category:Path_data.category,
                 classPresent:Path_data.classPresent,
-                id:Path_data.id
+                id:Path_data.id,
+                nClass:Path_data.classPresent.length,
+                nClassYep:nYepClass
               }
-
-              console.log("OBJ Tratado: ")
-              console.log(obj)
 
               RefList.push(obj)
             }
@@ -135,8 +144,8 @@ function Loby () {
                                 subTile={element.category}
                                 onClick={(e) => PathAcess(e,element.id)}
                                 img={img}
-                                nClass={100}
-                                nClassYep={10}
+                                nClass={element.nClass}
+                                nClassYep={element.nClassYep}
                               />
                             </div>
                           ))
