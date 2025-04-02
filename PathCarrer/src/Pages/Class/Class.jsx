@@ -429,7 +429,7 @@ function captchaAnswer (addres,casas) {
       GetContent();
   }, []);
   /* ORI-1.1 */
-  useEffect(() => {
+  useEffect(() => { // Determinamos a primeira aula e as aulas já assitidas
       if (ContentJSON?.modulos && Array.isArray(ContentJSON.modulos)) {
           
           if (moduleIndex !== null && !isNaN(moduleIndex)) {
@@ -444,6 +444,8 @@ function captchaAnswer (addres,casas) {
                   SetDescON(firstModuleContent.description);
               }
 
+              // Neste ponto definimos as aulas assistidas
+
               if (localStorage.getItem("ClassYepList") != null && localStorage.getItem("ClassYepList") != "undefined"){
                 console.log("ClassSeeYep: ")
                 console.log(JSON.parse(localStorage.getItem("ClassYepList")))
@@ -455,6 +457,7 @@ function captchaAnswer (addres,casas) {
                         ...prev,
                         {
                           onSee: ClassSeeYep?.includes(element.id), // true se incluso, false caso contrário
+                          implement:true,
                           core: element
                         }
                       ];
@@ -471,7 +474,8 @@ function captchaAnswer (addres,casas) {
                       return [
                         ...prev,
                         {
-                          onSee: "noAdd", // true se incluso, false caso contrário
+                          onSee: false,
+                          implement:false,
                           core: element
                         }
                       ];
@@ -549,7 +553,7 @@ function captchaAnswer (addres,casas) {
     }
   }, [ContentJSON]);
 
-  useEffect(() => { 
+  useEffect(() => { // Forum
     if (ContentJSON && ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments && answerCurrent.active === true) {
       alert("active");
   
@@ -676,7 +680,7 @@ function captchaAnswer (addres,casas) {
       }
   }}, [ContentJSON, answerCurrent.active]);
   
-  useEffect(() => {
+  useEffect(() => { // Forum
     if (ContentJSON && ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments && answerCurrent.deleteActive === true) {
       if (answerCurrent.addres.length > 2){ // Em resposta a alguem
         (
@@ -849,6 +853,7 @@ function captchaAnswer (addres,casas) {
                                   HandleTrue = {(e) => CallSeeClass(element.core.id)}
                                   HandleFalse= {(e) => CallOFFSeeClass(element.core.id)}
                                   Start={element.onSee}
+                                  implmented={element.implement}
                                   
                                   onClick={(e) => ClassSelect(index,ContentJSON)}
                                 />

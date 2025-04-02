@@ -20,6 +20,7 @@ import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2.jsx';
 import { LobyGet } from '../../Components/1he GlobalFunctions/GlobalFunctions.js';
 
 import { AddPath,RemovePath,UserPathOrder} from '../ContentAcess/ContentAcessAux.js';
+import { ShortPath } from '../../Components/1he GlobalFunctions/GlobalFunctions.js';
 
 
 function ContentAcess (){
@@ -104,10 +105,10 @@ function ContentAcess (){
           setIsLoading(false);
         }
     }
-    const ToIntoModulo = (e,index,ClassYepList) => { // Usado quando selecionamos um modulo
+    const ToIntoModulo = (e,index,ClassOnSeeAlredy) => { // Usado quando selecionamos um modulo
       e.preventDefault();
       localStorage.setItem("ModuleIndexON",index)
-      localStorage.setItem("ClassYepList",JSON.stringify(ClassYepList))
+      localStorage.setItem("ClassYepList",JSON.stringify(ClassOnSeeAlredy))
       navigate('/class')
     }
     async function PathDelete () {
@@ -168,69 +169,7 @@ function ContentAcess (){
         setIsClicked((prev) => (!prev))
     };
 
-    useEffect(() => {
-      if (!isLoading) { // ✅ Evita execução prematura
-        (async () => {
-          try {
-            const LobyInfo = await LobyGet();
-            let nClassYep = 0;
-    
-            console.log("ContentJSON.modulos:", ContentJSON.modulos);
-    
-            const pathId = localStorage.getItem("PathID_on");
-    
-            if (!pathId || !LobyInfo.myPaths[pathId]) { // Verifica se tal Path está na lista de MyPaths
-              console.error("não encontrado em myPaths");
-              SetModuleListRef(ContentJSON.modulos)
-              return;
-            }
-    
-            console.log("moduleSeens:", LobyInfo.myPaths[pathId].moduleSeens);
-    
-            for (const element of ContentJSON.modulos) {
-              let i = 0;
-              let elementsClassYep = []
-              for (const classe of element.modulocontent) {
-                let ListaDeAulasDoModulo = LobyInfo.myPaths[pathId].moduleSeens[i]?.classSeens;
-    
-                if (ListaDeAulasDoModulo?.includes(classe.id)) { // ✅ Correção do `find`
-                  elementsClassYep.push(classe.id)
-                  nClassYep++;
-                }
-              }
-    
-              console.log("Verificando se o módulo já foi adicionado...");
-    
-              SetModuleListRef(prev => {
-                if (!prev.some(mod => mod.titleMain === element.name)) {
-                  console.log("Adicionando módulo:", element.name);
-                  return [
-                    ...prev,
-                    {
-                      name: element.name,
-                      nClassYep: nClassYep,
-                      nClass: element.modulocontent.length,
-                      elementsClassYep:elementsClassYep
-                    },
-                  ];
-                }
-                console.log(`Módulo "${element.name}" já existe.`);
-                return prev; // ✅ Se já existe, mantém o estado sem mudanças.
-              });
-    
-              i++;
-              nClassYep = 0;
-              elementsClassYep = []
-            }
-            console.log("Processamento concluído.");
-          } catch (error) {
-            console.error("Erro ao processar módulos:", error);
-          }
-        })(); // ✅ Chamando a função imediatamente
-      }
-    }, [ContentJSON, isLoading]); // ✅ Dependências corretas
-    
-    
+   
     useEffect(() => {
       GetContent();
     }, []);
@@ -250,6 +189,54 @@ function ContentAcess (){
           }
       
     }, [ContentJSON,isLoading]);
+
+    useEffect(() => {
+      if (Entity === "studentOn"){
+        (async () => {
+          try {
+          let ModuleOfUser = [];
+          const pathID = localStorage.getItem("PathID_on");
+          const ShirtInfoPath = await ShortPath(pathID);
+          const ModuleOfPathInUserProfile = (JSON.parse(localStorage.getItem("LobyInfo"))).myPaths[pathID].moduleSeens;
+
+          let i  = 0;
+          for (const module of ContentJSON.modulos){ // -> element aqui é um modulo
+            let ClassYep = 0
+            let ClassOnSeeAlredy = []
+            if (ModuleOfPathInUserProfile[i] != null){
+              for (const Class of ModuleOfPathInUserProfile[i].classSeens) {
+                if(ShirtInfoPath.classPresent.includes(Class)){
+                ClassYep++
+                ClassOnSeeAlredy.push(Class)
+              }
+              }
+              i++
+              let ObjOfMoule = 
+              {
+                name:module.name,
+                nClassYep:ClassYep,
+                nClass:module.modulocontent.length,
+                ClassOnSeeAlredy:ClassOnSeeAlredy
+              }
+  
+              ModuleOfUser.push(ObjOfMoule)
+            } 
+          }
+          console.log("ModuleOfUser")
+          console.log(ModuleOfUser)
+          SetModuleListRef(ModuleOfUser)
+        }
+        catch (error) {
+          console.error("Falha ao determinar pocentagem do usuario em relação aos modulo: ",error)
+        }
+        })();
+      }
+
+      else {
+        SetModuleListRef(ContentJSON.modulos);
+      }
+      
+    }, [ContentJSON, Entity]); 
 
     return (
 
@@ -278,7 +265,7 @@ function ContentAcess (){
                       <div className={styles.contentMain}>
 
                         {/* Verificando se ContentJSON.modulos é um array e se não está vazio */}
-                        {Array.isArray(ContentJSON.modulos) && ContentJSON.modulos.length > 0  ? (
+                        {Array.isArray(ModuleListRef) && ModuleListRef.length > 0  ? (
                         ModuleListRef.map((element,index) => (
                             <div className={styles.content_area}>
                               <WindowModule
@@ -286,7 +273,7 @@ function ContentAcess (){
                               img={""}
                               nClassYep={element.nClassYep}
                               nClass={element.nClass}
-                              onClick={(e) => ToIntoModulo(e,index,element.elementsClassYep)}/>
+                              onClick={(e) => ToIntoModulo(e,index,element.ClassOnSeeAlredy)}/>
                             </div>
                           ))
                         ) : (

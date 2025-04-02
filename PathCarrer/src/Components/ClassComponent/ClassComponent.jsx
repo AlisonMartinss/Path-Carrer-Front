@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import styles from '../ClassComponent/ClassComponent.module.css'
 
-function ClassComponent({ title, index, HandleTrue, HandleFalse, Start, onClick }) {
+function ClassComponent({ title, index, HandleTrue, HandleFalse, Start, onClick, implmented }) {
     const [isSelected, setIsSelected] = useState(false);
 
     const handleToggle = () => {
@@ -14,11 +14,11 @@ function ClassComponent({ title, index, HandleTrue, HandleFalse, Start, onClick 
 
     useEffect(() => {
         console.log(Start)
-        if (Start !== "noAdd"){
+        if (Start){
             setIsSelected(true)
         }
         else {
-            setIsSelected("noAdd")
+            setIsSelected(false)
         }
     },[])
 
@@ -26,7 +26,7 @@ function ClassComponent({ title, index, HandleTrue, HandleFalse, Start, onClick 
 
     return (
         <main onClick={onClick} className={styles.main}>
-            {Start !== "noAdd" ? (
+            {Start !== null && implmented ?(
                 <label className={`${styles.checkBoxArea} ${styles.txt}`}>
                     <input 
                         type="checkbox" 
