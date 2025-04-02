@@ -137,6 +137,9 @@ const ClassSelect = (index) => {
     if (author === localStorage.getItem("UserName")){
       setEntity("author")
     }
+    else {
+      alert("n é")
+    }
 };
 
 const redirectActivity = (e) => {
@@ -408,6 +411,8 @@ async function CallDeleteComment (addresX) {
 }
 
 async function CallSeeClass (IDClass) {
+  console.log("IDClass")
+  console.log(IDClass)
   await AddSeeClass(IDClass)
 }
 
@@ -547,6 +552,7 @@ function captchaAnswer (addres,casas) {
   /* ORI-1.2 */
   useEffect(() => { // Delegar Modulo x user
     if (ContentJSON && ContentJSON.IdAuthor) {
+        alert("Autor ?")
         SetEntityFunc(ContentJSON.IdAuthor);
     } else {
         console.warn("IdAuthor ainda não disponível.");

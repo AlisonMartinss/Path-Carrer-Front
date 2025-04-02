@@ -191,7 +191,7 @@ function ContentAcess (){
     }, [ContentJSON,isLoading]);
 
     useEffect(() => {
-      if (Entity === "studentOn"){
+      if (Entity === "studentOn" && Array.isArray(ContentJSON.modulos)){
         (async () => {
           try {
           let ModuleOfUser = [];
@@ -199,11 +199,16 @@ function ContentAcess (){
           const ShirtInfoPath = await ShortPath(pathID);
           const ModuleOfPathInUserProfile = (JSON.parse(localStorage.getItem("LobyInfo"))).myPaths[pathID].moduleSeens;
 
+          console.info("ContentJSON.modulos")
+          console.info(ContentJSON.modulos)
+
           let i  = 0;
           for (const module of ContentJSON.modulos){ // -> element aqui é um modulo
+
             let ClassYep = 0
             let ClassOnSeeAlredy = []
             if (ModuleOfPathInUserProfile[i] != null){
+              console.log("Lidando com modulo do index " + i)
               for (const Class of ModuleOfPathInUserProfile[i].classSeens) {
                 if(ShirtInfoPath.classPresent.includes(Class)){
                 ClassYep++
@@ -220,6 +225,18 @@ function ContentAcess (){
               }
   
               ModuleOfUser.push(ObjOfMoule)
+            }
+            else 
+            {
+              let ObjOfMoule_B = 
+              {
+                name:module.name,
+                nClassYep:ClassYep,
+                nClass:module.modulocontent.length,
+                ClassOnSeeAlredy:[]
+              }
+  
+              ModuleOfUser.push(ObjOfMoule_B)
             } 
           }
           console.log("ModuleOfUser")
