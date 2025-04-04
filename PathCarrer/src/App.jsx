@@ -21,6 +21,7 @@ import UpdateModulo from './Pages/ModuleInstances/UpdateModulo'
 import Login from './Pages/Login/Login'
 import ContentAcess from './Pages/ContentAcess/ContentAcess'
 import ViewProfile from './Pages/Viewprofile/ViewProfile'
+import HomePage from './Pages/HomePage/HomePage'
 
 const browserRouter = createBrowserRouter(createRoutesFromElements(
   /*
@@ -29,6 +30,7 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
   */
 <Route path="/">
  <Route index element={<Login/>}/>
+ <Route path="/HomePage" element={<HomePage/>}/>
  <Route path="/Loby" element={<Loby/>}/>
 
  <Route path="/Class" element={

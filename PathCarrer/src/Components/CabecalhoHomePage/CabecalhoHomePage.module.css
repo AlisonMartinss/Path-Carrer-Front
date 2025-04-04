@@ -1,0 +1,77 @@
+.main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: fixed;
+
+    width: 100vw;
+    height: 13vh;
+    background: linear-gradient(to bottom, #3560eebf, transparent);
+
+    z-index: 10;
+}
+.rigthArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 20%;
+    height: 30%;
+
+    gap: 0%;
+
+}
+
+.leftArea{
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30%;
+    height: 30%;
+
+    gap: 0%;
+
+    gap: 0%;
+}
+
+.separador{
+    position: absolute;
+
+    left: 48%;
+
+    width: 0.1vw;
+    height: 80%;
+
+    background-color: #ffffff;
+}
+
+.LeftAreaCTOElement{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 27%;
+    height: 100%;
+
+    gap: 3%;
+
+    cursor: pointer;
+}
+
+.icon{
+    width: 13%;
+    height: 100%;
+}
+
+.txtOver{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em, 0.9vw, 5em);
+    color: #ffffff
+}
+
