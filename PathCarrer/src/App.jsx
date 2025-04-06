@@ -29,7 +29,7 @@ const browserRouter = createBrowserRouter(createRoutesFromElements(
   
   */
 <Route path="/">
- <Route index element={<Login/>}/>
+ <Route index element={<HomePage/>}/>
  <Route path="/HomePage" element={<HomePage/>}/>
  <Route path="/Loby" element={<Loby/>}/>
 

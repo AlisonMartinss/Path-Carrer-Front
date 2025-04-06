@@ -1,3 +1,9 @@
+@keyframes cimaPbaixo {
+    0% { transform: translate(0, -30%); }
+    40% { transform: translate(0px, 10%); }
+    100% { transform: translate(0, -30%); }
+}
+
 .main{
  display: flex;
  flex-direction: column;
@@ -6,6 +12,8 @@
 
  width: 100vw;
  height: 100vh;
+ 
+ scroll-behavior: smooth;
 }
 
 .cabecalho{
@@ -112,13 +120,76 @@
     overflow: hidden;
 }
 
+.icon_arrow{
+    position: absolute;
+    color: #ffff;
+
+    width: 11%;
+    height: 11%;
+
+    top: 80%;
+    left: 45%;
+
+    z-index: 5;
+
+    animation: cimaPbaixo 0.8s ease-out infinite;
+}
+
 .hp2{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
     width: 100vw;
     height: 50vh;
 
     margin-bottom: 3%;
+}
 
-    background-color: #4A3B3B;
+.pre01{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 27%;
+    height: 95%;
+
+    gap: 3%;
+
+    cursor: pointer;
+    border-radius: 0.5vw;
+
+    transition: all 0.5s ease-out;
+}
+
+.pre01:hover{
+  background-color: #bababa;
+}
+
+.imageArea{
+    width: 50%;
+    height: 45%;
+
+    margin-top: 3%;
+}
+
+.preTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 70%;
+    height: 10%;
+}
+
+.preTxt{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 71%;
+    height: 45%;
 }
 
 .PathThumb{
@@ -143,4 +214,20 @@
     font-weight: 500;
     font-size: clamp(0.6em, 2.3vw, 5em);
     color: #4A3B3B
+}
+
+.txtHp2title{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: clamp(0.6em, 1.5vw, 5em);
+    color: #282740
+}
+
+.txtHp2txt{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(0.6em, 1.2vw, 5em);
+    color: #282740
 }

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 import { FaLightbulb } from "react-icons/fa";
 
 
-function CabecalhoHomePage () {
+function CabecalhoHomePage ({sobrenosClick}) {
 
     const navigate = useNavigate(); 
     const Icon = {
@@ -34,7 +34,7 @@ function CabecalhoHomePage () {
     return (
         <div className={styles.main}>
             <div className={styles.rigthArea}>
-              <div className={`${styles.LeftAreaCTOElement} ${styles.txtOver}`}>
+              <div onClick={sobrenosClick} className={`${styles.LeftAreaCTOElement} ${styles.txtOver}`}>
                 <FaLightbulb/> Sobre nós
               </div>
             </div>
