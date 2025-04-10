@@ -1,5 +1,6 @@
 import styles from '../HomePage/HomePage.module.css'
 import { MdArrowDropDown } from "react-icons/md";
+import img from '../../assets/Midias/PNGs/images/expla01.png'
 
 
 // Componentes
@@ -7,6 +8,37 @@ import { MdArrowDropDown } from "react-icons/md";
 import CabecalhoHomePage from '../../Components/CabecalhoHomePage/CabecalhoHomePage'
 
 function HomePage () {
+    const explanation = 
+    [
+        {
+            title:
+            `Encontre as melhores aulas em um só lugar!`,
+            txtMain:
+            `
+             Sabemos como pode ser desafiador encontrar o conteúdo certo no meio de tantas opções.
+             Por isso, reunimos as melhores aulas sobre cada assunto, organizadas de forma clara 
+             e acessível.
+
+             Aqui, você aprende com pessoas que já estiveram no seu lugar,que entendem suas dúvidas
+             e desafios. Isso é possível graças aos paths. Trilhas estruturadas em módulos e aulas para
+             guiar seu aprendizado de forma prática e eficiente.
+            `,
+            motivaton:`Descubra, aprenda e avance no seu caminho!`,
+            img:'../../../src/assets/Midias/PNGs/images/expla01.png'
+        },
+        {
+            title:
+            `Conteudo reunido em um só lugar !`,
+            txtMain:
+            `
+             A gente sabe como é cansativo procurar bons materiais na internet e acabar perdido no meio
+             de tanta informação espalhada. E se tudo já estivesse organizado para você em um só lugar?
+             No Path to Carrer, os melhores materais estão reunidos em um só lugar.
+            `,
+            motivaton:"",
+            img:'../../../src/assets/Midias/PNGs/images/expla02.png'
+        }
+    ]
     const premissas = 
     [
         {
@@ -64,6 +96,26 @@ function HomePage () {
                       </div>
                     ))}
                 </div>
+                {explanation.map((element) => (
+                <div className={styles.explanationArea}>
+                    <div className={styles.expla_01}>
+                        
+                        <div className={`${styles.expla_title} ${styles.realoc}`}>
+                          <div className={styles.decorativo01}></div>
+                          <div className={styles.expla_title_main}>{element.title}</div> 
+                        </div>
+                        <div className={`${styles.expla_main}`}>
+                          {element.txtMain}
+                        </div>
+          
+                        <strong className={`${styles.strong} ${styles.realoc}`}>{element.motivaton}</strong>
+                    </div>
+
+                    <img className={styles.img} src={element.img} alt="" />
+                </div>
+
+                ))}
+      
             </div>
         </div>
 
