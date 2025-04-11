@@ -8,7 +8,6 @@
     position: absolute;
 
     background-color: #73798dc2;
-    width: 90%;
     height: 40%;
 
     border-radius: 0.3vw;
@@ -247,7 +246,7 @@
     align-items: flex-start;
 
     margin-top: 1%;
-    width: 60%;
+    width: 100%;
     min-height: 10%;
 
     font-family: "Urbanist", serif;
@@ -256,7 +255,6 @@
     font-size: clamp(0.6em, 1.4vw, 5em);
 
     color: #282740;
-
 }
 
 .expla_title_main{
@@ -294,6 +292,52 @@
 
     object-fit: contain;
     overflow: hidden;
+}
+
+.expla_01_a{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 51%;
+    height: 100%;
+
+    margin-left: 5%;
+    gap: 3%;
+
+}
+
+.expla_main_a{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    white-space:  pre-wrap;
+
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em, 0.85vw, 5em);
+    color: #282740;
+
+}
+
+.img_V2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40%;
+    height:56%;
+
+    background-color: rgba(19, 23, 62, 0.8);
+    border-radius: 0.8vw;
+
+    object-fit: cover;
+    overflow: hidden;
+
 }
 
 .strong{

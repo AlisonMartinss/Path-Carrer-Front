@@ -126,13 +126,15 @@ function Loby () {
             </header>
             <div className={styles.pre_coreArea}>
               <div className={styles.coreArea}>
+                
                   <div className={styles.weekArea}>
+                    {/*
                     {dayArray.map((element) => (
                       <div className={styles.dayArea}>
                         <Button class={"day"}
                         message={element}/>
                       </div>
-                    ))}
+                    ))} */}
                   </div>
                   <div className={styles.moduloArea}>             
                       {/* Verificando se LobyJSON.myPaths é um array e se não está vazio */}

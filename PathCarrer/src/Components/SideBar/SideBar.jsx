@@ -48,7 +48,8 @@ function SideBar ({handleClick,description,AuthorName,adjectivesList,imgPerfil,i
                     </div> 
                     <div className={`${style.bottom_area} ${style.txtOver}`}>{AuthorName}</div> 
                 </div>
-
+                
+                {/* 
                 <div className={style.adjectives_area}>
                     {Array.isArray(arraAuxAdjectives) && arraAuxAdjectives.length > 0 ? (
                           arraAuxAdjectives.map((element) => (
@@ -61,6 +62,7 @@ function SideBar ({handleClick,description,AuthorName,adjectivesList,imgPerfil,i
                     )}
                     
                 </div>
+                */}
 
                 <div className={style.descArea}>
                     <div className={style.barra_desc}></div>

@@ -11,6 +11,7 @@ function HomePage () {
     const explanation = 
     [
         {
+            GifON:false,
             title:
             `Encontre as melhores aulas em um só lugar!`,
             txtMain:
@@ -24,9 +25,11 @@ function HomePage () {
              guiar seu aprendizado de forma prática e eficiente.
             `,
             motivaton:`Descubra, aprenda e avance no seu caminho!`,
-            img:'../../../src/assets/Midias/PNGs/images/expla01.png'
+            img:'../../../src/assets/Midias/PNGs/images/expla01.png',
+            widthTitle:0.68*("Encontre as melhores aulas em um só lugar!").length
         },
         {
+            GifON:false,
             title:
             `Conteudo reunido em um só lugar !`,
             txtMain:
@@ -36,8 +39,27 @@ function HomePage () {
              No Path to Carrer, os melhores materais estão reunidos em um só lugar.
             `,
             motivaton:"",
-            img:'../../../src/assets/Midias/PNGs/images/expla02.png'
-        }
+            img:'../../../src/assets/Midias/PNGs/images/expla02.png',
+            widthTitle:0.68*("Conteudo reunido em um só lugar !").length
+        },
+        {
+            GifON:true,
+            title:
+            `Encontre as melhores aulas em um só lugar!`,
+            txtMain:
+            `
+             Sabemos como pode ser desafiador encontrar o conteúdo certo no meio de tantas opções.
+             Por isso, reunimos as melhores aulas sobre cada assunto, organizadas de forma clara 
+             e acessível.
+
+             Aqui, você aprende com pessoas que já estiveram no seu lugar,que entendem suas dúvidas
+             e desafios. Isso é possível graças aos paths. Trilhas estruturadas em módulos e aulas para
+             guiar seu aprendizado de forma prática e eficiente.
+            `,
+            motivaton:`Descubra, aprenda e avance no seu caminho!`,
+            img:'../../../src/assets/Midias/PNGs/images/progressaoHP.gif',
+            widthTitle:0.68*("Encontre as melhores aulas em um só lugar!").length
+        },
     ]
     const premissas = 
     [
@@ -96,25 +118,39 @@ function HomePage () {
                       </div>
                     ))}
                 </div>
-                {explanation.map((element) => (
-                <div className={styles.explanationArea}>
-                    <div className={styles.expla_01}>
-                        
-                        <div className={`${styles.expla_title} ${styles.realoc}`}>
-                          <div className={styles.decorativo01}></div>
-                          <div className={styles.expla_title_main}>{element.title}</div> 
+                {explanation.map((element) => 
+                !element.GifON ? (
+                    <div className={styles.explanationArea}>
+                        <div className={styles.expla_01}>
+                            <div className={`${styles.expla_title} ${styles.realoc}`}>
+                            <div style={{ width: `${element.widthTitle}vw` }} className={styles.decorativo01}></div>
+                            <div className={styles.expla_title_main}>{element.title}</div> 
+                            </div>
+                            <div className={`${styles.expla_main}`}>
+                            {element.txtMain}
+                            </div>
+                            <strong className={`${styles.strong} ${styles.realoc}`}>{element.motivaton}</strong>
                         </div>
-                        <div className={`${styles.expla_main}`}>
-                          {element.txtMain}
-                        </div>
-          
-                        <strong className={`${styles.strong} ${styles.realoc}`}>{element.motivaton}</strong>
+
+                        <img className={styles.img} src={element.img} alt="" />
                     </div>
-
-                    <img className={styles.img} src={element.img} alt="" />
+                ) : 
+                <div className={styles.explanationArea}>
+                    <div className={styles.expla_01_a}>
+                            <div className={`${styles.expla_title} ${styles.realoc}`}>
+                                
+                                <div className={styles.expla_title_main}>{element.title}</div>
+                                <div style={{ width: `${element.widthTitle}vw` }} className={styles.decorativo01}></div>
+                            </div>
+                            <div className={`${styles.expla_main_a}`}>
+                             {element.txtMain}
+                            </div>            
+                    </div>
+                    <img className={styles.img_V2} src={element.img} alt="" />
                 </div>
+                )}
 
-                ))}
+                
       
             </div>
         </div>

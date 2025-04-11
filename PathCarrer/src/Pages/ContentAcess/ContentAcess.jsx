@@ -23,6 +23,7 @@ import { AddPath,RemovePath,UserPathOrder} from '../ContentAcess/ContentAcessAux
 import { ShortPath } from '../../Components/1he GlobalFunctions/GlobalFunctions.js';
 
 
+
 function ContentAcess (){
   /* 
      ==== Explicações
@@ -287,7 +288,7 @@ function ContentAcess (){
                             <div className={styles.content_area}>
                               <WindowModule
                               titleMain={element.name}
-                              img={""}
+                              img={'../../assets/Midias/PNGs/images/ModuleIconDefault.png'}
                               nClassYep={element.nClassYep}
                               nClass={element.nClass}
                               onClick={(e) => ToIntoModulo(e,index,element.ClassOnSeeAlredy)}/>

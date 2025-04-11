@@ -19,7 +19,7 @@ function WindowModule ({titleMain,subTile,nClassYep,nClass,img,onClick}){
     return (
         <main onClick={onClick} className={`${style.main} ${style.style1}`}>
             <div className={style.Pre_img}>
-                <img  className={style.img} src={img} alt="Icone do curso" />
+                <img  className={style.img} src={"../../../src/assets/Midias/PNGs/images/ModuleIconDefault.png"} alt="Icone do curso" />
             </div>
             <div className={style.title_SubTitle}>
                 <div className={`${style.title_Main} ${style.txtOver}`}>{titleMain}</div>
