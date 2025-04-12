@@ -4,6 +4,20 @@
     100% { transform: translate(0, -30%); }
 }
 
+@keyframes emergirDireita {
+    0%   { transform: translate(90%, 0px); }   /* Posição inicial */
+    30%  { transform: translate(-5%, 0px);}
+    65%  { transform: translate( 2%, 0px);}
+    100% { transform: translate(0, 0); }  /* Volta ao normal */
+}
+
+@keyframes emergirDireita_b {
+    0%   { transform: translate(81%, -3%); }   /* Posição inicial */
+    30%  { transform: translate(-5%, 0px);}
+    65%  { transform: translate( 2%, 0px);}
+    100% { transform: translate(0, 0); }  /* Volta ao normal */
+}
+
 .decorativo01{
     position: absolute;
 
@@ -214,6 +228,8 @@
 }
 
 .explanationArea{
+    position: relative;
+
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -235,6 +251,17 @@
 
     margin-left: 5%;
     gap: 3%;
+}
+
+.line{
+    width: 92%;
+    height: 0.3%;
+
+    margin-left: 4%;
+
+    border-radius: 1vw;
+
+    background-color: #282740;
 }
 
 .expla_title{
@@ -281,7 +308,7 @@
     font-family: "Urbanist", serif;
     font-style: normal;
     font-weight: 500;
-    font-size: clamp(0.6em, 1vw, 5em);
+    font-size: clamp(0.6em, 1.2vw, 5em);
     color: #282740;
 
 }
@@ -319,12 +346,16 @@
     font-family: "Urbanist", serif;
     font-style: normal;
     font-weight: 500;
-    font-size: clamp(0.6em, 0.85vw, 5em);
+    font-size: clamp(0.6em, 1vw, 5em);
     color: #282740;
 
 }
 
+
+
 .img_V2{
+    position: absolute;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -332,15 +363,45 @@
     width: 40%;
     height:56%;
 
-    background-color: rgba(19, 23, 62, 0.8);
-    border-radius: 0.8vw;
+    right: 5%;
+    top: 8%;
 
-    object-fit: cover;
+    object-fit: contain;
     overflow: hidden;
+
+    
+    z-index: 2;
 
 }
 
+.img_V3{
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40%;
+    height:56%;
+
+    right: 4%;
+    top: 10%;
+
+    background-color: rgba(19, 23, 62, 0.8);
+
+    border-radius: 0.8vw;
+
+    object-fit: contain;
+    overflow: hidden;
+
+
+
+    z-index: 1;
+}
+
 .strong{
+    white-space:  pre-wrap;
+    
     font-family: "Urbanist", serif;
     font-style: normal;
     font-weight: 700;
@@ -384,3 +445,4 @@
     font-size: clamp(0.6em, 1.2vw, 5em);
     color: #282740
 }
+

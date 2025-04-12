@@ -16,13 +16,13 @@ function HomePage () {
             `Encontre as melhores aulas em um só lugar!`,
             txtMain:
             `
-             Sabemos como pode ser desafiador encontrar o conteúdo certo no meio de tantas opções.
-             Por isso, reunimos as melhores aulas sobre cada assunto, organizadas de forma clara 
-             e acessível.
+             Sabemos como pode ser desafiador encontrar o conteúdo certo no meio de tantas 
+             opções. Por isso, reunimos as melhores aulas sobre cada assunto, organizadas de forma
+             clara e acessível.
 
-             Aqui, você aprende com pessoas que já estiveram no seu lugar,que entendem suas dúvidas
-             e desafios. Isso é possível graças aos paths. Trilhas estruturadas em módulos e aulas para
-             guiar seu aprendizado de forma prática e eficiente.
+             Aqui, você aprende com pessoas que já estiveram no seu lugar,que entendem suas
+             dúvidas e desafios. Isso é possível graças aos paths. Trilhas estruturadas em
+             módulos e aulas para guiar seu aprendizado de forma prática e eficiente.
             `,
             motivaton:`Descubra, aprenda e avance no seu caminho!`,
             img:'../../../src/assets/Midias/PNGs/images/expla01.png',
@@ -34,8 +34,10 @@ function HomePage () {
             `Conteudo reunido em um só lugar !`,
             txtMain:
             `
-             A gente sabe como é cansativo procurar bons materiais na internet e acabar perdido no meio
-             de tanta informação espalhada. E se tudo já estivesse organizado para você em um só lugar?
+             A gente sabe como é cansativo procurar bons materiais na internet e acabar 
+             perdido no meio de tanta informação espalhada. E se tudo já estivesse organizado
+             para você em um só lugar?
+
              No Path to Carrer, os melhores materais estão reunidos em um só lugar.
             `,
             motivaton:"",
@@ -45,21 +47,43 @@ function HomePage () {
         {
             GifON:true,
             title:
-            `Encontre as melhores aulas em um só lugar!`,
+            `Acompanhe seu progresso e mantenha a motivação!`,
             txtMain:
             `
-             Sabemos como pode ser desafiador encontrar o conteúdo certo no meio de tantas opções.
-             Por isso, reunimos as melhores aulas sobre cada assunto, organizadas de forma clara 
-             e acessível.
+             Sabemos que aprender algo novo pode parecer um caminho longo, mas visualizar seu
+             avanço faz toda a diferença. 
 
-             Aqui, você aprende com pessoas que já estiveram no seu lugar,que entendem suas dúvidas
-             e desafios. Isso é possível graças aos paths. Trilhas estruturadas em módulos e aulas para
-             guiar seu aprendizado de forma prática e eficiente.
+            No Path to Career, você acompanha em tempo real quantos % já concluiu do seu path,
+            ajudando a manter o foco e a motivação. 
+
+            Cada módulo concluído é um passo a mais em direção ao seu objetivo.
             `,
-            motivaton:`Descubra, aprenda e avance no seu caminho!`,
+            motivaton:`Ver seu progresso crescer a cada dia faz com que o 
+aprendizado se torne mais leve e recompensador.`,
+
             img:'../../../src/assets/Midias/PNGs/images/progressaoHP.gif',
-            widthTitle:0.68*("Encontre as melhores aulas em um só lugar!").length
+            widthTitle:0.80*("Encontre as melhores aulas em um só lugar!").length
         },
+        {
+            GifON:false,
+            title:
+            `Acompanhe seu progresso e mantenha a motivação!`,
+            txtMain:
+            `
+             Sabemos que aprender algo novo pode parecer um caminho longo, mas visualizar seu
+             avanço faz toda a diferença. 
+
+            No Path to Career, você acompanha em tempo real quantos % já concluiu do seu path,
+            ajudando a manter o foco e a motivação. 
+
+            Cada módulo concluído é um passo a mais em direção ao seu objetivo.
+            `,
+            motivaton:`Ver seu progresso crescer a cada dia faz com que o 
+aprendizado se torne mais leve e recompensador.`,
+
+            img:'../../../src/assets/Midias/PNGs/images/Comments.png',
+            widthTitle:0.80*("Encontre as melhores aulas em um só lugar!").length
+        }
     ]
     const premissas = 
     [
@@ -130,6 +154,7 @@ function HomePage () {
                             {element.txtMain}
                             </div>
                             <strong className={`${styles.strong} ${styles.realoc}`}>{element.motivaton}</strong>
+                            <div className={styles.line}></div>
                         </div>
 
                         <img className={styles.img} src={element.img} alt="" />
@@ -144,14 +169,14 @@ function HomePage () {
                             </div>
                             <div className={`${styles.expla_main_a}`}>
                              {element.txtMain}
-                            </div>            
+                            </div>
+                            <strong className={`${styles.strong} ${styles.realoc}`}>{element.motivaton}</strong>
+                            <div className={styles.line}></div>         
                     </div>
                     <img className={styles.img_V2} src={element.img} alt="" />
+                    <div className={styles.img_V3}></div>
                 </div>
                 )}
-
-                
-      
             </div>
         </div>
 
