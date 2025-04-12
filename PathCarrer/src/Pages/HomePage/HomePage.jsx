@@ -1,6 +1,6 @@
 import styles from '../HomePage/HomePage.module.css'
 import { MdArrowDropDown } from "react-icons/md";
-import img from '../../assets/Midias/PNGs/images/expla01.png'
+import Button from '../../Components/Button/Button';
 
 
 // Componentes
@@ -177,6 +177,15 @@ aprendizado se torne mais leve e recompensador.`,
                     <div className={styles.img_V3}></div>
                 </div>
                 )}
+                <div className={styles.CTOend}>
+                    <div className={styles.CTOend_txt}>E muito mais!</div>
+                    <div className={styles.CTOend_button}>
+                        <Button
+                        class="BlueWhite"
+                        message="Crie sua conta!"/>
+                    </div>
+                    <img className={styles.CTOend_deco} src={"../../../src/assets/Midias/PNGs/images/setaA.svg"} alt="" />
+                </div>
             </div>
         </div>
 

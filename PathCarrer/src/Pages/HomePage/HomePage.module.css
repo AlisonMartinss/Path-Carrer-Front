@@ -398,6 +398,50 @@
     z-index: 1;
 }
 
+
+.CTOend{
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 50%;
+    height: 30%;
+
+    margin-left: 25%;
+}
+
+.CTOend_txt{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: clamp(0.6em, 2vw, 5em);
+    color: #282740
+
+}
+
+.CTOend_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 20%;
+    height: 22%;
+
+    margin-top: 5%
+}
+
+.CTOend_deco{
+    position: absolute;
+
+    width: 15vw;
+    height: 8vw;
+
+    left: 14.5%;
+}
+
 .strong{
     white-space:  pre-wrap;
     
