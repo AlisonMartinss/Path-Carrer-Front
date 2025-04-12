@@ -387,14 +387,13 @@
     right: 4%;
     top: 10%;
 
-    background-color: rgba(19, 23, 62, 0.8);
+    background-color: #3560EE;
 
-    border-radius: 0.8vw;
-
+    border-bottom-left-radius: 8vw;
+    border-top-right-radius: 5vw;
+    
     object-fit: contain;
     overflow: hidden;
-
-
 
     z-index: 1;
 }
