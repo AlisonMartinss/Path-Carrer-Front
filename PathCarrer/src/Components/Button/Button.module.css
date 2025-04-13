@@ -144,6 +144,35 @@ transform: translate(-3px, 3px);
 .BlueWhite:hover{
     color: #090d4b;
     border: solid #ffffff 0.15vw;
-    background-color: #e7d341;
+    background-color: #48d32d;
+
+}
+
+
+.darkBlue{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 87%;
+    height: 87%;
+
+    background-color: #40496A;
+    border: solid #ffffff00 0.15vw;
+    
+    font-family: "Urbanist";
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(0.6em, 0.85vw, 5em);
+    color: #ffffff;            
+
+    outline: none;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.darkBlue:hover{
+    border: solid #ffffff 0.15vw;
+    background-color: #48d32d;
 
 }

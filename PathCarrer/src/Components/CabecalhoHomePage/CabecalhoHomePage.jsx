@@ -22,14 +22,10 @@ function CabecalhoHomePage ({sobrenosClick}) {
         {
             title:"Criar Conta",
             Icone:Icon["IoAddCircle"],
-            onClick:() => navigate('/Login')
+            onClick:() => {localStorage.setItem("CreateAccount",true),navigate('/Login')}
         }
     ]
 
-     useEffect(() => {
-         console.log(buttonRender)
-    
-        },[]);
 
     return (
         <div className={styles.main}>

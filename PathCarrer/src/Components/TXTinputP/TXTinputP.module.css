@@ -12,11 +12,9 @@
 
 .input{
     position: relative;
-
-
-    border: #ffff,solid,0.15vw;
-    border-radius: 0.5vw;
-    background-color: #8D95B2;
+    border: none;
+    border-radius: 0.6vw;
+    background-color: #40496A;
 
     width: 93%;
     height: 95%;

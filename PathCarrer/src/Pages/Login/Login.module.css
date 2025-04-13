@@ -1,3 +1,10 @@
+@keyframes emergirDireita {
+    0%   { transform: translate(90%, 0px); }   /* Posição inicial */
+    30%  { transform: translate(-5%, 0px);}
+    65%  { transform: translate( 2%, 0px);}
+    100% { transform: translate(0, 0); }  /* Volta ao normal */
+}
+
 .main{
     display: flex;
     flex-direction: column;
@@ -14,45 +21,164 @@
 }
 
 .core{
+    position: relative;
+
     display: flex;
     justify-content: center;
     align-items: flex-start;
 
     width: 50vw;
     height: 90vh;
-
-    background-color: black;
 }
 
 .loginArea{
+    position: relative;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
 
-    padding-top: 8%;
+    padding-top: 2%;
 
     width: 40%;
-    height: 50%;
+    height: 60%;
 
     margin-top: 12%;
-    border-radius: 20px;
+    border-radius: 0.8vw;
+    border: solid #8F8F8F 0.15vw;
 
-    gap: 8%;
+    gap: 4%;
 
-    background-color: brown;
+    background-color: #C1CAEB;
+
+}
+
+.loginArea_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+    height:10%;
+
+    margin-bottom: 2%;
+    margin-top: 6%;
+
+    
+    font-family: "Urbanist";
+    font-style: normal;
+    font-weight: 700;
+    font-size: clamp(0.4em, 1.1vw, 5em);
+    color: #40496A;
+
+
 }
 
 .UserArea{
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+    width: 90%;
+    height:11%;
+}
+
+.inputPasswordArea{
+    width: 90%;
+    height: 100%;
+}
+
+.iconVerifyArea{
+    display: flex;
     justify-content: center;
     align-items: center;
     
-    width: 86%;
-    height:14%;
+    width: 1.5vw;
+    height: 1.5vw;
+
+    border-radius: 50%;
+    background-color: #f1f5ff;
+
+    animation: emergirDireita 0.8s ease-out 
+}
+
+.icon{
+    width: 100%;
+    height: 100%;
+
+    color: #4DE59F;
 }
 
 .Button{
     width: 32%;
-    height: 11%;
+    height: 9%;
+
+    margin-top: 4%;
+}
+
+.Button_setB{
+    width: 39%;
+    height: 10%;
+
+    margin-top: 4%;
+}
+
+.waring{
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    min-width: 50%;
+    height: 7%;
+
+    top: 4%;
+    
+    border-radius: 0.5vw;
+
+    
+}
+
+.othersLoginOptions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+    height:10%;
+
+    margin-left: -3%;
+
+    font-family: "Urbanist";
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(0.4em, 0.9vw, 5em);
+    color: #40496A;
+}
+
+.othersLoginOptions_a{
+    font-family: "Urbanist";
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(0.4em, 0.9vw, 5em);
+    color: #40496A;
+
+    cursor: pointer;
+}
+
+
+
+.iconPosition_a{
+
+}
+
+.txtOver_a{
+    font-family: "Urbanist";
+    font-style: normal;
+    font-weight: 700;
+    font-size: clamp(0.4em, 1vw, 5em);
+    color: #ff2735;
 }
