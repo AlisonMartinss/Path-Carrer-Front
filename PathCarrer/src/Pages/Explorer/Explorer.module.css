@@ -36,7 +36,7 @@
     width: 18vw;
     height: 90vh;
 
-    background-color: #C1CAEB;
+    background-color: #4C546F;
 }
 
 .categorys{
@@ -105,7 +105,7 @@
 
 .CategoryElementMain:hover{
     border-bottom: solid #ffffff 0.2vw;
-    background-color: #092164dc;
+    background-color: #ffffff;
 }
 
 
