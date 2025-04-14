@@ -157,6 +157,8 @@ transform: translate(-3px, 3px);
     width: 87%;
     height: 87%;
 
+    background: linear-gradient(to right, #2054fc, #41a3ff);
+
     background-color: #40496A;
     border: solid #ffffff00 0.15vw;
     
@@ -164,15 +166,19 @@ transform: translate(-3px, 3px);
     font-style: normal;
     font-weight: 600;
     font-size: clamp(0.6em, 0.85vw, 5em);
-    color: #ffffff;            
+    color: #ffffff;   
+    
+    background-size: 200%;
+    background-position: left;
 
-    outline: none;
+
     transition: all 0.3s ease-in-out;
+    border: solid #ffff 0.15vw;
 
 }
 
 .darkBlue:hover{
-    border: solid #ffffff 0.15vw;
-    background-color: #48d32d;
+    border: solid #ffff 0.15vw;
+    background-position: right;
 
 }

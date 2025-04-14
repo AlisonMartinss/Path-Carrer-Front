@@ -6,8 +6,10 @@ import Button from '../../Components/Button/Button';
 // Componentes
 
 import CabecalhoHomePage from '../../Components/CabecalhoHomePage/CabecalhoHomePage'
+import { useNavigate } from 'react-router';
 
 function HomePage () {
+    const navigate = useNavigate()
     const explanation = 
     [
         {
@@ -137,8 +139,8 @@ aprendizado se torne mais leve e recompensador.`,
                           <img className={styles.img_png} src={element.img} alt="" /> 
                         </div>
                         
-                        <div className={`${styles.preTitle} ${styles.txtHp2title}`}>{element.title}</div>
-                        <div className={`${styles.preTxt} ${styles.txtHp2txt}`}>{element.message}</div>
+                        <div className={`${styles.preTitle}`}>{element.title}</div>
+                        <div className={`${styles.preTxt}`}>{element.message}</div>
                       </div>
                     ))}
                 </div>
@@ -174,15 +176,17 @@ aprendizado se torne mais leve e recompensador.`,
                             <div className={styles.line}></div>         
                     </div>
                     <img className={styles.img_V2} src={element.img} alt="" />
-                    <div className={styles.img_V3}></div>
+                    <div className={styles.enfeite_b}>100%</div>
                 </div>
                 )}
                 <div className={styles.CTOend}>
                     <div className={styles.CTOend_txt}>E muito mais!</div>
                     <div className={styles.CTOend_button}>
                         <Button
-                        class="BlueWhite"
-                        message="Crie sua conta!"/>
+                        class="darkBlue"
+                        message="Crie sua conta!"
+                        func={() => {localStorage.setItem("CreateAccount",true),navigate('/Login')}}
+                        />
                     </div>
                     <img className={styles.CTOend_deco} src={"../../../src/assets/Midias/PNGs/images/setaA.svg"} alt="" />
                 </div>

@@ -153,6 +153,23 @@
     border-radius: 1vw;
 }
 
+.warring{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30%;
+    height: 7%;
+
+    margin-top: 20%;
+
+    background-color: #ff4848dc;
+    border: solid #ffff 0.015vw;
+    border-radius: 0.5vw;
+
+  
+}
+
 .txt1{
     font-family: "Urbanist", serif;
     font-style: normal;

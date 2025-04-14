@@ -103,7 +103,7 @@ function Explorer (){
                         />
                      </div>
                   ))) : (
-                  <div>Não há Paths para exibir.</div>
+                  <div className={`${styles.warring} ${styles.txt1}`}>Não há Paths nessa categoria para exibir.</div>
                )}
                </div>
               
