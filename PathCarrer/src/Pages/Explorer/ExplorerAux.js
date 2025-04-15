@@ -8,13 +8,10 @@ export async function Explore() {
                 "Content-Type": "application/json"
             }
         });
-
-        // Retorna os dados da resposta da API
         return response.data;
     } catch (error) {
-        // Em caso de erro, exibe um alerta e retorna null ou uma mensagem de erro
         alert("Erro ao Buscar explorer.");
-        return null; // ou return { error: "Erro ao Buscar explorer." };
+        return null;
     }
 }
 
@@ -26,12 +23,9 @@ export async function CategoryExplorer(e) {
                 "Content-Type": "application/json"
             }
         });
-
-        // Retorna os dados da resposta da API
         return response.data;
     } catch (error) {
-        // Em caso de erro, exibe um alerta e retorna null ou uma mensagem de erro
         alert("Erro ao Buscar Category Explorer.");
-        return null; // ou return { error: "Erro ao Buscar explorer." };
+        return null;
     }
 }

@@ -287,6 +287,7 @@ function CreatePath ({PreSend}) {
                   </div>
              
                </div>
+               {/*
               <div className={`${styles.txtover} ${styles.CallToAction}`}>
                Selecione cinco <strong className={styles.strong}>adjetivos</strong> que se encaixam no seu <strong className={styles.strong}>Path:</strong>
               </div>
@@ -299,8 +300,7 @@ function CreatePath ({PreSend}) {
                      name={"adjectives"}/>
                   </div>
                ))}
-              </div>
-
+              </div>*/}
               <div className={`${styles.txtover} ${styles.CallToAction}`}>
                 Escolha uma imagem que irá compor a <strong className={styles.strong}> capa do seu path </strong> 
               </div>

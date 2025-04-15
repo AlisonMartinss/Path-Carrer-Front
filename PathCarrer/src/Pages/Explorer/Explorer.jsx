@@ -32,16 +32,15 @@ function Explorer (){
       const fetchData = async () => {
       try{
          const contentPath = await CategoryExplorer(e);
-         console.log("API Response:", contentPath); // Verifica os dados no console
          if (Array.isArray(contentPath)) {
-            SetPathExplore(contentPath); // Só define se for um array
+            SetPathExplore(contentPath);
          } else {
-            SetPathExplore([]); // Evita erro se a API retornar um valor inválido
+            SetPathExplore([]);
          }   
        }
       catch (error) {
          console.error("Erro ao buscar Category Explorer:", error);
-         SetPathExplore([]); // Em caso de erro, evita erro de `.map()`
+         SetPathExplore([]);
        }
       }
       fetchData();
@@ -54,18 +53,15 @@ function Explorer (){
                const contentPath = await Explore(); // Aguarda a Promise ser resolvida
                console.log("API Response:", contentPath); // Verifica os dados no console
                if (Array.isArray(contentPath)) {
-                  SetPathExplore(contentPath); // Só define se for um array
-                  console.log(contentPath)
+                  SetPathExplore(contentPath);
                } else {
-                  SetPathExplore([]); // Evita erro se a API retornar um valor inválido
+                  SetPathExplore([]);
                }
             } catch (error) {
-               console.error("Erro ao buscar explorer:", error);
-               SetPathExplore([]); // Em caso de erro, evita erro de `.map()`
+               SetPathExplore([]);
             }
          };
-      
-         fetchData(); // Chama a função assíncrona dentro do useEffect
+         fetchData();
       }, []);
     return (
         <main className={styles.main}>

@@ -22,7 +22,7 @@ function Conteudo ({img,adjectives,PathName,Category,onClick,views}){
                         { views !== null && views !== undefined ? (`${views} já adicionaram esse Path`): "indefinido"}
                     </div>
                 </div>
-                <div className={`${styles.adjectivesArea}`}>                        
+                {/*<div className={`${styles.adjectivesArea}`}>                        
                         <div className={styles.adjectiveLines}>
                             <div className={`${styles.ajdLine} ${styles.txt3}`}>
                                 {adjectives.slice(0,3).map((element) => (
@@ -39,7 +39,7 @@ function Conteudo ({img,adjectives,PathName,Category,onClick,views}){
                                 ))}
                             </div>
                         </div>                       
-                </div>
+                </div>*/}
             </div>
         </div>
     )
