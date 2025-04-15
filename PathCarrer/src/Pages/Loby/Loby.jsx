@@ -8,6 +8,8 @@ import WindowModule from '../../Components/WindowModule/WindowModule'
 import WindowNote from '../../Components/WindowNote/WindowNote'
 import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2'
 import img from '../../assets/Midias/JP2.png'
+import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
+import PostComment from '../../Components/PostComment/PostComment'
 
 
 import { useState,useEffect } from 'react'
@@ -17,6 +19,7 @@ import { useNavigate } from 'react-router'
 // =-=-=-=-= Arquivos auxiliares =-=-=-=-=- //
 
 import { LobyGet,ShortPath } from '../../Components/1he GlobalFunctions/GlobalFunctions'
+import { ImOpt } from 'react-icons/im'
 
 
 
@@ -31,6 +34,12 @@ function Loby () {
       });
       
     const [dayArray,setDayArray] = useState(["All","Seg","Ter","Qua","Qui","Sex","Sab","Dom"]);
+    const [postNote,SetPostNote] = useState(
+      {
+        active:false,
+        message:""
+      }
+    );
 
     
     const PathAcess = (e,x) => { // Quando clicado em algum path
@@ -117,7 +126,6 @@ function Loby () {
   
       },[]);
     
-
     return (
       
         <main className={styles.main}>
@@ -137,7 +145,6 @@ function Loby () {
                     ))} */}
                   </div>
                   <div className={styles.moduloArea}>             
-                      {/* Verificando se LobyJSON.myPaths é um array e se não está vazio */}
                         {Array.isArray(LobyJSON.RefPathList) && Object.keys(LobyJSON.RefPathList).length > 0 ? (
                           LobyJSON.RefPathList.map((element) => (
                             <div key={element.id} className={styles.moduloArea_core}>
@@ -158,6 +165,25 @@ function Loby () {
               </div>
             
             <div className={styles.message_preArea}>
+              {postNote.active ? (
+                <div className={styles.PostCommentArea}>
+                  <PostComment
+                    onClose= {(e) => SetPostNote((prev) => ({...prev,active:false}))}
+                    inputTXT={(e) => SetPostNote((prev) => ({...prev,message:e.target.value}))}
+                    buttonON={(e) => alert("PIPOCA COM SAL")}
+                    maxlength={"150"}
+                  />
+                </div>
+              ):null}
+             
+              <div className={styles.newNoteButton}>
+                  <ButtonIMG
+                    iconV={"CiEdit"}
+                    icon_style={"evenConstStyleBlue"}
+                    handleClick={(e) => SetPostNote((prev) => ({...prev,active:true}))}
+                    title={"Postar comentario no forum"}
+                  />
+              </div>
               <div className={styles.messageMainArea}>
                 <div className={styles.messageArea}>
                   <WindowNote

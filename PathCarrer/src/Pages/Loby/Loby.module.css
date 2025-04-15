@@ -104,12 +104,16 @@
 }
 
 .message_preArea{
+    position: relative;
+
     display: flex;
     justify-content: center;
     align-items: center;
 
     width: 50vw;
     height: 100vh;
+
+    overflow: visible;
 }
 
 .messageMainArea{
@@ -136,6 +140,29 @@
     height: 30%;
 
 
+}
+
+.newNoteButton{
+    width: 2.2vw;
+    height: 2.2vw;
+
+    border-top-left-radius: 0.5vw;
+    border-bottom-left-radius: 0.5vw;
+
+    margin-top: -55%;
+
+    background-color: #3560EE;
+}
+
+.PostCommentArea{
+    position: absolute;
+
+    width: 80%;
+    height: 50%;
+
+    right: 50%;
+
+    z-index: 5;
 }
 
 .txtOver{

@@ -9,22 +9,20 @@ import { useEffect, useState } from 'react';
 function PostComment({ onClose, inputTXT, buttonON, maxlength }) {
     const [nCaracteres, SetnCaracteres] = useState("");
     const [restantes, SetRestantes] = useState(maxlength);
-    const [waring, setWaring] = useState(false); // Agora é um estado
+    const [waring, setWaring] = useState(false);
 
     const verify = () => {
-        if (nCaracteres.length >= 5) { // Corrigida a condição
-            setWaring(false); // Se atender ao requisito, remove o aviso
-            alert("PIPOCA COM SAL")
+        if (nCaracteres.length >= 5) {
+            setWaring(false);
             buttonON();
-            alert("PIPOCA COM SAL 2")
         } else { 
-            setWaring(true); // Agora ativa o aviso corretamente
+            setWaring(true);
         }
     };
 
     useEffect(() => {
-        SetRestantes(maxlength - nCaracteres.length); // Calculando caracteres restantes
-    }, [nCaracteres, maxlength]); // O efeito deve ser executado quando nCaracteres ou maxlength mudarem
+        SetRestantes(maxlength - nCaracteres.length);
+    }, [nCaracteres, maxlength]);
 
     return (
         <div className={styles.main}>
@@ -45,7 +43,7 @@ function PostComment({ onClose, inputTXT, buttonON, maxlength }) {
                 <TXTinputM
                     placeholder={"Digite aqui o seu comentário"}
                     onChange={(e) => {inputTXT(e); SetnCaracteres(e.target.value)}}
-                    maxLength={maxlength} // Corrigido para "maxLength"
+                    maxLength={maxlength}
                 />
             </div>
             <div className={`${styles.cRestantes} ${styles.txt}`}>
@@ -55,7 +53,7 @@ function PostComment({ onClose, inputTXT, buttonON, maxlength }) {
                 <ButtonIMG
                     iconV={"BsSendFill"}
                     icon_style={"evenConstStyleBlue"}
-                    handleClick={verify} // Removido `(e) =>`
+                    handleClick={verify}
                     title={"Postar !"}
                 />
             </div>
