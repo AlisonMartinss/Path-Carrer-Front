@@ -2,12 +2,14 @@ import style from '../WindowNote/WindowNote.module.css'
 
 import ButtonIMG from '../ButtonIMG/ButtonIMG'
 
-function WindowNote ({note,date}){
+function WindowNote ({note,date,trashButton}){
 
     return (
         
         <main className={`${style.main} ${style.textLayout} ${style.stylesText}`}>
+            
             <div className={style.style1}>
+                <div className={style.decoration}></div>
                 <div className={style.noteClass}>{note}</div>
 
                 <div  className={style.trash_date_Area}>
@@ -16,6 +18,7 @@ function WindowNote ({note,date}){
                     <ButtonIMG
                     iconV={"HiOutlineTrash"}
                     icon_style={"evenConstStyleTrash"}
+                    handleClick={trashButton}
                     />
                   </div>
 

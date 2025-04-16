@@ -20,6 +20,7 @@ import { useNavigate } from 'react-router'
 
 import { LobyGet,ShortPath } from '../../Components/1he GlobalFunctions/GlobalFunctions'
 import { ImOpt } from 'react-icons/im'
+import {AddNote,RemoveNote} from './LobyAUX'
 
 
 
@@ -188,7 +189,7 @@ function Loby () {
                   <PostComment
                     onClose= {(e) => SetPostNote((prev) => ({...prev,active:false}))}
                     inputTXT={(e) => SetPostNote((prev) => ({...prev,message:e.target.value}))}
-                    buttonON={(e) => alert("PIPOCA COM SAL")}
+                    buttonON={async () => {await AddNote(postNote.message),window.location.reload()}}
                     maxlength={"150"}
                   />
                 </div>
@@ -198,11 +199,18 @@ function Loby () {
                   <ButtonIMG
                     iconV={"CiEdit"}
                     icon_style={"evenConstStyle"}
-                    handleClick={(e) => SetPostNote((prev) => ({...prev,active:true}))}
+                    handleClick={(e) => {
+                      if (!(LobyJSON.Notes.length >= 3))
+                      {SetPostNote((prev) => ({...prev,active:true}))}
+                      else{
+                        alert("Numero maximo de notas por usuario já atingido")
+                      }
+                    }}
                     title={"Escrever nota"}
                   />
               </div>
-              <div className={styles.messageMainArea}>
+              {LobyJSON.Notes.length > null ? (
+                <div className={styles.messageMainArea}>
                 {LobyJSON.Notes.map((element) => 
                   (
                     <div className={styles.messageArea}>
@@ -213,11 +221,35 @@ function Loby () {
                         ClasseAfterB={"classeAfterBb"}
                         note={element.message}
                         date={element.date}
+                        trashButton={async () => {await RemoveNote(element.key),window.location.reload()}}
                       />
                     </div>
-                  ))}
-               
-              </div>
+                  ))} 
+              </div>    
+              ):
+              <div className={styles.messageMainArea}>
+                <div className={`${styles.waring}`}>Faça sua primeira anotação !</div> 
+                <div className={styles.cto_note}>
+                  <div className={styles.cto_note_icon}>
+                    <ButtonIMG
+                      iconV={"CiEdit"}
+                      icon_style={"evenConstStyleDarkBlue"}
+                      handleClick={(e) => {
+                        if (!(LobyJSON.Notes.length >= 3))
+                        {SetPostNote((prev) => ({...prev,active:true}))}
+                        else{
+                          alert("Numero maximo de notas por usuario já atingido")
+                        }
+                      }}
+                      title={"Escrever nota"}
+                    />
+                  </div>
+                
+                </div>
+              
+              </div> 
+              }
+              
 
             </div>
             </div>
