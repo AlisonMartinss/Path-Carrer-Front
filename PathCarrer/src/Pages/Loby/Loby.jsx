@@ -30,7 +30,8 @@ function Loby () {
         JSONdata:{},
         MyPathIDList:[],
         RefPathList:[],
-        isLoading:false
+        isLoading:false,
+        Notes:[]
       });
       
     const [dayArray,setDayArray] = useState(["All","Seg","Ter","Qua","Qui","Sex","Sab","Dom"]);
@@ -112,7 +113,24 @@ function Loby () {
 
       }, [LobyJSON.MyPathIDList,LobyJSON.isLoading]); 
 
-    useEffect(() => {
+      useEffect(() => {
+        if (LobyJSON.isLoading === false && LobyJSON.JSONdata.Notes !== undefined){
+          const keyHashList = Object.keys(LobyJSON.JSONdata.Notes)
+          let Notes = []
+          for (const element of keyHashList) {
+            let obj =
+            {
+              date:LobyJSON.JSONdata.Notes[element].date,
+              message:LobyJSON.JSONdata.Notes[element].message,
+              key:LobyJSON.JSONdata.Notes[element].key
+            }
+            Notes.push(obj)
+          }
+          SetLobyJSON((prev) => ({...prev,Notes:Notes}))
+        }
+      },[LobyJSON.JSONdata.Notes,LobyJSON.isLoading])
+
+    /*useEffect(() => {
         (async () => {
           try {
           const data = await LobyGet();
@@ -124,7 +142,7 @@ function Loby () {
           }
         })();
   
-      },[]);
+      },[]);*/
     
     return (
       
@@ -179,20 +197,26 @@ function Loby () {
               <div className={styles.newNoteButton}>
                   <ButtonIMG
                     iconV={"CiEdit"}
-                    icon_style={"evenConstStyleBlue"}
+                    icon_style={"evenConstStyle"}
                     handleClick={(e) => SetPostNote((prev) => ({...prev,active:true}))}
-                    title={"Postar comentario no forum"}
+                    title={"Escrever nota"}
                   />
               </div>
               <div className={styles.messageMainArea}>
-                <div className={styles.messageArea}>
-                  <WindowNote
-                  icon_Aa={"FaStar"}
-                  icon_Bb={"FaTrash"}
-                  ClasseAfterA={"classeAfterAa_2"}
-                  ClasseAfterB={"classeAfterBb"}
-                  />
-                </div>
+                {LobyJSON.Notes.map((element) => 
+                  (
+                    <div className={styles.messageArea}>
+                      <WindowNote
+                        icon_Aa={"FaStar"}
+                        icon_Bb={"FaTrash"}
+                        ClasseAfterA={"classeAfterAa_2"}
+                        ClasseAfterB={"classeAfterBb"}
+                        note={element.message}
+                        date={element.date}
+                      />
+                    </div>
+                  ))}
+               
               </div>
 
             </div>

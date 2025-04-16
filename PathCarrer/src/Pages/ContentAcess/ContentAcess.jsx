@@ -345,7 +345,7 @@ function ContentAcess (){
                       </div>
                     </div>
                 </div>
-                <div className={styles.module_core}>
+                {/*<div className={styles.module_core}>
                     <div className={styles.module_main}>
                       <div className={styles.icon}>
                        <div className={styles.icon_area}><AiOutlineComment className={`${styles.icon_conf}`}/></div>
@@ -363,7 +363,7 @@ function ContentAcess (){
 
                       </div>
                     </div>
-                </div> 
+                </div>*/}
              </div>
             </div>
 

@@ -1,30 +1,31 @@
 import style from '../WindowNote/WindowNote.module.css'
 
-import RelatedComponents from '../../Components/RelatedComponents/RelatedComponents'
+import ButtonIMG from '../ButtonIMG/ButtonIMG'
 
-function WindowNote ({note,userName,icon_Aa,icon_Bb,ClasseAfterA,ClasseAfterB,buttonActiveA,buttonActiveB,mensagemA,mensagemB}){
-    const ClickTest = () => {
-    }
+function WindowNote ({note,date}){
+
     return (
         
         <main className={`${style.main} ${style.textLayout} ${style.stylesText}`}>
             <div className={style.style1}>
-                <div className={style.userNameArea}>{userName}</div>
-
                 <div className={style.noteClass}>{note}</div>
 
-                <div className={style.likeButton}>
-                  <RelatedComponents
-                  icon_Aa={icon_Aa}
-                  icon_Bb={icon_Bb}
-                  ClasseAfterA={ClasseAfterA}
-                  ClasseAfterB={ClasseAfterB}
-                  buttonActiveA={buttonActiveA}
-                  buttonActiveB={buttonActiveB}
-                  mensagemA={mensagemA}
-                  mensagemB={mensagemB}
-                  buttonActive={ClickTest}
-                  />
+                <div  className={style.trash_date_Area}>
+
+                  <div title={"Excluir nota"} className={style.iconArea}>
+                    <ButtonIMG
+                    iconV={"HiOutlineTrash"}
+                    icon_style={"evenConstStyleTrash"}
+                    />
+                  </div>
+
+                  <div title={"Data de quando a anotação foi feita"} className={style.iconArea}>
+
+                    {date[date.length-2]+date[date.length-1]+"/"+
+                    date[date.length-5]+date[date.length-4]+"/"+
+                    date[date.length-10]+date[date.length-9]+date[date.length-8]+date[date.length-7]}
+                  </div>
+                
                 </div>
             </div>   
         </main>

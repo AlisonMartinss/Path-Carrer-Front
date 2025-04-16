@@ -41,13 +41,20 @@
 
 .noteClass{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
 
     width: 95%;
-    height:73%;
+    height:71%;
 
     margin-right: 2.5%;
+    margin-top: 3%;
+
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(0.6em, 0.8vw, 5em);
+    color: #000000
 }
 
 .textLayout{
@@ -67,11 +74,41 @@
     color: #000000
 }
 
-.likeButton{
-    width: 50%;
+.trash_date_Area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 3%;
+
+    width: 40%;
     height: 20%;
 
+    padding-top: 1%;
     margin-right: 5%;
+}
+
+.iconArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 23%;
+    max-width: 55%;
+    height: 100%;
+
+    padding: 2%;
+
+    background-color: #C1CAEB;
+
+    border-top-right-radius: 0.35vw;
+    border-top-left-radius: 0.35vw;
+
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(0.6em, 0.8vw, 5em);
+    color: #000000
 }
 
 
