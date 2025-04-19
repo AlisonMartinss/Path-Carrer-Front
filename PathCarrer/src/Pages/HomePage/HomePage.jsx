@@ -27,7 +27,7 @@ function HomePage () {
              módulos e aulas para guiar seu aprendizado de forma prática e eficiente.
             `,
             motivaton:`Descubra, aprenda e avance no seu caminho!`,
-            img:'../../../src/assets/Midias/PNGs/images/expla01.png',
+            img:'../../../src/assets/Midias/PNGs/images/Dinamica do Path.svg',
             widthTitle:0.68*("Encontre as melhores aulas em um só lugar!").length
         },
         {
@@ -124,7 +124,7 @@ aprendizado se torne mais leve e recompensador.`,
                     </div>
 
                     <div className={styles.PathThumb}>
-                        <img className={styles.img_png} src="../../../src/assets/Midias/SVGs/thumbpath.png" alt="" />
+                        <img className={styles.img_png} src="../../../src/assets/Midias/PNGs/images/thumbpath.png" alt="" />
                     </div>
 
                     <MdArrowDropDown
