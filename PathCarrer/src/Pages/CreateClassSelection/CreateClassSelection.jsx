@@ -12,7 +12,7 @@ function CreateClassSelection  ({option,circumstance}){
         podemos indicar qual API será chamda sem repetir codigo
     */
     async function teste (e) {
-      alert("TESTE");
+   
     }
     async function PathCreate (e) {
         e.preventDefault()
@@ -79,7 +79,7 @@ function CreateClassSelection  ({option,circumstance}){
       try {
         const response = await httpClient.put('CRUD/UpdateModule',
           {
-            id:localStorage.getItem("PathID_on"), // OBTIDO ATRAVES DO LOCAL STORAGE
+            PathID:localStorage.getItem("PathID_on"), // OBTIDO ATRAVES DO LOCAL STORAGE
             indexModule:localStorage.getItem("ModuleIndexON"), // OBTIDO ATRAVES DO LOCAL STORAGE
             title:twoStep.titleModule,
             desc:twoStep.descModule,
@@ -100,9 +100,9 @@ function CreateClassSelection  ({option,circumstance}){
           const response = await httpClient.put(
               'CRUD/UpdateClassUnic',
               {
-                  id: localStorage.getItem("PathID_on"),
+                  PathID: localStorage.getItem("PathID_on"),
                   indexModule: localStorage.getItem("ModuleIndexON"),
-                  indexClass: localStorage.getItem("indexClass"),
+                  indexClass: localStorage.getItem("ClassIndex"),
                   threePath: {
                       title: threeStep[0].title,
                       link: threeStep[0].link,
@@ -111,22 +111,21 @@ function CreateClassSelection  ({option,circumstance}){
               },
               {
                   headers: {
-                      Authorization: `Bearer ${localStorage.getItem("Token")}`, // Inclui o token de autenticação
-                      "Content-Type": "application/json" // Define o tipo de conteúdo
+                      Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                      "Content-Type": "application/json" 
                   }
               }
           );
   
-          // Exibe mensagem de sucesso
+      
           alert("Aula única atualizada com sucesso!");
   
-          // Log de depuração (opcional)
+
           console.log("Resposta da API:", response.data);
       } catch (err) {
-          // Exibe mensagem de erro
+   
           alert("Erro ao atualizar a aula. Verifique o console para mais detalhes.");
   
-          // Log detalhado do erro
           console.error("Erro completo:", err);
           console.error("Resposta do servidor:", err.response?.data);
       }
@@ -135,11 +134,10 @@ function CreateClassSelection  ({option,circumstance}){
       e.preventDefault();
   
       try {
-          // Faz a requisição POST para atualizar a aula
           const response = await httpClient.post(
-              'CRUD/UpadateNewClass', // Endpoint corrigido
+              'CRUD/UpadateNewClass', 
               {
-                  id: localStorage.getItem("PathID_on"),
+                  PathID: localStorage.getItem("PathID_on"),
                   indexModule: localStorage.getItem("ModuleIndexON"),
                   threePath: {
                       title: threeStep[0].title,
@@ -154,17 +152,14 @@ function CreateClassSelection  ({option,circumstance}){
                   }
               }
           );
-  
-          // Exibe mensagem de sucesso
+
           alert("Aula atualizada com sucesso!");
   
-          // Log de depuração (opcional)
           console.log("Resposta da API:", response.data);
       } catch (err) {
-          // Exibe mensagem de erro
+
           alert("Erro ao atualizar a aula. Verifique o console para mais detalhes.");
   
-          // Log detalhado do erro
           console.error("Erro completo:", err);
           console.error("Resposta do servidor:", err.response?.data);
       }

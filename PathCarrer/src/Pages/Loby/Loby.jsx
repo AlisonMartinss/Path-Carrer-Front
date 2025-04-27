@@ -116,7 +116,14 @@ function Loby () {
 
       useEffect(() => {
         if (LobyJSON.isLoading === false && LobyJSON.JSONdata.Notes !== undefined){
-          const keyHashList = Object.keys(LobyJSON.JSONdata.Notes)
+          try {
+            if (LobyJSON.JSONdata.Notes === null) {
+              alert("Notas não encontradas.");
+              return;
+            }
+            
+            const keyHashList = Object.keys(LobyJSON.JSONdata.Notes);
+
           let Notes = []
           for (const element of keyHashList) {
             let obj =
@@ -128,6 +135,8 @@ function Loby () {
             Notes.push(obj)
           }
           SetLobyJSON((prev) => ({...prev,Notes:Notes}))
+        } catch {
+        }
         }
       },[LobyJSON.JSONdata.Notes,LobyJSON.isLoading])
 

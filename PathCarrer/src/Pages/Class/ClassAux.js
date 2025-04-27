@@ -48,7 +48,7 @@ export async function DeleteClassUnicAPI(e) {
         const response = await httpClient.put(
             'CRUD/DeleteClassUnic',
             { 
-                id: localStorage.getItem("PathID_on"),
+                PathID: localStorage.getItem("PathID_on"),
                 indexModule: localStorage.getItem("ModuleIndexON"),
                 indexClass: localStorage.getItem("ClassIndex"),
             },

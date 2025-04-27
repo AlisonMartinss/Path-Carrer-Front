@@ -7,7 +7,7 @@ import { IoFlameSharp } from "react-icons/io5";
 import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2';
 import Conteudo from '../../Components/Conteudo/Conteudo'
 
-import { Explore, CategoryExplorer } from './ExplorerAux';
+import { Explore, CategoryExplorer,MyPaths } from './ExplorerAux';
 import { useNavigate } from 'react-router';
 
 function Explorer (){
@@ -47,11 +47,11 @@ function Explorer (){
    }
 
 
-      useEffect(() => {
-         const fetchData = async () => {
+   useEffect(() => {
+      if (localStorage.getItem("exploreObjective") === "exploreDefault"){
+         (async () => {
             try {
-               const contentPath = await Explore(); // Aguarda a Promise ser resolvida
-               console.log("API Response:", contentPath); // Verifica os dados no console
+               const contentPath = await Explore(); 
                if (Array.isArray(contentPath)) {
                   SetPathExplore(contentPath);
                } else {
@@ -60,8 +60,22 @@ function Explorer (){
             } catch (error) {
                SetPathExplore([]);
             }
-         };
-         fetchData();
+         })();
+      }else {
+         (async () => {
+            try {
+               const contentPath = await MyPaths(); 
+               if (Array.isArray(contentPath)) {
+                  SetPathExplore(contentPath);
+               } else {
+                  SetPathExplore([]);
+               }
+            } catch (error) {
+               SetPathExplore([]);
+            }
+         })();
+
+      }
       }, []);
     return (
         <main className={styles.main}>

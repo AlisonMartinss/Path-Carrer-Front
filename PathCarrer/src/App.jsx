@@ -24,10 +24,7 @@ import ViewProfile from './Pages/Viewprofile/ViewProfile'
 import HomePage from './Pages/HomePage/HomePage'
 
 const browserRouter = createBrowserRouter(createRoutesFromElements(
-  /*
-   
-  
-  */
+
 <Route path="/">
  <Route index element={<HomePage/>}/>
  <Route path="/HomePage" element={<HomePage/>}/>

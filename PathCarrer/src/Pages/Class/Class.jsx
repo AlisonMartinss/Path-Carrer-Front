@@ -266,7 +266,7 @@ const PostCommentFuncX = async () => {
 
           let nAnswers = [];
 
-          if (nAnswersBuild && nAnswersBuild.data) {  // ✅ Evita acessar undefined
+          if (nAnswersBuild && nAnswersBuild.data) { 
             nAnswers = Object.values(nAnswersBuild.data);
           } else {
             console.warn(`Nenhuma resposta encontrada para o comentário ${post.id}`);
@@ -335,7 +335,7 @@ const DeleteCommentAux = async (element,fatherOBJ) => {
 
           let nAnswers = [];
 
-          if (nAnswersBuild && nAnswersBuild.data) {  // ✅ Evita acessar undefined
+          if (nAnswersBuild && nAnswersBuild.data) { 
             nAnswers = Object.values(nAnswersBuild.data);
           } else {
             console.warn(`Nenhuma resposta encontrada para o comentário ${post.id}`);
@@ -432,10 +432,12 @@ function captchaAnswer (addres,casas) {
   /* ORI-1.0 */
   useEffect(() => {
       GetContent();
+      
   }, []);
   /* ORI-1.1 */
   useEffect(() => { // Determinamos a primeira aula e as aulas já assitidas
       if (ContentJSON?.modulos && Array.isArray(ContentJSON.modulos)) {
+        console.log(ContentJSON.modulos)
           
           if (moduleIndex !== null && !isNaN(moduleIndex)) {
               localStorage.setItem("moduleON",JSON.stringify(ContentJSON.modulos[moduleIndex]));
@@ -452,8 +454,6 @@ function captchaAnswer (addres,casas) {
               // Neste ponto definimos as aulas assistidas
 
               if (localStorage.getItem("ClassYepList") != null && localStorage.getItem("ClassYepList") != "undefined"){
-                console.log("ClassSeeYep: ")
-                console.log(JSON.parse(localStorage.getItem("ClassYepList")))
                 const ClassSeeYep = JSON.parse(localStorage.getItem("ClassYepList"))
                 for (const element of ContentJSON.modulos[moduleIndex].modulocontent) {
                   SetClassFilter((prev) => {
@@ -474,6 +474,7 @@ function captchaAnswer (addres,casas) {
 
               else {
                 for (const element of ContentJSON.modulos[moduleIndex].modulocontent) {
+                  console.log(ContentJSON.modulos)
                   SetClassFilter((prev) => {
                     if (!prev.some(classe => classe.core.id === element.id)) {
                       return [
@@ -491,6 +492,7 @@ function captchaAnswer (addres,casas) {
               }
           }
       }
+
 
     
   },[ContentJSON]);
@@ -520,7 +522,7 @@ function captchaAnswer (addres,casas) {
 
           let nAnswers = [];
 
-          if (nAnswersBuild && nAnswersBuild.data) {  // ✅ Evita acessar undefined
+          if (nAnswersBuild && nAnswersBuild.data) {
             nAnswers = Object.values(nAnswersBuild.data);
           } else {
             console.warn(`Nenhuma resposta encontrada para o comentário ${post.id}`);

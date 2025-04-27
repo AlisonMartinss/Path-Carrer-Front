@@ -33,13 +33,13 @@ function UpdateModulo ({route,APIroute}) {
 
     async function UpdateModule(e) {
         if (e) {
-            e.preventDefault(); // Previne o comportamento padrão do evento, se o parâmetro 'e' estiver presente
+            e.preventDefault();
         }
     
         try {
-            // Faz a requisição PUT para atualizar o módulo
+            
             const response = await httpClient.put(
-                'CRUD/UpdateModule', // Endpoint da API
+                'CRUD/UpdateModule',
                 {
                     PathID: localStorage.getItem("PathID_on"),
                     indexModule: localStorage.getItem("ModuleIndexON"),
@@ -48,22 +48,21 @@ function UpdateModulo ({route,APIroute}) {
                 },
                 {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("Token")}`, // Inclui o token de autenticação
-                        "Content-Type": "application/json" // Define o tipo de conteúdo
+                        Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                        "Content-Type": "application/json" 
                     }
                 }
             );
     
-            // Exibe mensagem de sucesso
+        
             alert("Módulo atualizado com sucesso!");
     
-            // Log de depuração (opcional)
+    
             console.log("Resposta da API:", response.data);
         } catch (err) {
-            // Exibe mensagem de erro
+      
             alert("Erro ao atualizar o módulo. Verifique o console para mais detalhes.");
     
-            // Log detalhado do erro
             console.error("Erro completo:", err);
             console.error("Resposta do servidor:", err.response?.data);
         }

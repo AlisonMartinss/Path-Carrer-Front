@@ -33,7 +33,7 @@ function ViewProfile (){
             banner:"",
             perfil:"",
             desc:"",
-            waring:"Não preencha os campos que você não pretende mudar"
+            waring:"Certifique-se que o link das imagens tem dominio aberto(publico) e não é de uso circustancial indevido."
         }
     )
 

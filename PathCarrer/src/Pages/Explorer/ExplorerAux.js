@@ -29,3 +29,18 @@ export async function CategoryExplorer(e) {
         return null;
     }
 }
+
+export async function MyPaths(e) {
+    try {
+        const response = await httpClient.get(`Explore/MyPaths?UserName=${e}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                "Content-Type": "application/json"
+            }
+        });
+        return response.data;
+    } catch (error) {
+        alert("Erro ao Seus Paths.");
+        return null;
+    }
+}

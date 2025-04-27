@@ -13,7 +13,6 @@ function ClassComponent({ title, index, HandleTrue, HandleFalse, Start, onClick,
     };
 
     useEffect(() => {
-        console.log(Start)
         if (Start){
             setIsSelected(true)
         }

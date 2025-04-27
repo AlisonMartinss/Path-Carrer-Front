@@ -33,9 +33,6 @@ function Login (){
     );
 
     async function LoginFunction (userNameX,PasswordY) {
-
-        console.log(userNameX);
-        console.log(PasswordY);
         try {
           const response = await httpClient.post('Login',
             {

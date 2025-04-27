@@ -43,8 +43,8 @@ function CabecalhoV2 ({logoPath,title}){
               },
               {iconV: "IoIosCompass",
                 icon_style: "evenConstStyle",
-                handleClick:() => navigate('/explorer'),
-                title:"voltar para o loby"
+                handleClick:() => { localStorage.setItem("exploreObjective","exploreDefault"),navigate('/explorer')},
+                title:"explorar Paths"
               }
         ]);
 
