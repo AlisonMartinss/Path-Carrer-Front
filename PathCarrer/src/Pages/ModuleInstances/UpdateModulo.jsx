@@ -56,6 +56,7 @@ function UpdateModulo ({route,APIroute}) {
     
         
             alert("Módulo atualizado com sucesso!");
+            navigate('/class')
     
     
             console.log("Resposta da API:", response.data);

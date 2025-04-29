@@ -2,9 +2,10 @@ import CreateAulas from "../CreateAulas/CreateAulas";
 import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'
 import { useContext} from 'react'
+import { useNavigate } from "react-router";
 
 function CreateClassSelection  ({option,circumstance}){
-
+  const navigate = useNavigate();
   const {oneStap,twoStep,threeStep} = useContext(PathStepsContext);
     /* 
         Esse jsx é nescessario pois 'CreateAulas' é usada em varias etapas com
@@ -69,6 +70,7 @@ function CreateClassSelection  ({option,circumstance}){
           }
         )
         alert("Modulo adicionado")
+        navigate('/ContentAcess')
       }catch (err){
         alert ("Erro")
         console.log(err)
@@ -119,6 +121,7 @@ function CreateClassSelection  ({option,circumstance}){
   
       
           alert("Aula única atualizada com sucesso!");
+          navigate('/class')
   
 
           console.log("Resposta da API:", response.data);
@@ -154,6 +157,7 @@ function CreateClassSelection  ({option,circumstance}){
           );
 
           alert("Aula atualizada com sucesso!");
+          navigate('/class')
   
           console.log("Resposta da API:", response.data);
       } catch (err) {

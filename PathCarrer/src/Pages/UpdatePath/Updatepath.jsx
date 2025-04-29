@@ -34,7 +34,7 @@ function UpdatePath () {
             }
         )
         alert("Path atualizado")
-        navigate('/loby')
+        navigate('/ContentAcess')
         }catch (err){
           alert ("Erro")
           console.log(err)

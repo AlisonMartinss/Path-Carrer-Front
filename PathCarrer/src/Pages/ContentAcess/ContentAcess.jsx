@@ -142,14 +142,10 @@ function ContentAcess (){
         }
         else if (e === "Editar Path"){
           navigate('/updatePath')
-          
-          
         }
         else if (e === "Deletar Path"){
           PathDelete();
           navigate('/Explorer')
-
-
         }
         else {
           alert("Ação n indentificada")

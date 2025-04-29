@@ -149,6 +149,7 @@ const redirectActivity = (e) => {
   }
   else if (e == "excluir a aula"){
     DeleteClassUnicAPI();
+    window.location.reload();
   }
   else if (e == "excluir modulo"){
     DeleteModule();
