@@ -357,6 +357,8 @@
 
     width: 23%;
     height: 15%;
+
+    transition: all 0.3s ease-in-out;
 }
 
 .img{

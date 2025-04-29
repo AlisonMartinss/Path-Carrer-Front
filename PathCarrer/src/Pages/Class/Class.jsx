@@ -137,9 +137,6 @@ const ClassSelect = (index) => {
     if (author === localStorage.getItem("UserName")){
       setEntity("author")
     }
-    else {
-      alert("n é")
-    }
 };
 
 const redirectActivity = (e) => {
@@ -235,7 +232,6 @@ const viewAnswers = async (element) => {
 
 const BuildPostComment = (element) => {
   SetPostComment((prev) => ({active:true,elementX:element}))
-  alert("!")
 }
 
 const PostCommentFuncX = async () => {
@@ -554,7 +550,6 @@ function captchaAnswer (addres,casas) {
   /* ORI-1.2 */
   useEffect(() => { // Delegar Modulo x user
     if (ContentJSON && ContentJSON.IdAuthor) {
-        alert("Autor ?")
         SetEntityFunc(ContentJSON.IdAuthor);
     } else {
         console.warn("IdAuthor ainda não disponível.");
@@ -563,7 +558,6 @@ function captchaAnswer (addres,casas) {
 
   useEffect(() => { // Forum
     if (ContentJSON && ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments && answerCurrent.active === true) {
-      alert("active");
   
       if (!(answerCurrent.addres.length < 2)) {
         (async () => { 
@@ -632,8 +626,6 @@ function captchaAnswer (addres,casas) {
         })();
       } 
       else {
-        alert("Else");
-
         (async () => {
           try {
             const updatedComments = [];

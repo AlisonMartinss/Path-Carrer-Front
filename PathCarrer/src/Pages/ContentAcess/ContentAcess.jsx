@@ -113,7 +113,7 @@ function ContentAcess (){
       navigate('/class')
     }
     async function PathDelete () {
-      setIsLoading(true); // requisição está em andamento
+      setIsLoading(true);
       try {
         const response = await httpClient.post('CRUD/PathDelete',
           {
@@ -143,9 +143,12 @@ function ContentAcess (){
         else if (e === "Editar Path"){
           navigate('/updatePath')
           
+          
         }
         else if (e === "Deletar Path"){
           PathDelete();
+          navigate('/Explorer')
+
 
         }
         else {
