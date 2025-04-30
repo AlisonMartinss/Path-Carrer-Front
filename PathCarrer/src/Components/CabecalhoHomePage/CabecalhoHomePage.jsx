@@ -17,7 +17,7 @@ function CabecalhoHomePage ({sobrenosClick}) {
         {
             title:"Login",
             Icone:Icon["IoLogIn"],
-            onClick:() => navigate('/Login')
+            onClick:() => {localStorage.setItem("CreateAccount",false),navigate('/Login')}
         },
         {
             title:"Criar Conta",
