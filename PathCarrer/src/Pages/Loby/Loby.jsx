@@ -57,8 +57,13 @@ function Loby () {
         SetLobyJSON((prev) => ({...prev,isLoading:true}))
         SetLobyJSON((prev) => ({...prev,JSONdata:data,MyPathIDList:Object.keys(data.myPaths)}))
         SetLobyJSON((prev) => ({...prev,isLoading:false}))
-        }catch {
-          console.error("Erro em buscar dados nescessarios para o preenchimento do loby")
+        }catch (error){
+          if (error.erro === "Token inválido ou expirado"){
+            console.error("Sessão expirada. Faça login novamente !")
+            alert("Sessão expirada. Faça login novamente !")
+            navigate('/Login')
+          }else {
+          console.error("Erro em buscar dados nescessarios para o preenchimento do loby")}
         }
       })();
 
@@ -118,7 +123,6 @@ function Loby () {
         if (LobyJSON.isLoading === false && LobyJSON.JSONdata.Notes !== undefined){
           try {
             if (LobyJSON.JSONdata.Notes === null) {
-              alert("Notas não encontradas.");
               return;
             }
             
@@ -140,19 +144,6 @@ function Loby () {
         }
       },[LobyJSON.JSONdata.Notes,LobyJSON.isLoading])
 
-    /*useEffect(() => {
-        (async () => {
-          try {
-          const data = await LobyGet();
-          SetLobyJSON((prev) => ({...prev,isLoading:true}))
-          SetLobyJSON((prev) => ({...prev,JSONdata:data,MyPathIDList:Object.keys(data.myPaths)}))
-          SetLobyJSON((prev) => ({...prev,isLoading:false}))
-          }catch {
-            console.error("Erro em buscar dados nescessarios para o preenchimento do loby")
-          }
-        })();
-  
-      },[]);*/
     
     return (
       

@@ -13,7 +13,7 @@ import { PiBookOpenDuotone } from "react-icons/pi";
 import LoadIcon from '../../Components/LoadIcon/LoadIcon.jsx'
 
 import { DeleteClassUnicAPI, DeleteModule, PostCommentFunc, 
-         AddSeeClass, RemoveSeeClass, ElementCommentInfo,PostCommentFunc4,DeleteComment} from './ClassAux';
+         AddSeeClass, RemoveSeeClass, ElementCommentInfo,PostCommentFuncao,DeleteComment} from './ClassAux';
 
 
 import { GetInfoUser } from '../../Components/1he GlobalFunctions/GlobalFunctions.js'
@@ -189,7 +189,8 @@ async function fetchCommentOBJ(elementZ) {
 };
 
 const viewAnswers = async (element) => {
-  const answersAPIresponse = await ElementCommentInfo(element.gen,element.id);
+
+  const answersAPIresponse = await ElementCommentInfo(element.gen+1,element.id);
 
   const answers = [];
 
@@ -241,15 +242,17 @@ const PostCommentFuncX = async () => {
   if (PostCommentON.elementX !== undefined){
     console.info("father - true")
     try {
-      await PostCommentFunc4(element.gen+1,element.id,PostCommentON.commentMain);
+      console.log("Gen: " + element.gen+1 + " ID: " + element.id + " PostCommentON: " + PostCommentON.commentMain )
+      await PostCommentFuncao(element.gen+1,element.id,PostCommentON.commentMain);
       SetPostComment((prev) => ({...prev,commentMain:"",elementX:{}}))
       viewAnswers(element)
-    }catch {
-      console.log("Erro ao postar comment")
+    }catch (error) {
+      console.log("Erro ao postar comment " + error)
+      return
     }
   }else {
     console.info("father - false")
-    await PostCommentFunc4(0,"Xae243467çiva#a124",PostCommentON.commentMain);
+    await PostCommentFuncao(0,"Xae243467çiva#a124",PostCommentON.commentMain);
     const localJSON =  await GetContent();
 
       const updatedComments = [];
@@ -377,10 +380,6 @@ const resetAnswerCurrent = () => { // Reset
     deleteActive: false
   });
 };
-
-
-
-
 
 
 async function CallPostComment (addresX,commentCore) {
@@ -513,7 +512,7 @@ function captchaAnswer (addres,casas) {
         try {
           const user = await GetInfoUser(post.userWordID);
 
-          const nAnswersBuild = await ElementCommentInfo(0, post.id);
+          const nAnswersBuild = await ElementCommentInfo(1, post.id);
           console.log("nAnswersBuild: ")
           console.log(nAnswersBuild)
 

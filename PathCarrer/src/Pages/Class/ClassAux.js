@@ -186,11 +186,11 @@ export async function ElementCommentInfo(Gen, commentID) {
       return response.data;
     } catch (err) {
       console.error("Erro na requisição:", err);
-      throw err; // Opcional: Lança o erro para melhor tratamento
+      throw err;
     }
 }
 
-export async function PostCommentFunc4(Gen, fatherID, comment) {
+export async function PostCommentFuncao(Gen, fatherID, comment) {
     try {
         // Pegando valores do localStorage de forma segura
         const userName = localStorage.getItem("UserName");

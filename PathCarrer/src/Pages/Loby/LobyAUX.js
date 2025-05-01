@@ -16,9 +16,18 @@ export async function AddNote(Note) {
                     }
                 }           
             );
-        } catch (erro) {
-            console.error ("Erro ao adicionar Nota.");
-            return "Erro ao adicionar Nota."
+        } catch (error) {
+            if (error.response) {
+                const serverMessage = error.response.data?.erro;
+                
+                if (serverMessage === "Token inválido ou expirado") {
+                  console.error("Sessão expirada. Faça login novamente !");
+                  alert("Sessão expirada. Faça login novamente !");
+                  window.location.href = '/login'
+                  return null;
+                }
+            }
+            console.error("Erro tentar adicionar nota")
         }
     }
     else {
@@ -41,8 +50,17 @@ export async function RemoveNote(key) {
                     }
                 }           
             );
-        } catch (erro) {
-            console.error ("Erro Deletar Nota.");
-            return "Erro Deletar Nota."
-        }  
+        } catch (error) {
+            if (error.response) {
+                const serverMessage = error.response.data?.erro;
+                
+                if (serverMessage === "Token inválido ou expirado") {
+                  console.error("Sessão expirada. Faça login novamente !");
+                  alert("Sessão expirada. Faça login novamente !");
+                  window.location.href = '/login'
+                  return null;
+                }
+            }
+            console.error("Erro ao tentar remover note")}
+            return "Erro Deletar Nota."      
 }

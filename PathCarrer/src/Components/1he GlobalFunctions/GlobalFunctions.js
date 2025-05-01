@@ -1,3 +1,4 @@
+
 import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
 
 export async function ShortPath(PathID) {
@@ -5,7 +6,6 @@ export async function ShortPath(PathID) {
     const token = localStorage.getItem("Token");
 
     if (!PathID || !token) {
-      alert("Erro: PathID ou Token não encontrado.");
       return null;
     }
 
@@ -18,10 +18,18 @@ export async function ShortPath(PathID) {
 
     const JSONdata = response.data;
     return JSONdata;
-  } catch (err) {
-    alert("Erro na chamada do ShortPath!");
-    console.error("Erro na requisição:", err);
-    return null; // Retorna null em caso de erro para evitar valores indefinidos
+  } catch (error) {
+    if (error.response) {
+      const serverMessage = error.response.data?.erro;
+      
+      if (serverMessage === "Token inválido ou expirado") {
+        console.error("Sessão expirada. Faça login novamente !");
+        alert("Sessão expirada. Faça login novamente !");
+        window.location.href = '/login'
+        return null;
+      }
+    }
+    return null; 
   }
 }
 
@@ -46,10 +54,20 @@ export async function LobyGet() {
       localStorage.setItem("LobyInfo", JSON.stringify(JSONdata));
   
       return JSONdata;
-    } catch (err) {
+    } catch (error) {
+      if (error.response) {
+        const serverMessage = error.response.data?.erro;
+        
+        if (serverMessage === "Token inválido ou expirado") {
+          console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+          alert("Sessão expirada. Faça login novamente !");
+          //window.location.href = '/login'
+          return null;
+        }
+      }
       alert("Erro na chamada do Loby!");
-      console.error("Erro na requisição:", err);
-      return null; // Retorna null em caso de erro para evitar valores indefinidos
+      return null;
+      
     }
 }
 
@@ -69,11 +87,23 @@ export async function GetInfoUser(userName) {
       },
     });
     return response.data;
-  } catch (err) {
-    console.error("Erro na requisição:", err);
-    return null; // Retorna null em caso de erro para evitar valores indefinidos
-  }
+  } catch (error) {
+    if (error.response) {
+      const serverMessage = error.response.data?.erro;
+      
+      if (serverMessage === "Token inválido ou expirado") {
+        console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+        alert("Sessão expirada. Faça login novamente !");
+        window.location.href = '/login'
+        return null;
+      }
+    }
+    console.error("Erro em buscar dados nescessarios para o preenchimento do loby")
+    console.error("Erro na requisição:", error);
+    return null
+    }
 }
+
 
 export async function ElementCommentInfo(Gen, commentID) {
   try {
@@ -101,8 +131,20 @@ export async function ElementCommentInfo(Gen, commentID) {
     });
 
     return response.data;
-  } catch (err) {
-    console.error("Erro na requisição:", err);
-    throw err; // Opcional: Lança o erro para melhor tratamento
+  } catch (error) {
+    if (error.response) {
+      const serverMessage = error.response.data?.erro;
+      
+      if (serverMessage === "Token inválido ou expirado") {
+        console.error("Sessão expirada. Faça login novamente !");
+        alert("Sessão expirada. Faça login novamente !");
+        window.location.href = '/login'
+        return null;
+      }
+    }
+    console.error("Erro em buscar informações sobre comentario")
+    console.error("Erro na requisição:", error);
+    return null
+    
   }
 }
