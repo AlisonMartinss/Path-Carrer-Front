@@ -60,12 +60,32 @@ function ViewProfile (){
             alert("Faça login novamente");
             setTimeout(() => navigate('/Login'), 500);
     
-        } catch (err) {
-            alert("Erro ao remover o Path.");
+        } catch (error) {
+
+            const serverMessage = error.response.data?.erro;
+
+            if (error.response) {
+                
+                if (serverMessage === "Token inválido ou expirado") {
+                  console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                  alert("Sessão expirada. Faça login novamente !");
+                  window.location.href = '/login'
+                  return null;
+                }
+
+                else if (
+                    error.response.data.erro?.trim().toLowerCase() === 
+                    "nome de usuario nao disponivel"
+                  ) {
+                      alert("Nome de Usuario não disponivel !");
+                      return null;
+                }
+            }
+
+            alert("Erro ao criar novo Nome.");
         }
     }
     
-
     async function PictureProfile(e) { // Função para foto e/ou banner de usuario
         if (e) {
             e.preventDefault(); 
@@ -87,7 +107,17 @@ function ViewProfile (){
                 }           
             );
             GetLobyON();
-        } catch (err) {
+        } catch (error) {
+            if (error.response) {
+                const serverMessage = error.response.data?.erro;
+                
+                if (serverMessage === "Token inválido ou expirado") {
+                  console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                  alert("Sessão expirada. Faça login novamente !");
+                  window.location.href = '/login'
+                  return null;
+                }
+              }
             alert("Erro ao atualizar fotos.");
         }
     }
@@ -112,7 +142,17 @@ function ViewProfile (){
                 }           
             );
             GetLobyON();
-        } catch (err) {
+        } catch (error){
+            if (error.response) {
+                const serverMessage = error.response.data?.erro;
+                
+                if (serverMessage === "Token inválido ou expirado") {
+                  console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                  alert("Sessão expirada. Faça login novamente !");
+                  window.location.href = '/login'
+                  return null;
+                }
+              }
             alert("Erro ao atualizar fotos.");
         }
     }
@@ -138,16 +178,32 @@ function ViewProfile (){
                 }           
             );
             
-        } catch (err) {
-            alert("Erro ao atualizar fotos.");
+        } catch (error){
+            if (error.response) {
+                const serverMessage = error.response.data?.erro;
+                
+                if (serverMessage === "Token inválido ou expirado") {
+                  console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                  alert("Sessão expirada. Faça login novamente !");
+                  window.location.href = '/login'
+                  return null;
+                }
+                else if (
+                        error.response.data.erro === 
+                        "As senhas que deveriam ser iguais não são."
+                ) {
+                          alert("Você digitou errado sua senha atual.");
+                          return null;
+                }
+
+                console.log(error.response.data.erro)
+            }
+            
+            alert("Erro ao atualizar senha.");
         }
     }
 
     async function DeleteProfile(e) { // Função deletar conta usuario
-        if (e) {
-            e.preventDefault(); 
-        }
-    
         try {
             const response = await httpClient.post(
                 'User/DeleteProfile',
@@ -162,7 +218,28 @@ function ViewProfile (){
                     }
                 }           
             );
-        } catch (err) {
+            localStorage.clear();
+            navigate('/')
+        } catch (error) {
+            if (error.response) {
+                const serverMessage = error.response.data?.erro;
+                
+                if (serverMessage === "Token inválido ou expirado") {
+                  console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                  alert("Sessão expirada. Faça login novamente !");
+                  window.location.href = '/login'
+                  return null;
+                }
+                else if (
+                    error.response.data.erro === 
+                    "DeleteProfile - Senha incorreta !"
+            )   {
+                      alert("Você digitou errado sua senha atual.");
+                      return null;
+                }
+
+                console.log(error.response.data.erro)
+            }
             alert("Erro ao deletar conta.");
         }
     }
@@ -229,10 +306,14 @@ function ViewProfile (){
 
                         <div className={styles.profile_area}>
                             <div className={styles.bannerArea}>
-                                <img className={styles.img} src={ProfileAt.banner !== "" ? (ProfileAt.banner): ProfileAt.banner === "" && LobyInfo.BannerProfile !== "" ? (LobyInfo.BannerProfile) : "https://preview.redd.it/tymdy6hjlyxb1.png?auto=webp&s=6e4a7eb5ead8f730e487938ad26a530b155ee6a6"} alt="Capa do perfil do usuario" />
+                                
+                                <img className={styles.img}  src={ProfileAt.banner !== null && ProfileAt.banner !== undefined && ProfileAt.banner !== "" ? (
+                                    ProfileAt.banner
+                                ):"../../../src/assets/Midias/PNGs/images/BannerDefault.png"} alt="Foto do Banner" />
                             </div>
                             <div className={styles.perfilArea}>
-                                <img className={styles.img} src={ProfileAt.perfil !== "" ? (ProfileAt.perfil): ProfileAt.perfil === "" && LobyInfo.PictureProfile !== "" ? (LobyInfo.PictureProfile) : "https://maquinadoinfinito.wordpress.com/wp-content/uploads/2014/04/baa8e-tumblr_lxltgcr5pr1qak4c2o1_500_large.gif?w=500&h=269"} alt="Foto do perfil do usuario" />
+                                <img className={styles.img} src={ProfileAt.perfil !== null && ProfileAt.perfil !== undefined && ProfileAt.perfil !== ""  ? ProfileAt.perfil : 
+                                "../../../src/assets/Midias/PNGs/images/DefaultProfile.png"} alt="Perfil Foto" />
                             </div>
                             <div className={`${styles.bottomArea} ${styles.txtover}`}>{ProfileAt.nickName !== "" ? (ProfileAt.nickName): localStorage.getItem("UserName")} </div>
                         </div>

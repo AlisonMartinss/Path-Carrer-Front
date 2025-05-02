@@ -5,7 +5,7 @@ function Comment ({imgURL,comment,nickName,onClickIcon1,onClickIcon2,responseAct
     return (
         <div className={styles.main}>
             <div className={styles.perfilArea}>
-                <img className={styles.img} src={imgURL} alt="Foto de perfil" />
+                <img className={styles.img} src={imgURL !== null ? (imgURL):"../../../src/assets/Midias/PNGs/images/DefaultProfile.png"} alt="Foto de perfil" />
             </div>
             <div className={`${styles.nickName} ${styles.txtover}`}>{`@${nickName}`}</div>
             

@@ -45,8 +45,8 @@ function Login (){
           localStorage.setItem("Token",token)
           localStorage.setItem("UserName",userNameX)
           navigate('/loby');
-        }catch (err){
-          console.log(err)
+        }catch (error){
+            alert( error.response.data.erro)
         }
     }
 
@@ -64,8 +64,8 @@ function Login (){
           await LoginFunction(NewuserName, NewPassword);
 
         } catch (error) {
-          console.error("Erro ao criar conta:", error);
-          throw error; // propaga o erro para ser tratado onde for chamado
+          alert(error.response.data.erro);
+          
         }
       }
 
@@ -114,6 +114,7 @@ function Login (){
                         name={"userName"}
                         type={"text"}
                         placeholder={"Digite seu usuario"}
+                        maxLengthX={"20"}
                         onChange={(e) => setInfo(e)}/>
                         
                     </div>
@@ -123,6 +124,7 @@ function Login (){
                         name={"password"}
                         type={"password"}
                         placeholder={"Digite sua senha"}
+                        maxLengthX={"20"}
                         onChange={(e) => setInfo(e)}/>
                     </div>
 
@@ -148,6 +150,7 @@ function Login (){
                         name={"NewuserName"}
                         type={"text"}
                         placeholder={"Digite o nome do seu usuario"}
+                        maxLengthX={"20"}
                         onChange={(e) => setInfo(e)}/>
                         
                     </div>
@@ -158,6 +161,7 @@ function Login (){
                             name={"passwordToNew"}
                             type={"password"}
                             placeholder={"Digite sua senha"}
+                            maxLengthX={"20"}
                             onChange={(e) => SetUser((prev) => ({...prev,passwordToNew:e.target.value}))}/>
                         </div>
                         {user.passwordToNew !== ""? (
@@ -174,6 +178,7 @@ function Login (){
                             name={"confirmPassword"}
                             type={"password"}
                             placeholder={"Confirme sua senha"}
+                            maxLengthX={"20"}
                             onChange={(e) => SetUser((prev) => ({...prev,confirmPassword:e.target.value}))}/>
                         </div>
                         {waringMessage === true && user.confirmPassword !== ""? (

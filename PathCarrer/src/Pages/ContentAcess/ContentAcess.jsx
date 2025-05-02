@@ -154,13 +154,13 @@ function ContentAcess (){
       else if (Entity === "studentOff"){
         if (e === "Student-off-add"){
           await AddPath();
-          window.location.reload();
+          navigate('/Loby')
         }
       }
       else if (Entity === "studentOn") {
         if (e === "Student-on-remove"){
           await RemovePath();
-          window.location.reload();
+          navigate('/explorer')
         }
         
       }

@@ -61,7 +61,7 @@ export async function LobyGet() {
         if (serverMessage === "Token inválido ou expirado") {
           console.error("Sessão expirada. Faça login novamente !" + serverMessage);
           alert("Sessão expirada. Faça login novamente !");
-          //window.location.href = '/login'
+          window.location.href = '/login'
           return null;
         }
       }

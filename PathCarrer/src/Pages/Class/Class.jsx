@@ -116,9 +116,19 @@ async function GetContent() {
         );
         setContentJSON(response.data);
         return response.data
-    } catch (err) {
-        console.error("Erro na requisição:", err);
-        alert("Erro na chamada");
+    } catch (error) {
+      if (error.response) {
+        const serverMessage = error.response.data?.erro;
+        
+        if (serverMessage === "Token inválido ou expirado") {
+          console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+          alert("Sessão expirada. Faça login novamente !");
+          window.location.href = '/login'
+          return null;
+        }
+      }
+      console.error("Erro na requisição:", error);
+      alert("Erro na chamada");
     } finally {
         setIsLoading(false);
     }
@@ -158,78 +168,60 @@ const redirectActivity = (e) => {
   }
 };
 
-async function fetchCommentOBJ(elementZ) {
-  const updatedComments = 
-  {
-    userName:elementZ.userName,
-    pictureProfile:elementZ.pictureProfile,
-    worldIDDesvio:elementZ.worldIDDesvio,
-    comment:elementZ.comment,
-    address:elementZ.address,
-    answers:[]
-  };
-
-  for (const element of elementZ.answers) {
-    try {
-      const user = await GetInfoUser(element.worldIDDesvio);
-      updatedComments.answers.push({
-        userName: user.userName,
-        pictureProfile: user.PictureProfile,
-        worldIDDesvio: element.worldIDDesvio,
-        comment: element.comment,
-        address: element.address,
-        answers:element.answers
-      });
-    } catch (error) {
-      console.error("Erro ao buscar usuário:", error);
-    }
-  }
-
-  return updatedComments;
-};
-
 const viewAnswers = async (element) => {
+  try {
+    const answersAPIresponse = await ElementCommentInfo(element.gen+1,element.id);
+    const answers = [];
 
-  const answersAPIresponse = await ElementCommentInfo(element.gen+1,element.id);
+    for (const element of Object.values(answersAPIresponse.data)){
 
-  const answers = [];
+      const user = await GetInfoUser(element.userWordID);
+      const nAnswers = await ElementCommentInfo(element.gen,element.id);
 
-  for (const element of Object.values(answersAPIresponse.data)){
+      let xAnswers = 0;
 
-    const user = await GetInfoUser(element.userWordID);
-    const nAnswers = await ElementCommentInfo(element.gen,element.id);
+      try{
+        xAnswers = Object.values(nAnswers.data)
+      }
+      catch {
+        xAnswers = 0;
+      }
 
-    let xAnswers = 0;
-
-    try{
-       xAnswers = Object.values(nAnswers.data)
+      answers.push(
+        {
+          userName: user.userName,
+          pictureProfile: user.PictureProfile,
+          userWordID: element.userWordID,
+          comment: element.comment,
+          fatherID:element.fatherID,
+          nAnswers:xAnswers,
+          gen:element.gen,
+          id:element.id
+        }
+      )
     }
-    catch {
-      xAnswers = 0;
-    }
 
-    answers.push(
+    SetAnswer(
       {
-        userName: user.userName,
-        pictureProfile: user.PictureProfile,
-        userWordID: element.userWordID,
-        comment: element.comment,
-        fatherID:element.fatherID,
-        nAnswers:xAnswers,
-        gen:element.gen,
-        id:element.id
+        TOPcommentON:element,
+        answers:answers,
+        active:true
       }
     )
-  }
-
-  SetAnswer(
-    {
-      TOPcommentON:element,
-      answers:answers,
-      active:true
+  }catch (error) {
+    if (error.response) {
+      const serverMessage = error.response.data?.erro;
+      
+      if (serverMessage === "Token inválido ou expirado") {
+        console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+        alert("Sessão expirada. Faça login novamente !");
+        window.location.href = '/login'
+        return null;
+      }
     }
-  )
-  
+  }
+  console.error("Falha parcial em ver respostas")
+  return null
 };
 
 const BuildPostComment = (element) => {
@@ -284,6 +276,16 @@ const PostCommentFuncX = async () => {
           });
 
         } catch (error) {
+          if (error.response) {
+            const serverMessage = error.response.data?.erro;
+            
+            if (serverMessage === "Token inválido ou expirado") {
+              console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+              alert("Sessão expirada. Faça login novamente !");
+              window.location.href = '/login'
+              return null;
+            }
+          }
           console.error("Erro ao buscar usuário:", error);
         }
       }
@@ -317,22 +319,16 @@ const DeleteCommentAux = async (element,fatherOBJ) => {
 
       const localJSON =  await GetContent();
 
-    const updatedComments = [];
+      const updatedComments = [];
       const forumPosts = Object.values(localJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[0].fatherList.forumPost);
-      console.log("forumPosts: ")
-      console.log(forumPosts)
+     
 
       for (const post of forumPosts) {
         try {
           const user = await GetInfoUser(post.userWordID);
 
-          console.log("user: ")
-          console.log(user)
-
           const nAnswersBuild = await ElementCommentInfo(0, post.id);
-          console.log("nAnswersBuild: ")
-          console.log(nAnswersBuild)
-
+      
           let nAnswers = [];
 
           if (nAnswersBuild && nAnswersBuild.data) { 
@@ -340,9 +336,6 @@ const DeleteCommentAux = async (element,fatherOBJ) => {
           } else {
             console.warn(`Nenhuma resposta encontrada para o comentário ${post.id}`);
           }
-
-          console.log("Coment em x: ")
-          console.log(post.comment)
 
           updatedComments.push({
             userName: user.userName,
@@ -354,15 +347,38 @@ const DeleteCommentAux = async (element,fatherOBJ) => {
             gen:post.gen,
             id:post.id
           });
-
+          console.log("window.location.reload();")
+         
         } catch (error) {
+          if (error.response) {
+            const serverMessage = error.response.data?.erro;
+            
+            if (serverMessage === "Token inválido ou expirado") {
+              console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+              alert("Sessão expirada. Faça login novamente !");
+              window.location.href = '/login'
+              return null;
+            }
+          }
           console.error("Erro ao buscar usuário:", error);
+          return null
         }
       }
-
-      SetForumRender((prev) => ({...prev,topicComments:updatedComments})); 
+      SetForumRender((prev) => ({...prev,topicComments:updatedComments}));
+      window.location.reload();
+      return
     }
-  }catch {
+  }catch (error) {
+    if (error.response) {
+      const serverMessage = error.response.data?.erro;
+      
+      if (serverMessage === "Token inválido ou expirado") {
+        console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+        alert("Sessão expirada. Faça login novamente !");
+        window.location.href = '/login'
+        return ;
+      }
+    }
     console.log("Erro ao deletar comment")
   }
 };
@@ -381,39 +397,36 @@ const resetAnswerCurrent = () => { // Reset
   });
 };
 
-
-async function CallPostComment (addresX,commentCore) {
-  /**
-   * Reponder:
-   * (addred,comment)
-   *  API
-   *  pego o endereço anteriormente pego e carrego (onde? )
-   * 
-   * SetAnswerCurrent - onde guardo o endereço antes de td
-   */
-  
-  SetAnswerCurrent((prev) => ({...prev,addres:addresX})) 
-  await PostCommentFunc(addresX,commentCore);
-  await GetContent();
-  SetAnswerCurrent((prev) => ({...prev,active:true}))
-}
-
-
-async function CallDeleteComment (addresX) {
-  SetAnswerCurrent((prev) => ({...prev,addres:addresX})) 
-  await DeleteComment(addresX);
-  await GetContent();
-  SetAnswerCurrent((prev) => ({...prev,deleteActive:true}))
-}
-
 async function CallSeeClass (IDClass) {
-  console.log("IDClass")
-  console.log(IDClass)
-  await AddSeeClass(IDClass)
+  try {await AddSeeClass(IDClass)}
+  catch(error){
+    if (error.response) {
+      const serverMessage = error.response.data?.erro;
+      
+      if (serverMessage === "Token inválido ou expirado") {
+        console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+        alert("Sessão expirada. Faça login novamente !");
+        window.location.href = '/login'
+        return null;
+      }
+    }
+  }
 }
 
 async function CallOFFSeeClass (IDClass) {
-  await RemoveSeeClass(IDClass)
+  try{await RemoveSeeClass(IDClass)}
+  catch(error){
+    if (error.response) {
+      const serverMessage = error.response.data?.erro;
+      
+      if (serverMessage === "Token inválido ou expirado") {
+        console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+        alert("Sessão expirada. Faça login novamente !");
+        window.location.href = '/login'
+        return null;
+      }
+    }
+  }
 }
 
 function captchaAnswer (addres,casas) {
@@ -536,6 +549,16 @@ function captchaAnswer (addres,casas) {
           });
 
         } catch (error) {
+          if (error.response) {
+            const serverMessage = error.response.data?.erro;
+            
+            if (serverMessage === "Token inválido ou expirado") {
+              console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+              alert("Sessão expirada. Faça login novamente !");
+              window.location.href = '/login'
+              return null;
+            }
+          }
           console.error("Erro ao buscar usuário:", error);
         }
       }
@@ -608,6 +631,16 @@ function captchaAnswer (addres,casas) {
                   answers: element.answers,
                 });
               } catch (error) {
+                if (error.response) {
+                  const serverMessage = error.response.data?.erro;
+                  
+                  if (serverMessage === "Token inválido ou expirado") {
+                    console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                    alert("Sessão expirada. Faça login novamente !");
+                    window.location.href = '/login'
+                    return null;
+                  }
+                }
                 console.error("Erro ao buscar user na lista de respostas:", error);
               }
             }
@@ -620,6 +653,16 @@ function captchaAnswer (addres,casas) {
             }));
   
           } catch (error) {
+            if (error.response) {
+              const serverMessage = error.response.data?.erro;
+              
+              if (serverMessage === "Token inválido ou expirado") {
+                console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                alert("Sessão expirada. Faça login novamente !");
+                window.location.href = '/login'
+                return null;
+              }
+            }
             console.error(" Erro ao obter informacoes do comentario:", error);
             alert("Erro ao obter informacoes do comentario");
           }
@@ -653,6 +696,16 @@ function captchaAnswer (addres,casas) {
                 });
         
               } catch (error) {
+                if (error.response) {
+                  const serverMessage = error.response.data?.erro;
+                  
+                  if (serverMessage === "Token inválido ou expirado") {
+                    console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                    alert("Sessão expirada. Faça login novamente !");
+                    window.location.href = '/login'
+                    return null;
+                  }
+                }
                 console.error(" Erro ao atribuir atributos ao usuario:", error);
               }
             }
@@ -665,6 +718,16 @@ function captchaAnswer (addres,casas) {
             }));
         
           } catch (error) {
+            if (error.response) {
+              const serverMessage = error.response.data?.erro;
+              
+              if (serverMessage === "Token inválido ou expirado") {
+                console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                alert("Sessão expirada. Faça login novamente !");
+                window.location.href = '/login'
+                return null;
+              }
+            }
             console.error(" Erro geral na atualizacao dos comentarios:", error);
           } finally {
             // Agora chamamos SetAnswer e resetAnswerCurrent APÓS o processamento assíncrono
@@ -728,6 +791,16 @@ function captchaAnswer (addres,casas) {
                     answers: element.answers,
                   });
                 } catch (error) {
+                  if (error.response) {
+                    const serverMessage = error.response.data?.erro;
+                    
+                    if (serverMessage === "Token inválido ou expirado") {
+                      console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                      alert("Sessão expirada. Faça login novamente !");
+                      window.location.href = '/login'
+                      return null;
+                    }
+                  }
                   console.error("Erro ao buscar user na lista de respostas:", error);
                 }
 
@@ -776,6 +849,16 @@ function captchaAnswer (addres,casas) {
                 });
         
               } catch (error) {
+                if (error.response) {
+                  const serverMessage = error.response.data?.erro;
+                  
+                  if (serverMessage === "Token inválido ou expirado") {
+                    console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                    alert("Sessão expirada. Faça login novamente !");
+                    window.location.href = '/login'
+                    return null;
+                  }
+                }
                 console.error(" Erro ao atribuir atributos ao usuario:", error);
               }
             }
@@ -786,6 +869,16 @@ function captchaAnswer (addres,casas) {
             }));
         
           } catch (error) {
+            if (error.response) {
+              const serverMessage = error.response.data?.erro;
+              
+              if (serverMessage === "Token inválido ou expirado") {
+                console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                alert("Sessão expirada. Faça login novamente !");
+                window.location.href = '/login'
+                return null;
+              }
+            }
             console.error(" Erro geral na atualizacao dos comentarios:", error);
           } finally {
             // Agora chamamos SetAnswer e resetAnswerCurrent APÓS o processamento assíncrono
