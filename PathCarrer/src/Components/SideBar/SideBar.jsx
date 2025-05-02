@@ -40,7 +40,9 @@ function SideBar ({handleClick,description,AuthorName,adjectivesList,imgPerfil,i
 
                     <div className={`${style.profile_props} ${isClicked ? style.profile_propsOFF : style.profile_props}`}>
                             <div className={style.perfil_img}>
-                                <img className={style.img} src={imgPerfil !== null ? imgPerfil : "../../../src/assets/Midias/PNGs/images/DefaultProfile.png"} alt="Perfil Foto" />
+                                <img className={style.img} src={imgPerfil !== null ? imgPerfil : 
+                                    "../../../src/assets/Midias/PNGs/images/DefaultProfile.png"} alt="Perfil Foto" />
+                                    
                             </div>
                             {arraAuxMedals.map((element) => (
                             <div className={style.medals_img}></div>

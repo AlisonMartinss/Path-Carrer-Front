@@ -124,7 +124,7 @@ async function GetContent() {
           console.error("Sessão expirada. Faça login novamente !" + serverMessage);
           alert("Sessão expirada. Faça login novamente !");
           window.location.href = '/login'
-          return null;
+          return;
         }
       }
       console.error("Erro na requisição:", error);
@@ -170,7 +170,7 @@ const redirectActivity = (e) => {
 
 const viewAnswers = async (element) => {
   try {
-    const answersAPIresponse = await ElementCommentInfo(element.gen+1,element.id);
+    const answersAPIresponse = await ElementCommentInfo(element.gen,element.id);
     const answers = [];
 
     for (const element of Object.values(answersAPIresponse.data)){
@@ -216,12 +216,12 @@ const viewAnswers = async (element) => {
         console.error("Sessão expirada. Faça login novamente !" + serverMessage);
         alert("Sessão expirada. Faça login novamente !");
         window.location.href = '/login'
-        return null;
+        return ;
       }
     }
   }
   console.error("Falha parcial em ver respostas")
-  return null
+  return 
 };
 
 const BuildPostComment = (element) => {
@@ -243,6 +243,7 @@ const PostCommentFuncX = async () => {
       return
     }
   }else {
+    // Direto no forum
     console.info("father - false")
     await PostCommentFuncao(0,"Xae243467çiva#a124",PostCommentON.commentMain);
     const localJSON =  await GetContent();
@@ -283,7 +284,7 @@ const PostCommentFuncX = async () => {
               console.error("Sessão expirada. Faça login novamente !" + serverMessage);
               alert("Sessão expirada. Faça login novamente !");
               window.location.href = '/login'
-              return null;
+              return ;
             }
           }
           console.error("Erro ao buscar usuário:", error);
@@ -347,8 +348,7 @@ const DeleteCommentAux = async (element,fatherOBJ) => {
             gen:post.gen,
             id:post.id
           });
-          console.log("window.location.reload();")
-         
+
         } catch (error) {
           if (error.response) {
             const serverMessage = error.response.data?.erro;
@@ -357,15 +357,14 @@ const DeleteCommentAux = async (element,fatherOBJ) => {
               console.error("Sessão expirada. Faça login novamente !" + serverMessage);
               alert("Sessão expirada. Faça login novamente !");
               window.location.href = '/login'
-              return null;
+              return ;
             }
           }
           console.error("Erro ao buscar usuário:", error);
-          return null
+          return 
         }
       }
       SetForumRender((prev) => ({...prev,topicComments:updatedComments}));
-      window.location.reload();
       return
     }
   }catch (error) {
@@ -407,7 +406,7 @@ async function CallSeeClass (IDClass) {
         console.error("Sessão expirada. Faça login novamente !" + serverMessage);
         alert("Sessão expirada. Faça login novamente !");
         window.location.href = '/login'
-        return null;
+        return ;
       }
     }
   }
@@ -423,7 +422,7 @@ async function CallOFFSeeClass (IDClass) {
         console.error("Sessão expirada. Faça login novamente !" + serverMessage);
         alert("Sessão expirada. Faça login novamente !");
         window.location.href = '/login'
-        return null;
+        return ;
       }
     }
   }
@@ -517,7 +516,7 @@ function captchaAnswer (addres,casas) {
     async function fetchComments() {
       console.info("Carregando comentarios do forum ") 
       const updatedComments = [];
-      const forumPosts = Object.values(ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[0].fatherList.forumPost);
+      const forumPosts = Object.values(ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[0].Forum);
 
       console.info("Atribuições") 
      
@@ -525,7 +524,7 @@ function captchaAnswer (addres,casas) {
         try {
           const user = await GetInfoUser(post.userWordID);
 
-          const nAnswersBuild = await ElementCommentInfo(1, post.id);
+          const nAnswersBuild = await ElementCommentInfo(0, post.id);
           console.log("nAnswersBuild: ")
           console.log(nAnswersBuild)
 
@@ -556,7 +555,7 @@ function captchaAnswer (addres,casas) {
               console.error("Sessão expirada. Faça login novamente !" + serverMessage);
               alert("Sessão expirada. Faça login novamente !");
               window.location.href = '/login'
-              return null;
+              return ;
             }
           }
           console.error("Erro ao buscar usuário:", error);
@@ -638,7 +637,7 @@ function captchaAnswer (addres,casas) {
                     console.error("Sessão expirada. Faça login novamente !" + serverMessage);
                     alert("Sessão expirada. Faça login novamente !");
                     window.location.href = '/login'
-                    return null;
+                    return ;
                   }
                 }
                 console.error("Erro ao buscar user na lista de respostas:", error);
@@ -660,7 +659,7 @@ function captchaAnswer (addres,casas) {
                 console.error("Sessão expirada. Faça login novamente !" + serverMessage);
                 alert("Sessão expirada. Faça login novamente !");
                 window.location.href = '/login'
-                return null;
+                return ;
               }
             }
             console.error(" Erro ao obter informacoes do comentario:", error);
@@ -703,7 +702,7 @@ function captchaAnswer (addres,casas) {
                     console.error("Sessão expirada. Faça login novamente !" + serverMessage);
                     alert("Sessão expirada. Faça login novamente !");
                     window.location.href = '/login'
-                    return null;
+                    return ;
                   }
                 }
                 console.error(" Erro ao atribuir atributos ao usuario:", error);
@@ -725,7 +724,7 @@ function captchaAnswer (addres,casas) {
                 console.error("Sessão expirada. Faça login novamente !" + serverMessage);
                 alert("Sessão expirada. Faça login novamente !");
                 window.location.href = '/login'
-                return null;
+                return ;
               }
             }
             console.error(" Erro geral na atualizacao dos comentarios:", error);
@@ -798,7 +797,7 @@ function captchaAnswer (addres,casas) {
                       console.error("Sessão expirada. Faça login novamente !" + serverMessage);
                       alert("Sessão expirada. Faça login novamente !");
                       window.location.href = '/login'
-                      return null;
+                      return ;
                     }
                   }
                   console.error("Erro ao buscar user na lista de respostas:", error);
@@ -856,7 +855,7 @@ function captchaAnswer (addres,casas) {
                     console.error("Sessão expirada. Faça login novamente !" + serverMessage);
                     alert("Sessão expirada. Faça login novamente !");
                     window.location.href = '/login'
-                    return null;
+                    return ;
                   }
                 }
                 console.error(" Erro ao atribuir atributos ao usuario:", error);
@@ -876,7 +875,7 @@ function captchaAnswer (addres,casas) {
                 console.error("Sessão expirada. Faça login novamente !" + serverMessage);
                 alert("Sessão expirada. Faça login novamente !");
                 window.location.href = '/login'
-                return null;
+                return ;
               }
             }
             console.error(" Erro geral na atualizacao dos comentarios:", error);
