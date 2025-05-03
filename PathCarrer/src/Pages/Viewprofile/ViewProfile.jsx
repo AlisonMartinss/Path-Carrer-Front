@@ -30,8 +30,8 @@ function ViewProfile (){
     const [ProfileAt,SetProfileAt] = useState(
         {
             nickName:localStorage.getItem("UserName"),
-            banner:"",
-            perfil:"",
+            banner:JSON.parse(localStorage.getItem("LobyInfo")).BannerProfile,
+            perfil:JSON.parse(localStorage.getItem("LobyInfo")).PictureProfile,
             desc:"",
             waring:"Certifique-se que o link das imagens tem dominio aberto(publico) e não é de uso circustancial indevido."
         }
@@ -250,7 +250,6 @@ function ViewProfile (){
          console.log("Erro ao buscar informações do Loby.");
         }
     }
-
 
     const setObjectClass = (event) => {
         event.preventDefault();

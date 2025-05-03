@@ -177,6 +177,8 @@ const viewAnswers = async (element) => {
 
       const user = await GetInfoUser(element.userWordID);
       const nAnswers = await ElementCommentInfo(element.gen,element.id);
+      console.log("nAnswers")
+      console.log(nAnswers) // -> Array dos comentarios em respota a este -> element
 
       let xAnswers = 0;
 
@@ -201,6 +203,9 @@ const viewAnswers = async (element) => {
       )
     }
 
+    console.log("answers")
+    console.log(answers)
+
     SetAnswer(
       {
         TOPcommentON:element,
@@ -219,8 +224,9 @@ const viewAnswers = async (element) => {
         return ;
       }
     }
+    console.error("Falha parcial em ver respostas. Erro: " + error)
   }
-  console.error("Falha parcial em ver respostas")
+  
   return 
 };
 
@@ -511,8 +517,6 @@ function captchaAnswer (addres,casas) {
     /*
      Nesta etapa do processo, para cada comentario postado diretamente no forum,
      passará por um filtro onde definiremos qual sua foto de perfil
-    
-    
     */
     async function fetchComments() {
       console.info("Carregando comentarios do forum ") 
@@ -524,11 +528,9 @@ function captchaAnswer (addres,casas) {
       for (const post of forumPosts) {
         try {
           const user = await GetInfoUser(post.userWordID);
-
+        
           const nAnswersBuild = await ElementCommentInfo(0, post.id);
-          console.log("nAnswersBuild: ")
-          console.log(nAnswersBuild)
-
+       
           let nAnswers = [];
 
           if (nAnswersBuild && nAnswersBuild.data) {
@@ -580,6 +582,7 @@ function captchaAnswer (addres,casas) {
   }, [ContentJSON]);
 
   useEffect(() => { // Forum
+   
     if (ContentJSON && ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments && answerCurrent.active === true) {
   
       if (!(answerCurrent.addres.length < 2)) {
@@ -744,6 +747,7 @@ function captchaAnswer (addres,casas) {
   }}, [ContentJSON, answerCurrent.active]);
   
   useEffect(() => { // Forum
+
     if (ContentJSON && ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].comments && answerCurrent.deleteActive === true) {
       if (answerCurrent.addres.length > 2){ // Em resposta a alguem
         (
@@ -1096,7 +1100,7 @@ function captchaAnswer (addres,casas) {
                             comment={element.comment}
                             imgURL={element.pictureProfile}
                             onClickIcon1={(e) => viewAnswers(element)}
-                            nAnswers={Array.isArray(element.answers) ? formatarNumero(element.answers.length) : 0}
+                            nAnswers={Array.isArray(element.nAnswers) ? formatarNumero(element.nAnswers.length) : 0}
                             responseAction={(e) => BuildPostComment(element)}
                             onClickIcon2={(e) => DeleteCommentAux(element,answer.TOPcommentON)}
                           />
