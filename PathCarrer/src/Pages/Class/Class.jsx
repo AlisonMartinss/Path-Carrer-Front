@@ -249,12 +249,11 @@ const PostCommentFuncX = async () => {
     const localJSON =  await GetContent();
 
       const updatedComments = [];
-      const forumPosts = Object.values(localJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[0].fatherList.forumPost);
+      const forumPosts = Object.values(localJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[0].Forum);
 
       for (const post of forumPosts) {
         try {
           const user = await GetInfoUser(post.userWordID);
-
           const nAnswersBuild = await ElementCommentInfo(0, post.id);
 
           let nAnswers = [];
@@ -297,7 +296,6 @@ const PostCommentFuncX = async () => {
  
 };
 
-
 const DeleteCommentAux = async (element,fatherOBJ) => {
   try {
     const elementY = 
@@ -308,20 +306,22 @@ const DeleteCommentAux = async (element,fatherOBJ) => {
     }
 
     await DeleteComment(element.gen,element.fatherID,element.id);
+
     if (fatherOBJ !== null){
      viewAnswers(fatherOBJ)
     }
     else {
-      let mouseList = forumRender.topicComments;
+      /*let mouseList = forumRender.topicComments;
+      console.log(mouseList)
       mouseList.findIndex(elementR => elementR.id === element.id)
       
       SetForumRender((prev) => ({...prev,topicComments:mouseList}))
-      SetAnswer((prev) => ({...prev,active:false}))
+      SetAnswer((prev) => ({...prev,active:false}))*/
 
       const localJSON =  await GetContent();
 
       const updatedComments = [];
-      const forumPosts = Object.values(localJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[0].fatherList.forumPost);
+      const forumPosts = Object.values(localJSON.modulos[localStorage.getItem("ModuleIndexON")].comments[0].Forum);
      
 
       for (const post of forumPosts) {
@@ -364,7 +364,9 @@ const DeleteCommentAux = async (element,fatherOBJ) => {
           return 
         }
       }
+      
       SetForumRender((prev) => ({...prev,topicComments:updatedComments}));
+      SetAnswer((prev) => ({...prev,active:false}))
       return
     }
   }catch (error) {
@@ -505,7 +507,6 @@ function captchaAnswer (addres,casas) {
     
   },[ContentJSON]);
 
-
   useEffect(() => { // Chamado quando user clica em forum, será carregado comnetarios de topicos
     /*
      Nesta etapa do processo, para cada comentario postado diretamente no forum,
@@ -562,7 +563,7 @@ function captchaAnswer (addres,casas) {
         }
       }
 
-      console.log(updatedComments)
+      //console.log(updatedComments)
       SetForumRender((prev) => ({...prev,topicComments:updatedComments})); 
     };
 
@@ -752,8 +753,7 @@ function captchaAnswer (addres,casas) {
               if (!AnswerObject) {
                 throw new Error(" AnswerObject está indefinido!");
               }
-              console.log("AnswerOBJ: ")
-              console.log(AnswerObject)
+       
              if (!AnswerObject.worldIDDesvio){
               throw new Error(" AnswerObject.worldIDDesvio está indefinido!");
              }
