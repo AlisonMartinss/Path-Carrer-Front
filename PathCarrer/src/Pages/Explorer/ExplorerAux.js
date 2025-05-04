@@ -30,9 +30,9 @@ export async function CategoryExplorer(e) {
     }
 }
 
-export async function MyPaths(e) {
+export async function MyPaths() {
     try {
-        const response = await httpClient.get(`Explore/MyPaths?UserName=${e}`, {
+        const response = await httpClient.get(`Explore/MyPaths`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("Token")}`,
                 "Content-Type": "application/json"
@@ -40,7 +40,8 @@ export async function MyPaths(e) {
         });
         return response.data;
     } catch (error) {
-        alert("Erro ao Seus Paths.");
+        alert("Erro ao Buscar seus paths.");
         return null;
     }
 }
+

@@ -102,7 +102,8 @@ function Loby () {
                 classPresent:Path_data.classPresent,
                 id:Path_data.id,
                 nClass:Path_data.classPresent.length,
-                nClassYep:nYepClass
+                nClassYep:nYepClass,
+                category:Path_data.category
               }
 
               RefList.push(obj)
@@ -174,6 +175,7 @@ function Loby () {
                                 img={img}
                                 nClass={element.nClass}
                                 nClassYep={element.nClassYep}
+                                category={element.category}
                               />
                             </div>
                           ))

@@ -7,13 +7,13 @@ import { IoFlameSharp } from "react-icons/io5";
 import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2';
 import Conteudo from '../../Components/Conteudo/Conteudo'
 
-import { Explore, CategoryExplorer,MyPaths } from './ExplorerAux';
+import { Explore, CategoryExplorer,MyPaths} from './ExplorerAux';
 import { useNavigate } from 'react-router';
 
 function Explorer (){
 
    const navigate = useNavigate();    
-   const [onFire,SetonFire] = useState(["Tecnologia Longo","IA","Marketing","Tigrinho","Outro","Financias","Enem","CriptoMoedas","Estatistica","Empreendedorismo","Ingles"])
+   const [onFire,SetonFire] = useState(["Todos","Inteligência Artificial","Marketing Digital","Educação Financeira","Tecnologia da Informação","Modelo de Negócio","Produtividade","Design Gráfico","Criptomoedas","Seus Paths"])
    const [pathExplore,SetPathExplore] = useState(null);
    const [leftElements,SetleftElements] = useState([
       {
@@ -31,12 +31,21 @@ function Explorer (){
    const ClickCategory = (e) => {
       const fetchData = async () => {
       try{
-         const contentPath = await CategoryExplorer(e);
-         if (Array.isArray(contentPath)) {
-            SetPathExplore(contentPath);
-         } else {
-            SetPathExplore([]);
-         }   
+         if (e === "Seus Paths"){
+            const contentPath = await MyPaths();
+            if (Array.isArray(contentPath)) {
+               SetPathExplore(contentPath);
+            } else {
+               SetPathExplore([]);
+            }  
+         }else {
+            const contentPath = await CategoryExplorer(e);
+            if (Array.isArray(contentPath)) {
+               SetPathExplore(contentPath);
+            } else {
+               SetPathExplore([]);
+            }
+         } 
        }
       catch (error) {
          console.error("Erro ao buscar Category Explorer:", error);

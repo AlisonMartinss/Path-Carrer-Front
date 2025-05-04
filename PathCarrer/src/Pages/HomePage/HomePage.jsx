@@ -27,7 +27,7 @@ function HomePage () {
              módulos e aulas para guiar seu aprendizado de forma prática e eficiente.
             `,
             motivaton:`Descubra, aprenda e avance no seu caminho!`,
-            img:'../../../src/assets/Midias/PNGs/images/Dinamica do Path.svg',
+            img:'../../../src/assets/Midias/SVGs/DinamicadoPath.svg',
             widthTitle:0.68*("Encontre as melhores aulas em um só lugar!").length
         },
         {

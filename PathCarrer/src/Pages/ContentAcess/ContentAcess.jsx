@@ -199,16 +199,13 @@ function ContentAcess (){
           const ShirtInfoPath = await ShortPath(pathID);
           const ModuleOfPathInUserProfile = (JSON.parse(localStorage.getItem("LobyInfo"))).myPaths[pathID].moduleSeens;
 
-          console.info("ContentJSON.modulos")
-          console.info(ContentJSON.modulos)
-
           let i  = 0;
           for (const module of ContentJSON.modulos){ // -> element aqui é um modulo
 
             let ClassYep = 0
             let ClassOnSeeAlredy = []
             if (ModuleOfPathInUserProfile[i] != null){
-              console.log("Lidando com modulo do index " + i)
+              console.warn("Lidando com modulo do index " + i)
               for (const Class of ModuleOfPathInUserProfile[i].classSeens) {
                 if(ShirtInfoPath.classPresent.includes(Class)){
                 ClassYep++
@@ -239,8 +236,7 @@ function ContentAcess (){
               ModuleOfUser.push(ObjOfMoule_B)
             } 
           }
-          console.log("ModuleOfUser")
-          console.log(ModuleOfUser)
+        
           SetModuleListRef(ModuleOfUser)
         }
         catch (error) {
@@ -287,9 +283,9 @@ function ContentAcess (){
                             <div className={styles.content_area}>
                               <WindowModule
                               titleMain={element.name}
-                              img={'../../assets/Midias/PNGs/images/ModuleIconDefault.png'}
                               nClassYep={element.nClassYep}
                               nClass={element.nClass}
+                              category={ContentJSON.category}
                               onClick={(e) => ToIntoModulo(e,index,element.ClassOnSeeAlredy)}/>
                             </div>
                           ))

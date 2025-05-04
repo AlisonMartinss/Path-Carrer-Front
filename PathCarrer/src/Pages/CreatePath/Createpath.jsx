@@ -62,33 +62,37 @@ function CreatePath ({PreSend}) {
          txt: "Selecione"
       },
       {
-        value:"Tecnologia",
-        txt: "Tecnologia"
+        value:"Inteligência Artificial",
+        txt: "Inteligência Artificial"
       },
       {
-         value:"Marketing",
-         txt: "Marketing"
+         value:"Marketing Digital",
+         txt: "Marketing Digital"
       },
       {
-         value:"Educação",
-         txt: "Educação"
+         value:"Educação Financeira",
+         txt: "Educação Financeira"
       },
       {
-         value:"financeira",
-         txt: "financeira"
+         value:"Tecnologia da Informação",
+         txt: "Tecnologia da Informação"
       },
       {
-         value:"Trafego Pago",
-         txt: "Trafego Pago"
+         value:"Modelo de Negócio",
+         txt: "Modelo de Negócio"
       },
       {
-         value:"Emprendedorismo",
-         txt: "Emprendedorismo"
+         value:"Produtividade",
+         txt: "Produtividade"
       },
       {
-         value:"Enem",
-         txt: "Enem"
+         value:"Design Gráfico",
+         txt: "Design Gráfico"
       },
+      {
+         value:"Criptomoedas",
+         txt: "Criptomoedas"
+      }
    ])
 
    const [adjectives] = useState([

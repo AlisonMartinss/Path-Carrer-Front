@@ -22,10 +22,11 @@ import Login from './Pages/Login/Login'
 import ContentAcess from './Pages/ContentAcess/ContentAcess'
 import ViewProfile from './Pages/Viewprofile/ViewProfile'
 import HomePage from './Pages/HomePage/HomePage'
+import NotFound from './Pages/NotFound/NotFound'
 
 const browserRouter = createBrowserRouter(createRoutesFromElements(
 
-<Route path="/">
+<Route path="/" errorElement={<NotFound/>}>
  <Route index element={<HomePage/>}/>
  <Route path="/HomePage" element={<HomePage/>}/>
  <Route path="/Loby" element={<Loby/>}/>

@@ -1,0 +1,48 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.header{
+    width: 100vw;
+    height: 10vh;
+}
+
+.waring{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 20vw;
+    height: 5vw;
+
+    background-color: rgb(255, 81, 92);
+    border-radius: 0.5vw;
+    border: solid #ffff 0.15vw;
+
+    margin-top: 10%;
+}
+
+.txtover{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(0.6em, 1vw, 5em);
+    color: #ffffff
+}
+
+.txtoverB{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: clamp(0.6em, 1vw, 5em);
+    color: #1a009a;
+
+    cursor: pointer;
+}
