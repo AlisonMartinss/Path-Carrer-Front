@@ -19,11 +19,6 @@ function CabecalhoV2 ({logoPath,title}){
 
 
     const [leftElements] = useState([
-              {iconV: "FaFolderOpen",
-              icon_style: "evenConstStyle",
-              handleClick:"",
-              title:"Seus Paths"
-              },
     
               {iconV: "CgProfile",
               icon_style: "evenConstStyle",

@@ -47,9 +47,20 @@ function CreateClassSelection  ({option,circumstance}){
             }
           )
           alert("Aulas cadastradas")
-        }catch (err){
+        }catch (error){
+          if (error.response) {
+            const serverMessage = error.response.data?.erro;
+            
+            if (serverMessage === "Token inválido ou expirado") {
+              alert(serverMessage)
+              console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+              alert("Sessão expirada. Faça login novamente !");
+              window.location.href = '/login'
+              return;
+            }
+          }
           alert ("Erro no Create Path")
-          console.log(err)
+          console.log(error)
         }
     }
     async function UpadateNewModule (e) {
@@ -71,9 +82,20 @@ function CreateClassSelection  ({option,circumstance}){
         )
         alert("Modulo adicionado")
         navigate('/ContentAcess')
-      }catch (err){
+      }catch (error){
+        if (error.response) {
+          const serverMessage = error.response.data?.erro;
+          
+          if (serverMessage === "Token inválido ou expirado") {
+            alert(serverMessage)
+            console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+            alert("Sessão expirada. Faça login novamente !");
+            window.location.href = '/login'
+            return;
+          }
+        }
         alert ("Erro")
-        console.log(err)
+        console.log(error)
       }
     }
     async function UpdateModulo (e) {
@@ -89,7 +111,18 @@ function CreateClassSelection  ({option,circumstance}){
           }
         )
         alert("Modulo atualizado")
-      }catch (err){
+      }catch (error){
+        if (error.response) {
+          const serverMessage = error.response.data?.erro;
+          
+          if (serverMessage === "Token inválido ou expirado") {
+            alert(serverMessage)
+            console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+            alert("Sessão expirada. Faça login novamente !");
+            window.location.href = '/login'
+            return;
+          }
+        }
         alert ("Erro")
         console.log(err)
       }
@@ -160,12 +193,22 @@ function CreateClassSelection  ({option,circumstance}){
           navigate('/class')
   
           console.log("Resposta da API:", response.data);
-      } catch (err) {
-
-          alert("Erro ao atualizar a aula. Verifique o console para mais detalhes.");
+      } catch (error){
+        if (error.response) {
+          const serverMessage = error.response.data?.erro;
+          
+          if (serverMessage === "Token inválido ou expirado") {
+            alert(serverMessage)
+            console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+            alert("Sessão expirada. Faça login novamente !");
+            window.location.href = '/login'
+            return;
+          }
+        }
+        alert("Erro ao atualizar a aula. Verifique o console para mais detalhes.");
   
-          console.error("Erro completo:", err);
-          console.error("Resposta do servidor:", err.response?.data);
+        console.error("Erro completo:", error);
+        console.error("Resposta do servidor:", error.response?.data);
       }
     }
     const APIoptions = {

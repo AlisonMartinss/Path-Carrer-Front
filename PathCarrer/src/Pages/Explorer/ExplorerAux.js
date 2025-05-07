@@ -10,6 +10,17 @@ export async function Explore() {
         });
         return response.data;
     } catch (error) {
+        if (error.response) {
+            const serverMessage = error.response.data?.erro;
+            
+            if (serverMessage === "Token inválido ou expirado") {
+              alert(serverMessage)
+              console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+              alert("Sessão expirada. Faça login novamente !");
+              window.location.href = '/login'
+              return;
+            }
+        }
         alert("Erro ao Buscar explorer.");
         return null;
     }
@@ -25,6 +36,17 @@ export async function CategoryExplorer(e) {
         });
         return response.data;
     } catch (error) {
+        if (error.response) {
+            const serverMessage = error.response.data?.erro;
+            
+            if (serverMessage === "Token inválido ou expirado") {
+              alert(serverMessage)
+              console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+              alert("Sessão expirada. Faça login novamente !");
+              window.location.href = '/login'
+              return;
+            }
+        }
         alert("Erro ao Buscar Category Explorer.");
         return null;
     }
@@ -40,6 +62,17 @@ export async function MyPaths() {
         });
         return response.data;
     } catch (error) {
+        if (error.response) {
+            const serverMessage = error.response.data?.erro;
+            
+            if (serverMessage === "Token inválido ou expirado") {
+              alert(serverMessage)
+              console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+              alert("Sessão expirada. Faça login novamente !");
+              window.location.href = '/login'
+              return;
+            }
+        }
         alert("Erro ao Buscar seus paths.");
         return null;
     }

@@ -48,7 +48,7 @@ function Explorer (){
          } 
        }
       catch (error) {
-         console.error("Erro ao buscar Category Explorer:", error);
+         console.error("Erro ao buscar com base na categoria", error);
          SetPathExplore([]);
        }
       }

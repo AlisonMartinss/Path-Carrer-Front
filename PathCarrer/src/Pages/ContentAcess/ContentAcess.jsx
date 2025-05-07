@@ -99,8 +99,19 @@ function ContentAcess (){
           const content = response.data;
           setContentJSON(content);
           
-        } catch (err) {
-          console.error("Erro na requisição:", err);
+        } catch (error) {
+          if (error.response) {
+            const serverMessage = error.response.data?.erro;
+            
+            if (serverMessage === "Token inválido ou expirado") {
+              alert(serverMessage)
+              console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+              alert("Sessão expirada. Faça login novamente !");
+              window.location.href = '/login'
+              return;
+            }
+          }
+          console.error("Erro na requisição");
           alert("Erro da chamada GetContent");
         } finally {
           setIsLoading(false);
@@ -126,7 +137,18 @@ function ContentAcess (){
             },
           }
         )
-      }catch (err){
+      }catch (error){
+        if (error.response) {
+          const serverMessage = error.response.data?.erro;
+          
+          if (serverMessage === "Token inválido ou expirado") {
+            alert(serverMessage)
+            console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+            alert("Sessão expirada. Faça login novamente !");
+            window.location.href = '/login'
+            return;
+          }
+        }
         alert ("Erro em remover Path")
       }
       finally {
@@ -240,6 +262,17 @@ function ContentAcess (){
           SetModuleListRef(ModuleOfUser)
         }
         catch (error) {
+          if (error.response) {
+            const serverMessage = error.response.data?.erro;
+            
+            if (serverMessage === "Token inválido ou expirado") {
+              alert(serverMessage)
+              console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+              alert("Sessão expirada. Faça login novamente !");
+              window.location.href = '/login'
+              return;
+            }
+          }
           console.error("Falha ao determinar pocentagem do usuario em relação aos modulo: ",error)
         }
         })();

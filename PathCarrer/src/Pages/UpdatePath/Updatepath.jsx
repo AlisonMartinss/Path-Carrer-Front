@@ -35,7 +35,18 @@ function UpdatePath () {
         )
         alert("Path atualizado")
         navigate('/ContentAcess')
-        }catch (err){
+        }catch (error){
+          if (error.response) {
+            const serverMessage = error.response.data?.erro;
+            
+            if (serverMessage === "Token inválido ou expirado") {
+              alert(serverMessage)
+              console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+              alert("Sessão expirada. Faça login novamente !");
+              window.location.href = '/login'
+              return;
+            }
+          }
           alert ("Erro")
           console.log(err)
         }

@@ -60,12 +60,22 @@ function UpdateModulo ({route,APIroute}) {
     
     
             console.log("Resposta da API:", response.data);
-        } catch (err) {
+        } catch (error) {
+            if (error.response) {
+                const serverMessage = error.response.data?.erro;
+                
+                if (serverMessage === "Token inválido ou expirado") {
+                  alert(serverMessage)
+                  console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                  alert("Sessão expirada. Faça login novamente !");
+                  window.location.href = '/login'
+                  return;
+                }
+              }
       
             alert("Erro ao atualizar o módulo. Verifique o console para mais detalhes.");
     
-            console.error("Erro completo:", err);
-            console.error("Resposta do servidor:", err.response?.data);
+            console.error("Erro completo");
         }
     }
 

@@ -61,7 +61,17 @@ function ViewProfile (){
             setTimeout(() => navigate('/Login'), 500);
     
         } catch (error) {
-
+            if (error.response) {
+                const serverMessage = error.response.data?.erro;
+                
+                if (serverMessage === "Token inválido ou expirado") {
+                  alert(serverMessage)
+                  console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                  alert("Sessão expirada. Faça login novamente !");
+                  window.location.href = '/login'
+                  return;
+                }
+              }
             const serverMessage = error.response.data?.erro;
 
             if (error.response) {
@@ -245,9 +255,24 @@ function ViewProfile (){
     }
 
     async function GetLobyON() {
-        const dados = await LobyGet();
-        if (!dados) {
-         console.log("Erro ao buscar informações do Loby.");
+        try {
+            const dados = await LobyGet();
+            if (!dados) {
+            console.log("Erro ao buscar informações do Loby.");
+            }
+        }
+        catch (error){
+            if (error.response) {
+                const serverMessage = error.response.data?.erro;
+                
+                if (serverMessage === "Token inválido ou expirado") {
+                  alert(serverMessage)
+                  console.error("Sessão expirada. Faça login novamente !" + serverMessage);
+                  alert("Sessão expirada. Faça login novamente !");
+                  window.location.href = '/login'
+                  return;
+                }
+              }
         }
     }
 

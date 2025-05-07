@@ -203,9 +203,6 @@ const viewAnswers = async (element) => {
       )
     }
 
-    console.log("answers")
-    console.log(answers)
-
     SetAnswer(
       {
         TOPcommentON:element,
