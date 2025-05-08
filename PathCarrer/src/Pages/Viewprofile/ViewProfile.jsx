@@ -17,6 +17,10 @@ import { HiOutlineTrash } from "react-icons/hi2";
 import { LobyGet } from '../../Components/1he GlobalFunctions/GlobalFunctions';
 
 
+//==== AUX ==== //
+
+import { verify } from '../Login/LoginAux';
+
 
 // Hooks
 import { useState } from 'react';
@@ -25,6 +29,7 @@ import { useNavigate } from 'react-router';
 function ViewProfile (){
     const navigate = useNavigate();
     const [option,SetOption] = useState(true)
+    const [waring,SetWaring] = useState({ message:"",active:false,messageByDelete:""})
     const [newPassword,SetnewPassword] = useState({password:"",newPassword:"",CurrentPassword:"",CurrentPasswordDelete:""})
     const [LobyInfo,SetLobyInfo] = useState(JSON.parse(localStorage.getItem("LobyInfo")));
     const [ProfileAt,SetProfileAt] = useState(
@@ -244,11 +249,9 @@ function ViewProfile (){
                     error.response.data.erro === 
                     "DeleteProfile - Senha incorreta !"
             )   {
-                      alert("Você digitou errado sua senha atual.");
+                      SetWaring((prev) => ({...prev,messageByDelete:"Senha incorreta !"}))
                       return null;
                 }
-
-                console.log(error.response.data.erro)
             }
             alert("Erro ao deletar conta.");
         }
@@ -288,11 +291,26 @@ function ViewProfile (){
               }
             ))
         }
+
+        else if (name === "nickName"){
+        const result = verify(value);
+        if (result === 3){
+            SetProfileAt((prevState) => ({
+                ...prevState,
+                [name]: value
+            }));
+            SetWaring((prev) => ({...prev,active:false}))
+
+          }
+          else if (result === 0) {
+                SetWaring(({active:true,message:"Insira um nome de usuario sem usar espaços! ex: usuario_numero1."}))
+          }
+          else if (result === 1){
+                SetWaring(({active:true,message:"Numero de caracteres minimos: 10."}))
+          }
+        }
     
-        SetProfileAt((prevState) => ({
-          ...prevState,
-          [name]: value
-        }));
+        
     };
 
 
@@ -343,22 +361,31 @@ function ViewProfile (){
                         </div>
 
                         <div className={`${styles.aviso} ${styles.txtover2}`}>{ProfileAt.waring}</div>
+                        {waring.active === true ? (
+                            <div className={styles.waringLite}>{waring.message}</div>
+                        ):null}
+                        
                         <div className={styles.inputName_area}>                       
                             <div className={styles.inputName}>
                                 <TXTinputP
                                 name={"nickName"}
                                 onChange={(e) => setObjectClass(e)}
-                                placeholder={"Digite aqui o novo nome de usuario"}/>
+                                placeholder={"Digite aqui o novo nome de usuario"}
+                                maxLengthX={"15"}/>
                             </div>
 
-                            <div className={styles.actionButton}>
-                                <ButtonIMG
-                                iconV={"RxPencil2"}
-                                icon_style={"evenConstStyle"}
-                                title={"Atualizar nick name"}
-                                handleClick={(e) => NewName(e)}
-                                />
-                            </div>
+                            {waring.active === false ? (
+                                 <div className={styles.actionButton}>
+                                    <ButtonIMG
+                                    iconV={"RxPencil2"}
+                                    icon_style={"evenConstStyle"}
+                                    title={"Atualizar nick name"}
+                                    handleClick={(e) => NewName(e)}
+                                    />
+                                </div>
+                            ):null}
+
+                           
                         </div>
 
                         <div className={styles.inputName_area}>                       
@@ -477,6 +504,10 @@ function ViewProfile (){
                             <TbAlertTriangleFilled/>
                             Deletar Conta
                         </div>}
+                        {(waring.messageByDelete !== null && waring.messageByDelete !== undefined && waring.messageByDelete !== "") ? (
+                            <div className={`${styles.waringLite} ${styles.waringPasswordLocation}`}>{waring.messageByDelete}</div>
+                        ):null}
+                        
                     </div>
 
                     

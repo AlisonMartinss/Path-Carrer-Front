@@ -15,11 +15,15 @@ import { useNavigate } from 'react-router'
 
 import { IoIosCheckmarkCircle } from "react-icons/io";
 
+/* ==== AUX ==== */
+
+import { verify } from './LoginAux'
+
 function Login (){
     const navigate = useNavigate(); 
 
     const [waringMessage,SetWarringMessage] = useState(null)
-    const [erros,SetErros] = useState ([false,false,false])
+
 
     const [user,SetUser] = useState( // Estrutura usada no login
         {
@@ -46,7 +50,8 @@ function Login (){
           localStorage.setItem("UserName",userNameX)
           navigate('/loby');
         }catch (error){
-            alert( error.response.data.erro)
+            SetWarringMessage(error.response.data.erro)
+            
         }
     }
 
@@ -64,8 +69,7 @@ function Login (){
           await LoginFunction(NewuserName, NewPassword);
 
         } catch (error) {
-          alert(error.response.data.erro);
-          
+          SetWarringMessage(error.response.data.erro);
         }
       }
 
@@ -73,21 +77,37 @@ function Login (){
         if (user.passwordToNew === user.confirmPassword) {
             try{
              await CreateAccount (user.NewuserName,user.confirmPassword);
-            }catch (erro) {
-                console.log(erro)
-                SetWarringMessage(erro)
+            }catch (error) {
+                console.log(error)
             }
         }
     }
     
-
     const setInfo = (e) => {
         const { name, value } = e.target;
-        SetUser((prevState) => ({
-            ...prevState,
-            [name]: value
-        }));
+        console.log(name)
+        if(((name === "userName") || (name === "NewuserName") )&& (verify(value) === 3)){
+            SetUser((prevState) => ({
+                ...prevState,
+                [name]: value
+            }));
+            SetWarringMessage(true)
+        }
+        else if (((name === "userName")  || (name === "NewuserName")) && (verify(value) === 0)) {
+            
+            SetWarringMessage("Insira um nome de usuario sem usar espaços! ex: usuario_numero1")
+        }
+        else if (((name === "userName")  || (name === "NewuserName")) && (verify(value) === 1)){
+            SetWarringMessage("Numero de caracteres minimos: 10.")
+        }
+        else if (name === "password") {
+            SetUser((prevState) => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
     }
+        
 
     useEffect(() => {
         if (user.passwordToNew !== user.confirmPassword && user.passwordToNew !== ""){
@@ -114,7 +134,7 @@ function Login (){
                         name={"userName"}
                         type={"text"}
                         placeholder={"Digite seu usuario"}
-                        maxLengthX={"20"}
+                        maxLengthX={"15"}
                         onChange={(e) => setInfo(e)}/>
                         
                     </div>
@@ -150,7 +170,7 @@ function Login (){
                         name={"NewuserName"}
                         type={"text"}
                         placeholder={"Digite o nome do seu usuario"}
-                        maxLengthX={"20"}
+                        maxLengthX={"15"}
                         onChange={(e) => setInfo(e)}/>
                         
                     </div>

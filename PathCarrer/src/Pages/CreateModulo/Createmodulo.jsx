@@ -55,14 +55,16 @@ function CreateModulo ({redirec,APIroute}) {
                 <TXTinputP
                 onChange={(e) => setInfo(e)}
                 name={"titleModule"}
-                placeholder={"Digite o nome do modulo"}/>
+                placeholder={"Digite o nome do modulo"}
+                maxLengthX={"100"}/>
               </div>
 
               <div className={styles.moduloDesc}>
                 <TXTinputM
                 onChange={(e) => setInfo(e)}
                 name={"descModule"}
-                placeholder={"Descreva o seu modulo"}/>
+                placeholder={"Descreva o seu modulo"}
+                maxLengthX={"200"}/>
               </div>
 
               <div className={styles.Button}>

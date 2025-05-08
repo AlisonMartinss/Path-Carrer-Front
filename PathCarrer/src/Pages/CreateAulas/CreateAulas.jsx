@@ -216,21 +216,24 @@ function CreateAulas ({APIoption,circumstance}){
                 <TXTinputP
                 name={"title"} 
                 onChange={(e) => setObjectClass(e)} 
-                placeholder={"Digite o titulo da aula"}/>
+                placeholder={"Digite o titulo da aula"}
+                maxLengthX={"100"}/>
                </div>
 
                <div className={`${styles.inputLink} ${styles.overInput}`}>
                 <TXTinputP
                 name={"link"} 
                 onChange={(e) => setObjectClass(e)} 
-                placeholder={"Cole aqui o link do conteudo desta aula"}/>
+                placeholder={"Cole aqui o link do conteudo desta aula"}
+                maxLengthX={"100"}/>
                </div>
 
                <div className={styles.inputDesc}>
                 <TXTinputM 
                 name={"description"} 
                 onChange={(e) => setObjectClass(e)} 
-                placeholder={"Descreva os pontos mais interessantes para essa aula"}/>
+                placeholder={"Descreva os pontos mais interessantes para essa aula"}
+                maxLengthX={"200"}/>
                </div>
 
                <div className={styles.Button}>

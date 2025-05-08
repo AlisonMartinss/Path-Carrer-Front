@@ -113,6 +113,11 @@ function Loby () {
             SetLobyJSON((prev) => ({...prev,RefPathList:RefList}))
           }
           catch (error){
+            if (error.erro === "Token inválido ou expirado"){
+              console.error("Sessão expirada. Faça login novamente !")
+              alert("Sessão expirada. Faça login novamente !")
+              navigate('/Login')
+            }
             console.error("Erro em atribuir informações aos Path da sua lista MyPaths: ", error)
           }
         })()

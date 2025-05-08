@@ -276,7 +276,8 @@ function CreatePath ({PreSend}) {
                  <TXTinputP
                  placeholder={"Digite o titulo do seu Path"}
                  name={"title"}
-                 onChange={setInfo}/>
+                 onChange={setInfo}
+                 maxLengthX={"100"}/>
               </div>
               <div className={`${styles.txtover} ${styles.CallToAction}`}>
                      Selecione uma <strong className={styles.strong}>categoria</strong> que se encaixa no seu <strong className={styles.strong}>Path:</strong>
@@ -354,7 +355,8 @@ function CreatePath ({PreSend}) {
               <div className={styles.inputDesc}>
                <TXTinputM
                name={"descPathOver"}
-               onChange={setInfo}/>
+               onChange={setInfo}
+               maxLengthX={"200"}/>
               </div>
               <div className={styles.enviar}>
                <Button 
