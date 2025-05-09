@@ -2,50 +2,31 @@ import styles from '../ContentAcess/ContentAcess.module.css'
 
 /* Componentes */
 
-import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
 import SideBar from '../../Components/SideBar/SideBar'
 import WindowModule from '../../Components/WindowModule/WindowModule';
 import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG';
-import WindowNote from '../../Components/WindowNote/WindowNote';
-
 
 /* Recursos */
 
-import { AiOutlineComment } from "react-icons/ai";
 import { GiBookCover } from "react-icons/gi";
 import {useNavigate } from "react-router-dom"
 import {useState,useEffect} from 'react'
-import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
 import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2.jsx';
-import { LobyGet } from '../../Components/1he GlobalFunctions/GlobalFunctions.js';
-
-import { AddPath,RemovePath,UserPathOrder} from '../ContentAcess/ContentAcessAux.js';
+import { AddPath,RemovePath,UserPathOrder,GetContentByPath,PathDelete} from '../ContentAcess/ContentAcessAux.js';
 import { ShortPath } from '../../Components/1he GlobalFunctions/GlobalFunctions.js';
 
 
 
 function ContentAcess (){
-  /* 
-     ==== Explicações
-
-     - SetEntityFunc: Definir relação User x Path
-     - GetContent: informações sobre o Paht.
-     - ToIntoModulo: É ativada quando entramos em um modulo,consequentimente 
-       setamos as informações nescessarias para obter informações nescessarias
-       para esse modulo.
-       -
-    -  PathDelete: Chamada quando vamos deletar o path 
-    -  ButtonAction: indentifica qual função estamos chamando quando o user aperta algum botao.
-  */
 
     const navigate = useNavigate();
     
-    const [Entity,SetEntity] = useState(""); // Determinamos aqui qual a relação entre user x path
-    const [isClicked, setIsClicked] = useState(false);
+    const [Entity,SetEntity] = useState(""); // Determining the relationship between user x path
     const [ModuleListRef, SetModuleListRef] = useState([]);
+    const [isClicked, setIsClicked] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const [ContentJSON,setContentJSON] = useState({}); // Conteudo da Resposta da chamada da API. Conteudo do Path
-    const [buttons] = useState(  // Botoes a serem renderizados.
+    const [ContentJSON,setContentJSON] = useState({}); // Content of Path
+    const [buttons] = useState(  // buttons to be rendered. Dependend of relationship between user x path
       {
         author:
         [
@@ -79,83 +60,19 @@ function ContentAcess (){
         ]
     })
 
-    /* Chamada API - Obter informações sobre o Path 
-      - O formato de respota esperado pela API pode ser visto no arquivo
-      JS desse componente. Busque pelo titulo 'API_JSON - User/GetPath' */  
 
-    async function GetContent() {
-        setIsLoading(true);
-        try {
-          const response = await httpClient.get(
-            `User/GetPath?PathID=${localStorage.getItem("PathID_on")}`,
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("Token")}`,
-                "Content-Type": "application/json",
-              },
-            }
-          );
-      
-          const content = response.data;
-          setContentJSON(content);
-          
-        } catch (error) {
-          if (error.response) {
-            const serverMessage = error.response.data?.erro;
-            
-            if (serverMessage === "Token inválido ou expirado") {
-              alert(serverMessage)
-              console.error("Sessão expirada. Faça login novamente !" + serverMessage);
-              alert("Sessão expirada. Faça login novamente !");
-              window.location.href = '/login'
-              return;
-            }
-          }
-          console.error("Erro na requisição");
-          alert("Erro da chamada GetContent");
-        } finally {
-          setIsLoading(false);
-        }
-    }
-    const ToIntoModulo = (e,index,ClassOnSeeAlredy) => { // Usado quando selecionamos um modulo
+    const whenselectingmodule = (e,index,ClassOnSeeAlredy) => { // Usado quando selecionamos um modulo
       e.preventDefault();
       localStorage.setItem("ModuleIndexON",index)
       localStorage.setItem("ClassYepList",JSON.stringify(ClassOnSeeAlredy))
       navigate('/class')
     }
-    async function PathDelete () {
+    async function WhenWantDeletePath () {
       setIsLoading(true);
-      try {
-        const response = await httpClient.post('CRUD/PathDelete',
-          {
-            PathID:localStorage.getItem("PathID_on")
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("Token")}`,
-              "Content-Type": "application/json",
-            },
-          }
-        )
-      }catch (error){
-        if (error.response) {
-          const serverMessage = error.response.data?.erro;
-          
-          if (serverMessage === "Token inválido ou expirado") {
-            alert(serverMessage)
-            console.error("Sessão expirada. Faça login novamente !" + serverMessage);
-            alert("Sessão expirada. Faça login novamente !");
-            window.location.href = '/login'
-            return;
-          }
-        }
-        alert ("Erro em remover Path")
-      }
-      finally {
-        setIsLoading(false); // Sempre será chamado, finalizando o carregamento
-      }
+      await PathDelete();
+      setIsLoading(false);
     }
-    async function ButtonAction (e) {
+    async function actionButtonForUsersAndAuthor (e) {
     // Nessa função determinamos a ação do Usuario e do autor, que são: Adicionar,
     // excluir Path e Adicionar modulos, editar path
       if (Entity === "author"){
@@ -166,7 +83,7 @@ function ContentAcess (){
           navigate('/updatePath')
         }
         else if (e === "Deletar Path"){
-          PathDelete();
+          await WhenWantDeletePath();
           navigate('/Explorer')
         }
         else {
@@ -187,18 +104,27 @@ function ContentAcess (){
         
       }
     }
-    const handleClick = () => { // Controle do side bar
+    function SideBarOnOff () {
         setIsClicked((prev) => (!prev))
     };
 
-   
     useEffect(() => {
-      GetContent();
+
+      (async () => {
+      setIsLoading(true);
+      setContentJSON( await GetContentByPath());
+      console.log(" await GetContentByPath()")
+      console.log( await GetContentByPath())
+      setIsLoading(false);
+      })();
+
     }, []);
 
     useEffect(() => {
       const MyPathList = Object.keys(JSON.parse(localStorage.getItem("LobyInfo")).myPaths);
       const relaction = UserPathOrder(localStorage.getItem("PathID_on"),ContentJSON.IdAuthor,MyPathList);
+
+      // defining Relationship between user and path
 
           if (relaction === 2){
             SetEntity("author")
@@ -214,6 +140,7 @@ function ContentAcess (){
 
     useEffect(() => {
       if (Entity === "studentOn" && Array.isArray(ContentJSON.modulos)){
+        // Defining module specifications
         (async () => {
           try {
           let ModuleOfUser = [];
@@ -222,12 +149,11 @@ function ContentAcess (){
           const ModuleOfPathInUserProfile = (JSON.parse(localStorage.getItem("LobyInfo"))).myPaths[pathID].moduleSeens;
 
           let i  = 0;
-          for (const module of ContentJSON.modulos){ // -> element aqui é um modulo
+          for (const module of ContentJSON.modulos){
 
             let ClassYep = 0
             let ClassOnSeeAlredy = []
             if (ModuleOfPathInUserProfile[i] != null){
-              console.warn("Lidando com modulo do index " + i)
               for (const Class of ModuleOfPathInUserProfile[i].classSeens) {
                 if(ShirtInfoPath.classPresent.includes(Class)){
                 ClassYep++
@@ -292,7 +218,7 @@ function ContentAcess (){
                 
              <div className={`${isClicked ? styles.sideBarOFF : styles.sideBar}`}>
                 <SideBar
-                  handleClick={handleClick}
+                  handleClick={SideBarOnOff}
                   description={ContentJSON.description}
                   AuthorName={ContentJSON.IdAuthor}
                   imgPerfil={ContentJSON.PictureProfile}
@@ -308,9 +234,7 @@ function ContentAcess (){
                         <div className={styles.icon_area}><GiBookCover className={styles.icon_conf}/></div>
                       </div>
 
-                      <div className={styles.contentMain}>
-
-                        {/* Verificando se ContentJSON.modulos é um array e se não está vazio */}
+                      <div className={styles.contentMain}>                    
                         {Array.isArray(ModuleListRef) && ModuleListRef.length > 0  ? (
                         ModuleListRef.map((element,index) => (
                             <div className={styles.content_area}>
@@ -319,7 +243,7 @@ function ContentAcess (){
                               nClassYep={element.nClassYep}
                               nClass={element.nClass}
                               category={ContentJSON.category}
-                              onClick={(e) => ToIntoModulo(e,index,element.ClassOnSeeAlredy)}/>
+                              onClick={(e) => whenselectingmodule(e,index,element.ClassOnSeeAlredy)}/>
                             </div>
                           ))
                         ) : (
@@ -337,7 +261,7 @@ function ContentAcess (){
                                   <ButtonIMG
                                   iconV={element.iconV} 
                                   icon_style={"evenConstStyle"}                  
-                                  handleClick={(e) => ButtonAction(element.id)}
+                                  handleClick={(e) => actionButtonForUsersAndAuthor(element.id)}
                                   />
                                 </div>
                               )}
@@ -350,7 +274,7 @@ function ContentAcess (){
                                     <ButtonIMG
                                     iconV={element.iconV} 
                                     icon_style={"evenConstStyle"}                  
-                                    handleClick={(e) => ButtonAction(element.id)}
+                                    handleClick={(e) => actionButtonForUsersAndAuthor(element.id)}
                                     />
                                   </div>
                                 )}
@@ -363,7 +287,7 @@ function ContentAcess (){
                                   <ButtonIMG
                                   iconV={element.iconV} 
                                   icon_style={"evenConstStyle"}                  
-                                  handleClick={(e) => ButtonAction(element.id)}
+                                  handleClick={(e) => actionButtonForUsersAndAuthor(element.id)}
                                   />
                                 </div>
                               )}                          
@@ -373,25 +297,6 @@ function ContentAcess (){
                       </div>
                     </div>
                 </div>
-                {/*<div className={styles.module_core}>
-                    <div className={styles.module_main}>
-                      <div className={styles.icon}>
-                       <div className={styles.icon_area}><AiOutlineComment className={`${styles.icon_conf}`}/></div>
-                      </div>
-
-                      <div className={styles.contentMain}>
-                        <div className={styles.comment_area}>
-                          <WindowNote
-                          icon_Aa={"BiLike"}
-                          icon_Bb={"BiDislike"}
-                          ClasseAfterA={"classeAfterAa"}
-                          ClasseAfterB={"classeAfterBb"}
-                          className={""}/>
-                        </div>
-
-                      </div>
-                    </div>
-                </div>*/}
              </div>
             </div>
 
