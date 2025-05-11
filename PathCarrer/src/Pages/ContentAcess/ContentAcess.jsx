@@ -21,12 +21,12 @@ function ContentAcess (){
 
     const navigate = useNavigate();
     
-    const [Entity,SetEntity] = useState(""); // Determining the relationship between user x path
+    const [Entity,SetEntity] = useState("");
     const [ModuleListRef, SetModuleListRef] = useState([]);
     const [isClicked, setIsClicked] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const [ContentJSON,setContentJSON] = useState({}); // Content of Path
-    const [buttons] = useState(  // buttons to be rendered. Dependend of relationship between user x path
+    const [ContentJSON,setContentJSON] = useState({}); 
+    const [buttons] = useState(  
       {
         author:
         [
@@ -61,7 +61,7 @@ function ContentAcess (){
     })
 
 
-    const whenselectingmodule = (e,index,ClassOnSeeAlredy) => { // Usado quando selecionamos um modulo
+    const whenselectingmodule = (e,index,ClassOnSeeAlredy) => { 
       e.preventDefault();
       localStorage.setItem("ModuleIndexON",index)
       localStorage.setItem("ClassYepList",JSON.stringify(ClassOnSeeAlredy))

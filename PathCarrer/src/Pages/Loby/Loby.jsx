@@ -19,32 +19,27 @@ import { useNavigate } from 'react-router'
 // =-=-=-=-= Arquivos auxiliares =-=-=-=-=- //
 
 import { LobyGet,ShortPath } from '../../Components/1he GlobalFunctions/GlobalFunctions'
-import { ImOpt } from 'react-icons/im'
 import {AddNote,RemoveNote} from './LobyAUX'
 
 
 
 function Loby () {
     const navigate = useNavigate();
-    const [LobyJSON,SetLobyJSON] = useState(
+    const [ContentForLobyJSON,SetLobyJSON] = useState(
       {
         JSONdata:{},
         MyPathIDList:[],
-        RefPathList:[],
+        reformulatedPathList:[],
         isLoading:false,
         Notes:[]
-      });
-      
-    const [dayArray,setDayArray] = useState(["All","Seg","Ter","Qua","Qui","Sex","Sab","Dom"]);
+      });     
     const [postNote,SetPostNote] = useState(
       {
         active:false,
         message:""
       }
-    );
-
-    
-    const PathAcess = (e,x) => { // Quando clicado em algum path
+    ); 
+    const WhenPathAcess = (e,x) => {
       e.preventDefault();
       localStorage.setItem("PathID_on",x)
       navigate('/ContentAcess')
@@ -70,14 +65,13 @@ function Loby () {
     },[]);
 
     useEffect(() => {
-      // Atribuição de informação para lista de Path
-      if (LobyJSON.isLoading === false && LobyJSON.MyPathIDList !== undefined){
+      if (ContentForLobyJSON.isLoading === false && ContentForLobyJSON.MyPathIDList !== undefined){
         
         (async () => {
           console.info("Iniciando tratativa dos elementos de MyPaths")
           try {
             let RefList = [];
-            for (const element of LobyJSON.MyPathIDList){
+            for (const element of ContentForLobyJSON.MyPathIDList){
               const Path_data = await ShortPath(element);
 
               if (Path_data === null || Path_data === undefined){
@@ -85,7 +79,7 @@ function Loby () {
                 continue;
               }
 
-              const ClassAlredyView = LobyJSON.JSONdata.myPaths[element].classSee;
+              const ClassAlredyView = ContentForLobyJSON.JSONdata.myPaths[element].classSee;
               let nYepClass = 0;
 
               for (const classe of ClassAlredyView){
@@ -108,9 +102,7 @@ function Loby () {
 
               RefList.push(obj)
             }
-            console.log("RefList: ")
-            console.log(RefList)
-            SetLobyJSON((prev) => ({...prev,RefPathList:RefList}))
+            SetLobyJSON((prev) => ({...prev,reformulatedPathList:RefList}))
           }
           catch (error){
             if (error.erro === "Token inválido ou expirado"){
@@ -123,24 +115,24 @@ function Loby () {
         })()
       }
 
-      }, [LobyJSON.MyPathIDList,LobyJSON.isLoading]); 
+      }, [ContentForLobyJSON.MyPathIDList,ContentForLobyJSON.isLoading]); 
 
-      useEffect(() => {
-        if (LobyJSON.isLoading === false && LobyJSON.JSONdata.Notes !== undefined){
+    useEffect(() => {
+        if (ContentForLobyJSON.isLoading === false && ContentForLobyJSON.JSONdata.Notes !== undefined){
           try {
-            if (LobyJSON.JSONdata.Notes === null) {
+            if (ContentForLobyJSON.JSONdata.Notes === null) {
               return;
             }
             
-            const keyHashList = Object.keys(LobyJSON.JSONdata.Notes);
+            const keyHashList = Object.keys(ContentForLobyJSON.JSONdata.Notes);
 
           let Notes = []
           for (const element of keyHashList) {
             let obj =
             {
-              date:LobyJSON.JSONdata.Notes[element].date,
-              message:LobyJSON.JSONdata.Notes[element].message,
-              key:LobyJSON.JSONdata.Notes[element].key
+              date:ContentForLobyJSON.JSONdata.Notes[element].date,
+              message:ContentForLobyJSON.JSONdata.Notes[element].message,
+              key:ContentForLobyJSON.JSONdata.Notes[element].key
             }
             Notes.push(obj)
           }
@@ -148,7 +140,7 @@ function Loby () {
         } catch {
         }
         }
-      },[LobyJSON.JSONdata.Notes,LobyJSON.isLoading])
+      },[ContentForLobyJSON.JSONdata.Notes,ContentForLobyJSON.isLoading])
 
     
     return (
@@ -159,24 +151,14 @@ function Loby () {
             </header>
             <div className={styles.pre_coreArea}>
               <div className={styles.coreArea}>
-                
-                  <div className={styles.weekArea}>
-                    {/*
-                    {dayArray.map((element) => (
-                      <div className={styles.dayArea}>
-                        <Button class={"day"}
-                        message={element}/>
-                      </div>
-                    ))} */}
-                  </div>
                   <div className={styles.moduloArea}>             
-                        {Array.isArray(LobyJSON.RefPathList) && Object.keys(LobyJSON.RefPathList).length > 0 ? (
-                          LobyJSON.RefPathList.map((element) => (
+                        {Array.isArray(ContentForLobyJSON.reformulatedPathList) && Object.keys(ContentForLobyJSON.reformulatedPathList).length > 0 ? (
+                          ContentForLobyJSON.reformulatedPathList.map((element) => (
                             <div key={element.id} className={styles.moduloArea_core}>
                               <WindowModule
                                 titleMain={element.title}
                                 subTile={element.category}
-                                onClick={(e) => PathAcess(e,element.id)}
+                                onClick={(e) => WhenPathAcess(e,element.id)}
                                 img={img}
                                 nClass={element.nClass}
                                 nClassYep={element.nClassYep}
@@ -207,7 +189,7 @@ function Loby () {
                     iconV={"CiEdit"}
                     icon_style={"evenConstStyle"}
                     handleClick={(e) => {
-                      if (!(LobyJSON.Notes.length >= 3))
+                      if (!(ContentForLobyJSON.Notes.length >= 3))
                       {SetPostNote((prev) => ({...prev,active:true}))}
                       else{
                         alert("Numero maximo de notas por usuario já atingido")
@@ -216,9 +198,9 @@ function Loby () {
                     title={"Escrever nota"}
                   />
               </div>
-              {LobyJSON.Notes.length > null ? (
+              {ContentForLobyJSON.Notes.length > null ? (
                 <div className={styles.messageMainArea}>
-                {LobyJSON.Notes.map((element) => 
+                {ContentForLobyJSON.Notes.map((element) => 
                   (
                     <div className={styles.messageArea}>
                       <WindowNote
@@ -242,7 +224,7 @@ function Loby () {
                       iconV={"CiEdit"}
                       icon_style={"evenConstStyleDarkBlue"}
                       handleClick={(e) => {
-                        if (!(LobyJSON.Notes.length >= 3))
+                        if (!(ContentForLobyJSON.Notes.length >= 3))
                         {SetPostNote((prev) => ({...prev,active:true}))}
                         else{
                           alert("Numero maximo de notas por usuario já atingido")
