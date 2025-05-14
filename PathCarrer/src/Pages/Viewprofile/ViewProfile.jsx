@@ -12,6 +12,8 @@ import { TbAlertTriangleFilled } from "react-icons/tb";
 import { PiSwapDuotone } from "react-icons/pi";
 import { HiOutlineTrash } from "react-icons/hi2";
 
+//import img from '../../../src/assets/Midias/SVGs/Logo.svg'
+
 // ==== Arquivos nescessarios ==== //
 
 import { LobyGet } from '../../Components/1he GlobalFunctions/GlobalFunctions';
