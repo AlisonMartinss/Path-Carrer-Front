@@ -242,12 +242,6 @@ function CreateAulas ({APIoption,circumstance}){
                </div>
 
              </form>
-
-             <div className={styles.etapa}>
-              <div className={styles.tut_img}>
-               <MessageIMG href={"https://www.youtube.com/watch?v=63nfV47oDhU"}img={JP2} message={"Está com duvida de como lidar com essa etapa? Clique aqui"}/>
-              </div>               
-             </div>
                 
             </div>
 

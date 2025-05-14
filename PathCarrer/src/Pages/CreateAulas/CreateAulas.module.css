@@ -34,6 +34,8 @@
     width: 50vw;
     height: 100%;
 
+    margin-right: 20%;
+
     background-color: #7878783a;
 }
 
@@ -71,6 +73,7 @@
 .dicaCore{
     width: 70%;
     height: 15%;
+    
 }
 
 .dicaA{

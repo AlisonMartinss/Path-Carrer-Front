@@ -129,7 +129,6 @@ export async function AddSeeClass(IDclass) {
                 }
             }           
         );
-        alert("Aula vista")
     } catch (err) {
         alert("Erro ver aula.");
     }
@@ -152,7 +151,6 @@ export async function RemoveSeeClass(IDclass) {
                 }
             }           
         );
-        alert("Aula des-vista")
     } catch (err) {
         alert("Erro ver desver aula.");
     }
