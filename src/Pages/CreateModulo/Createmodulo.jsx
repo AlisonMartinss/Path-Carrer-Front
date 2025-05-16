@@ -2,7 +2,6 @@ import styles from '../CreateModulo/Createmodulo.module.css'
 
 import TXTinputP from '../../Components/TXTinputP/TXTinputP'
 import TXTinputM from '../../Components/TXTinputM/TXTinputM'
-import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
 import Button from '../../Components/Button/Button'
 
 import {useEffect, useContext} from 'react'

@@ -2,16 +2,13 @@ import styles from '../CreateAulas/CreateAulas.module.css'
 
 // =-=-=-=-=- Componentes =-=-=-=-=- //
 
-import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
 import TXTinputP from '../../Components/TXTinputP/TXTinputP'
 import TXTinputM from '../../Components/TXTinputM/TXTinputM'
-import MessageIMG from '../../Components/messageIMG/messageIMG'
 import Dicas from '../../Components/Dicas/Dicas'
 import Button from '../../Components/Button/Button'
 import BoxInput from '../../Components/BoxInput/BoxInput'
 
 // =-=-=-=-= Midias =-=-=-=-= //
-import JP2 from '../../assets/Midias/JP2.png'
 
 /*
   ===== Explicações =====
@@ -33,9 +30,6 @@ import JP2 from '../../assets/Midias/JP2.png'
     o indice do elemento que está sendo editado. 'tail' tamanho atual da lista para indicarmos indices coerentes.
     
 */
-
-
-import { useNavigate } from "react-router-dom"
 
 import { useContext, useState,useEffect } from 'react'
 import {PathStepsContext} from '../../Provider/CreatePathSteps/CreatePathSteps'

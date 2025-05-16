@@ -1,6 +1,5 @@
 import styles from '../CreatePath/CreatePath.module.css'
 
-import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
 import TXTinputP from '../../Components/TXTinputP/TXTinputP'
 import BoxInput from '../../Components/BoxInput/BoxInput'
 import Button from '../../Components/Button/Button'
