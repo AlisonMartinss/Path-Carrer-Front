@@ -1,11 +1,15 @@
 import styles from '../Comment/Comment.module.css'
 import ButtonIMG from '../ButtonIMG/ButtonIMG'
 
+// ==== Midias ====
+
+import DefaultProfile  from '../../../src/assets/Midias/PNGs/images/DefaultProfile.png'
+
 function Comment ({imgURL,comment,nickName,onClickIcon1,onClickIcon2,responseAction,nAnswers}){
     return (
         <div className={styles.main}>
             <div className={styles.perfilArea}>
-                <img className={styles.img} src={imgURL !== null ? (imgURL):"../../../src/assets/Midias/PNGs/images/DefaultProfile.png"} alt="Foto de perfil" />
+                <img className={styles.img} src={imgURL !== null ? (imgURL):DefaultProfile} alt="Foto de perfil" />
             </div>
             <div className={`${styles.nickName} ${styles.txtover}`}>{`@${nickName}`}</div>
             

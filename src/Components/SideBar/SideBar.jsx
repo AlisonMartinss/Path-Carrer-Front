@@ -2,6 +2,11 @@ import { useState,useEffect } from 'react'
 import style from '../SideBar/SideBar.module.css'
 import ButtonIMG from '../ButtonIMG/ButtonIMG'
 
+// ==== Arquivos de midia ====
+
+import BannerDefault from '../../../src/assets/Midias/PNGs/images/BannerDefault.png'
+import DefaultProfile from '../../../src/assets/Midias/PNGs/images/DefaultProfile.png'
+
 function SideBar ({handleClick,description,AuthorName,adjectivesList,imgPerfil,imgBanner}){
     const [arraAuxMedals, setArrAuxMedals] = useState([])
     const [arraAuxAdjectives,setArraAuxAdjectives] = useState(adjectivesList)
@@ -34,14 +39,14 @@ function SideBar ({handleClick,description,AuthorName,adjectivesList,imgPerfil,i
                 <div className={style.autor_aspects}>
                     <div className={style.top_area}>
                         <img className={style.img}  src={imgBanner === null || imgBanner === undefined ? (
-                            "../../../src/assets/Midias/PNGs/images/BannerDefault.png"
+                            BannerDefault
                         ):imgBanner} alt="Foto do Banner" />
                     </div>
 
                     <div className={`${style.profile_props} ${isClicked ? style.profile_propsOFF : style.profile_props}`}>
                             <div className={style.perfil_img}>
                                 <img className={style.img} src={imgPerfil !== null ? imgPerfil : 
-                                    "../../../src/assets/Midias/PNGs/images/DefaultProfile.png"} alt="Perfil Foto" />
+                                    DefaultProfile} alt="Perfil Foto" />
                                     
                             </div>
                             {arraAuxMedals.map((element) => (

@@ -762,8 +762,6 @@ function captchaAnswer (addres,casas) {
               if (!userA) {
                 throw new Error(" userA.data está indefinido ou não contem os dados esperados!");
              }
-             console.log("UserA: ")
-             console.log(userA)
   
             const updatedComments = {
               userName: userA.userName,

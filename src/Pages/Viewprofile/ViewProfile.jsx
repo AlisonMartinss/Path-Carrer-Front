@@ -12,11 +12,12 @@ import { TbAlertTriangleFilled } from "react-icons/tb";
 import { PiSwapDuotone } from "react-icons/pi";
 import { HiOutlineTrash } from "react-icons/hi2";
 
-//import img from '../../../src/assets/Midias/SVGs/Logo.svg'
 
 // ==== Arquivos nescessarios ==== //
 
 import { LobyGet } from '../../Components/1he GlobalFunctions/GlobalFunctions';
+import BannerDefault from '../../../src/assets/Midias/PNGs/images/BannerDefault.png';
+import DefaultProfile from '../../../src/assets/Midias/PNGs/images/DefaultProfile.png';
 
 
 //==== AUX ==== //
@@ -360,11 +361,11 @@ function ViewProfile (){
                                 
                                 <img className={styles.img}  src={ProfileAt.banner !== null && ProfileAt.banner !== undefined && ProfileAt.banner !== "" ? (
                                     ProfileAt.banner
-                                ):"../../../src/assets/Midias/PNGs/images/BannerDefault.png"} alt="Foto do Banner" />
+                                ):BannerDefault} alt="Foto do Banner" />
                             </div>
                             <div className={styles.perfilArea}>
                                 <img className={styles.img} src={ProfileAt.perfil !== null && ProfileAt.perfil !== undefined && ProfileAt.perfil !== ""  ? ProfileAt.perfil : 
-                                "../../../src/assets/Midias/PNGs/images/DefaultProfile.png"} alt="Perfil Foto" />
+                                DefaultProfile} alt="Perfil Foto" />
                             </div>
                             <div className={`${styles.bottomArea} ${styles.txtover}`}>{ProfileAt.nickName !== "" ? (ProfileAt.nickName): localStorage.getItem("UserName")} </div>
                         </div>

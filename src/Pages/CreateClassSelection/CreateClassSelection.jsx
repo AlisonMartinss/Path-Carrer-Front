@@ -47,7 +47,7 @@ function CreateClassSelection  ({option,circumstance}){
             }
           )
           alert("Path Criado com Sucesso")
-          navigate('Explorer')
+          navigate('/Explorer')
         }catch (error){
           if (error.response) {
             const serverMessage = error.response.data?.erro;
@@ -114,7 +114,7 @@ function CreateClassSelection  ({option,circumstance}){
           }
         )
         alert("Modulo atualizado")
-        navigate('Explorer')
+        navigate('/Explorer')
       }catch (error){
         if (error.response) {
           const serverMessage = error.response.data?.erro;
