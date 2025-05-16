@@ -46,7 +46,8 @@ function CreateClassSelection  ({option,circumstance}){
               },
             }
           )
-          alert("Aulas cadastradas")
+          alert("Path Criado com Sucesso")
+          navigate('Explorer')
         }catch (error){
           if (error.response) {
             const serverMessage = error.response.data?.erro;
@@ -63,6 +64,7 @@ function CreateClassSelection  ({option,circumstance}){
           console.log(error)
         }
     }
+
     async function UpadateNewModule (e) {
       e.preventDefault()
       try {
@@ -98,6 +100,7 @@ function CreateClassSelection  ({option,circumstance}){
         console.log(error)
       }
     }
+
     async function UpdateModulo (e) {
       e.preventDefault()
       try {
@@ -111,6 +114,7 @@ function CreateClassSelection  ({option,circumstance}){
           }
         )
         alert("Modulo atualizado")
+        navigate('Explorer')
       }catch (error){
         if (error.response) {
           const serverMessage = error.response.data?.erro;
@@ -127,6 +131,7 @@ function CreateClassSelection  ({option,circumstance}){
         console.log(err)
       }
     }
+
     async function UpdateClassUnic(e) {
       e.preventDefault();
   
@@ -166,6 +171,7 @@ function CreateClassSelection  ({option,circumstance}){
           console.error("Resposta do servidor:", err.response?.data);
       }
     }
+    
     async function UpdateNewClass(e) {
       e.preventDefault();
   

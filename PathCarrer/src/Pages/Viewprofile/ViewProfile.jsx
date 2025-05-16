@@ -103,7 +103,7 @@ function ViewProfile (){
         }
     }
     
-    async function PictureProfile(e) { // Função para foto e/ou banner de usuario
+    async function PictureProfile(e) {
         if (e) {
             e.preventDefault(); 
         }
@@ -294,6 +294,14 @@ function ViewProfile (){
             ))
         }
 
+        else if (name === "banner"){
+            SetProfileAt((prev) => ({...prev,banner:value}))
+        }
+
+         else if (name === "perfil"){
+            SetProfileAt((prev) => ({...prev,perfil:value}))
+        }
+
         else if (name === "nickName"){
         const result = verify(value);
         if (result === 3){
@@ -314,7 +322,6 @@ function ViewProfile (){
     
         
     };
-
 
     const SelectOption = (event) => {
         event.preventDefault();
