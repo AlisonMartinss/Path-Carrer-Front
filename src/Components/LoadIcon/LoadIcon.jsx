@@ -21,9 +21,12 @@ function LoadIcon ({msg,iconV}) {
                 </div>
                 
             ):<div className={styles.perfilArea}></div>}
+            {msg !== null && msg !== undefined && msg !== "" ? (
             <div className={`${styles.msgLoad} ${styles.txt}`}> 
                 {msg}
             </div>
+            ):null}
+            
         </div>
     )
 }

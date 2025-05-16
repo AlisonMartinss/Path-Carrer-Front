@@ -1,5 +1,5 @@
 
-import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
+import httpClient from "../../APIs/PathCarrerAPI/PathCarrer";
 
 export async function ShortPath(PathID) {
   try {
@@ -42,6 +42,8 @@ export async function LobyGet() {
         alert("Erro: Usuário ou Token não encontrado no localStorage.");
         return null;
       }
+      console.log("username")
+      console.log(username)
   
       const response = await httpClient.get(`User/Getloby?username=${username}`, {
         headers: {

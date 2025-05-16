@@ -31,6 +31,19 @@
     height: 90vh;
 }
 
+.LoadArea{
+    position: absolute;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30%;
+    height: 20%;
+
+    margin-top: 20%;
+}
+
 .loginArea{
     position: relative;
 

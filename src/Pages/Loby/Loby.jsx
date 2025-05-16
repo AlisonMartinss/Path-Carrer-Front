@@ -48,9 +48,18 @@ function Loby () {
     useEffect(() => {
       (async () => {
         try {
+          
         const data = await LobyGet();
+        console.log("data")
+        console.log(data)
+  
+        
         SetLobyJSON((prev) => ({...prev,isLoading:true}))
-        SetLobyJSON((prev) => ({...prev,JSONdata:data,MyPathIDList:Object.keys(data.myPaths)}))
+        if (Object.keys(data.myPaths !== null)){
+            SetLobyJSON((prev) => ({...prev,JSONdata:data,MyPathIDList:Object.keys(data.myPaths)}))
+        }else{
+          SetLobyJSON((prev) => ({...prev,JSONdata:data,MyPathIDList:null}))
+        }
         SetLobyJSON((prev) => ({...prev,isLoading:false}))
         }catch (error){
           if (error.erro === "Token inválido ou expirado"){
@@ -66,7 +75,6 @@ function Loby () {
 
     useEffect(() => {
       if (ContentForLobyJSON.isLoading === false && ContentForLobyJSON.MyPathIDList !== undefined){
-        
         (async () => {
           console.info("Iniciando tratativa dos elementos de MyPaths")
           try {
