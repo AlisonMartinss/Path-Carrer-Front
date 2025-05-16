@@ -157,7 +157,6 @@ function Login (){
                     </div>
 
                     <div className={styles.othersLoginOptions}>
-                        <a href="https://www.youtube.com/watch?v=GPYG4MQkU2s" className={styles.othersLoginOptions_a}>Esqueci a senha</a>
                         <div className={styles.othersLoginOptions_a} onClick={() => {localStorage.setItem("CreateAccount",true),window.location.reload();}} >Crie sua conta</div>
                     </div>
                 </div>
