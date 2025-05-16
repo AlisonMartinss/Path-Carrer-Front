@@ -43,9 +43,8 @@ function Login (){
     async function LoginFunction (userNameX,PasswordY) {
         try {
           SetAuxStates((prev) => ({...prev,isLoad:true}))
-          await LoginCall(userNameX,PasswordY);
-          localStorage.setItem("UserName",userNameX)
-          navigate('/loby');
+          response = await LoginCall(userNameX,PasswordY);
+          navigate('/Loby');
         }catch (error){
             SetAuxStates((prev => ({...prev,waringMessage:error.response.data.erro})))       
         }

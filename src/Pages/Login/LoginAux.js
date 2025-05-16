@@ -32,7 +32,9 @@ export async function LoginCall(userNameX,PasswordY) {
         const token = response.data.Token;
 
         localStorage.clear();
-        localStorage.setItem("Token",token)
+        localStorage.setItem("UserName",userNameX)
+        localStorage.setItem("Token",response)
+        return token
                
         } catch (error) {
           return null

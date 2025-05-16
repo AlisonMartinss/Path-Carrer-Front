@@ -42,8 +42,6 @@ export async function LobyGet() {
         alert("Erro: Usuário ou Token não encontrado no localStorage.");
         return null;
       }
-      console.log("username")
-      console.log(username)
   
       const response = await httpClient.get(`User/Getloby?username=${username}`, {
         headers: {

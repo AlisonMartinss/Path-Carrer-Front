@@ -13,7 +13,6 @@ import PostComment from '../../Components/PostComment/PostComment'
 
 
 import { useState,useEffect } from 'react'
-import httpClient from '../../APIs/PathCarrerAPI/PathCarrer'
 import { useNavigate } from 'react-router'
 
 // =-=-=-=-= Arquivos auxiliares =-=-=-=-=- //
@@ -50,10 +49,7 @@ function Loby () {
         try {
           
         const data = await LobyGet();
-        console.log("data")
-        console.log(data)
-  
-        
+         
         SetLobyJSON((prev) => ({...prev,isLoading:true}))
         if (Object.keys(data.myPaths !== null)){
             SetLobyJSON((prev) => ({...prev,JSONdata:data,MyPathIDList:Object.keys(data.myPaths)}))
