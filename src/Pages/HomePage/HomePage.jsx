@@ -11,6 +11,9 @@ import Comments from '../../../src/assets/Midias/PNGs/images/Comments.png'
 import premissas_01 from '../../../src/assets/Midias/PNGs/images/premissas_01.png'
 import premissas_02 from '../../../src/assets/Midias/PNGs/images/premissas_02.png'
 import premissas_03 from '../../../src/assets/Midias/PNGs/images/premissas_03.png'
+import setaA from '../../../src/assets/Midias/PNGs/images/setaA.svg'
+import retangle from '../../../src/assets/Midias/SVGs/retangle.svg'
+import thumbpath from '../../../src/assets/Midias/PNGs/images/thumbpath.png'
 
 
 // Componentes
@@ -130,11 +133,11 @@ aprendizado se torne mais leve e recompensador.`,
                     </div>
 
                     <div className={styles.backForm}>
-                        <img className={styles.img_svg} src="../../../src/assets/Midias/SVGs/retangle.svg" alt="" />
+                        <img className={styles.img_svg} src={retangle} alt="Imagem de forma geometrica azul" />
                     </div>
 
                     <div className={styles.PathThumb}>
-                        <img className={styles.img_png} src="../../../src/assets/Midias/PNGs/images/thumbpath.png" alt="" />
+                        <img className={styles.img_png} src={thumbpath} alt="Estudante sentada estudando no laptop" />
                     </div>
 
                     <MdArrowDropDown
@@ -198,7 +201,7 @@ aprendizado se torne mais leve e recompensador.`,
                         func={() => {localStorage.setItem("CreateAccount",true),navigate('/Login')}}
                         />
                     </div>
-                    <img className={styles.CTOend_deco} src={"../../../src/assets/Midias/PNGs/images/setaA.svg"} alt="" />
+                    <img className={styles.CTOend_deco} src={setaA} alt="Imagem de seta" />
                 </div>
             </div>
         </div>
