@@ -1,18 +1,8 @@
-# Path-Carrer-Front
+# React + Vite
 
-### Projeto ainda em desenvolvolvimento
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Tecnologias em uso
-- ReactJS
-- Vite (build tool)
-- NodeJS
+Currently, two official plugins are available:
 
-## Como rodar o projeto
-1. Instale o Node.js (https://nodejs.org/).
-2. Clone o repositório.
-3. No diretório do projeto `npm install`.
-4. Para iniciar o servidor `npm run dev`.
-
-### Uma vez no direotio .../PathCarrer:
-- Digite "npm run dev"
-- No direorio ".../PathCarrer/src/App.jsx" é possivel ver as rotas já criadas 😉
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
