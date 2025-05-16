@@ -2,6 +2,16 @@ import styles from '../HomePage/HomePage.module.css'
 import { MdArrowDropDown } from "react-icons/md";
 import Button from '../../Components/Button/Button';
 
+// Midias
+
+import expla02 from '../../../src/assets/Midias/PNGs/images/expla02.png'
+import DinamicadoPath from  '../../../src/assets/Midias/SVGs/DinamicadoPath.svg'
+import progressaoHP from '../../../src/assets/Midias/PNGs/images/progressaoHP.gif'
+import Comments from '../../../src/assets/Midias/PNGs/images/Comments.png'
+import premissas_01 from '../../../src/assets/Midias/PNGs/images/premissas_01.png'
+import premissas_02 from '../../../src/assets/Midias/PNGs/images/premissas_02.png'
+import premissas_03 from '../../../src/assets/Midias/PNGs/images/premissas_03.png'
+
 
 // Componentes
 
@@ -27,7 +37,7 @@ function HomePage () {
              módulos e aulas para guiar seu aprendizado de forma prática e eficiente.
             `,
             motivaton:`Descubra, aprenda e avance no seu caminho!`,
-            img:'../../../src/assets/Midias/SVGs/DinamicadoPath.svg',
+            img:DinamicadoPath,
             widthTitle:0.68*("Encontre as melhores aulas em um só lugar!").length
         },
         {
@@ -43,7 +53,7 @@ function HomePage () {
              No Path to Carrer, os melhores materais estão reunidos em um só lugar.
             `,
             motivaton:"",
-            img:'../../../src/assets/Midias/PNGs/images/expla02.png',
+            img:expla02,
             widthTitle:0.68*("Conteudo reunido em um só lugar !").length
         },
         {
@@ -63,7 +73,7 @@ function HomePage () {
             motivaton:`Ver seu progresso crescer a cada dia faz com que o 
 aprendizado se torne mais leve e recompensador.`,
 
-            img:'../../../src/assets/Midias/PNGs/images/progressaoHP.gif',
+            img:progressaoHP,
             widthTitle:0.80*("Encontre as melhores aulas em um só lugar!").length
         },
         {
@@ -83,7 +93,7 @@ aprendizado se torne mais leve e recompensador.`,
             motivaton:`Ver seu progresso crescer a cada dia faz com que o 
 aprendizado se torne mais leve e recompensador.`,
 
-            img:'../../../src/assets/Midias/PNGs/images/Comments.png',
+            img:Comments,
             widthTitle:0.80*("Encontre as melhores aulas em um só lugar!").length
         }
     ]
@@ -92,17 +102,17 @@ aprendizado se torne mais leve e recompensador.`,
         {
             title:"Paths estruturados",
             message:"Aprenda com trilhas organizadas por quem já passou pelo mesmo caminho que você.",
-            img:'../../../src/assets/Midias/PNGs/images/premissas_01.png'
+            img:premissas_01
         },
         {
             title:"Progresso visível",
             message:"Acompanhe seu avanço em cada path e mantenha a motivação em alta.",
-            img:'../../../src/assets/Midias/PNGs/images/premissas_02.png'
+            img:premissas_02
         },
         {
             title:"Comunidade ativa",
             message:"Tire dúvidas, troque ideias e cresça junto com quem está na mesma jornada.",
-            img:'../../../src/assets/Midias/PNGs/images/premissas_03.png'
+            img:premissas_03
         }
     ]
     return (
