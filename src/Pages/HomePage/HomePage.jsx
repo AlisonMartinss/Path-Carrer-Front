@@ -5,7 +5,7 @@ import Button from '../../Components/Button/Button';
 // Midias
 
 import expla02 from '../../../src/assets/Midias/PNGs/images/expla02.png'
-import DinamicadoPath from  '../../../src/assets/Midias/SVGs/DinamicadoPath.svg'
+import DinamicadoPath from  '../../assets/Midias/SVGs/DinamicaDoPath.svg'
 import progressaoHP from '../../../src/assets/Midias/PNGs/images/progressaoHP.gif'
 import Comments from '../../../src/assets/Midias/PNGs/images/Comments.png'
 import premissas_01 from '../../../src/assets/Midias/PNGs/images/premissas_01.png'
