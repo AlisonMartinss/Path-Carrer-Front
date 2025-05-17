@@ -5,7 +5,7 @@ import { HiMiniUserGroup } from "react-icons/hi2";
 
 // Midia 
 
-import bannerpathDefault from '../../assets/Midias/PNGs/images/bannerpathDefault.png'
+import bannerpathDefault from '../../assets/Midias/PNGs/images/bannerPathDefault.png'
 
 
 function Conteudo ({img,PathName,Category,onClick,views}){
