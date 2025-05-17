@@ -21,14 +21,13 @@ import { verify,CreateNewAccount,LoginCall} from './LoginAux'
 
 function Login (){
     const navigate = useNavigate(); 
+
     const [AuxStates,SetAuxStates] = useState(
         {
            waringMessage:null,
            isLoad:false 
         }
     )
-
-
     const [user,SetUser] = useState( // Estrutura usada no login
         {
             userName:"",
@@ -39,20 +38,20 @@ function Login (){
 
         }
     );
-
     async function LoginFunction (userNameX,PasswordY) {
         try {
           SetAuxStates((prev) => ({...prev,isLoad:true}))
-          response = await LoginCall(userNameX,PasswordY);
-          navigate('/Loby');
+          await LoginCall(userNameX,PasswordY);      
         }catch (error){
-            SetAuxStates((prev => ({...prev,waringMessage:error.response.data.erro})))       
+        
+            SetAuxStates((prev => ({...prev,waringMessage:error.response.data.erro})))
+            return  
         }
         finally {
              SetAuxStates((prev => ({...prev,isLoad:false})))   
         }
+        navigate('/Loby');
     }
-
     async function createNewUser () {
         if (user.passwordToNew === user.confirmPassword) {
             try{
@@ -60,13 +59,10 @@ function Login (){
              await CreateNewAccount (user.NewuserName,user.confirmPassword);
              await LoginFunction(user.NewuserName,user.confirmPassword)
             }catch (error) {
-                SetAuxStates((prev => ({...prev,waringMessage:error.response.data.erro}))) 
-            }finally{
-                SetAuxStates((prev => ({...prev,isLoad:false}))) 
+                SetAuxStates((prev => ({...prev,waringMessage:error.response.data.erro,isLoad:false}))) 
             }
         }
     }
-    
     const setInfo = (e) => {
         const { name, value } = e.target;
         console.log(name)
@@ -108,7 +104,7 @@ function Login (){
                 <CabecalhoPadrao/>
             </div>
             <div className={styles.core}>
-                {AuxStates.waringMessage !== true ? (<div className={`${styles.waring} ${styles.txtOver_a}`}>{AuxStates.waringMessage}</div>):null}
+                {AuxStates.waringMessage !== null && AuxStates.waringMessage !== undefined && AuxStates.waringMessage !== "" ? (<div className={`${styles.waring} ${styles.txtOver_a}`}>{AuxStates.waringMessage}</div>):null}
                 {AuxStates.isLoad === true ? (
                     <div className={styles.LoadArea}>
                         <LoadIcon
@@ -137,12 +133,13 @@ function Login (){
                         onChange={(e) => setInfo(e)}/>
                     </div>
 
+                
                     <div className={styles.Button}>
-                        <Button
+                         <Button
                             func={(e) => LoginFunction(user.userName,user.password)}
                             class={"darkBlue"}
                             message={"Entrar"}
-                        />
+                            />
                     </div>
 
                     <div className={styles.othersLoginOptions}>

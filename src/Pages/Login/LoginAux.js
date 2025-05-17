@@ -17,27 +17,28 @@ export async function CreateNewAccount(NewuserName, NewPassword) {
             password: NewPassword,
           });
         } catch (error) {
-          return null
+          throw error;
         }
 }
 
 export async function LoginCall(userNameX,PasswordY) {
         try {
-        const response = await httpClient.post('Login',
-        {
-            userName:userNameX,
-            password:PasswordY
-        })
+          const response = await httpClient.post('Login',
+          {
+              userName:userNameX,
+              password:PasswordY
+          })
 
-        const token = response.data.Token;
+          const token = response.data.Token;
 
-        localStorage.clear();
-        localStorage.setItem("UserName",userNameX)
-        localStorage.setItem("Token",response)
-        return token
+          localStorage.clear();
+          localStorage.setItem("UserName",userNameX)
+          localStorage.setItem("Token",token)
+          return token
                
         } catch (error) {
-          return null
+          localStorage.clear();
+          throw error;
         }
         
 }
