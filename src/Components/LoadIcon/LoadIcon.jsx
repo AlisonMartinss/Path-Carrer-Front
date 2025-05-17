@@ -3,10 +3,6 @@ import { BiSolidMessageSquareError } from "react-icons/bi";
 import { AiFillAlipayCircle } from "react-icons/ai";
 import { HiArrowPath } from "react-icons/hi2";
 
-// Midia
-
-import loadIcon from '../../assets/Midias/PNGs/images/loadicon.svg'
-
 
 
 function LoadIcon ({msg,iconV}) {
