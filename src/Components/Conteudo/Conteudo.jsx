@@ -1,5 +1,4 @@
 import styles from '../Conteudo/Conteudo.module.css'
-import ButtonIMG from '../ButtonIMG/ButtonIMG'
 
 import { HiMiniUserGroup } from "react-icons/hi2";
 

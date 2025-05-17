@@ -82,22 +82,20 @@ aprendizado se torne mais leve e recompensador.`,
         {
             GifON:false,
             title:
-            `Acompanhe seu progresso e mantenha a motivação!`,
+            `Aprendizado que se fortalece em grupo`,
             txtMain:
             `
-             Sabemos que aprender algo novo pode parecer um caminho longo, mas visualizar seu
-             avanço faz toda a diferença. 
+            Sabemos que estudar sozinho pode gerar dúvidas e inseguranças, mas trocar 
+            ideias muda tudo.
 
-            No Path to Career, você acompanha em tempo real quantos % já concluiu do seu path,
-            ajudando a manter o foco e a motivação. 
-
-            Cada módulo concluído é um passo a mais em direção ao seu objetivo.
+            No Path to Career, o fórum conecta alunos com interesses em comum, criando
+            um espaço para perguntas, dicas e apoio mútuo.Participar das discussões 
+            fortalece o aprendizado e estimula novas descobertas.
             `,
-            motivaton:`Ver seu progresso crescer a cada dia faz com que o 
-aprendizado se torne mais leve e recompensador.`,
+            motivaton:`Aprender em comunidade transforma o caminho em uma jornada mais rica e colaborativa.`,
 
             img:Comments,
-            widthTitle:0.80*("Encontre as melhores aulas em um só lugar!").length
+            widthTitle:0.60*("Encontre as melhores aulas em um só lugar!").length
         }
     ]
     const premissas = 
