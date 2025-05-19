@@ -1,4 +1,17 @@
-# React + Vite
+# Path to/ Carrer
+
+Aplicação React para navegação por trilhas de aprendizagem personalizadas. Foco em estudantes e mentores que desejam compartilhar ou seguir caminhos educacionais estruturados.
+
+A plataforma Path to/ Carrer permite aos usuarios criarem e assitirem estruturas chamadas "Paths" que são constituidas por modulos, e respectivamente aulas. Cada aula é composta por um video e uma descrição. Além de que, cada modulo possa ter sua aulas, tambem tem o forum, onde usuarios e criadores podem conversar entre si.
+
+Acesse o site para ver isso em pratica: [ https://path-carrer-front.vercel.app/](https://path-carrer-front.vercel.app/)
+
+Demonstrando o primeiro acesso a plataforma: 
+[![Assista ao vídeo](https://img.youtube.com/vi/V-uKTesoJds&t=22s/hqdefault.jpg)](https://www.youtube.com/watch?v=V-uKTesoJds&t=22s)
+
+
+
+
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
