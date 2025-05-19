@@ -1,8 +1,9 @@
 # Path to/ Carrer
 
-Aplicação React para navegação por trilhas de aprendizagem personalizadas. Foco em estudantes e mentores que desejam compartilhar ou seguir caminhos educacionais estruturados.
+Aplicação desenvolvida em React, focada na navegação por trilhas de aprendizagem personalizadas.
+Destina-se a estudantes e mentores interessados em compartilhar ou acompanhar percursos educacionais organizados de maneira estruturada.
 
-A plataforma Path to/ Carrer permite aos usuarios criarem e assitirem estruturas chamadas "Paths" que são constituidas por modulos, e respectivamente aulas. Cada aula é composta por um video e uma descrição. Além de que, cada modulo possa ter sua aulas, tambem tem o forum, onde usuarios e criadores podem conversar entre si.
+A plataforma Path to Career permite aos usuários criar e acessar estruturas chamadas "Paths", que são constituídas por módulos e, respectivamente, por aulas. Cada aula é composta por um vídeo e uma descrição. Além disso, cada módulo pode conter suas próprias aulas e um fórum, onde usuários e criadores podem interagir entre si.
 
 ![](https://github.com/AlisonMartinss/Imagens/blob/main/FluxoGrama.png?raw=true)
 
