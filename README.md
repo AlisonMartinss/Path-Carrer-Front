@@ -13,7 +13,7 @@ A plataforma Path to/ Carrer permite aos usuarios criarem e assitirem estruturas
 [Assista ao vídeo](https://www.youtube.com/watch?v=y9Uz3luEqzQ)
 
 ## Arquitetura e Estrutura de Pastas
-![Demonstraçaõ da estrutura e proposito dos diretorios a partir do 'src', diretorio mais importante.]([https://exemplo.com/imagem.png](https://github.com/AlisonMartinss/Imagens/blob/main/img/Toda%20estgrutura.png?raw=true))
+![Demonstraçaõ da estrutura e proposito dos diretorios a partir do 'src', diretorio mais importante.](https://github.com/AlisonMartinss/Imagens/blob/main/img/Toda%20estgrutura.png?raw=true)
 
 
 
