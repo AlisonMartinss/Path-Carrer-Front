@@ -69,7 +69,6 @@ function Explorer() {
       }
    };
 
-   // Carregamento inicial
    useEffect(() => {
       const objective = localStorage.getItem("exploreObjective");
       if (objective === "exploreDefault") {
@@ -79,7 +78,6 @@ function Explorer() {
       }
    }, []);
 
-   // Atualização quando clica numa categoria
    useEffect(() => {
       if (searchMecanism.AuxIsLoad) {
          fetchPaths("category", searchMecanism.category);
@@ -90,7 +88,6 @@ function Explorer() {
       }
    }, [searchMecanism.AuxIsLoad]);
 
-   // Disparo do carregamento quando clicam numa categoria
    const handleCategoryClick = (element) => {
       SetSearchMecanism((prev) => ({
          ...prev,
