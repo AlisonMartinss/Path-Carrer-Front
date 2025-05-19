@@ -4,6 +4,8 @@ Aplicação React para navegação por trilhas de aprendizagem personalizadas. F
 
 A plataforma Path to/ Carrer permite aos usuarios criarem e assitirem estruturas chamadas "Paths" que são constituidas por modulos, e respectivamente aulas. Cada aula é composta por um video e uma descrição. Além de que, cada modulo possa ter sua aulas, tambem tem o forum, onde usuarios e criadores podem conversar entre si.
 
+![](https://github.com/AlisonMartinss/Imagens/blob/main/FluxoGrama.png?raw=true)
+
 ### Acesse o site para ver isso em pratica: [ https://path-carrer-front.vercel.app/](https://path-carrer-front.vercel.app/)
 
 #### Demonstrando o primeiro acesso a plataforma: 
