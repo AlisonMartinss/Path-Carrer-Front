@@ -1,134 +1,161 @@
 import styles from '../Explorer/Explorer.module.css'
 
-
 import { useEffect, useState } from 'react'
-import { IoFlameSharp } from "react-icons/io5";
 
 import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2';
 import Conteudo from '../../Components/Conteudo/Conteudo'
+import LoadIcon from '../../Components/LoadIcon/LoadIcon';
 
-import { Explore, CategoryExplorer,MyPaths} from './ExplorerAux';
+import { Explore, CategoryExplorer, MyPaths } from './ExplorerAux';
 import { useNavigate } from 'react-router';
 
-function Explorer (){
+function Explorer() {
 
-   const navigate = useNavigate();    
-   const [onFire,SetonFire] = useState(["Todos","Inteligência Artificial","Marketing Digital","Educação Financeira","Tecnologia da Informação","Modelo de Negócio","Produtividade","Design Gráfico","Criptomoedas","Seus Paths"])
-   const [pathExplore,SetPathExplore] = useState(null);
-   const [leftElements,SetleftElements] = useState([
+   const navigate = useNavigate();
+
+   const [searchMecanism, SetSearchMecanism] = useState({
+      category: "",
+      penultimateSearch: "",
+      isLoading: true,
+      AuxIsLoad: false
+   });
+
+   const [onFire] = useState([
+      "Todos", "Inteligência Artificial", "Marketing Digital",
+      "Educação Financeira", "Tecnologia da Informação",
+      "Modelo de Negócio", "Produtividade", "Design Gráfico",
+      "Criptomoedas", "Seus Paths"
+   ]);
+
+   const [pathExplore, SetPathExplore] = useState(null);
+
+   const [leftElements] = useState([
       {
-         iconV:"FaHouseChimneyWindow",
-         icon_style:"evenConstStyle",
+         iconV: "FaHouseChimneyWindow",
+         icon_style: "evenConstStyle",
          handleClick: ""
       }
-   ])
+   ]);
 
-   const ClickonPath = (e) =>{
-      localStorage.setItem("PathID_on",e);
-      navigate('/ContentAcess')   
-   }
+   const ClickonPath = (e) => {
+      localStorage.setItem("PathID_on", e);
+      navigate('/ContentAcess');
+   };
 
-   const ClickCategory = (e) => {
-      const fetchData = async () => {
-      try{
-         if (e === "Seus Paths"){
-            const contentPath = await MyPaths();
-            if (Array.isArray(contentPath)) {
-               SetPathExplore(contentPath);
+   const fetchPaths = async (type, category = "") => {
+      try {
+         SetSearchMecanism((prev) => ({ ...prev, isLoading: true }));
+
+         let contentPath = [];
+
+         if (type === "default") {
+            contentPath = await Explore();
+         } else if (type === "mine") {
+            contentPath = await MyPaths();
+         } else if (type === "category") {
+            if (category === "Seus Paths") {
+               contentPath = await MyPaths();
             } else {
-               SetPathExplore([]);
-            }  
-         }else {
-            const contentPath = await CategoryExplorer(e);
-            if (Array.isArray(contentPath)) {
-               SetPathExplore(contentPath);
-            } else {
-               SetPathExplore([]);
+               contentPath = await CategoryExplorer(category);
             }
-         } 
-       }
-      catch (error) {
-         console.error("Erro ao buscar com base na categoria", error);
+         }
+
+         SetPathExplore(Array.isArray(contentPath) ? contentPath : []);
+      } catch (error) {
+         console.error("Erro ao buscar paths", error);
          SetPathExplore([]);
-       }
+      } finally {
+         SetSearchMecanism((prev) => ({ ...prev, isLoading: false }));
       }
-      fetchData();
-   }
+   };
 
-
+   // Carregamento inicial
    useEffect(() => {
-      if (localStorage.getItem("exploreObjective") === "exploreDefault"){
-         (async () => {
-            try {
-               const contentPath = await Explore(); 
-               if (Array.isArray(contentPath)) {
-                  SetPathExplore(contentPath);
-               } else {
-                  SetPathExplore([]);
-               }
-            } catch (error) {
-               SetPathExplore([]);
-            }
-         })();
-      }else {
-         (async () => {
-            try {
-               const contentPath = await MyPaths(); 
-               if (Array.isArray(contentPath)) {
-                  SetPathExplore(contentPath);
-               } else {
-                  SetPathExplore([]);
-               }
-            } catch (error) {
-               SetPathExplore([]);
-            }
-         })();
-
+      const objective = localStorage.getItem("exploreObjective");
+      if (objective === "exploreDefault") {
+         fetchPaths("default");
+      } else {
+         fetchPaths("mine");
       }
-      }, []);
-    return (
-        <main className={styles.main}>
-            <header className={styles.header}>
-               <CabecalhoV2 leftElements={leftElements}/>
-            </header>
-            <div className={styles.core}>
+   }, []);
 
-               <div className={styles.sideBar}>
-                  
-                  <div className={styles.categorys}>
-                     <div className={`${styles.categorysTitle} ${styles.txt1}`}>Pesquise por Categoria</div>
-                     <div className={`${styles.categorysElements} ${styles.txt3}`}>
-                        {onFire.map((element) => (
-                           <div className={styles.CategoryElementMain} onClick={(e) => ClickCategory(element)}>
-                              {element}
-                           </div>
-                        ))}
+   // Atualização quando clica numa categoria
+   useEffect(() => {
+      if (searchMecanism.AuxIsLoad) {
+         fetchPaths("category", searchMecanism.category);
+         SetSearchMecanism((prev) => ({
+            ...prev,
+            AuxIsLoad: false
+         }));
+      }
+   }, [searchMecanism.AuxIsLoad]);
+
+   // Disparo do carregamento quando clicam numa categoria
+   const handleCategoryClick = (element) => {
+      SetSearchMecanism((prev) => ({
+         ...prev,
+         category: element,
+         isLoading: true,
+         AuxIsLoad: true
+      }));
+   };
+
+   return (
+      <main className={styles.main}>
+         <header className={styles.header}>
+            <CabecalhoV2 leftElements={leftElements} />
+         </header>
+         <div className={styles.core}>
+
+            <div className={styles.sideBar}>
+               <div className={styles.categorys}>
+                  <div className={`${styles.categorysTitle} ${styles.txt1}`}>
+                     Pesquise por Categoria
+                  </div>
+                  <div className={`${styles.categorysElements} ${styles.txt3}`}>
+                     {onFire.map((element) => (
+                        <div
+                           key={element}
+                           className={styles.CategoryElementMain}
+                           onClick={() => handleCategoryClick(element)}
+                        >
+                           {element}
+                        </div>
+                     ))}
+                  </div>
+               </div>
+            </div>
+
+            <div className={styles.mainContent}>
+               {searchMecanism.isLoading ? (
+                  <div className={styles.contentArea}>
+                     <div className={styles.loadIcon}>
+                        <LoadIcon msg={"Carregando Paths . . ."} />
                      </div>
                   </div>
-
-               </div>
-
-               <div className={styles.mainContent}>                 
-               {Array.isArray(pathExplore) && pathExplore.length > 0 ? (
+               ) : Array.isArray(pathExplore) && pathExplore.length > 0 ? (
                   pathExplore.map((element) => (
-                     <div className={styles.contentArea}>
+                     <div key={element.id} className={styles.contentArea}>
                         <Conteudo
                            img={element.banner}
                            adjectives={element.adjectivesElements}
                            PathName={element.title}
                            Category={element.category}
-                           onClick={(e) => ClickonPath(element.id)}
+                           onClick={() => ClickonPath(element.id)}
                            views={element.everAdd}
                         />
                      </div>
-                  ))) : (
-                  <div className={`${styles.warring} ${styles.txt1}`}>Não há Paths nessa categoria para exibir.</div>
+                  ))
+               ) : (
+                  <div className={`${styles.warring} ${styles.txt1}`}>
+                     Não há Paths nessa categoria para exibir.
+                  </div>
                )}
-               </div>
-              
             </div>
-        </main>
-    )
+
+         </div>
+      </main>
+   );
 }
 
-export default Explorer
+export default Explorer;

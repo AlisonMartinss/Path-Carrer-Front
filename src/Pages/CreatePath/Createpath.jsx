@@ -94,54 +94,7 @@ function CreatePath ({PreSend}) {
       }
    ])
 
-   const [adjectives] = useState([
-      {
-         value:"Selecione",
-         txt: "Selecione"
-      },
-      {
-         txt:"Objetivo",
-         value:"Objetivo"
-      },
-      {
-         txt:"Pratico",
-         value:"Pratico"
-      },
-      {
-         txt:"revisão",
-         value:"revisão"
-      },
-      {
-         txt:"aplicação teorica",
-         value:"aplicação teorica"
-      },
-      {
-         txt:"aplicação no campo pratico",
-         value:"aplicação no campo pratico"
-      },
-      {
-         txt:"Versátil",
-         value:"Versátil"
-      },
-      {
-         txt:"Descomplicado",
-         value:"Descomplicado"
-      },
-      {
-         txt:"Multidisciplinar",
-         value:"Multidisciplinar"
-      },
-      {
-         txt:"Integrado",
-         value:"Integrado"
-      },
-      {
-         txt:"Imersivo",
-         value:"Imersivo"
-      },
-   ]
-   )
-
+   
    const handlePermissionAPI = () => {
       /* 
           Serve para atualizar determinado campo do context API com as informações
@@ -177,31 +130,9 @@ function CreatePath ({PreSend}) {
       }));
    };
 
-   const handleAdjective = (e, index) => {
-      /*
-        Adiciona um novo adjetivo e Garante a atualização 
-        circular do array.
-      */
-      const { value } = e.target;
-      const object = {name:value};
-
-      setAdjectiveAux((prev) => {
-         const newList = [...prev]; // Copia da antiga 
-         newList[index] = object;
-         return newList;
-      });
-  
-      setAdjectivesList((prev) => {
-          const newList = [...prev]; // Copia da antiga 
-          newList[index] = value;
-          return newList;
-      });
-   };
 
   const AddTag = () => {
-      /*
-        Adiciona uma nova tag.
-      */
+
       if (9 >  tags.length){
          setTags((prev) => ([...prev,inputxt]))
       }
@@ -210,10 +141,7 @@ function CreatePath ({PreSend}) {
       }
    }  
   
-   const deleteElementTags = (tag) => {
-      /*
-        deleta tags.
-      */
+const deleteElementTags = (tag) => {
       
       setTags(tags.filter(elemento => elemento !== tag));
    }
@@ -276,7 +204,7 @@ function CreatePath ({PreSend}) {
                  placeholder={"Digite o titulo do seu Path"}
                  name={"title"}
                  onChange={setInfo}
-                 maxLengthX={"100"}/>
+                 maxLengthX={"35"}/>
               </div>
               <div className={`${styles.txtover} ${styles.CallToAction}`}>
                      Selecione uma <strong className={styles.strong}>categoria</strong> que se encaixa no seu <strong className={styles.strong}>Path:</strong>
@@ -291,20 +219,7 @@ function CreatePath ({PreSend}) {
                   </div>
              
                </div>
-               {/*
-              <div className={`${styles.txtover} ${styles.CallToAction}`}>
-               Selecione cinco <strong className={styles.strong}>adjetivos</strong> que se encaixam no seu <strong className={styles.strong}>Path:</strong>
-              </div>
-              <div className={styles.adjetivosInput}>
-               {adjectives.slice(0,5).map((element,key) => (
-                  <div className={styles.boxAdjetivo}>
-                     <BoxInput
-                     optionE={adjectives}
-                     onChange={(e) => handleAdjective(e,key)}
-                     name={"adjectives"}/>
-                  </div>
-               ))}
-              </div>*/}
+               
               <div className={`${styles.txtover} ${styles.CallToAction}`}>
                 Escolha uma imagem que irá compor a <strong className={styles.strong}> capa do seu path </strong> 
               </div>
@@ -313,7 +228,8 @@ function CreatePath ({PreSend}) {
                  <TXTinputP
                  placeholder={"Cole aqui o link da imagem"}
                  name={"banner"}
-                 onChange={setInfo}/>
+                 onChange={setInfo}
+                 maxLengthX={"70"}/>
               </div>
             </div>
 
@@ -332,7 +248,8 @@ function CreatePath ({PreSend}) {
                         <TXTinputP
                         name={"tags"}
                         placeholder={"#Calculo #Progamação #ilustração . . . "}
-                        onChange={(e) => setinputxt(e.target.value)}                       
+                        onChange={(e) => setinputxt(e.target.value)}
+                        maxLengthX={"12"}                       
                         />
                      </div>
                   </div>
@@ -355,7 +272,7 @@ function CreatePath ({PreSend}) {
                <TXTinputM
                name={"descPathOver"}
                onChange={setInfo}
-               maxLengthX={"200"}/>
+               maxlength={"130"}/>
               </div>
               <div className={styles.enviar}>
                <Button 

@@ -151,6 +151,10 @@
 
     border-radius: 1vw;
 }
+.loadIcon{
+  width: 50%;
+  height: 35%;
+}
 
 .warring{
     display: flex;

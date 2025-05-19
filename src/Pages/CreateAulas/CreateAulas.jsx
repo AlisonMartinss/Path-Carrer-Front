@@ -211,7 +211,7 @@ function CreateAulas ({APIoption,circumstance}){
                 name={"title"} 
                 onChange={(e) => setObjectClass(e)} 
                 placeholder={"Digite o titulo da aula"}
-                maxLengthX={"100"}/>
+                maxLengthX={"35"}/>
                </div>
 
                <div className={`${styles.inputLink} ${styles.overInput}`}>
@@ -219,7 +219,7 @@ function CreateAulas ({APIoption,circumstance}){
                 name={"link"} 
                 onChange={(e) => setObjectClass(e)} 
                 placeholder={"Cole aqui o link do conteudo desta aula"}
-                maxLengthX={"100"}/>
+                maxLengthX={"15"}/>
                </div>
 
                <div className={styles.inputDesc}>
@@ -227,7 +227,7 @@ function CreateAulas ({APIoption,circumstance}){
                 name={"description"} 
                 onChange={(e) => setObjectClass(e)} 
                 placeholder={"Descreva os pontos mais interessantes para essa aula"}
-                maxLengthX={"200"}/>
+                maxLengthX={"350"}/>
                </div>
 
                <div className={styles.Button}>

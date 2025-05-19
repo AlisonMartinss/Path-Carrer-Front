@@ -416,7 +416,7 @@ function ViewProfile (){
                             </div>
                         </div>
 
-                        <div className={styles.inputName_area}>                       
+                        <div className={`${styles.inputName_area} ${styles.spaceConfig}`}>                       
                             <div className={styles.inputName}>
                                 <TXTinputP
                                 name={"perfil"}
@@ -432,21 +432,6 @@ function ViewProfile (){
                                 handleClick={(e) => PictureProfile(e)}
                                 />
                             </div>
-                        </div>
-
-                        <div className={styles.inputDesc}>
-                            <TXTinputM
-                            name={"desc"}
-                            onChange={(e) => setObjectClass(e)}
-                            placeholder={"Digite aqui sua nova descrição"}/>
-                            
-                        </div>
-
-                        <div className={styles.button}>
-                            <Button
-                            func={(e) => UpdateDesc(e)}
-                            class={"button"}
-                            message={"Atualizar Descrição"}/>
                         </div>
                     </div>               
                 ):

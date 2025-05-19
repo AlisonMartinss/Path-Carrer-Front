@@ -14,7 +14,7 @@
     font-family: "Urbanist", serif;
     font-style: normal;
     font-weight: 500;
-    font-size: clamp(0.4em,1.0vw, 5em);
+    font-size: clamp(0.4em,0.8vw, 5em);
     color: #ffffff;
 
     cursor: pointer;

@@ -29,9 +29,7 @@
     font-size: clamp(0.4em, 0.9vw, 5em);
     color: #ffffff;
 
-    white-space: pre-wrap;
-
-    outline: none;
+    overflow-wrap: break-word;
     resize: none;
 
 }

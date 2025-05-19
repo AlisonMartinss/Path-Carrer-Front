@@ -7,9 +7,7 @@ import ButtonIMG from '../ButtonIMG/ButtonIMG'
 import BannerDefault from '../../../src/assets/Midias/PNGs/images/BannerDefault.png'
 import DefaultProfile from '../../../src/assets/Midias/PNGs/images/DefaultProfile.png'
 
-function SideBar ({handleClick,description,AuthorName,adjectivesList,imgPerfil,imgBanner}){
-    const [arraAuxMedals, setArrAuxMedals] = useState([])
-    const [arraAuxAdjectives,setArraAuxAdjectives] = useState(adjectivesList)
+function SideBar ({handleClick,description,AuthorName,imgPerfil,imgBanner}){
 
     const [isClicked, setIsClicked] = useState(false);
     const handleClickSide = () => {       
@@ -17,11 +15,7 @@ function SideBar ({handleClick,description,AuthorName,adjectivesList,imgPerfil,i
         handleClick();     
     };
 
-    useEffect(() => {
-        if (Array.isArray(adjectivesList)) {
-            setArraAuxAdjectives(adjectivesList);
-        }
-    }, [adjectivesList]);
+
 
     return (
         <main className={style.main}>
@@ -45,31 +39,13 @@ function SideBar ({handleClick,description,AuthorName,adjectivesList,imgPerfil,i
 
                     <div className={`${style.profile_props} ${isClicked ? style.profile_propsOFF : style.profile_props}`}>
                             <div className={style.perfil_img}>
-                                <img className={style.img} src={imgPerfil !== null ? imgPerfil : 
-                                    DefaultProfile} alt="Perfil Foto" />
+                                <img className={style.img} src={imgPerfil === null || imgPerfil === undefined ? DefaultProfile : 
+                                    imgPerfil} alt="Perfil Foto" />
                                     
                             </div>
-                            {arraAuxMedals.map((element) => (
-                            <div className={style.medals_img}></div>
-                            ))}
                     </div> 
                     <div className={`${style.bottom_area} ${style.txtOver}`}>{AuthorName}</div> 
                 </div>
-                
-                {/* 
-                <div className={style.adjectives_area}>
-                    {Array.isArray(arraAuxAdjectives) && arraAuxAdjectives.length > 0 ? (
-                          arraAuxAdjectives.map((element) => (
-                            <div className={`${style.adjectie_element} ${style.txtOver2}`}>
-                                {element.name}
-                            </div>
-                           ))
-                        ) : (
-                        <div className={style.txtOver2}>Não há Adjetivos para exibir.</div>
-                    )}
-                    
-                </div>
-                */}
 
                 <div className={style.descArea}>
                     <div className={style.barra_desc}></div>

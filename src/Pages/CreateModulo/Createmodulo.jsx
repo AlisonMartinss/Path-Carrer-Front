@@ -55,7 +55,7 @@ function CreateModulo ({redirec,APIroute}) {
                 onChange={(e) => setInfo(e)}
                 name={"titleModule"}
                 placeholder={"Digite o nome do modulo"}
-                maxLengthX={"100"}/>
+                maxLengthX={"35"}/>
               </div>
 
               <div className={styles.moduloDesc}>
@@ -63,7 +63,7 @@ function CreateModulo ({redirec,APIroute}) {
                 onChange={(e) => setInfo(e)}
                 name={"descModule"}
                 placeholder={"Descreva o seu modulo"}
-                maxLengthX={"200"}/>
+                maxLengthX={"150"}/>
               </div>
 
               <div className={styles.Button}>

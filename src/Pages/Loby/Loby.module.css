@@ -74,6 +74,21 @@
     width: 0vw;
 }
 
+.LoadIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30%;
+    height: 20%;
+}
+
+.LoadIconA{
+    margin-top: 5%;
+    margin-left: 35%;
+
+}
+
 .alert{
     display: flex;
     justify-content: center;

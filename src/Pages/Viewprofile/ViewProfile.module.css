@@ -244,6 +244,10 @@
     gap: 3%;
 }
 
+.spaceConfig{
+    margin-bottom: 10%;
+}
+
 .inputName{
     width: 85%;
     height: 90%;

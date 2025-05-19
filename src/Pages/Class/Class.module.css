@@ -276,11 +276,13 @@
     background-color: #69718E;
     border-radius: 1vw;
 
-    width: 76%;
-    min-height: 50%;
+    width: 65%;
+    min-height: 40%;
 
     margin-bottom: 5%;
-    padding: 2%;
+    padding: 5%;
+
+    word-break: break-all;
 
     flex-wrap: wrap;
 
@@ -603,5 +605,13 @@
     font-style: normal;
     font-weight: 400;
     font-size: clamp(0.4em,1.0vw, 5em);
+    color: #ffffff
+}
+
+.txt4{
+    font-family: "Urbanist", serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(0.4em,0.8vw, 5em);
     color: #ffffff
 }

@@ -4,6 +4,7 @@
 }
 
 .main{
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -11,39 +12,18 @@
 
     width: 100%;
     height: 100%;
+
+    gap: 5%;
 }
-
-.IconArea{
-    position: absolute;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 15%;
-    height: 20%;
-
-    margin-top: 20%;
-}
-
-.icon{
-    width: 100%;
-    height: 100%;
-
-    color: rgb(100, 27, 50);
-}
-
 
 .perfilArea{
-    position: absolute;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 10%;
-
-    margin-top: 20%;
+    width: 20%;
+    height: 20%;
 
     animation: emergirBaixo 0.8s ease-out infinite;
 
@@ -62,19 +42,17 @@
     justify-content: center;
     align-items: center;
 
-    width: 90%;
+    width: 100%;
     height: 25%;
 
     background-color: #051a67e3;
     border-radius: 0.5vw;
-
-    margin-top: 33%;
 }
 
 .txt{
     font-family: "Urbanist", serif;
     font-style: normal;
     font-weight: 400;
-    font-size: clamp(0.4em,1.0vw, 5em);
+    font-size: clamp(0.4em,0.9vw, 5em);
     color: #ffffff
 }

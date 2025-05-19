@@ -924,7 +924,7 @@ function captchaAnswer (addres,casas) {
             <div className={styles.core}>
               {/* ORI-2.0 */} 
               <div className={styles.sideBar}>
-                <div className={`${styles.titlePath} ${styles.txt2}`}>
+                <div className={`${styles.titlePath} ${styles.txt4}`}>
                   {/* ORI - 2.1 */}
                   {ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].name !== null ? (
                     ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].name
@@ -953,7 +953,7 @@ function captchaAnswer (addres,casas) {
                         ) : (
                         <div>Não há Aulas para exibir.</div>
                 )}
-                <div onClick={(e) => SetForum((prev) => !prev)} className={`${styles.forumArea} ${styles.txt3}`}>
+                <div onClick={(e) => SetForum((prev) => !prev)} className={`${styles.forumArea} ${styles.txt4}`}>
                    <LiaComments
                    className={styles.icone}/>
                    Forum do modulo 
@@ -988,7 +988,7 @@ function captchaAnswer (addres,casas) {
                 </div> 
                 ):
                 <div className={styles.apresentacao}> {/*ORI-3.1.4*/}
-                  <div className={`${styles.tituloModulo} ${styles.txt3}`}>
+                  <div className={`${styles.tituloModulo} ${styles.txt1}`}>
                     <PiBookOpenDuotone/>
                     {ContentJSON.modulos[localStorage.getItem("ModuleIndexON")].name}
                   </div>

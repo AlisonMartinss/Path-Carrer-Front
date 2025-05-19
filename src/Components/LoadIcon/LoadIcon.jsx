@@ -1,17 +1,10 @@
 import styles from '../LoadIcon/LoadIcon.module.css'
-import { BiSolidMessageSquareError } from "react-icons/bi";
-import { AiFillAlipayCircle } from "react-icons/ai";
 import { HiArrowPath } from "react-icons/hi2";
 
 
 
-function LoadIcon ({msg,iconV}) {
+function LoadIcon ({msg}) {
 
-    const comp = {
-        BiSolidMessageSquareError,AiFillAlipayCircle
-    }
-    
-    const Componente =  comp[iconV]
     return (
         <div className={styles.main}>
             <div className={styles.perfilArea}><HiArrowPath className={styles.loadImage}/></div>
@@ -20,7 +13,6 @@ function LoadIcon ({msg,iconV}) {
                 {msg}
             </div>
             ):null}
-            
         </div>
     )
 }

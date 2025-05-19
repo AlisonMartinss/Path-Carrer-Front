@@ -69,7 +69,7 @@ function ContentAcess (){
     }
     async function WhenWantDeletePath () {
       setIsLoading(true);
-      await PathDelete();
+       await PathDelete();
       setIsLoading(false);
     }
     async function actionButtonForUsersAndAuthor (e) {
@@ -111,11 +111,9 @@ function ContentAcess (){
     useEffect(() => {
 
       (async () => {
-      setIsLoading(true);
-      setContentJSON( await GetContentByPath());
-      console.log(" await GetContentByPath()")
-      console.log( await GetContentByPath())
-      setIsLoading(false);
+        setIsLoading(true);
+         setContentJSON( await GetContentByPath());
+        setIsLoading(false);
       })();
 
     }, []);

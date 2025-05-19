@@ -2,14 +2,14 @@ import styles from '../Loby/Loby.module.css'
 
 // =-=-=-=-=- Componentes =-=-=-=-=- //
 
-import CabecalhoPadrao from '../../Components/Cabecalho/CabecalhoPadrao'
-import Button from '../../Components/Button/Button'
+
 import WindowModule from '../../Components/WindowModule/WindowModule'
 import WindowNote from '../../Components/WindowNote/WindowNote'
 import CabecalhoV2 from '../../Components/CabecalhoV2/CabecalhoV2'
 import img from '../../assets/Midias/JP2.png'
 import ButtonIMG from '../../Components/ButtonIMG/ButtonIMG'
 import PostComment from '../../Components/PostComment/PostComment'
+import LoadIcon from '../../Components/LoadIcon/LoadIcon'
 
 
 import { useState,useEffect } from 'react'
@@ -24,20 +24,30 @@ import {AddNote,RemoveNote} from './LobyAUX'
 
 function Loby () {
     const navigate = useNavigate();
+
     const [ContentForLobyJSON,SetLobyJSON] = useState(
       {
         JSONdata:{},
         MyPathIDList:[],
         reformulatedPathList:[],
-        isLoading:false,
-        Notes:[]
-      });     
+        isLoadingPaths:{
+          inPromessPath:true,
+          useEffectPath:false
+        },
+        isLoadingNotes:{
+          inPromessNote:true,
+          useEffectNote:false
+        },
+        Notes:{}
+      }); 
+
     const [postNote,SetPostNote] = useState(
       {
         active:false,
         message:""
       }
     ); 
+
     const WhenPathAcess = (e,x) => {
       e.preventDefault();
       localStorage.setItem("PathID_on",x)
@@ -47,16 +57,14 @@ function Loby () {
     useEffect(() => {
       (async () => {
         try {
-          
         const data = await LobyGet();
-         
-        SetLobyJSON((prev) => ({...prev,isLoading:true}))
+        
+        SetLobyJSON((prev) => ({...prev,isLoadingPaths:{...prev.isLoadingPaths,inPromessPath:true,},isLoadingNotes:{...prev.isLoadingNotes,inPromessNote:true}}))
         if (Object.keys(data.myPaths !== null)){
             SetLobyJSON((prev) => ({...prev,JSONdata:data,MyPathIDList:Object.keys(data.myPaths)}))
         }else{
           SetLobyJSON((prev) => ({...prev,JSONdata:data,MyPathIDList:null}))
         }
-        SetLobyJSON((prev) => ({...prev,isLoading:false}))
         }catch (error){
           if (error.erro === "Token inválido ou expirado"){
             console.error("Sessão expirada. Faça login novamente !")
@@ -65,14 +73,17 @@ function Loby () {
           }else {
           console.error("Erro em buscar dados nescessarios para o preenchimento do loby")}
         }
+        SetLobyJSON((prev) => ({...prev,isLoadingPaths:{...prev.isLoadingPaths,inPromessPath:false},isLoadingNotes:{...prev.isLoadingNotes,inPromessNote:false}}))
       })();
 
     },[]);
 
     useEffect(() => {
-      if (ContentForLobyJSON.isLoading === false && ContentForLobyJSON.MyPathIDList !== undefined){
+      if (ContentForLobyJSON.isLoadingPaths.inPromessPath === false && ContentForLobyJSON.isLoadingPaths.useEffectPath === false && ContentForLobyJSON.MyPathIDList.length >= 0){
         (async () => {
-          console.info("Iniciando tratativa dos elementos de MyPaths")
+          SetLobyJSON((prev) => ({...prev,isLoadingPaths:{...prev.isLoadingPaths,inPromessPath:true}}))
+          console.warn("UserEffect/433")
+          
           try {
             let RefList = [];
             for (const element of ContentForLobyJSON.MyPathIDList){
@@ -116,13 +127,17 @@ function Loby () {
             }
             console.error("Erro em atribuir informações aos Path da sua lista MyPaths: ", error)
           }
+          SetLobyJSON((prev) => ({...prev,isLoadingPaths:{...prev.isLoadingPaths,inPromessPath:false,useEffectPath:true}}))
         })()
       }
 
-      }, [ContentForLobyJSON.MyPathIDList,ContentForLobyJSON.isLoading]); 
+      }, [ContentForLobyJSON.MyPathIDList,ContentForLobyJSON.isLoadingPaths.inPromessPath]); 
 
     useEffect(() => {
-        if (ContentForLobyJSON.isLoading === false && ContentForLobyJSON.JSONdata.Notes !== undefined){
+        if (ContentForLobyJSON.isLoadingNotes.inPromessNote === false && ContentForLobyJSON.isLoadingNotes.useEffectNote === false && ContentForLobyJSON.JSONdata.Notes !== undefined){
+          SetLobyJSON((prev) => ({...prev,isLoadingNotes:{...prev.isLoadingNotes,inPromessNote:true,useEffectNote:true}}))
+          console.warn("UseEffect/455")
+          
           try {
             if (ContentForLobyJSON.JSONdata.Notes === null) {
               return;
@@ -143,8 +158,9 @@ function Loby () {
           SetLobyJSON((prev) => ({...prev,Notes:Notes}))
         } catch {
         }
+        SetLobyJSON((prev) => ({...prev,isLoadingNotes:{...prev.isLoadingNotes,inPromessNote:false}}))
         }
-      },[ContentForLobyJSON.JSONdata.Notes,ContentForLobyJSON.isLoading])
+      },[ContentForLobyJSON.JSONdata.Notes,ContentForLobyJSON.isLoadingNotes.inPromessNote])
 
     
     return (
@@ -156,7 +172,11 @@ function Loby () {
             <div className={styles.pre_coreArea}>
               <div className={styles.coreArea}>
                   <div className={styles.moduloArea}>             
-                        {Array.isArray(ContentForLobyJSON.reformulatedPathList) && Object.keys(ContentForLobyJSON.reformulatedPathList).length > 0 ? (
+                        {ContentForLobyJSON.isLoadingPaths.useEffectPath === false ? (
+                          <div className={`${styles.LoadIcon} ${styles.LoadIconA}`}>
+                            <LoadIcon/>                       
+                          </div> 
+                        ):Array.isArray(ContentForLobyJSON.reformulatedPathList) && Object.keys(ContentForLobyJSON.reformulatedPathList).length > 0 ? (
                           ContentForLobyJSON.reformulatedPathList.map((element) => (
                             <div key={element.id} className={styles.moduloArea_core}>
                               <WindowModule
@@ -170,8 +190,8 @@ function Loby () {
                               />
                             </div>
                           ))
-                        ) : (
-                          <div className={`${styles.alert} ${styles.txtOver2}`}>Não há Paths para exibir.</div>
+                        ): (
+                          <div  className={`${styles.alert} ${styles.txtOver2}`}>Não há Paths para exibir.</div>
                         )}
                   </div>
               </div>
@@ -202,7 +222,16 @@ function Loby () {
                     title={"Escrever nota"}
                   />
               </div>
-              {ContentForLobyJSON.Notes.length > null ? (
+              {ContentForLobyJSON.isLoadingNotes.useEffectNote === false ?
+               (
+                <div className={styles.messageMainArea}>
+                  <div className={`${styles.LoadIcon} ${styles.LoadIconB}`}>
+                    <LoadIcon/>                       
+                  </div>
+                </div>
+               ):
+
+                ContentForLobyJSON.Notes.length > null ? (
                 <div className={styles.messageMainArea}>
                 {ContentForLobyJSON.Notes.map((element) => 
                   (
