@@ -15,15 +15,16 @@ A plataforma Path to/ Carrer permite aos usuarios criarem e assitirem estruturas
 ## Arquitetura e Estrutura de Pastas
 ![Demonstraçaõ da estrutura e proposito dos diretorios a partir do 'src', diretorio mais importante.](https://github.com/AlisonMartinss/Imagens/blob/main/Toda%20estgrutura%20(1).png?raw=true)
 
+## Tecnologias e boas praticas usadas
+- React 18 + Vite.
+- Axios para requisições.
+- Context API para alguns casos.
+- React Router para rotas.
+- Principios do SOLID.
+- Principios do CleanCode.
 
+## Como rodar projeto
 
-
-
-
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Umas vez que você tenha clonado esse repositorio,utilize:
+- npm run install: Para instalar dependencias do projeto.
+- npm run dev: Para iniciar o servidor de desinvolvimento.
