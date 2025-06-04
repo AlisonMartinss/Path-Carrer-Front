@@ -5,13 +5,13 @@ import { HiMiniUserGroup } from "react-icons/hi2";
 // Midia 
 
 import bannerpathDefault from '../../assets/Midias/PNGs/images/bannerPathDefault.png'
-
+import { useEffect } from 'react';
 
 function Conteudo ({img,PathName,Category,onClick,views}){
     return (
         <div onClick={onClick} className={styles.main}>
             <div className={styles.thumbMail}>
-                <img className={styles.img} src={img !== null && img !== undefined && img !== "" ? ({img}) : bannerpathDefault} alt="" />
+                <img className={styles.img} src={img !== null && img !== undefined && img !== "" ? (img) : bannerpathDefault} alt="" />
             </div>
             <div className={styles.coreArea}>
                 <div className={styles.title_category}>

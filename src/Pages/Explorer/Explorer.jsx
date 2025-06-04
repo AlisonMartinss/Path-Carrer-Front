@@ -69,6 +69,7 @@ function Explorer() {
       }
    };
 
+
    useEffect(() => {
       const objective = localStorage.getItem("exploreObjective");
       if (objective === "exploreDefault") {

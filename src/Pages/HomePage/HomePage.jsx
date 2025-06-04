@@ -12,92 +12,22 @@ import premissas_01 from '../../../src/assets/Midias/PNGs/images/premissas_01.pn
 import premissas_02 from '../../../src/assets/Midias/PNGs/images/premissas_02.png'
 import premissas_03 from '../../../src/assets/Midias/PNGs/images/premissas_03.png'
 import setaA from '../../../src/assets/Midias/PNGs/images/setaA.svg'
-import retangle from '../../../src/assets/Midias/SVGs/retangle.svg'
-import thumbpath from '../../../src/assets/Midias/PNGs/images/thumbpath.png'
+import thumbpath from '../../../src/assets/Midias/PNGs/images/estudante_HP.png'
+import virtudes from '../../../src/assets/Midias/PNGs/images/virtudesGG.svg'
+import ApresentacaoHP01 from '../../../src/assets/Midias/PNGs/images/apresentacaoHP01.png'
+import ApresentacaoHP02 from '../../../src/assets/Midias/PNGs/images/ensinamento.png'
+
+
+
 
 
 // Componentes
 
 import CabecalhoHomePage from '../../Components/CabecalhoHomePage/CabecalhoHomePage'
-import { useNavigate } from 'react-router';
-
+import { useNavigate } from 'react-router-dom';
 function HomePage () {
     const navigate = useNavigate()
-    const explanation = 
-    [
-        {
-            GifON:false,
-            title:
-            `Encontre as melhores aulas em um só lugar!`,
-            txtMain:
-            `
-             Sabemos como pode ser desafiador encontrar o conteúdo certo no meio de tantas 
-             opções. Por isso, reunimos as melhores aulas sobre cada assunto, organizadas de forma
-             clara e acessível.
 
-             Aqui, você aprende com pessoas que já estiveram no seu lugar,que entendem suas
-             dúvidas e desafios. Isso é possível graças aos paths. Trilhas estruturadas em
-             módulos e aulas para guiar seu aprendizado de forma prática e eficiente.
-            `,
-            motivaton:`Descubra, aprenda e avance no seu caminho!`,
-            img:DinamicadoPath,
-            widthTitle:0.68*("Encontre as melhores aulas em um só lugar!").length
-        },
-        {
-            GifON:false,
-            title:
-            `Conteudo reunido em um só lugar !`,
-            txtMain:
-            `
-             A gente sabe como é cansativo procurar bons materiais na internet e acabar 
-             perdido no meio de tanta informação espalhada. E se tudo já estivesse organizado
-             para você em um só lugar?
-
-             No Path to Carrer, os melhores materais estão reunidos em um só lugar.
-            `,
-            motivaton:"",
-            img:expla02,
-            widthTitle:0.68*("Conteudo reunido em um só lugar !").length
-        },
-        {
-            GifON:true,
-            title:
-            `Acompanhe seu progresso e mantenha a motivação!`,
-            txtMain:
-            `
-             Sabemos que aprender algo novo pode parecer um caminho longo, mas visualizar seu
-             avanço faz toda a diferença. 
-
-            No Path to Career, você acompanha em tempo real quantos % já concluiu do seu path,
-            ajudando a manter o foco e a motivação. 
-
-            Cada módulo concluído é um passo a mais em direção ao seu objetivo.
-            `,
-            motivaton:`Ver seu progresso crescer a cada dia faz com que o 
-aprendizado se torne mais leve e recompensador.`,
-
-            img:progressaoHP,
-            widthTitle:0.80*("Encontre as melhores aulas em um só lugar!").length
-        },
-        {
-            GifON:false,
-            title:
-            `Aprendizado que se fortalece em grupo`,
-            txtMain:
-            `
-            Sabemos que estudar sozinho pode gerar dúvidas e inseguranças, mas trocar 
-            ideias muda tudo.
-
-            No Path to Career, o fórum conecta alunos com interesses em comum, criando
-            um espaço para perguntas, dicas e apoio mútuo.Participar das discussões 
-            fortalece o aprendizado e estimula novas descobertas.
-            `,
-            motivaton:`Aprender em comunidade transforma o caminho em uma jornada mais rica e colaborativa.`,
-
-            img:Comments,
-            widthTitle:0.60*("Encontre as melhores aulas em um só lugar!").length
-        }
-    ]
     const premissas = 
     [
         {
@@ -116,6 +46,7 @@ aprendizado se torne mais leve e recompensador.`,
             img:premissas_03
         }
     ]
+    
     return (
         <div className={styles.main}>
             <div className={styles.core}>
@@ -124,18 +55,19 @@ aprendizado se torne mais leve e recompensador.`,
 
                 <div className={styles.hp1}>
                     <div className={styles.CtoTXT}>
-                        <div className={`${styles.slogan} ${styles.txtSlogan}`}>Aprenda de forma estruturada, sem complicação</div>
-                        <div className={`${styles.proposito} ${styles.txtProposito}`}>
-                            Paths organizam o conhecimento em módulos e aulas para facilitar sua jornada de aprendizado.
+                        <div className={`${styles.slogan} ${styles.txtSlogan}`}>
+                            <div className={styles.strg_A}>Cursos completos com vídeos do <strong className={styles.strg_B}>YouTube</strong></div>
+                            <div>organizados por quem quer <strong className={styles.strg_C}>ensinar,</strong></div>
+                            <div>acessíveis pra quem quer <strong className={styles.strg_D}>aprender.</strong></div>
                         </div>
-                    </div>
-
-                    <div className={styles.backForm}>
-                        <img className={styles.img_svg} src={retangle} alt="Imagem de forma geometrica azul" />
                     </div>
 
                     <div className={styles.PathThumb}>
                         <img className={styles.img_png} src={thumbpath} alt="Estudante sentada estudando no laptop" />
+                    </div>
+
+                    <div className={styles.flowNav}>
+                        <img className={styles.img_png} src={virtudes} alt="Estudante sentada estudando no laptop" />
                     </div>
 
                     <MdArrowDropDown
@@ -155,41 +87,69 @@ aprendizado se torne mais leve e recompensador.`,
                       </div>
                     ))}
                 </div>
-                {explanation.map((element) => 
-                !element.GifON ? (
-                    <div className={styles.explanationArea}>
-                        <div className={styles.expla_01}>
-                            <div className={`${styles.expla_title} ${styles.realoc}`}>
-                            <div style={{ width: `${element.widthTitle}vw` }} className={styles.decorativo01}></div>
-                            <div className={styles.expla_title_main}>{element.title}</div> 
-                            </div>
-                            <div className={`${styles.expla_main}`}>
-                            {element.txtMain}
-                            </div>
-                            <strong className={`${styles.strong} ${styles.realoc}`}>{element.motivaton}</strong>
-                            <div className={styles.line}></div>
+                <div className={styles.contentMain}>
+                    <div className={styles.content_A}>
+                        <div className={styles.titleAccessoryB}></div>
+                        <div className={`${styles.contentTitle} ${styles.txtHp2title}`}>Encontre as melhores aulas em um só lugar!</div>
+                        <div className={`${styles.contentMainCore} ${styles.txtHp2txt}`}>
+                            Já ficou perdido tentando aprender algo com <strong>vídeos soltos no YouTube?</strong>
+                            A nossa plataforma organiza isso pra você. Aqui, pessoas como você,
+                            curiosas, generosas e apaixonadas por aprender, organizam vídeos <strong>gratuitos </strong>
+                            do YouTube em cursos <strong>completos,</strong> com começo, meio e fim.
+                            Você não precisa pagar nada. Nem perder tempo procurando vídeo por vídeo.
                         </div>
+                        <div className={`${styles.contentCTO} ${styles.strong}`}>É só entrar, escolher um tema e começar a estudar.</div>
+                    </div>
+                    <div className={styles.img_Area}>
+                        <img className={styles.img_png}  src={ApresentacaoHP01} alt="dinamica de funcionamento" />
+                    </div>
+                </div>
 
-                        <img className={styles.img} src={element.img} alt="" />
+                <div className={styles.contentMain}>
+                    <div className={styles.content_A}>
+                        <div className={styles.titleAccessoryB}></div>
+                        <div className={`${styles.contentTitle} ${styles.txtHp2title}`}>Compartilhe também o que você sabe !</div>
+                        <div className={`${styles.contentMainCore} ${styles.txtHp2txt}`}>
+                            E se um dia você quiser compartilhar o que sabe, também pode montar
+                            <strong> seu próprio curso</strong> com vídeos já existentes. <strong className={styles.strg_E}>Fácil,</strong>
+                            <strong className={styles.strg_F}> intuitivo</strong> <strong> e sem</strong><strong className={styles.strg_G}> complicação.</strong>
+                            A gente acredita que aprender deve ser simples, acessível e feito junto.
+                        </div>
+                        <div className={`${styles.contentCTO} ${styles.strong}`}>
+                           Por isso, criamos um espaço onde o conhecimento é compartilhado, organizado e gratuito.
+                        </div>
                     </div>
-                ) : 
-                <div className={styles.explanationArea}>
-                    <div className={styles.expla_01_a}>
-                            <div className={`${styles.expla_title} ${styles.realoc}`}>
-                                
-                                <div className={styles.expla_title_main}>{element.title}</div>
-                                <div style={{ width: `${element.widthTitle}vw` }} className={styles.decorativo01}></div>
-                            </div>
-                            <div className={`${styles.expla_main_a}`}>
-                             {element.txtMain}
-                            </div>
-                            <strong className={`${styles.strong} ${styles.realoc}`}>{element.motivaton}</strong>
-                            <div className={styles.line}></div>         
+                    <div className={styles.img_Area}>
+                        <img className={styles.img_png}  src={ApresentacaoHP02} alt="dinamica de funcionamento" />
                     </div>
-                    <img className={styles.img_V2} src={element.img} alt="" />
+                </div>
+
+                <div className={styles.contentMain}>
+                    <div className={styles.content_A}>
+                        <div className={styles.titleAccessoryB}></div>
+                        <div className={`${styles.contentTitle} ${styles.txtHp2title}`}>Acompanhe seu progresso e mantenha a motivação!</div>
+                        <div className={`${styles.contentMainCore} ${styles.txtHp2txt}`}>
+                           Sabemos que aprender algo novo pode parecer um caminho longo, mas <strong className={styles.strg_G}>visualizar seu
+                           avanço faz toda a diferença.</strong> 
+
+                            No Path to Career, você acompanha em tempo real <strong>quantos % já concluiu do seu path,
+                            ajudando a manter o foco e a motivação. </strong>
+
+                           Cada módulo concluído é um passo a mais em direção ao seu objetivo.
+                        </div>
+                        <div className={`${styles.contentCTO} ${styles.strong}`}>
+                           Ver seu progresso crescer a cada dia faz com que o aprendizado se torne mais leve e recompensador.
+                        </div>
+                    </div>
+                    <div className={styles.img_Area}>
+                        <img className={styles.img_png}  src={progressaoHP} alt="dinamica de funcionamento" />
+                    </div>
                     <div className={styles.enfeite_b}>100%</div>
                 </div>
-                )}
+
+                 
+
+                
                 <div className={styles.CTOend}>
                     <div className={styles.CTOend_txt}>E muito mais!</div>
                     <div className={styles.CTOend_button}>

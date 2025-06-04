@@ -48,7 +48,7 @@ function CreatePath ({PreSend}) {
          (b) Adicionamos a lista 'adjectives' que está presente no context API 
              a lista de adjectives local.  
    */
-   const {oneStap, SetOneStap,SetAPImodel} = useContext(PathStepsContext);
+   const {oneStap,SetOneStap,SetAPImodel} = useContext(PathStepsContext);
 
    const [adjectivesList,setAdjectivesList] = useState([]);
    const [adjectiveAux,setAdjectiveAux] = useState([]); // Ajuda na previa de renderização do path
@@ -226,10 +226,10 @@ const deleteElementTags = (tag) => {
 
               <div className={styles.title_input}>
                  <TXTinputP
-                 placeholder={"Cole aqui o link da imagem"}
-                 name={"banner"}
-                 onChange={setInfo}
-                 maxLengthX={"70"}/>
+                  placeholder={"Cole aqui o link da imagem"}
+                  name={"banner"}
+                  onChange={setInfo}
+                 />
               </div>
             </div>
 
